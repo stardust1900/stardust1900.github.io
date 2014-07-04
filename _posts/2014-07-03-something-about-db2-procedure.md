@@ -128,6 +128,71 @@ tags: [db2]
 
     select * from syscat.routines; 系统中所有的函数和存储过程都可以通过这个表查到 routinename 对应名称。
 
+4.在shell中 通过db2命令调用sql脚本创建存储过程
+
+需要注意的是在sql脚本中存储过程都需要以@结尾。
+
+warn.sql
+{% highlight sql %}
+drop procedure POSL.process_warn@
+
+create procedure POSL.process_warn()
+P: BEGIN
+INSERT
+INTO
+    POSL.SPD_MERCHANT_WARN
+    (
+        ENTITY_OID,
+        WORK_DATE,
+        MERCHANT_NO,
+        CANCEL_FLAG,
+        IS_POS_DAILNUM_CHANGE,
+        IS_TOUCH_RISK,
+        IS_TOUCH_R1,
+        IS_TOUCH_R2,
+        IS_TOUCH_R3,
+        IS_TOUCH_R4,
+        IS_TOUCH_R5,
+        IS_TOUCH_R6,
+        IS_TOUCH_R7,
+        IS_TOUCH_R8,
+        IS_TOUCH_R9
+    )
+select 
+NEXTVAL FOR POSL.SPD_MERCHANT_WARN_SEQ as ENTITY_OID,
+VARCHAR_FORMAT(current TIMESTAMP,'yyyymmdd') as WORK_DATE,
+a.MCHT_CD as MERCHANT_NO,
+case when a.DELETE_DATE is not null and a.DELETE_DATE <= (current date) then 'Y' else 'N' end as CANCEL_FLAG,
+a.IS_POS_DIAL_NO_CHG as IS_POS_DAILNUM_CHANGE,
+case when LOCATE('R',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_RISK, 
+case when LOCATE('R1',replace(b.ruletype,'R11','A'))>0 then 'Y' else 'N' end as IS_TOUCH_R1,
+case when LOCATE('R2',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R2,
+case when LOCATE('R3',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R3,
+case when LOCATE('R4',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R4,
+case when LOCATE('R5',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R5,
+case when LOCATE('R6',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R6,
+case when LOCATE('R7',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R7,
+case when LOCATE('R8',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R8,
+case when LOCATE('R9',b.ruletype)>0 then 'Y' else 'N' end as IS_TOUCH_R9
+from POSL.APMS_MCHT a, POSL.APMS_RXINFO b where a.MCHT_CD = b.MCHT_CD 
+and b.createtime = char(current date);
+
+update POSL.APMS_MCHT set IS_POS_DIAL_NO_CHG = 'N' where IS_POS_DIAL_NO_CHG = 'Y';
+    
+END P@
+{% endhighlight %}
+
+调用的shell 脚本
+
+{% highlight sql %}
+db2 connect to $DB user $USER using $PWD;
+
+db2  -td@ -f warn.sql;
+{% endhighlight %}
+
+如果你的sql脚本是在windows下编辑的，执行的时候可能会出现错误。这是由换行符的格式造成的。用dos2unix命令转化一下就ok了
+
+
 ## db2 自定义函数##
 开始时我是想用自定义函数，然后在存储过程中调用函数来实现功能。但是自定义的函数在存储过程中没法调用，我没找到调用的方法，只好放弃，只能用存储过程调存储过程。
 写自定义函数的时候如果你在函数中修改了表的数据，会遇到MODIFIES SQL DATA 的问题，这是因为在自定义函数中默认是不允许修改数据的。需要用下面的声明方式创建函数而且返回类型必须是table，其他类型的都创建不了。这个需要改数据的自定义函数真的很麻烦，能不用最好不要用。
