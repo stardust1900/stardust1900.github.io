@@ -2,4 +2,4 @@
 ======================
 
 我的个人博客。
-地址是：http://remote-mountain.com
+地址是：http://wangxuan.me
