@@ -1,6 +1,9 @@
 name: 独行深山
 home: 首页
+archive: 存档
 about: 关于
+
+
 highlighter: pygments
 
 paginate: 5

@@ -1,10 +1,10 @@
 ---
-layout: default
+layout: archive
 title: 独行深山
 ---
 
 <div id="home">
-  <h1>我的博文</h1>
+  <h3>我的博文</h3>
   <ul class="posts">
     {% for post in site.posts %}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>

@@ -25,5 +25,30 @@ title: 独行深山
 	</ul>
 	{% endif %}
 	</div>
+
+	<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+	    <div class="sidebar-module sidebar-module-inset">
+	      <h4>广告</h4>
+	      <p>此广告位<em>招租</em>，长期招租 :) </p>
+	    </div>
+	    
+	    <div class="sidebar-module">
+	      <h4>存档</h4>
+	      <ol class="list-unstyled">
+	     {% for post in site.posts %}
+	      <li><a href="{{ post.url }}">{{ post.date | date_to_long_string }}</a></li>
+	     {% endfor %}
+	      </ol>
+	    </div>
+
+	    <div class="sidebar-module">
+	      <h4>Elsewhere</h4>
+	      <ol class="list-unstyled">
+	        <li><a href="https://github.com/stardust1900">GitHub</a></li>
+	        <li><a href="http://douban.com/people/stardust1900">Douban</a></li>
+	        <li><a href="http://weibo.com/halfg0d">Weibo</a></li>
+	      </ol>
+	    </div>
+	</div>
 </div>
 
