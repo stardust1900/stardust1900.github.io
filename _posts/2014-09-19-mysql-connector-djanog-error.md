@@ -26,13 +26,13 @@ DATABASES = {
 }
 {% endhighlight %}
 
-![error](/pic/snapshot/20140919/error1.PNG)
+<img src="/pic/snapshot/20140919/error1.PNG"  width="600"/>
 
-![error](/pic/snapshot/20140919/error2.PNG)
+<img src="/pic/snapshot/20140919/error2.PNG"  width="600"/>
 
 使用python manager.py dbshell 也报错
 
-![error](/pic/snapshot/20140919/error3.PNG)
+<img src="/pic/snapshot/20140919/error3.PNG"  width="600"/>
 
 但是当配置文件是下面这样的时候，一切正常 
 
