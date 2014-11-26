@@ -15,13 +15,13 @@ tags: []
 
 在sql commander窗口中写下需要分析的sql语句。然后选择SQL Commander --Execute Explain plan--Execute Explain plan
 
-<img src="/pic/snapshot/20141113/dbVisualizer.PNG"  width="600"/>
+<img src="/pic/snapshot/20141113/dbVisualizer2.PNG"  width="600"/>
 
 然后就可以看分析结果了
 树视图
-<img src="/pic/snapshot/20141113/dbVisualizer.PNG"  width="600"/>
+<img src="/pic/snapshot/20141113/dbVisualizer3.PNG"  width="600"/>
 
 图表视图
-<img src="/pic/snapshot/20141113/dbVisualizer.PNG"  width="600"/>
+<img src="/pic/snapshot/20141113/dbVisualizer4.PNG"  width="600"/>
 
 至于每项的意义，就需要查查文档了。我主要看索引的使用情况，大体看一下就可以了。
