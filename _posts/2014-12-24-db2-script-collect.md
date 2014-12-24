@@ -2,8 +2,8 @@
 layout: post
 title: "db2 常用语句整理"
 description: ""
-category: 
-tags: []
+category: 技术
+tags: [db2]
 ---
 ###执行文件中的sql脚本
 
