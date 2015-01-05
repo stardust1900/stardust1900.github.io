@@ -19,6 +19,10 @@ tags: [db2]
 
 	db2 "export to xxx.ixf of ixf select * from schema.tablename where ..."
 
+###导出表中数据到csv文件
+
+db2 "export to xxx.csv of del select * from schema.tablename where ..."
+
 ###从ixf文件导入数据到数据库表
 1.创建表并导入
 
