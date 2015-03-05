@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ page.title }}</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+         <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/bootstrap/css/blog.css" rel="stylesheet">
+
+    </head>
+    <body>
+       <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="/">{{site.home}}</a>
+          <a class="blog-nav-item" href="#">{{site.about}}</a>
+        </nav>
+      </div>
+    </div>
+
+        <div class="container">
+        <div class="blog-header">
+          <h3 class="blog-title"><a href="/">{{ site.name }}</a></h3>
+          <p class="lead blog-description">{{site.desc}}</p>
+        </div>
+                {{ content }}
+
+            <div class="blog-footer">
+                <p>
+                  尘世间一个迷途小码农 <a href="http://weibo.com/halfgodwang">@王半山人</a>
+                </p>
+            </div>
+
+        </div> <!-- /container -->
+
+    </body>
+</html>
