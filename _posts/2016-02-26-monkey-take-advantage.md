@@ -13,7 +13,7 @@ tags: []
 
 {% highlight java%}
 public class Monkey {
-    /**
+    /*
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -66,5 +66,5 @@ class Flag {
 
 结果是：
 >flag:4 num:5115
->15620
->end
+15620
+end
