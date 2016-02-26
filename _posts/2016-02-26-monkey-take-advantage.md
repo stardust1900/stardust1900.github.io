@@ -67,5 +67,7 @@ class Flag {
 结果是：
 
 >flag:4 num:5115
+
 >15620
+
 >end
