@@ -11,7 +11,7 @@ tags: []
 
 这是一个从我很小时候就困扰我的问题。。。昨天晚上突然又想起来，于是写了个程序，把答案算出来了。。。
 
-{% highlight java%}
+```java
 public class Monkey {
     /*
 	 * @param args
@@ -62,7 +62,7 @@ class Flag {
 	}
 }
 
-{% endhighlight %}
+```
 
 结果是：
 

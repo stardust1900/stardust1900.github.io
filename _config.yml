@@ -4,7 +4,9 @@ archive: 存档
 about: 关于
 
 
-highlighter: pygments
+highlighter: rouge
 
 paginate: 5
 paginate_path: "page:num"
+
+gems: [jekyll-paginate]
