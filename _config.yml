@@ -2,6 +2,11 @@ name: 独行深山
 home: 首页
 archive: 存档
 about: 关于
+desc: 只身打马过草原，独自仗剑走天涯
+
+# url
+category_dir: category/
+tag_dir: tag/
 
 
 highlighter: rouge

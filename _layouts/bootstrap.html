@@ -17,15 +17,15 @@
        <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="/" name="top">{{site.home}}</a>
-          <a class="blog-nav-item" href="/archive.html">{{site.archive}}</a>
-          <a class="blog-nav-item" href="/about.html">{{site.about}}</a>
+          <a class="blog-nav-item active" href="/" name="top"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>{{site.home}}</a>
+          <a class="blog-nav-item" href="/archive.html"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>{{site.archive}}</a>
+          <a class="blog-nav-item" href="/about.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{site.about}}</a>
         </nav>
       </div>
     </div>
         <div class="container">
         <div class="blog-header">
-          <h3 class="blog-title"><a href="/">{{ site.name }}</a></h3>
+          <h3 class="blog-title">{{ site.name }}</h3>
           <p class="lead blog-description">{{site.desc}}</p>
         </div>
                 {{ content }}
