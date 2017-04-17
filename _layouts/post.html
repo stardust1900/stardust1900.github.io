@@ -1,30 +1,65 @@
----
-layout: bootstrap
----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ page.title }}</title>
+        <meta name="viewport" content="width=device-width">
+         <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/bootstrap/css/blog.css" rel="stylesheet">
+        <!-- syntax highlighting CSS -->
+        <!--link rel="stylesheet" href="/css/syntax.css"-->
+    <link rel="stylesheet" href="/css/pygments.css">
+    </head>
+    <body>
+       <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="/" name="top"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>{{site.home}}</a>
+          <a class="blog-nav-item" href="/archive.html"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>{{site.archive}}</a>
+          <a class="blog-nav-item" href="/about.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{site.about}}</a>
+        </nav>
+      </div>
+    </div>
+        <div class="container">
+        <div class="blog-header">
+          <h3 class="blog-title">{{ site.name }}</h3>
+          <p class="lead blog-description">{{site.desc}}</p>
+        </div>
+                <div class="blog-post">
+					<h2 class="blog-post-title">{{ page.title }}</h2>
+					<p class="blog-post-meta">{{ page.date | date_to_string }}</p>
+					{{ content }}
+				</div>
 
+				<div class="panel panel-default">
+				  <div class="panel-body">
+				<script type="text/javascript">
+				(function(){
+				var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=auto&skin=1&ralateuid=1708190532&appkey=803210360&iframskin=1&dpc=1";
+				url = url.replace("url=auto", "url=" + encodeURIComponent(document.URL)); 
+				document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
+				})();
+				</script>
+				<script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
+				<script type="text/javascript">
+				window.WBComment.init({
+				    "id": "WBCommentFrame"
+				});
+				</script>
+				  </div>
+				</div>
+            <div class="blog-footer">
+                <p>
+                  尘世间一个迷途老码农 <a href="http://weibo.com/halfg0d">@王半山人</a> 
+                </p>
+                <P>Copyright &copy; 2014 wangxuan.me All Rights Reserved</P>
+                <P><a href="#top">Back to top</a></P>
+            </div>
 
-<div class="blog-post">
-	<h2 class="blog-post-title">{{ page.title }}</h2>
-	<p class="blog-post-meta">{{ page.date | date_to_string }}</p>
+        </div> <!-- /container -->
 
-	{{ content }}
-
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-body">
-<script type="text/javascript">
-(function(){
-var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=auto&skin=1&ralateuid=1708190532&appkey=803210360&iframskin=1&dpc=1";
-url = url.replace("url=auto", "url=" + encodeURIComponent(document.URL)); 
-document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
-})();
-</script>
-<script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-window.WBComment.init({
-    "id": "WBCommentFrame"
-});
-</script>
-  </div>
-</div>
+    </body>
+</html>
