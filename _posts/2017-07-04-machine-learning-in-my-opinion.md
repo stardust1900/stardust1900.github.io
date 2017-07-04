@@ -114,7 +114,7 @@ plt.show()
 {% endhighlight %}
 
 可以在优矿上直接看运行结果
-
+<img src="/pic/snapshot/20170704/mltest.PNG"  width="600"/>
 这是我通过优矿Uqer.io分享给你的量化策略研究，链接：[https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private](https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private)；
 
 密码：4760
