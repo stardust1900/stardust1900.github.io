@@ -53,7 +53,7 @@ tags: 机器学习 ML
 这就是机器学习吗？我也不知道，可能是吧。可能这跟你想的有点不同，坦白说，和我起初想的也不太一样...
 
 
-<img src="/pic/snapshot/20170704/machineLearning.png"  width="600"/>
+[<img src="/pic/snapshot/20170704/machineLearning.png"  width="400" />](/pic/snapshot/20170704/machineLearning.png)
 
 [为期一周的机器学习](http://blog.jobbole.com/110684/)<--这是个较完整的介绍，可以让你对机器学习有个大体的概念。
 
@@ -65,13 +65,13 @@ tags: 机器学习 ML
 
 机器学习的分类：
 
-<img src="/pic/snapshot/20170704/mlcategory.png"  width="600"/>
+[<img src="/pic/snapshot/20170704/mlcategory.png"  width="400"/>](/pic/snapshot/20170704/mlcategory.png)
 
 我们只看监督学习（分类与回归）与非监督学习(聚类与降维)。
 
 下面是一张scikit-learn官网上的一张图，教你怎么选择算法。
 
-<img src="/pic/snapshot/20170704/scikit-learn.png"  width="600"/>
+[<img src="/pic/snapshot/20170704/scikit-learn.png"  width="400"/>](/pic/snapshot/20170704/scikit-learn.png)
 
 从图上可以看出，你选什么算法，有时候是由你拥有什么样的数据决定的...
 
@@ -115,7 +115,7 @@ plt.show()
 
 可以在优矿上直接看运行结果
 
-<img src="/pic/snapshot/20170704/mltest.png"  width="600"/>
+[<img src="/pic/snapshot/20170704/mltest.png"  width="400"/>](/pic/snapshot/20170704/mltest.png)
 
 这是我通过优矿Uqer.io分享给你的量化策略研究，链接：[https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private](https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private)；
 
