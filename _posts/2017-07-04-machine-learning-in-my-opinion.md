@@ -85,7 +85,7 @@ tags: 机器学习 ML
 
 完成后就可以拿模型去做预测了。
 
-一个完整的例子：
+来一个完整的例子，通过支持向量机识别图片中的数字：
 
 
 {% highlight sql %}
@@ -93,7 +93,7 @@ tags: 机器学习 ML
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn import svm
-# 准备数据，这个是sklearn内置的一个 图形识别数据的数据
+# 准备数据，这个是sklearn内置的一个 图形识别数字的数据
 digits = datasets.load_digits()
 
 # 选择一个支持向量机的算法，后面是参数
