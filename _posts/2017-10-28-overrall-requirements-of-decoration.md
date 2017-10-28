@@ -102,6 +102,8 @@ tags: [装修]
 
     [天猫](https://detail.tmall.com/item.htm?id=45810936054&_u=t2dmg8j26111&skuId=3651641279482)
 
+    ![风扇](/pic/snapshot/20171028/fan.jpg) 
+
 
 
 
