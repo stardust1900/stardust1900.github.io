@@ -1,17 +1,66 @@
-name: 独行深山
-home: 首页
-archive: 存档
-about: 关于
-desc: 只身打马过草原，独自仗剑走天涯
+# Site settings 配置站点
+title: '独行深山'
+description: '尘世间一个迷途老码农'
+keyword: '王宣, 王宣的独立博客, 王宣的博客, 机器学习, 数据库, 架构, java, python, sql, 设计'
+url: 'http://wangxuan.me' # your host
 
-# url
-category_dir: category/
-tag_dir: tag/
+# if you don't need baseurl, you should leave this value blank.
+baseurl: ''
 
+# Navigation links
+nav:
+  home: '/'
+  tags: '/tags.html'
 
+# Author 配置博主信息
+author: '王一刀'
+nickname: '王一刀'
+bio: '看书，听歌，写程序'
+avatar: '/assets/img/profile.png'
+
+# Search
+search: true
+
+# Night mode
+nightMode: true
+
+# Comments
+disqus: false
+disqus_url: 'https://liaokeyu.disqus.com/embed.js'
+
+# Share
+social-share: true
+social-share-items: ['wechat', 'weibo', 'douban', 'twitter']
+
+# theme color 主题皮肤
+theme-color: 'default'  # pink or default
+
+# Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
+postPatterns: 'circuitBoard'
+
+# SNS settings 配置社交网站url: weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
+sns:
+  weibo: '//weibo.com/halfg0d'
+  douban: '//douban.com/people/stardust1900'
+  twitter: '//twitter.com/halfg0d'
+  github: '//github.com/stardust1900'
+
+# Tags 设置标签
+recommend-tags: true # whether or not display recommend-tags on the sidebar
+recommend-condition-size: 12 # a tag will be recommended if the size of it is more than this value
+
+# Build settings
+paginate: 6
+paginate_path: 'page:num'
+exclude: ['node_modules', 'dev', 'package.json', 'gulpfile.js', '.gitignore', 'README.md']
+
+# Markdown
+markdown: kramdown
 highlighter: rouge
+kramdown:
+  input: GFM
 
-paginate: 5
-paginate_path: "page:num"
+RSS: false
 
+# Plugins
 gems: [jekyll-paginate]

@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "装修整体需求"
+subtitle: '关于装修的东西，事无巨细'
 description: ""
+cover: '/pic/snapshot/20171028/livingroom.jpg'
 category: 装修
 tags: [装修]
 ---

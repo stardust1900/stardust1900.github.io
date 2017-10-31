@@ -1,65 +1,136 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width">
-         <!-- Bootstrap core CSS -->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/bootstrap/css/blog.css" rel="stylesheet">
-        <!-- syntax highlighting CSS -->
-        <!--link rel="stylesheet" href="/css/syntax.css"-->
-    <link rel="stylesheet" href="/css/pygments.css">
-    </head>
-    <body>
-       <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item" href="/" name="top"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>{{site.home}}</a>
-          <a class="blog-nav-item" href="/archive.html"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>{{site.archive}}</a>
-          <a class="blog-nav-item" href="/about.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{site.about}}</a>
-        </nav>
-      </div>
-    </div>
-        <div class="container">
-        <div class="blog-header">
-          <h3 class="blog-title"><a href="/" >{{ site.name }}</a></h3>
-          <p class="lead blog-description">{{site.desc}}</p>
+{% include post-head.html %}
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="{{ site.nightMode }}">
+
+{% include header.html %}
+
+<header class="g-banner post-header {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }} {% unless page.cover %}post-no-cover{% endunless %}" data-theme="{{ site.theme-color }}">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            {% if page.tags.size > 0 %}
+            {% for tag in page.tags  %}
+            <a href="{{ "tags#" | append: tag | absolute_url }}" class="post-tag">{{ tag }}</a>
+            {% endfor %}
+            {% endif %}
         </div>
-                <div class="blog-post">
-					<h2 class="blog-post-title">{{ page.title }}</h2>
-					<p class="blog-post-meta">{{ page.date | date_to_string }}</p>
-					{{ content }}
-				</div>
+        <h1>{{ page.title }}</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="{{ site.url }}" target="_blank" rel="author">{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</a></></span>
+            <time class="post-meta-item" datetime="{{ page.date | date:"%y-%m-%d" }}"><i class="iconfont icon-date"></i>{{ page.date | date_to_string }}</time>
+        </div>
+    </div>
+    {% if page.cover %}
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('{{ page.cover }}') center no-repeat; background-size: cover;">
+    {% endif %}
+</header>
 
-				<div class="panel panel-default">
-				  <div class="panel-body">
-				<script type="text/javascript">
-				(function(){
-				var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=auto&skin=1&ralateuid=1708190532&appkey=803210360&iframskin=1&dpc=1";
-				url = url.replace("url=auto", "url=" + encodeURIComponent(document.URL)); 
-				document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
-				})();
-				</script>
-				<script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
-				<script type="text/javascript">
-				window.WBComment.init({
-				    "id": "WBCommentFrame"
-				});
-				</script>
-				  </div>
-				</div>
-            <div class="blog-footer">
-                <p>
-                  尘世间一个迷途老码农 <a href="http://weibo.com/halfg0d">@王半山人</a> 
-                </p>
-                <P>Copyright &copy; 2014 wangxuan.me All Rights Reserved</P>
-                <P><a href="#top">Back to top</a></P>
-            </div>
+<div class="post-content">
+    {% if page.subtitle %}
+    <h2 class="post-subtitle">{{ page.subtitle }}</h2>
+    {% endif %}
+    <article class="markdown-body">
+        {{ page.content }}
+    </article>
+    {% if site.social-share %}
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    {% endif %}
+</div>
 
-        </div> <!-- /container -->
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="{{ site.avatar | absolute_url }}" alt="">
+        </div>
+        <div class="author-name" rel="author">{{ site.author }}</div>
+        <div class="bio">
+            <p>{{ site.bio }}</p>
+        </div>
+        {% if site.sns.size > 0 %}
+        <ul class="sns-links">
+            {% for s in site.sns %}
+            <li>
+                <a href="{{ s[1] }}" target="_blank">
+                    <i class="iconfont icon-{{ s[0] }}"></i>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </section>
+    <section class="post-footer-item read-next">
+        {% if page.next.url %}
+        <div class="read-next-item">
+            <a href="{{ page.next.url }}" class="read-next-link"></a>
+            <section>
+                <span>{{ page.next.title }}</span>
+                <p>{{ page.next.excerpt | strip_html | strip_newlines | truncate: 60}}</p>
+            </section>
+            {% if page.next.cover %}
+            <div class="filter"></div>
+            <img src="{{ page.next.cover }}" alt="">
+            {% endif %}
+        </div>
+        {% endif %}
+        {% if page.previous.url %}
+        <div class="read-next-item">
+            <a href="{{ page.previous.url }}" class="read-next-link"></a>
+            <section>
+                <span>{{ page.previous.title }}</span>
+                <p>{{ page.previous.excerpt | strip_html | strip_newlines | truncate: 60}}</p>
+            </section>
+            {% if page.previous.cover %}
+            <div class="filter"></div>
+            <img src="{{ page.previous.cover }}" alt="">
+            {% endif %}
+        </div>
+        {% endif %}
+    </section>
+    {% if site.disqus %}
+    <section class="post-footer-item comment">
+        <div id="disqus_thread"></div>
+    </section>
+    {% endif %}
+</section>
 
-    </body>
+{% include footer.html %}
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: [{% for i in site.social-share-items %}'{{ i }}'{% if forloop.last == false %},{% endif %}{% endfor %}],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+// var d = document, s = d.createElement('script');
+// /*写入自己的disqus信息*/
+// s.src = '{{ site.disqus_url }}';
+// s.setAttribute('data-timestamp', +new Date());
+// (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+</body>
 </html>
