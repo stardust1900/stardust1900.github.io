@@ -3,7 +3,7 @@ layout: post
 title: "spring cloud gateway使用总结"
 date: 2020-09-29
 category: 技术
-tags: [spring gateway]
+tags: [spring,gateway]
 ---
 
 最近使用spring gateway组件做了一个机构网关，我把使用过程中遇到的问题做个总结。
