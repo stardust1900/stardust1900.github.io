@@ -95,19 +95,13 @@
     </section>
         <section class="post-footer-item comment">
         <div id="disqus_thread">
-        <script type="text/javascript">
-        (function(){
-        var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=auto&skin=1&ralateuid=1708190532&appkey=803210360&iframskin=1&dpc=1";
-        url = url.replace("url=auto", "url=" + encodeURIComponent(document.URL)); 
-        document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
-        })();
-        </script>
-        <script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
-        window.WBComment.init({
-            "id": "WBCommentFrame"
-        });
-        </script>
+            <script src="https://utteranc.es/client.js"
+                repo="stardust1900/stardust1900.github.io"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+             </script>
         </div>
     </section>
 </section>
@@ -144,5 +138,6 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/prism.js"></script>
 <script src="/assets/js/index.min.js"></script>
+
 </body>
 </html>
