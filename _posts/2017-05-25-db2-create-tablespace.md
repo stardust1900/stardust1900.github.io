@@ -14,7 +14,7 @@ tags: [db2]
     db2pd -d tlb1405 -tablespaces
 ```
 
- [<img src="/images/2017-05-25/db2pd.jpg"  width="400"/>](/images/2017-05-25/db2pd.jpg)
+ [<img src="/pic/2017-05-25/db2pd.jpg"  width="400"/>](/pic/2017-05-25/db2pd.jpg)
 
 - 2.查看表空间使用缓冲池
 
