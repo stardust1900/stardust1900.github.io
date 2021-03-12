@@ -7,6 +7,8 @@ category: Tech
 tags: [微信开放平台]
 ---
 
+在微信开放平台里，软件服务商可以作为第三方平台，代用户的公众号/小程序，调用接口。授权和调用的流程比较复杂，我将我做测试的过程记录一下，供需要的人做参考。
+
 ## 0.启动ticket推送服务
 
 官方接口文档：
@@ -18,7 +20,7 @@ https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/api/compone
 ``` bash
 # 调用接口
 
-curl -X POST "https://api.weixin.qq.com/cgi-bin/component/api_start_push_ticket" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"component_appid\": \"wx43548a6703d7a56b\", \"component_secret\": \"dc2b36844f88b54b96d6e315e8fa1010\" }"
+curl -X POST "https://api.weixin.qq.com/cgi-bin/component/api_start_push_ticket" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"component_appid\": \"wx41111111111111\", \"component_secret\": \"xxxxxxxxxxxxxxxxxxxxxxxx\" }"
 
 # 接口返回
 
@@ -44,7 +46,7 @@ https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/api/compone
     public String getComponentVeriryTicket(HttpServletRequest request,@RequestParam Map<String, String> params){
     	String encodingAESKey = "giaoao1111111111111111111111111111111111111";
 		String token = "giaoao";
-		String componentAppId = "wx43548a6703d7a56b";
+		String componentAppId = "wx41111111111111";
 		
     	 // 微信加密签名
         String msgSignature = request.getParameter("msg_signature");
@@ -95,11 +97,11 @@ https://www.oracle.com/java/technologies/javase-jce8-downloads.html
 
 ``` log
  |postData:<xml>
-    <AppId><![CDATA[wx43548a6703d7a56b]]></AppId>
+    <AppId><![CDATA[wx411111111111111111111]]></AppId>
     <Encrypt><![CDATA[mPRda2sAxx/6nuHxMtBSV/icd1VsCb5zHd8zfHAtCqS8vxbMMeXH5xUshAvvGHRB+UQeVWr+TZviY0TttFF5cjs28VEf6RuCHWHvMpFNF43xABgr8HtzzUIb5/O8JuLUoFxvQB7mk7ECxm1SuT4ZBIGr3if8Gxb2K0aJAzKhqfXedlUNRND5oqLAa3XuKjC4wQ1QgdQCziBK5xZq96o+gOLJRuC1hGwRXlpkGTKJ3RBdsHtZz6aTUg+PvGMl0dYLWPLUUK5qWd7nVUBndNtkJxqxIcQpLSbbN8ErCv8S/mhaW/Kc/PnG123SO9Cj1XKKWv/8RVMqbr9AvS51AdfCsTHwnRLwSPd047+G00s3NTPBbhDCfkgLUakSERIWAZfODKiwPSuQvvtOahQfG8BVXtV3Int/ZGVDg/94zExNotE8SVQ5hbbFoY9ZmsaoMUlQgnC6qNj6FTUuOgvtRd6RzA==]]></Encrypt>
 </xml>
 
-2021-03-12 09:30:04.218 [http-nio-8280-exec-5]-INFO  (com.allinpay.liveapp.retail.controller.HelloController:194)|msg:<xml><AppId><![CDATA[wx43548a6703d7a56b]]></AppId>
+2021-03-12 09:30:04.218 [http-nio-8280-exec-5]-INFO  (com.allinpay.liveapp.retail.controller.HelloController:194)|msg:<xml><AppId><![CDATA[wx411111111111111111111]]></AppId>
 <CreateTime>1615512486</CreateTime>
 <InfoType><![CDATA[component_verify_ticket]]></InfoType>
 <ComponentVerifyTicket><![CDATA[ticket@@@O5aMkWQut6f1uxGpexkRwxl53LpEtHVKkuNnGTZ8e4lkrG0riuaCPY16HegOX-7R4d7NbDkoNJvQ3HxPmLTsZA]]></ComponentVerifyTicket>
@@ -153,7 +155,7 @@ https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/api/authori
 
 ### 4.1 拼授权跳转链接：
 
-https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=wx43548a6703d7a56b&pre_auth_code=preauthcode@@@PS8nU53W1iZIoj9tN_F4vA2ox5nWl8MLmxu8UJ_XJN1y-lEFIoS5CDmlsc6znjnIoz_BQtWFUfoAcaoup65xWg&redirect_uri=http://mini.allinpayjs.com/wxcallback
+https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=wx411111111111111111111&pre_auth_code=preauthcode@@@PS8nU53W1iZIoj9tN_F4vA2ox5nWl8MLmxu8UJ_XJN1y-lEFIoS5CDmlsc6znjnIoz_BQtWFUfoAcaoup65xWg&redirect_uri=http://mini.demonisles.com/wxcallback
 
 
 授权页面必须从指定域名跳转，简单的授权跳转页面如下：
@@ -165,18 +167,32 @@ https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=wx43548a6703
 </body>
 <script>
 function go(){
-window.location.href = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=wx43548a6703d7a56b&pre_auth_code=preauthcode@@@PS8nU53W1iZIoj9tN_F4vA2ox5nWl8MLmxu8UJ_XJN1y-lEFIoS5CDmlsc6znjnIoz_BQtWFUfoAcaoup65xWg&redirect_uri=http://mini.allinpayjs.com/wxcallback";
+window.location.href = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=wx411111111111111111111&pre_auth_code=preauthcode@@@PS8nU53W1iZIoj9tN_F4vA2ox5nWl8MLmxu8UJ_XJN1y-lEFIoS5CDmlsc6znjnIoz_BQtWFUfoAcaoup65xWg&redirect_uri=http://mini.demonisles.com/wxcallback";
 }
 </script>
 </html>
 
 ```
+
 引导公众号管理员点击按钮进行授权
 
+跳转完成后，会显示如下页面
+![componentloginpage](/pic/snapshot/20210312/1.png)
+
+有一点需要注意：如果第三方平台应用还没有发布到全网，需要把待授权公众号的原始id配置一下
+![config](/pic/snapshot/20210312/2.png)
+
+不然，授权的时候会报个错：
+
+![error](/pic/snapshot/20210312/0.png)
+
+管理员扫码后会显示以下页面
+
+![admin](/pic/snapshot/20210312/3.jpg)
 
 ### 4.2授权后跳转
 
-http://mini.allinpayjs.com/wxcallback?auth_code=queryauthcode@@@20PJDNpfTJAa3oN4pCQTk1GuE35fYDTmrZLyM3pEoBi37fhXzdaqDN1y_SZVPlTiQ447tVscEkA_szhmVVuhDw&expires_in=3600
+http://mini.demonisles.com/wxcallback?auth_code=queryauthcode@@@20PJDNpfTJAa3oN4pCQTk1GuE35fYDTmrZLyM3pEoBi37fhXzdaqDN1y_SZVPlTiQ447tVscEkA_szhmVVuhDw&expires_in=3600
 
 
 ### 4.3使用授权码获取授权信息
@@ -185,11 +201,11 @@ http://mini.allinpayjs.com/wxcallback?auth_code=queryauthcode@@@20PJDNpfTJAa3oN4
 ``` bash
 # 调用接口：
 
-curl -X POST "https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token=43_XENaRUJm4gulOvoh2KMNbhZ6GLXGY51kkBVJYNl2tRqKYGzu260GbBe5AdaYSRJnSEQTLZ5OfnuEwXir-KC9MJP8U2xb6SfNDNDTvdBQCuKweu0cNQYqKmQvnvMFmuZk6ICUbLUGLchVxwMxKJAaAJARQH" -d "{ \"component_appid\":\"wx43548a6703d7a56b\" , \"authorization_code\": \"queryauthcode@@@20PJDNpfTJAa3oN4pCQTk1GuE35fYDTmrZLyM3pEoBi37fhXzdaqDN1y_SZVPlTiQ447tVscEkA_szhmVVuhDw\" }"
+curl -X POST "https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token=43_XENaRUJm4gulOvoh2KMNbhZ6GLXGY51kkBVJYNl2tRqKYGzu260GbBe5AdaYSRJnSEQTLZ5OfnuEwXir-KC9MJP8U2xb6SfNDNDTvdBQCuKweu0cNQYqKmQvnvMFmuZk6ICUbLUGLchVxwMxKJAaAJARQH" -d "{ \"component_appid\":\"wx411111111111111111111\" , \"authorization_code\": \"queryauthcode@@@20PJDNpfTJAa3oN4pCQTk1GuE35fYDTmrZLyM3pEoBi37fhXzdaqDN1y_SZVPlTiQ447tVscEkA_szhmVVuhDw\" }"
 
 # 接口返回：
 
-{"authorization_info":{"authorizer_appid":"wx927858bad6f6868a","authorizer_access_token":"43_LzORzyML5BCsToFtBKlHdUxI-7JNlBE9JPt8FceZQcx5VsdtSzy-E8Ue8DaBOskQyWwDEM3Hh5lJZ42XJQ-CWESVyyECkuc-BkM5KwrZg3GBpDSwwpgLCqNpzVNaJoou1ZKb78-M6jG6IWcVDZWhADDQMJ","expires_in":7200,"authorizer_refresh_token":"refreshtoken@@@HDIjlj4Zywh_ZF8TT_LPqQOzulFPLMVbF9sczyNuHcY","func_info":[{"funcscope_category":{"id":1}},{"funcscope_category":{"id":15}},{"funcscope_category":{"id":4}},{"funcscope_category":{"id":7}},{"funcscope_category":{"id":2}},{"funcscope_category":{"id":3}},{"funcscope_category":{"id":11}},{"funcscope_category":{"id":6}},{"funcscope_category":{"id":5}},{"funcscope_category":{"id":8}},{"funcscope_category":{"id":13}},{"funcscope_category":{"id":9}},{"funcscope_category":{"id":10}},{"funcscope_category":{"id":12}},{"funcscope_category":{"id":22}},{"funcscope_category":{"id":23}},{"funcscope_category":{"id":24},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":26}},{"funcscope_category":{"id":27},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":33},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":34}},{"funcscope_category":{"id":35}},{"funcscope_category":{"id":44},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":46}},{"funcscope_category":{"id":47}},{"funcscope_category":{"id":54}},{"funcscope_category":{"id":66}},{"funcscope_category":{"id":89}}]}}
+{"authorization_info":{"authorizer_appid":"wx999999999999","authorizer_access_token":"43_LzORzyML5BCsToFtBKlHdUxI-7JNlBE9JPt8FceZQcx5VsdtSzy-E8Ue8DaBOskQyWwDEM3Hh5lJZ42XJQ-CWESVyyECkuc-BkM5KwrZg3GBpDSwwpgLCqNpzVNaJoou1ZKb78-M6jG6IWcVDZWhADDQMJ","expires_in":7200,"authorizer_refresh_token":"refreshtoken@@@HDIjlj4Zywh_ZF8TT_LPqQOzulFPLMVbF9sczyNuHcY","func_info":[{"funcscope_category":{"id":1}},{"funcscope_category":{"id":15}},{"funcscope_category":{"id":4}},{"funcscope_category":{"id":7}},{"funcscope_category":{"id":2}},{"funcscope_category":{"id":3}},{"funcscope_category":{"id":11}},{"funcscope_category":{"id":6}},{"funcscope_category":{"id":5}},{"funcscope_category":{"id":8}},{"funcscope_category":{"id":13}},{"funcscope_category":{"id":9}},{"funcscope_category":{"id":10}},{"funcscope_category":{"id":12}},{"funcscope_category":{"id":22}},{"funcscope_category":{"id":23}},{"funcscope_category":{"id":24},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":26}},{"funcscope_category":{"id":27},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":33},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":34}},{"funcscope_category":{"id":35}},{"funcscope_category":{"id":44},"confirm_info":{"need_confirm":0,"already_confirm":0,"can_confirm":0}},{"funcscope_category":{"id":46}},{"funcscope_category":{"id":47}},{"funcscope_category":{"id":54}},{"funcscope_category":{"id":66}},{"funcscope_category":{"id":89}}]}}
 
 ```
 
@@ -202,11 +218,11 @@ https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Official_Ac
 
 拼接调转链接：
 
-https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx927858bad6f6868a&redirect_uri=http://mini.allinpayjs.com/wxcallback&response_type=code&scope=snsapi_base&state=STATE&component_appid=wx43548a6703d7a56b#wechat_redirect
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9999999999999&redirect_uri=http://mini.demonisles.com/wxcallback&response_type=code&scope=snsapi_base&state=STATE&component_appid=wx411111111111111111111#wechat_redirect
 
 跳转返回
 
-http://mini.allinpayjs.com/wxcallback?code=011wQd000WmlkL1WzY000s42RR1wQd0-&state=STATE&appid=wxfd5749048f25a4b6
+http://mini.demonisles.com/wxcallback?code=011wQd000WmlkL1WzY000s42RR1wQd0-&state=STATE&appid=wx9999999999999
 
 
 
@@ -214,7 +230,7 @@ http://mini.allinpayjs.com/wxcallback?code=011wQd000WmlkL1WzY000s42RR1wQd0-&stat
 
 ``` bash
 # 调用接口
-curl "https://api.weixin.qq.com/sns/oauth2/component/access_token?appid=wxfd5749048f25a4b6&code=011wQd000WmlkL1WzY000s42RR1wQd0-&grant_type=authorization_code&component_appid=wx43548a6703d7a56b&component_access_token=43_SQdmRUQbqMf4Am_y3YkIMmHjrrM76qrfYAvCGaGhY43K3hSOVOhZIA_irz2m6VhoZNFVK2UHmPV1YjA2uf_4mSTkW1dXVQcVeTJbJiqEPvhWvw9kS8s06-q_X_befgeMuYW7DvpxN0disAOCUDQgAIAGPC"
+curl "https://api.weixin.qq.com/sns/oauth2/component/access_token?appid=wx999999999999999&code=011wQd000WmlkL1WzY000s42RR1wQd0-&grant_type=authorization_code&component_appid=wx411111111111111111111&component_access_token=43_SQdmRUQbqMf4Am_y3YkIMmHjrrM76qrfYAvCGaGhY43K3hSOVOhZIA_irz2m6VhoZNFVK2UHmPV1YjA2uf_4mSTkW1dXVQcVeTJbJiqEPvhWvw9kS8s06-q_X_befgeMuYW7DvpxN0disAOCUDQgAIAGPC"
 
 # 接口返回：
 
@@ -241,3 +257,4 @@ curl "https://api.weixin.qq.com/cgi-bin/user/info?access_token=43_9jXJS3aI4vzk6G
 
 ```
 
+以上。
