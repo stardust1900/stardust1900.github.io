@@ -1,7 +1,7 @@
 ---
 layout: post
-title: ""
-subtitle: '微信开放平台三方平台开发流程'
+title: "微信开放平台第三方平台应用开发流程"
+subtitle: '微信开放平台三方平台应用开发流程'
 date: 2021-03-12
 category: Tech
 tags: [微信开放平台]
