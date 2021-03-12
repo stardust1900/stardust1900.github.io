@@ -74,14 +74,21 @@ https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/api/compone
     	return "success";
     }
 ```
-获取报文后 要对报文进行揭秘操作，官方说明:https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Message_Encryption/Technical_Plan.html
+获取报文后 要对报文进行解秘操作，官方说明:
 
-官方demo:https://wximg.gtimg.com/shake_tv/mpwiki/cryptoDemo.zip
+https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Message_Encryption/Technical_Plan.html
+
+官方demo:
+
+https://wximg.gtimg.com/shake_tv/mpwiki/cryptoDemo.zip
 
 
 异常 java.security.InvalidKeyException:illegal Key Size 的解决方案：
 
 在官方网站下载 JCE 无限制权限策略文件
+
+https://www.oracle.com/java/technologies/javase-jce8-downloads.html
+
 下载后解压，可以看到 local_policy.jar 和 US_export_policy.jar 以及 readme.txt，如果安装了 JRE，将两个 jar 文件放到%JRE_HOME%\lib\security 目录下覆盖原来的文件；如果安装了 JDK，将两个 jar 文件放到%JDK_HOME%\jre\lib\security 目录下覆盖原来文件
 
 接收微信推送服务的报文如下：
@@ -108,11 +115,11 @@ https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/api/compone
 
 调用接口需要的参数：
 
-    component_appid 在开放平台创建第三方应用后可以查到
+component_appid 在开放平台创建第三方应用后可以查到
 
-    component_appsecret 这个在开放平台可以设置
+component_appsecret 这个在开放平台可以设置
 
-    component_verify_ticket 就是上一步得到的
+component_verify_ticket 就是上一步得到的
 
 ``` bash
 # 调用接口
