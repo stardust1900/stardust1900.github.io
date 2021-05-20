@@ -11,6 +11,7 @@ baseurl: ''
 nav:
   home: '/'
   tags: '/tags.html'
+  fastpages: '/fastpages/'
   about: '/about.html'
 
 # Author 配置博主信息
