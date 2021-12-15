@@ -28,7 +28,7 @@ tags: [okhttp,android]
 > defaultHttpClient.setHttpRequestRetryHandler(new DefaultHttpRequestRetryHandler(0,false));
 
 于是，我们可以给出一个解释：
-***用户做扫码操作时，网络出现问题，智能POS从WiFi连接自动切换到了移动连接，此时客户端多了一次请求重发。***
+***用户做扫码操作时，网络出现问题，智能POS从WiFi连接自动切换到了移动连接，此时客户端做了一次请求重发。***
 
 因为智能POS是android系统，我们部署在智能POS上的支付app是使用okhttp发起后端请求的，需要修改okhttp相关的代码来规避这个问题.
 
