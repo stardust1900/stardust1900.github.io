@@ -21,7 +21,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='创建post')
     parser.add_argument('-et', '--english-title', help='英文标题')
     parser.add_argument('-ct', '--chinese-title', help='中文标题')
-    parser.add_argument('-sub', '--subtitle', help='中文标题')
+    parser.add_argument('-sub', '--subtitle', help='中文子标题')
     parser.add_argument('-cat', '--category', help='分类')
     parser.add_argument('-tags', '--tags', help='标签 多个用逗号分隔')
     args = parser.parse_args()
