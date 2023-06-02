@@ -1,6 +1,6 @@
 ---
 layout: post
-title: FastJson转Java对账字段不区分大小写
+title: FastJson转Java对像字段不区分大小写
 subtitle: ''
 date: 2023-06-02
 category: Tech
@@ -177,6 +177,6 @@ nickName:null	 nickname:shawn3
 
 这个结果符合你的预期吗？
 
-所以，用JSON.toObject的时候还是的慎重。
+所以，用JSON.toObject的时候还是得慎重。
 
 以上。

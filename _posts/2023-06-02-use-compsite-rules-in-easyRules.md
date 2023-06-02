@@ -21,7 +21,7 @@ tags: [rule engine,easyRules,java]
 >
 >    源: 与必应的对话， 2023/6/2
 >
->    (1) 规则引擎核心知识与开源产品对比选型 | ThinkingInsights. https://ranying666.github.io/2021/03/11/rule-engine/.
+>    (1) 规则引擎核心知识与开源产品对比选型 ThinkingInsights. https://ranying666.github.io/2021/03/11/rule-engine/.
 >
 >    (2) Using EasyRule to Manage Firewall Rules - pfSense Documentation. https://docs.netgate.com/pfsense/en/latest/firewall/easyrule.html.
 >
@@ -153,7 +153,7 @@ public class MyCompositeRule extends UnitRuleGroup{
 
 执行结果是：
 
-``` text
+``` shell
 
 1111111111111111
 2222222222222222
