@@ -2,8 +2,8 @@
 title: Categories
 layout: default
 ---
-
-<div class="well article">
+{% include header.html %}
+<main class="tags-content">
 {% assign sortedcategories = site.categories | sort %}
 {% for category in sortedcategories %}
     <h2>{{ category[0] | capitalize }}</h2>
@@ -14,11 +14,12 @@ layout: default
             {% if group == null or group == node.group %}
                 <li><span class="post-date">
                     {% assign date_format = site.date_format.categories %}
-                    {{ node.date | date: date_format }} </span><a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a></li>
+                    {{ node.date | date: '%Y-%m-%d' }} </span><a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a></li>
             {% endif %}
             {% endif %}
         {% endfor %}
         {% assign pages_list = nil %}
     </ul>
 {% endfor %}
-</div>
+</main>
+{% include footer.html %}
