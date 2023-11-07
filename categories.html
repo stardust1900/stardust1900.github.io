@@ -19,7 +19,8 @@ layout: default
             {% if group == null or group == node.group %}
                 <span class="tag-post">
                     {% assign date_format = site.date_format.categories %}
-                    {{ node.date | date: '%Y-%m-%d' }} </span><a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a>
+                    {{ node.date | date: '%Y-%m-%d' }} <a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a>
+                </span>
             {% endif %}
             {% endif %}
         {% endfor %}
