@@ -10,20 +10,21 @@ layout: default
     <ul class="tags-list">
 {% assign sortedcategories = site.categories | sort %}
 {% for category in sortedcategories %}
+<li>
     <h2>{{ category[0] | capitalize }}</h2>
-    <ul>
+    
         {% assign pages_list = category[1] %}
         {% for node in pages_list %}
             {% if node.title != null %}
             {% if group == null or group == node.group %}
-                <li><span class="tag-post">
+                <span class="tag-post">
                     {% assign date_format = site.date_format.categories %}
-                    {{ node.date | date: '%Y-%m-%d' }} </span><a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a></li>
+                    {{ node.date | date: '%Y-%m-%d' }} </span><a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a>
             {% endif %}
             {% endif %}
         {% endfor %}
         {% assign pages_list = nil %}
-    </ul>
+</li>
 {% endfor %}
 </ul>
 </main>
