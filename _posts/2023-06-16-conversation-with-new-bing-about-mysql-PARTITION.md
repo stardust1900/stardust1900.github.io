@@ -4,7 +4,7 @@ title: 和必应对话之mysql分区分表
 subtitle: 'mysql单表海量数据处理'
 date: 2023-06-16
 category: Tech
-tags: [bing mysql]
+tags: [bing,mysql]
 ---
 > mysql单表数据量太大 导致查询缓慢问题如何解决
 

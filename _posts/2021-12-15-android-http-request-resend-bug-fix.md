@@ -3,7 +3,7 @@ layout: post
 title: "android端http请求重发问题定位过程"
 subtitle: 'okhttp自动重发问题定位'
 date: 2021-12-15
-category: tech
+category: Tech
 tags: [okhttp,android]
 ---
 

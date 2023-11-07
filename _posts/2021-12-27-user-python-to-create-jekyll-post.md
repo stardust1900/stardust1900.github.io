@@ -3,7 +3,7 @@ layout: post
 title: python脚本创建jekyll post
 subtitle: 'rake 的替代方案'
 date: 2021-12-27
-category: tech
+category: Tech
 tags: [python,jekyll]
 ---
 
