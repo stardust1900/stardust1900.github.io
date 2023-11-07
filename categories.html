@@ -3,7 +3,11 @@ title: Categories
 layout: default
 ---
 {% include header.html %}
+<div class="g-banner tags-banner {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }}" data-theme="{{ site.theme-color }}">
+    <h2>CATEGORIES</h2>
+</div>
 <main class="tags-content">
+    <ul class="tags-list"></ul>
 {% assign sortedcategories = site.categories | sort %}
 {% for category in sortedcategories %}
     <h2>{{ category[0] | capitalize }}</h2>
@@ -21,5 +25,7 @@ layout: default
         {% assign pages_list = nil %}
     </ul>
 {% endfor %}
+</ul>
 </main>
+
 {% include footer.html %}
