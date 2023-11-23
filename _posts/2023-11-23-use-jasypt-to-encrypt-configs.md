@@ -6,7 +6,7 @@ category: Tech
 tags: [jasypt,springboot]
 ---
 
-1. pom文件增加依赖
+###    1.pom文件增加依赖
 
 
 ``` xml 
@@ -17,7 +17,7 @@ tags: [jasypt,springboot]
 		</dependency>
 ```
 
-2. 修改启动类增加StringEncryptor实现
+###    2.修改启动类增加StringEncryptor实现
 
 jasypt密码可以放到配置文件或者启动命令中，与其这样不如直接写到代码里
 
@@ -44,7 +44,7 @@ jasypt密码可以放到配置文件或者启动命令中，与其这样不如�
 
 注意：上面的@Primary 注解必须加上，覆盖默认实现。
 
-3. 本地写一个加密类，对你要加密的敏感信息加密
+###    3.本地写一个加密类，对你要加密的敏感信息加密
 
 ``` java
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
@@ -75,7 +75,7 @@ public class JasyptTest {
 }
 ```
 
-4. 修改配置文件
+###    4.修改配置文件
 
 将加密后的信息用前面用 ENC( ) 包起来
 
