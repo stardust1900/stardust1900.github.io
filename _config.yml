@@ -2,7 +2,7 @@
 title: '独行深山'
 description: '南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发'
 keyword: '南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 商城开发 系统开发'
-url: 'http://wangxuan.me' # your host
+url: 'https://wangxuan.me' # your host
 
 # if you don't need baseurl, you should leave this value blank.
 baseurl: ''
@@ -16,9 +16,9 @@ nav:
   about: '/about.html'
 
 # Author 配置博主信息
-author: '王一刀'
+author: '王君敕'
 nickname: '王一刀'
-bio: '看书，听歌，写程序'
+bio: '交流，讨论，分享； 思考，总结，沉淀'
 avatar: '/assets/img/profile.png'
 
 # Search
