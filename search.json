@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "将github pages托管到4everland",
+      "tags"     : "github 4everland",
+      "url"      : "/tech/2023/12/09/move-github-pages-to-4everland.html"
+    } ,
+  
+    {
       "title"    : "使用jasypt对springboot配置信息加密",
       "tags"     : "jasypt springboot",
       "url"      : "/tech/2023/11/23/use-jasypt-to-encrypt-configs.html"

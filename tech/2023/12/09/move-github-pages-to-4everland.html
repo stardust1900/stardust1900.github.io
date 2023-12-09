@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>将github pages托管到4everland - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="将github pages托管到4everland">
+    <meta name="keywords"  content="github, 4everland">
+
+    <meta property="og:title" content="将github pages托管到4everland - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2023/12/09/move-github-pages-to-4everland.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#github" class="post-tag">github</a>
+            
+            <a href="https://wangxuan.me/tags#4everland" class="post-tag">4everland</a>
+            
+            
+        </div>
+        <h1>将github pages托管到4everland</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="23-12-09"><i class="iconfont icon-date"></i>09 Dec 2023</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">访问速度让人惊喜</h2>
+    
+    <article class="markdown-body">
+        <p>最近发现了个好东西 https://www.4everland.org/，这个号称是web3.0的云计算平台，可以做web主机，云存储，去中心网关等等。如果你用vue或者react做网页应用，部署在这个上面，非常好用。我试了一下，在国内的访问速度也是让人惊喜。</p>
+
+<p>我的个人博客是用的github pages，虽然凑合用，但是这个在国内的访问速度实在是差强人意。因为4everland是直接导入github仓库的，于是我产生了一个想法：能不能把我的个人博客整到4everland上面去？</p>
+
+<p>答案是：能，真的是太能了。整完以后的感觉是：哎呀妈呀，真香！</p>
+
+<p>跟大家介绍一下我是怎么做的，感兴趣的朋友可以试一下。</p>
+
+<p>因为之前对github action不太熟悉，也浪费了不少时间，曾经一度以为我要自己写action了，不过走运的是从action市场找到了合适的action。</p>
+
+<p>哪怕你没用过github action，跟着我的步骤做，也一定能成功。</p>
+
+<h2 id="0设置github-token">0.设置github Token</h2>
+
+<p>因为要通过action创建分支，需要授权</p>
+
+<p>登陆github后点击又上角头像-&gt;Settings-&gt;Developer setings-&gt;Personal access tokens-&gt;Tokens(classic)</p>
+
+<p><img src="/assets/images/20231209/1.png" alt="" /></p>
+
+<p><img src="/assets/images/20231209/2.png" alt="" /></p>
+
+<p>点击Generate new Token 授权确认后进入创建页面
+<img src="/assets/images/20231209/3.png" alt="" /></p>
+
+<p>在note中取个名字，选过期时间，我选的永不过期，下面的授权主要把repo和workflow勾上，我为了保险都给勾上了…</p>
+
+<p>点击下面的按钮后页面上会生成一个gh开头的字符串，把这个字符串保存好，下一步会用到。</p>
+
+<h2 id="1设置secrets">1.设置secrets</h2>
+
+<p>这个是要在action使用的变量</p>
+
+<p>在你的github pages仓库的settings中
+  <img src="/assets/images/20231209/4.png" alt="" /></p>
+
+<p>点击New repository secret</p>
+
+<p>名字填：DEPLOY_TOKEN secret：填上一步生成的gh开头的字符串 保存。</p>
+
+<h2 id="2创建workflow">2.创建workflow</h2>
+<p>回到仓库，点击action，点new workflow，然后点set a workflow yourself
+<img src="/assets/images/20231209/5.png" alt="" />
+<img src="/assets/images/20231209/6.png" alt="" />
+把下面的内容拷贝进去，保存 commit changes。github的部分就搞完了</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># Sample workflow for building and deploying a Jekyll site to GitHub Pages</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Deploy Jekyll with GitHub Pages dependencies preinstalled</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="c1"># Runs on pushes targeting the default branch</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">main"</span><span class="pi">]</span>
+
+  <span class="c1"># Allows you to run this workflow manually from the Actions tab</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+
+<span class="c1"># Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages</span>
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">read</span>
+  <span class="na">pages</span><span class="pi">:</span> <span class="s">write</span>
+  <span class="na">id-token</span><span class="pi">:</span> <span class="s">write</span>
+
+<span class="c1"># Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.</span>
+<span class="c1"># However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.</span>
+<span class="na">concurrency</span><span class="pi">:</span>
+  <span class="na">group</span><span class="pi">:</span> <span class="s2">"</span><span class="s">pages"</span>
+  <span class="na">cancel-in-progress</span><span class="pi">:</span> <span class="no">false</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="c1"># Build job</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Setup Pages</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/configure-pages@v4</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build with Jekyll</span>
+        <span class="c1"># uses: actions/jekyll-build-pages@v1</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">jerryjvl/jekyll-build-action@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">source</span><span class="pi">:</span> <span class="s">./</span>
+          <span class="na">destination</span><span class="pi">:</span> <span class="s">./_site</span>
+      <span class="c1"># - name: Upload artifact</span>
+      <span class="c1">#   uses: actions/upload-pages-artifact@v2</span>
+                    
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to GitHub Pages</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">JamesIves/github-pages-deploy-action@v4.5.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">folder</span><span class="pi">:</span> <span class="s">./_site</span>
+          <span class="na">token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">branch</span><span class="pi">:</span> <span class="s">docs</span>
+
+
+
+  <span class="c1"># Deployment job</span>
+  <span class="c1"># deploy:</span>
+  <span class="c1">#   environment:</span>
+  <span class="c1">#     name: github-pages</span>
+  <span class="c1">#     url: $</span>
+  <span class="c1">#   runs-on: ubuntu-latest</span>
+  <span class="c1">#   needs: build</span>
+  <span class="c1">#   steps:</span>
+  <span class="c1">#     - name: Deploy to GitHub Pages</span>
+  <span class="c1">#       id: deployment</span>
+  <span class="c1">#       uses: actions/deploy-pages@v3</span>
+
+</code></pre></div></div>
+<p><img src="/assets/images/20231209/7.png" alt="" /></p>
+
+<p>你可能会问 为什么不直接用jekyll的workflow？</p>
+
+<p>有两个问题：</p>
+
+<p>1.这个直接部署到pages上了拿不到生成的_site目录。</p>
+
+<p>上面使用JamesIves/github-pages-deploy-action@v4.5.0 替换 actions/jekyll-build-pages@v1 就是为了将_site目录保存到了docs分支</p>
+
+<p>2.生成的html中包含*.github.io的域名无法部署到别的域名。</p>
+
+<p>使用jerryjvl/jekyll-build-action@v1 替换 actions/jekyll-build-pages@v1 就是为了解决这个问题</p>
+
+<h2 id="3进入4everland网站">3.进入4everland网站</h2>
+
+<p>是用github账号可以直接登陆，登陆后点击projects，点右上角new project，会展示你的所有在github上的仓库，选择你的目标仓库import</p>
+
+<p><img src="/assets/images/20231209/8.png" alt="" /></p>
+
+<p>修改一下工程名，选择docs分支，点击下面的deploy就可以了。</p>
+
+<p><img src="/assets/images/20231209/9.png" alt="" /></p>
+
+<p>4everland会为你的工程生成一个二级域名你可以直接访问，或者你可以像我一样配置自己的域名，如果你有自己的域名的话。</p>
+
+<p><a href="https://wangxuan.me">https://wangxuan.me</a></p>
+
+<p>好了，这样就全部完成了，赶快来试试吧。</p>
+
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        
+        <div class="read-next-item">
+            <a href="/tech/2023/11/23/use-jasypt-to-encrypt-configs.html" class="read-next-link"></a>
+            <section>
+                <span>使用jasypt对springboot配置信息加密</span>
+                <p>1.pom文件增加依赖</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>
