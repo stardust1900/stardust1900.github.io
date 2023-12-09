@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>规则引擎easyRules中组合规则的使用 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="规则引擎easyRules中组合规则的使用">
+    <meta name="keywords"  content="rule engine, easyRules, java">
+
+    <meta property="og:title" content="规则引擎easyRules中组合规则的使用 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2023/06/02/use-compsite-rules-in-easyRules.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#rule%20engine" class="post-tag">rule engine</a>
+            
+            <a href="https://wangxuan.me/tags#easyRules" class="post-tag">easyRules</a>
+            
+            <a href="https://wangxuan.me/tags#java" class="post-tag">java</a>
+            
+            
+        </div>
+        <h1>规则引擎easyRules中组合规则的使用</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="23-06-02"><i class="iconfont icon-date"></i>02 Jun 2023</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">easyRules4.1.0的用法</h2>
+    
+    <article class="markdown-body">
+        <p>这两天想要做支付路由，要根据支付信息将支付请求转发到不同的支付渠道，可能要用到规则引擎，于是研究了一下开源的规则引擎产品。<a href="https://ranying666.github.io/2021/03/11/rule-engine/">规则引擎核心知识与开源产品对比选型</a> ，这篇文章对规格引擎和开源产品有详细的介绍。从文中得知目前活跃的项目有uRule和easyRule。通过询问new bing ^_^，这两个项目的比较如下：</p>
+
+<blockquote>
+  <p>你好，这是必应。我看到你的消息是一个搜索词，是关于 URule 和 EasyRule 的对比。URule 和 EasyRule 都是 Java 规则引擎，但是它们有很大的不同。下面是一些主要的区别¹：</p>
+
+  <ul>
+    <li>URule 是一个成熟的规则引擎，提供了多种规则表达方式，如决策表、决策树、评分卡等，并且提供了基于 Web 的设计器，可以让业务人员直接参与和修改规则。URule 基于 Rete 算法，可以高效地匹配大量的规则和数据。URule 有开源版和商业版，开源版的功能有限，没有高级功能。</li>
+    <li>EasyRule 是一个轻量级的规则引擎，只提供了一种规则表达方式，就是使用 Java 代码或者注解来定义和扩展规则。EasyRule 不需要额外的学习成本，只需要掌握 Java 语言即可。EasyRule 不依赖 Rete 算法，而是按照优先级的顺序执行规则。EasyRule 是完全开源的，没有商业版。</li>
+  </ul>
+
+  <p>你可以根据你的需求和场景来选择合适的规则引擎。如果你需要一个功能全面、性能高效、可视化友好的规则引擎，你可以考虑 URule；如果你需要一个简单易用、轻量级、基于 Java 代码的规则引擎，你可以考虑 EasyRule。</p>
+
+  <p>你对 URule 和 EasyRule 的对比有什么疑问吗？</p>
+
+  <p>源: 与必应的对话， 2023/6/2</p>
+
+  <p>(1) 规则引擎核心知识与开源产品对比选型 ThinkingInsights. https://ranying666.github.io/2021/03/11/rule-engine/.</p>
+
+  <p>(2) Using EasyRule to Manage Firewall Rules - pfSense Documentation. https://docs.netgate.com/pfsense/en/latest/firewall/easyrule.html.</p>
+
+  <p>(3) 常见开源规则引擎对比分析_大海梦想的博客-CSDN博客. https://blog.csdn.net/wjc133/article/details/111954160.</p>
+
+  <p>(4) EasyRule实战 - 掘金. https://juejin.cn/post/7028949948259368990.</p>
+</blockquote>
+
+<p>显然，EasyRule是比较合适的。目前EasyRule的最新版本是4.1.0，官方文档地址：https://github.com/j-easy/easy-rules/wiki 而网上的介绍文章大都停留在3.x版本。而EasyRule在4.x后做了较大的变动。我看了下最新文档，根据最新版本写了个组合规则的例子。</p>
+
+<p>首先，在pom文件中增加依赖。需要easy-rules-support，因为组合规则的接口在这个包里。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+        <span class="nt">&lt;dependency&gt;</span>
+		    <span class="nt">&lt;groupId&gt;</span>org.jeasy<span class="nt">&lt;/groupId&gt;</span>
+		    <span class="nt">&lt;artifactId&gt;</span>easy-rules-core<span class="nt">&lt;/artifactId&gt;</span>
+		    <span class="nt">&lt;version&gt;</span>4.1.0<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+		    <span class="nt">&lt;groupId&gt;</span>org.jeasy<span class="nt">&lt;/groupId&gt;</span>
+		    <span class="nt">&lt;artifactId&gt;</span>easy-rules-support<span class="nt">&lt;/artifactId&gt;</span>
+		    <span class="nt">&lt;version&gt;</span>4.1.0<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>然后，定义两个单独的规则：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">easyrule</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Action</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Condition</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Fact</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Rule</span><span class="o">;</span>
+
+<span class="nd">@Rule</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Age rule"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"Check if a person's age is &gt; 18"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AgeRule</span> <span class="o">{</span>
+
+
+    <span class="nd">@Condition</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAdult</span><span class="o">(</span><span class="nd">@Fact</span><span class="o">(</span><span class="s">"person"</span><span class="o">)</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2222222222222222"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">person</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">18</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Action</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">(</span><span class="nd">@Fact</span><span class="o">(</span><span class="s">"person"</span><span class="o">)</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"3333333333333"</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"The %s is %d yeas old"</span><span class="o">,</span><span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span><span class="n">person</span><span class="o">.</span><span class="na">getAge</span><span class="o">()));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">easyrule</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Action</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Condition</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Fact</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Rule</span><span class="o">;</span>
+
+<span class="nd">@Rule</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Gender rule"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"Check if a person's gender is male"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GenderRule</span> <span class="o">{</span>
+
+    <span class="nd">@Condition</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isMale</span><span class="o">(</span><span class="nd">@Fact</span><span class="o">(</span><span class="s">"person"</span><span class="o">)</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"4444444444444444"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">person</span><span class="o">.</span><span class="na">getGender</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"male"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Action</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">(</span><span class="nd">@Fact</span><span class="o">(</span><span class="s">"person"</span><span class="o">)</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"5555555555555555555555"</span><span class="o">);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"The %s is %s"</span><span class="o">,</span><span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span><span class="n">person</span><span class="o">.</span><span class="na">getGender</span><span class="o">()));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>接着，通过继承UnitRuleGroup 写一个组合接口</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">easyrule</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.annotation.Action</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.api.Facts</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jeasy.rules.support.composite.UnitRuleGroup</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyCompositeRule</span> <span class="kd">extends</span> <span class="nc">UnitRuleGroup</span><span class="o">{</span>
+
+	<span class="kd">public</span> <span class="nf">MyCompositeRule</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1111111111111111"</span><span class="o">);</span>
+		<span class="n">addRule</span><span class="o">(</span><span class="k">new</span> <span class="nc">AgeRule</span><span class="o">());</span>
+		<span class="n">addRule</span><span class="o">(</span><span class="k">new</span> <span class="nc">GenderRule</span><span class="o">());</span>
+	<span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">MyCompositeRule</span><span class="o">(</span><span class="nc">Object</span> <span class="o">...</span><span class="na">rules</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// register sub rules</span>
+    	<span class="k">for</span><span class="o">(</span><span class="nc">Object</span> <span class="n">rule</span> <span class="o">:</span> <span class="n">rules</span><span class="o">)</span> <span class="o">{</span>
+    		<span class="n">addRule</span><span class="o">(</span><span class="n">rule</span><span class="o">);</span>
+    	<span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">execute</span><span class="o">(</span><span class="nc">Facts</span> <span class="n">facts</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    	<span class="c1">//super.execute(facts);</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The person is an adult male"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>需要注意的是：这个组合规则类不需要@Rule注解，还需要覆写execute方法。</p>
+
+<p>最后，执行引擎</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="nc">RulesEngine</span> <span class="n">adultEngine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultRulesEngine</span><span class="o">();</span>
+		<span class="nc">Rules</span> <span class="n">rules</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rules</span><span class="o">();</span>
+		<span class="n">rules</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyCompositeRule</span><span class="o">());</span>
+		
+		<span class="nc">Facts</span> <span class="n">facts</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Facts</span><span class="o">();</span>
+		<span class="n">facts</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"person"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"tom"</span><span class="o">,</span><span class="mi">19</span><span class="o">,</span><span class="s">"male"</span><span class="o">));</span>
+		
+		<span class="n">adultEngine</span><span class="o">.</span><span class="na">fire</span><span class="o">(</span><span class="n">rules</span><span class="o">,</span> <span class="n">facts</span><span class="o">);</span>
+
+</code></pre></div></div>
+
+<p>执行结果是：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+1111111111111111
+2222222222222222
+4444444444444444
+The person is an adult male
+
+</code></pre></div></div>
+
+<p>可以看到单独规则里的Action 并没有执行。如果想要单独规则里的Action也执行，需要在组合规则的excute方法里增加一句 super.execute(facts); 这个需要根据实际需求来选择。</p>
+
+<p>以上。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/tech/2023/06/16/conversation-with-new-bing-about-mysql-PARTITION.html" class="read-next-link"></a>
+            <section>
+                <span>和必应对话之mysql分区分表</span>
+                <p>  mysql单表数据量太大 导致查询缓慢问题如何解决</p>
+            </section>
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/tech/2023/06/02/FastJson-convert-json-to-Java-Object-field-ignore-case.html" class="read-next-link"></a>
+            <section>
+                <span>FastJson转Java对像字段不区分大小写</span>
+                <p>昨天遇到参数key大小写不一致导致校验签名失败的问题，查了很长时间才找到原因。看了一下FastJson源码，发现J...</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

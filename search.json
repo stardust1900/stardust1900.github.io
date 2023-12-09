@@ -1,0 +1,93 @@
+[
+  
+    {
+      "title"    : "使用jasypt对springboot配置信息加密",
+      "tags"     : "jasypt springboot",
+      "url"      : "/tech/2023/11/23/use-jasypt-to-encrypt-configs.html"
+    } ,
+  
+    {
+      "title"    : "和必应对话之mysql分区分表",
+      "tags"     : "bing mysql",
+      "url"      : "/tech/2023/06/16/conversation-with-new-bing-about-mysql-PARTITION.html"
+    } ,
+  
+    {
+      "title"    : "规则引擎easyRules中组合规则的使用",
+      "tags"     : "rule engine easyRules java",
+      "url"      : "/tech/2023/06/02/use-compsite-rules-in-easyRules.html"
+    } ,
+  
+    {
+      "title"    : "FastJson转Java对像字段不区分大小写",
+      "tags"     : "java fastJson",
+      "url"      : "/tech/2023/06/02/FastJson-convert-json-to-Java-Object-field-ignore-case.html"
+    } ,
+  
+    {
+      "title"    : "当穷人不配有厕所",
+      "tags"     : "尊严",
+      "url"      : "/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html"
+    } ,
+  
+    {
+      "title"    : "python脚本创建jekyll post",
+      "tags"     : "python jekyll",
+      "url"      : "/tech/2021/12/27/user-python-to-create-jekyll-post.html"
+    } ,
+  
+    {
+      "title"    : "你同情王力宏的老婆吗？",
+      "tags"     : "直男聊八卦",
+      "url"      : "/discuss/2021/12/15/do-you-feel-pity-for-wanglihongs-wife.html"
+    } ,
+  
+    {
+      "title"    : "android端http请求重发问题定位过程",
+      "tags"     : "okhttp android",
+      "url"      : "/tech/2021/12/15/android-http-request-resend-bug-fix.html"
+    } ,
+  
+    {
+      "title"    : "若依后管的多服务实现",
+      "tags"     : "若依 springboot 代理 vue",
+      "url"      : "/%E6%8A%80%E6%9C%AF/2020/05/13/multi-service-for-ruoyi.html"
+    } ,
+  
+    {
+      "title"    : "在spring security中使用shiro的加密验证方法",
+      "tags"     : "spring security shiro",
+      "url"      : "/%E6%8A%80%E6%9C%AF/2020/03/12/spring-security-with-shiro.html"
+    } ,
+  
+    {
+      "title"    : "jwt搭建springboot服务步骤",
+      "tags"     : "jwt springboot",
+      "url"      : "/%E6%8A%80%E6%9C%AF/2020/02/25/jwt-step-by-step.html"
+    } ,
+  
+    {
+      "title"    : "多进程提交spark app",
+      "tags"     : "spark springboot",
+      "url"      : "/%E6%8A%80%E6%9C%AF/2018/06/13/submit-spark-app-in-multiprocess.html"
+    } ,
+  
+    {
+      "title"    : "我所理解的机器学习",
+      "tags"     : "机器学习 ML",
+      "url"      : "/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2017/07/04/machine-learning-in-my-opinion.html"
+    } ,
+  
+    {
+      "title"    : "db2 常用语句整理",
+      "tags"     : "db2",
+      "url"      : "/%E6%8A%80%E6%9C%AF/2014/12/24/db2-script-collect.html"
+    } ,
+  
+    {
+      "title"    : "db2 存储过程总结",
+      "tags"     : "db2",
+      "url"      : "/database/2014/07/03/something-about-db2-procedure.html"
+    } 
+  
+]

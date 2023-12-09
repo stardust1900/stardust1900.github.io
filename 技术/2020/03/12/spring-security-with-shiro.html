@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在spring security中使用shiro的加密验证方法 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="在spring security中使用shiro的加密验证方法">
+    <meta name="keywords"  content="spring security, shiro">
+
+    <meta property="og:title" content="在spring security中使用shiro的加密验证方法 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/%E6%8A%80%E6%9C%AF/2020/03/12/spring-security-with-shiro.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#spring%20security" class="post-tag">spring security</a>
+            
+            <a href="https://wangxuan.me/tags#shiro" class="post-tag">shiro</a>
+            
+            
+        </div>
+        <h1>在spring security中使用shiro的加密验证方法</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="20-03-12"><i class="iconfont icon-date"></i>12 Mar 2020</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <p>有个叫若依的后台管理框架挺流行的，我们也在用。经过一段时间发展，若依有了两个版本，前后端分离和未分离版本，前一个版本用的是spring security验证框架，后一个用的是shiro。</p>
+
+<p>有时候我们需要跟若依共用数据库搭建springboot服务，之前用jwt+spring security搭建过，所以拿过来直接用，用的时候发现问题，登录总是失败无法获取token。定位半天才发现，这个老版本的若依用的是shiro。于是，问题来了，怎么在现有的工程中，改动最少，把spring security 的验证方法改成shiro的验证方法(MD5加盐)？</p>
+
+<p>从AuthenticationManager.authenticate,这个入口开始，一步一步看源码，不过spring的代码代理来注入去，看着让人头大，很难把整个流程理清楚，所以也很难找到切入点。直到看到 DaoAuthenticationProvider 这个类的时候才豁然开朗。
+<img src="/pic/snapshot/20200312/1.jpg" alt="DaoAuthenticationProvider" />
+密码验证是在这里做的，我只要照着DaoAuthenticationProvider写一个实现类替换它就行了。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.apache.shiro.crypto.hash.Md5Hash</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.authentication.BadCredentialsException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.authentication.InternalAuthenticationServiceException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.authentication.UsernamePasswordAuthenticationToken</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.AuthenticationException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.UserDetails</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.UserDetailsService</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.xxxxxx.data.board.model.UserDetail</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DaoAuthenticationProvider</span> <span class="kd">extends</span> <span class="nc">AbstractUserDetailsAuthenticationProvider</span><span class="o">{</span>
+
+	<span class="kd">private</span> <span class="nc">UserDetailsService</span> <span class="n">userDetailsService</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">DaoAuthenticationProvider</span><span class="o">(</span><span class="nc">UserDetailsService</span> <span class="n">userDetailsService</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">userDetailsService</span> <span class="o">=</span> <span class="n">userDetailsService</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">additionalAuthenticationChecks</span><span class="o">(</span><span class="nc">UserDetails</span> <span class="n">userDetails</span><span class="o">,</span>
+			<span class="nc">UsernamePasswordAuthenticationToken</span> <span class="n">authentication</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">AuthenticationException</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">authentication</span><span class="o">.</span><span class="na">getCredentials</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Authentication failed: no credentials provided"</span><span class="o">);</span>
+
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">BadCredentialsException</span><span class="o">(</span><span class="n">messages</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span>
+					<span class="s">"AbstractUserDetailsAuthenticationProvider.badCredentials"</span><span class="o">,</span>
+					<span class="s">"Bad credentials"</span><span class="o">));</span>
+		<span class="o">}</span>
+		<span class="nc">String</span> <span class="n">newPassword</span> <span class="o">=</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getCredentials</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+		
+		<span class="k">if</span> <span class="o">(!</span><span class="n">matches</span><span class="o">((</span><span class="nc">UserDetail</span><span class="o">)</span><span class="n">userDetails</span><span class="o">,</span> <span class="n">newPassword</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Authentication failed: password does not match stored value"</span><span class="o">);</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">BadCredentialsException</span><span class="o">(</span><span class="n">messages</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span>
+					<span class="s">"AbstractUserDetailsAuthenticationProvider.badCredentials"</span><span class="o">,</span>
+					<span class="s">"Bad credentials"</span><span class="o">));</span>
+		<span class="o">}</span>
+		
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">matches</span><span class="o">(</span><span class="nc">UserDetail</span> <span class="n">userDetail</span><span class="o">,</span> <span class="nc">String</span> <span class="n">newPassword</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">userDetail</span><span class="o">.</span><span class="na">getPassword</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">encryptPassword</span><span class="o">(</span><span class="n">userDetail</span><span class="o">.</span><span class="na">getUsername</span><span class="o">(),</span> <span class="n">newPassword</span><span class="o">,</span> <span class="n">userDetail</span><span class="o">.</span><span class="na">getSalt</span><span class="o">()));</span>
+    <span class="o">}</span>
+ 
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptPassword</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">,</span> <span class="nc">String</span> <span class="n">salt</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Md5Hash</span><span class="o">(</span><span class="n">username</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="n">salt</span><span class="o">).</span><span class="na">toHex</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">protected</span> <span class="nc">UserDetails</span> <span class="nf">retrieveUser</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">UsernamePasswordAuthenticationToken</span> <span class="n">authentication</span><span class="o">)</span>
+			<span class="kd">throws</span> <span class="nc">AuthenticationException</span> <span class="o">{</span>
+		<span class="nc">UserDetails</span> <span class="n">loadedUser</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">userDetailsService</span><span class="o">.</span><span class="na">loadUserByUsername</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">loadedUser</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">InternalAuthenticationServiceException</span><span class="o">(</span>
+					<span class="s">"UserDetailsService returned null, which is an interface contract violation"</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">loadedUser</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>然后要做的就是修改 WebSecurityConfig 将新的实现类注入</p>
+
+<p><img src="/pic/snapshot/20200312/2.png" alt="WebSecurityConfig" /></p>
+
+<p>如此就把spring security 的 BCrypt方式加密 替换成了 shiro 的MD5加盐方式加密。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2020/05/13/multi-service-for-ruoyi.html" class="read-next-link"></a>
+            <section>
+                <span>若依后管的多服务实现</span>
+                <p>有时候我们需要多系统多数据库共用一个后管平台，让运维人员通过一个入口登录系统管理后台数据。后管系统用的是开源系统–...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2020/02/25/jwt-step-by-step.html" class="read-next-link"></a>
+            <section>
+                <span>jwt搭建springboot服务步骤</span>
+                <p>之前通过参考 SpringBoot集成SpringSecurity和JWT做登陆鉴权 搭建过一次。这两天需要搭建一...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

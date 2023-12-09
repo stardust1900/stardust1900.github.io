@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastJson转Java对像字段不区分大小写 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="FastJson转Java对像字段不区分大小写">
+    <meta name="keywords"  content="java, fastJson">
+
+    <meta property="og:title" content="FastJson转Java对像字段不区分大小写 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2023/06/02/FastJson-convert-json-to-Java-Object-field-ignore-case.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#java" class="post-tag">java</a>
+            
+            <a href="https://wangxuan.me/tags#fastJson" class="post-tag">fastJson</a>
+            
+            
+        </div>
+        <h1>FastJson转Java对像字段不区分大小写</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="23-06-02"><i class="iconfont icon-date"></i>02 Jun 2023</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <p>昨天遇到参数key大小写不一致导致校验签名失败的问题，查了很长时间才找到原因。看了一下FastJson源码，发现JSON.toObject中转换成对象的时候会忽略大小写。</p>
+
+<p>所以，当使用了JSON.toObject将json转成Java对象后，再用JSON.toObject转成json，key值就变了。</p>
+
+<p>写个方法验证一下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">nickName</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNickName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nickName</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNickName</span><span class="o">(</span><span class="nc">String</span> <span class="n">nickName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nickName</span> <span class="o">=</span> <span class="n">nickName</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSON</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSONObject</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JsonToObject</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">JSONObject</span> <span class="n">json1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
+		<span class="n">json1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nickName"</span><span class="o">,</span> <span class="s">"shawn1"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json1</span><span class="o">);</span>
+		<span class="nc">Person</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">json1</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p1</span><span class="o">.</span><span class="na">getNickName</span><span class="o">());</span>
+		<span class="nc">JSONObject</span> <span class="n">json11</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span><span class="no">JSON</span><span class="o">.</span><span class="na">toJSON</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json11</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
+		
+		<span class="nc">JSONObject</span> <span class="n">json2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
+		<span class="n">json2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">,</span> <span class="s">"shawn2"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json2</span><span class="o">);</span>
+		<span class="n">json2</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">Person</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">json2</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">getNickName</span><span class="o">());</span>
+		<span class="nc">JSONObject</span> <span class="n">json22</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span><span class="no">JSON</span><span class="o">.</span><span class="na">toJSON</span><span class="o">(</span><span class="n">p2</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json22</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
+		
+		<span class="nc">JSONObject</span> <span class="n">json3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
+		<span class="n">json3</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nIcknAme"</span><span class="o">,</span> <span class="s">"shawn3"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json3</span><span class="o">);</span>
+		<span class="n">json3</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">Person</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">json3</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p3</span><span class="o">.</span><span class="na">getNickName</span><span class="o">());</span>
+		<span class="nc">JSONObject</span> <span class="n">json33</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span><span class="no">JSON</span><span class="o">.</span><span class="na">toJSON</span><span class="o">(</span><span class="n">p3</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json33</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
+	<span class="o">}</span>	
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>输出：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s2">"nickName"</span>:<span class="s2">"shawn1"</span><span class="o">}</span>
+shawn1
+<span class="o">{</span><span class="s2">"nickName"</span>:<span class="s2">"shawn1"</span><span class="o">}</span>
+<span class="nt">--------------------</span>
+<span class="o">{</span><span class="s2">"nickname"</span>:<span class="s2">"shawn2"</span><span class="o">}</span>
+shawn2
+<span class="o">{</span><span class="s2">"nickName"</span>:<span class="s2">"shawn2"</span><span class="o">}</span>
+<span class="nt">--------------------</span>
+<span class="o">{</span><span class="s2">"nIcknAme"</span>:<span class="s2">"shawn3"</span><span class="o">}</span>
+shawn3
+<span class="o">{</span><span class="s2">"nickName"</span>:<span class="s2">"shawn3"</span><span class="o">}</span>
+<span class="nt">--------------------</span>
+
+</code></pre></div></div>
+
+<p>JSON.toObject中转换成对象的时候忽略了大小写，可以增强健壮性，但Java类是区分大小写的，如果有两个仅仅带小写不同的属性，可能就出问题了。</p>
+
+<p>给Person增加一个属性再试一下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">nickName</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNickName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nickName</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNickName</span><span class="o">(</span><span class="nc">String</span> <span class="n">nickName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nickName</span> <span class="o">=</span> <span class="n">nickName</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">nickname</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNickname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nickname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNickname</span><span class="o">(</span><span class="nc">String</span> <span class="n">nickname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nickname</span> <span class="o">=</span> <span class="n">nickname</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSON</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSONObject</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JsonToObject</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">JSONObject</span> <span class="n">json1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
+		<span class="n">json1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nickName"</span><span class="o">,</span> <span class="s">"shawn1"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json1</span><span class="o">);</span>
+		<span class="nc">Person</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">json1</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"nickName:"</span><span class="o">+</span><span class="n">p1</span><span class="o">.</span><span class="na">getNickName</span><span class="o">()+</span><span class="s">"\t nickname:"</span><span class="o">+</span><span class="n">p1</span><span class="o">.</span><span class="na">getNickname</span><span class="o">());</span>
+		<span class="nc">JSONObject</span> <span class="n">json11</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span><span class="no">JSON</span><span class="o">.</span><span class="na">toJSON</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json11</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
+		
+		<span class="nc">JSONObject</span> <span class="n">json2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
+		<span class="n">json2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">,</span> <span class="s">"shawn2"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json2</span><span class="o">);</span>
+		<span class="n">json2</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">Person</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">json2</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"nickName:"</span><span class="o">+</span><span class="n">p2</span><span class="o">.</span><span class="na">getNickName</span><span class="o">()+</span><span class="s">"\t nickname:"</span><span class="o">+</span><span class="n">p2</span><span class="o">.</span><span class="na">getNickname</span><span class="o">());</span>
+		<span class="nc">JSONObject</span> <span class="n">json22</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span><span class="no">JSON</span><span class="o">.</span><span class="na">toJSON</span><span class="o">(</span><span class="n">p2</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json22</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
+		
+		<span class="nc">JSONObject</span> <span class="n">json3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
+		<span class="n">json3</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nIcknAme"</span><span class="o">,</span> <span class="s">"shawn3"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json3</span><span class="o">);</span>
+		<span class="n">json3</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">Person</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">json3</span><span class="o">.</span><span class="na">toJavaObject</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"nickName:"</span><span class="o">+</span><span class="n">p3</span><span class="o">.</span><span class="na">getNickName</span><span class="o">()+</span><span class="s">"\t nickname:"</span><span class="o">+</span><span class="n">p3</span><span class="o">.</span><span class="na">getNickname</span><span class="o">());</span>
+		<span class="nc">JSONObject</span> <span class="n">json33</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span><span class="no">JSON</span><span class="o">.</span><span class="na">toJSON</span><span class="o">(</span><span class="n">p3</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json33</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------------"</span><span class="o">);</span>
+	<span class="o">}</span>	
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>输出：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s2">"nickName"</span>:<span class="s2">"shawn1"</span><span class="o">}</span>
+nickName:shawn1	 nickname:null
+<span class="o">{</span><span class="s2">"nickName"</span>:<span class="s2">"shawn1"</span><span class="o">}</span>
+<span class="nt">--------------------</span>
+<span class="o">{</span><span class="s2">"nickname"</span>:<span class="s2">"shawn2"</span><span class="o">}</span>
+nickName:null	 nickname:shawn2
+<span class="o">{</span><span class="s2">"nickname"</span>:<span class="s2">"shawn2"</span><span class="o">}</span>
+<span class="nt">--------------------</span>
+<span class="o">{</span><span class="s2">"nIcknAme"</span>:<span class="s2">"shawn3"</span><span class="o">}</span>
+nickName:null	 nickname:shawn3
+<span class="o">{</span><span class="s2">"nickname"</span>:<span class="s2">"shawn3"</span><span class="o">}</span>
+<span class="nt">--------------------</span>
+
+</code></pre></div></div>
+
+<p>这个结果符合你的预期吗？</p>
+
+<p>所以，用JSON.toObject的时候还是得慎重。</p>
+
+<p>以上。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/tech/2023/06/02/use-compsite-rules-in-easyRules.html" class="read-next-link"></a>
+            <section>
+                <span>规则引擎easyRules中组合规则的使用</span>
+                <p>这两天想要做支付路由，要根据支付信息将支付请求转发到不同的支付渠道，可能要用到规则引擎，于是研究了一下开源的规则引...</p>
+            </section>
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html" class="read-next-link"></a>
+            <section>
+                <span>当穷人不配有厕所</span>
+                <p>董宇辉在几十万人的直播间，直接问经济学家薛兆丰：薛老师，您提出了很多骇人听闻的观点，震惊世人，廉租房不能配厕所等等...</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

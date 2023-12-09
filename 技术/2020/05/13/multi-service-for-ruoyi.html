@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>若依后管的多服务实现 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="若依后管的多服务实现">
+    <meta name="keywords"  content="若依, springboot, 代理, vue">
+
+    <meta property="og:title" content="若依后管的多服务实现 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/%E6%8A%80%E6%9C%AF/2020/05/13/multi-service-for-ruoyi.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#%E8%8B%A5%E4%BE%9D" class="post-tag">若依</a>
+            
+            <a href="https://wangxuan.me/tags#springboot" class="post-tag">springboot</a>
+            
+            <a href="https://wangxuan.me/tags#%E4%BB%A3%E7%90%86" class="post-tag">代理</a>
+            
+            <a href="https://wangxuan.me/tags#vue" class="post-tag">vue</a>
+            
+            
+        </div>
+        <h1>若依后管的多服务实现</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="20-05-13"><i class="iconfont icon-date"></i>13 May 2020</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <p>有时候我们需要多系统多数据库共用一个后管平台，让运维人员通过一个入口登录系统管理后台数据。后管系统用的是开源系统–若依，现在我需要对系统做改造，以满足管理多系统多数据库的需求。我们想到了两种方案：配置多数据源和使用代理。</p>
+
+<p>我们选择了使用代理的方式，我记录一下怎么实现的，和实现过程中遇到的问题是如何解决的。</p>
+
+<ol>
+  <li>
+    <p>配置代理</p>
+
+    <p>修改若依原有的service</p>
+
+    <p>引入org.mitre.dsmiley.httpproxy</p>
+
+    <p>在pom文件中增加依赖</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.mitre.dsmiley.httpproxy<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>smiley-http-proxy-servlet<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.7<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>    </div>
+
+    <p>application.yml中增加</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> canislupus:
+     proxy:
+         servlet_url: /canislupus/*
+         target_url: http://localhost:8883/canislupus
+</code></pre></div>    </div>
+
+    <p>访问/canislupus/* 的请求都会被转发</p>
+
+    <p>增加代理类</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">package</span> <span class="nn">com.ruoyi.framework.config.proxy</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">javax.servlet.Servlet</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">org.mitre.dsmiley.httpproxy.ProxyServlet</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.boot.web.servlet.ServletRegistrationBean</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">com.google.common.collect.ImmutableMap</span><span class="o">;</span>
+
+ <span class="nd">@Configuration</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CanislupusProxyServletConfiguration</span> <span class="o">{</span>
+
+     <span class="nd">@Value</span><span class="o">(</span><span class="s">"${canislupus.proxy.servlet_url}"</span><span class="o">)</span>
+     <span class="kd">private</span> <span class="nc">String</span> <span class="n">servletUrl</span><span class="o">;</span>
+        
+     <span class="cm">/**
+     * 读取配置中代理目标地址
+     */</span>
+     <span class="nd">@Value</span><span class="o">(</span><span class="s">"${canislupus.proxy.target_url}"</span><span class="o">)</span>
+     <span class="kd">private</span> <span class="nc">String</span> <span class="n">targetUrl</span><span class="o">;</span>
+        
+     <span class="nd">@Bean</span>
+     <span class="kd">public</span> <span class="nc">Servlet</span> <span class="nf">createProxyServlet</span><span class="o">(){</span>
+         <span class="c1">// 创建新的ProxyServlet</span>
+         <span class="k">return</span> <span class="k">new</span> <span class="nf">ProxyServlet</span><span class="o">();</span>
+     <span class="o">}</span>
+        
+     <span class="nd">@Bean</span>
+     <span class="kd">public</span> <span class="nc">ServletRegistrationBean</span><span class="o">&lt;</span><span class="nc">Servlet</span><span class="o">&gt;</span> <span class="nf">proxyServletRegistration</span><span class="o">(){</span>
+         <span class="nc">ServletRegistrationBean</span><span class="o">&lt;</span><span class="nc">Servlet</span><span class="o">&gt;</span> <span class="n">registrationBean</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServletRegistrationBean</span><span class="o">&lt;</span><span class="nc">Servlet</span><span class="o">&gt;(</span><span class="n">createProxyServlet</span><span class="o">(),</span> <span class="n">servletUrl</span><span class="o">);</span>
+         <span class="c1">//设置网址以及参数</span>
+         <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                 <span class="s">"targetUri"</span><span class="o">,</span> <span class="n">targetUrl</span><span class="o">,</span>
+                 <span class="s">"log"</span><span class="o">,</span> <span class="s">"true"</span><span class="o">);</span>
+         <span class="n">registrationBean</span><span class="o">.</span><span class="na">setInitParameters</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+         <span class="n">registrationBean</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"canislupus"</span><span class="o">);</span>
+         <span class="k">return</span> <span class="n">registrationBean</span><span class="o">;</span>
+     <span class="o">}</span>
+
+ <span class="o">}</span>
+
+</code></pre></div>    </div>
+
+    <p>如果http://localhost:8883/canislupus 是可以访问的，</p>
+
+    <p>访问http://host:port/canislupus 的时候请求会被转发，可以看到如下日志：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> canislupus: proxy GET uri: /canislupus/platform/convergepre/list -- http://localhost:8883/canislupus/platform/convergepre/list
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>解决文件导出的问题</p>
+
+    <p>若依的文件下载方式是在服务短生成文件，将文件名返回，通过共用的download方法接收文件名来下载文件。当后台是多服务的时候，因为文件生成在不同的机器上无法通过共用的download方法来下载。需要对export方法做改造，是方法返回流而不仅仅是文件名。</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@PreAuthorize</span><span class="o">(</span><span class="s">"@ss.hasPermi('platform:convergepre:export')"</span><span class="o">)</span>
+     <span class="nd">@Log</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"平台列表"</span><span class="o">,</span> <span class="n">businessType</span> <span class="o">=</span> <span class="nc">BusinessType</span><span class="o">.</span><span class="na">EXPORT</span><span class="o">)</span>
+     <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/export"</span><span class="o">)</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">export</span><span class="o">(</span><span class="nc">TlParamConvergepre</span> <span class="n">tlParamConvergepre</span><span class="o">,</span><span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span>
+     <span class="o">{</span>
+         <span class="nc">List</span><span class="o">&lt;</span><span class="nc">TlParamConvergepre</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">tlParamConvergepreService</span><span class="o">.</span><span class="na">selectTlParamConvergepreList</span><span class="o">(</span><span class="n">tlParamConvergepre</span><span class="o">);</span>
+         <span class="nc">ExcelUtil</span><span class="o">&lt;</span><span class="nc">TlParamConvergepre</span><span class="o">&gt;</span> <span class="n">util</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ExcelUtil</span><span class="o">&lt;</span><span class="nc">TlParamConvergepre</span><span class="o">&gt;(</span><span class="nc">TlParamConvergepre</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+         <span class="nc">AjaxResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="na">exportExcel</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="s">"convergepre"</span><span class="o">);</span>
+         <span class="nc">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"msg"</span><span class="o">));</span>
+         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+         <span class="nc">String</span> <span class="n">realFileName</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="n">fileName</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">fileName</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="s">"_"</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+         <span class="nc">String</span> <span class="n">filePath</span> <span class="o">=</span> <span class="nc">RuoYiConfig</span><span class="o">.</span><span class="na">getDownloadPath</span><span class="o">()</span> <span class="o">+</span> <span class="n">fileName</span><span class="o">;</span>
+
+         <span class="n">response</span><span class="o">.</span><span class="na">setCharacterEncoding</span><span class="o">(</span><span class="s">"utf-8"</span><span class="o">);</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"multipart/form-data"</span><span class="o">);</span>
+         <span class="k">try</span> <span class="o">{</span>
+             <span class="n">response</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"Content-Disposition"</span><span class="o">,</span>
+                     <span class="s">"attachment;fileName="</span> <span class="o">+</span> <span class="nc">FileUtils</span><span class="o">.</span><span class="na">setFileDownloadHeader</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">realFileName</span><span class="o">));</span>
+             <span class="nc">FileUtils</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">filePath</span><span class="o">,</span> <span class="n">response</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">UnsupportedEncodingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+         <span class="o">}</span>
+        
+     <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>前端下载的时候需要通过接收流的方式来生成文件</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="k">if</span> <span class="p">(</span><span class="nx">getToken</span><span class="p">())</span> <span class="p">{</span>
+         <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Bearer </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">getToken</span><span class="p">()</span> <span class="c1">// 让每个请求携带自定义token 请根据实际情况自行修改</span>
+     <span class="p">}</span>
+     <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/dev-api/canislupus/platform/convergepre/export</span><span class="dl">'</span><span class="p">;</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+     <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,{</span>
+     <span class="na">responseType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">blob</span><span class="dl">'</span><span class="p">,</span>  <span class="c1">//指定reponseType 为blog</span>
+     <span class="na">headers</span><span class="p">:{</span><span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="nx">token</span><span class="p">}</span>
+     <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+     <span class="kd">let</span> <span class="nx">blob</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
+     <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">()</span>
+     <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">)</span>
+     <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+     <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">)</span>
+     <span class="kd">let</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nb">decodeURI</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">content-disposition</span><span class="dl">'</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">fileName=</span><span class="dl">'</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+     <span class="nx">a</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">fileName</span>
+     <span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span>
+     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+     <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">()</span>
+     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+     <span class="p">}</span>
+     <span class="p">})</span>
+</code></pre></div>    </div>
+    <p>上面这个是网上搜到的标准写法。</p>
+
+    <p>当使用若依封装的request的时候总是报错，排查了很长时间才发现是response拦截器的问题，因为返回流的时候没有data.code拦截器报错了。</p>
+
+    <p>需要把request.js中的拦截器修改一下</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 响应拦截器</span>
+ <span class="nx">service</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+     <span class="c1">//下面是增加的</span>
+     <span class="k">if</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span>
+     <span class="k">if</span><span class="p">(</span><span class="dl">"</span><span class="s2">blob</span><span class="dl">"</span> <span class="o">===</span> <span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="nx">res</span>
+     <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="c1">//上面是增加的</span>
+     <span class="kd">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span>
+     <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">MessageBox</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span>
+         <span class="dl">'</span><span class="s1">登录状态已过期，您可以继续留在该页面，或者重新登录</span><span class="dl">'</span><span class="p">,</span>
+         <span class="dl">'</span><span class="s1">系统提示</span><span class="dl">'</span><span class="p">,</span>
+         <span class="p">{</span>
+             <span class="na">confirmButtonText</span><span class="p">:</span> <span class="dl">'</span><span class="s1">重新登录</span><span class="dl">'</span><span class="p">,</span>
+             <span class="na">cancelButtonText</span><span class="p">:</span> <span class="dl">'</span><span class="s1">取消</span><span class="dl">'</span><span class="p">,</span>
+             <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">warning</span><span class="dl">'</span>
+         <span class="p">}</span>
+         <span class="p">).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+         <span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">LogOut</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+             <span class="nx">location</span><span class="p">.</span><span class="nx">reload</span><span class="p">()</span> <span class="c1">// 为了重新实例化vue-router对象 避免bug</span>
+         <span class="p">})</span>
+         <span class="p">})</span>
+     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">Notification</span><span class="p">.</span><span class="nx">error</span><span class="p">({</span>
+         <span class="na">title</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span>
+         <span class="p">})</span>
+         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">)</span>
+     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
+     <span class="p">}</span>
+ <span class="p">},</span>
+ <span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">err</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">error</span><span class="p">)</span>
+     <span class="nx">Message</span><span class="p">({</span>
+     <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+     <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span>
+     <span class="na">duration</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1000</span>
+     <span class="p">})</span>
+     <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+ <span class="p">}</span>
+ <span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>生成的js中也需要把responseType加上</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 导出平台列表</span>
+ <span class="k">export</span> <span class="kd">function</span> <span class="nx">exportConvergepre</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+ <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">request</span><span class="p">({</span>
+     <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/canislupus/platform/convergepre/export</span><span class="dl">'</span><span class="p">,</span>
+     <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+     <span class="na">responseType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">blob</span><span class="dl">'</span><span class="p">,</span>
+     <span class="na">params</span><span class="p">:</span> <span class="nx">query</span>
+ <span class="p">});</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+ <span class="k">return</span> <span class="nx">req</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+    <p>这样就可以实现文件导出了。</p>
+  </li>
+</ol>
+
+<p>以上</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/tech/2021/12/15/android-http-request-resend-bug-fix.html" class="read-next-link"></a>
+            <section>
+                <span>android端http请求重发问题定位过程</span>
+                <p>昨天生产系统上报出一个问题：用户做一次扫码交易，出现了两条交易记录。幸好支付渠道对支付码有限制只成功了一笔，没有出...</p>
+            </section>
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2020/03/12/spring-security-with-shiro.html" class="read-next-link"></a>
+            <section>
+                <span>在spring security中使用shiro的加密验证方法</span>
+                <p>有个叫若依的后台管理框架挺流行的，我们也在用。经过一段时间发展，若依有了两个版本，前后端分离和未分离版本，前一个版...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

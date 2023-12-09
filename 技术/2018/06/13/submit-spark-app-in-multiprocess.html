@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多进程提交spark app - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="多进程提交spark app">
+    <meta name="keywords"  content="spark, springboot">
+
+    <meta property="og:title" content="多进程提交spark app - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/%E6%8A%80%E6%9C%AF/2018/06/13/submit-spark-app-in-multiprocess.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#spark" class="post-tag">spark</a>
+            
+            <a href="https://wangxuan.me/tags#springboot" class="post-tag">springboot</a>
+            
+            
+        </div>
+        <h1>多进程提交spark app</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王一刀</a></></span>
+            <time class="post-meta-item" datetime="18-06-13"><i class="iconfont icon-date"></i>13 Jun 2018</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <p>商户数据分析系统是通过web服务来管理spark app的。我们发现在web服务里同时提交多个spark app的时候，无法提交成功。在stackoverflow上查到：单个jvm里spark不允许有多个sparksession，因为spark不支持并且以后也不会支持(It is not supported and won’t be)。原文：<a href="https://stackoverflow.com/questions/40153728/multiple-sparksessions-in-single-jvm">Multiple SparkSessions in single JVM</a> 。web服务启动的时候只有一个进程，那么，问题来了，怎么才能在web服务里同时提交多个spark app呢？</p>
+
+<p>有两种解决方案：一种用上面的回答里提到的第三方工具livy；一种是另起进程提交。</p>
+
+<p>我试了一下livy，这个的确可以同时提交多个spark app，但是，有两个问题：</p>
+<ol>
+  <li>standalone模式下，提交后返回的application id 为null，无法跟踪任务状态。<a href="https://stackoverflow.com/questions/45489852/why-is-apache-livy-session-showing-application-id-null">Why is Apache Livy session showing Application id NULL?
+</a></li>
+  <li>任务提交后，在spark UI界面无法看到提交的任务</li>
+</ol>
+
+<p>如此看来，第三方工具并不好用。只好用第二种方法：自己写程序另起进程提交。并且在livy的日志里我看到一句：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>18/06/01 14:59:21 INFO SparkProcessBuilder: Running 
+<span class="s1">'/home/appadm/app/spark-2.0.2-bin-hadoop2.7/bin/spark-submit'</span> 
+<span class="s1">'--deploy-mode'</span> <span class="s1">'client'</span> 
+<span class="s1">'--name'</span> <span class="s1">'EarliestTradeApp'</span> 
+<span class="s1">'--class'</span> <span class="s1">'com.allinpal.mdas.sparkapps.EarliestTradeApp'</span> 
+<span class="s1">'--conf'</span> <span class="s1">'spark.executor.memory=1G'</span> 
+<span class="s1">'--conf'</span> 
+<span class="s1">'spark.jars=file:///app/thfd/commjars/mysql-connector-java-5.0.2.jar'</span> 
+<span class="s1">'--conf'</span> <span class="s1">'spark.submit.deployMode=client'</span> 
+<span class="s1">'--conf'</span> <span class="s1">'spark.master=spark://10.56.201.74:7077'</span> 
+<span class="s1">'--conf'</span> <span class="s1">'spark.driver.extraClassPath=/app/thfd/commjars/mysql-connector-java-5.0.2.jar'</span> 
+<span class="s1">'file:///app/thfd/sparkapps/earliest-trade-1.0.0.jar'</span> <span class="s1">'201804'</span> <span class="s1">'hdfs://cluster1'</span> 
+<span class="s1">'jdbc:mysql://10.56.201.71:3306/mdas?useUnicode=true&amp;characterEncoding=utf8'</span> 
+<span class="s1">'mdas'</span> 
+<span class="s1">'mdas'</span> 
+<span class="s1">'10.56.200.191:9000|10.56.200.193:9000'</span>
+</code></pre></div></div>
+
+<p>可见，livy的功能也是通过SparkProcessBuilder另起进程实现的。我们用另起进程的方法可能是可行的。</p>
+
+<p>于是，我们需要一个可以独立运行的提交spark app的jar。这样的功能好写，但是打成可以执行的又包含第三方依赖包的jar，有点困难…我用了maven-assembly-plugin和maven-shade-plugin，他们的配置有点复杂，而且都没有达到我想要的效果。
+最后用了springboot的CommandLineRunner，通过springboot打包成可以独立运行的jar包，配置简单，操作方便。</p>
+
+<p>接下来就是在web服务里启进程提交spark app ，代码类似下面这样。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="nc">String</span><span class="o">[]</span> <span class="n">arg0</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">"java"</span><span class="o">,</span> <span class="s">"-Xmx1024M"</span><span class="o">,</span> <span class="s">"-Xms512M"</span><span class="o">,</span> <span class="s">"-XX:MaxPermSize=256M"</span><span class="o">,</span>
+				<span class="s">"-jar"</span><span class="o">,</span>
+				<span class="s">"/app/thfd/apps/mdas-sparkappsubmit.jar"</span><span class="o">,</span>
+				<span class="s">"spark://10.56.201.74:7077"</span><span class="o">,</span> <span class="s">"client"</span><span class="o">,</span> <span class="s">"EarliestTradeApp"</span><span class="o">,</span>
+				<span class="s">"com.allinpal.mdas.sparkapps.EarliestTradeApp"</span><span class="o">,</span> <span class="s">"1G"</span><span class="o">,</span>
+				<span class="s">"/app/thfd/commjars/mysql-connector-java-5.0.2.jar"</span><span class="o">,</span>
+				<span class="s">"/app/thfd/sparkapps/earliest-trade-1.0.0.jar"</span><span class="o">,</span> <span class="s">"201802"</span><span class="o">,</span> <span class="s">"hdfs://cluster1"</span><span class="o">,</span>
+				<span class="s">"jdbc:mysql://10.56.201.71:3306/mdas?useUnicode=true&amp;characterEncoding=utf8"</span><span class="o">,</span> <span class="s">"mdas"</span><span class="o">,</span> <span class="s">"mdas"</span><span class="o">,</span>
+				<span class="s">"10.56.200.191:9000|10.56.200.193:9000"</span> <span class="o">};</span>
+
+		<span class="nc">ProcessBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ProcessBuilder</span><span class="o">(</span><span class="n">arg0</span><span class="o">);</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Process</span> <span class="n">process</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+			<span class="n">process</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+			<span class="nc">InputStreamReader</span> <span class="n">isr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">(),</span> <span class="s">"UTF-8"</span><span class="o">);</span>
+			<span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+			<span class="nc">String</span> <span class="n">line</span><span class="o">;</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Output of running %s is:"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">arg0</span><span class="o">));</span>
+			<span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// TODO Auto-generated catch block</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+</code></pre></div></div>
+<p>如此，完美解决多进程提交spark app 的问题。:)</p>
+
+<p>以上。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2020/02/25/jwt-step-by-step.html" class="read-next-link"></a>
+            <section>
+                <span>jwt搭建springboot服务步骤</span>
+                <p>之前通过参考 SpringBoot集成SpringSecurity和JWT做登陆鉴权 搭建过一次。这两天需要搭建一...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2017/07/04/machine-learning-in-my-opinion.html" class="read-next-link"></a>
+            <section>
+                <span>我所理解的机器学习</span>
+                <p>断断续续看了几个月的机器学习，我觉得是时候总结一下了。正如题目讲的那样，我只说我所理解的机器学习，我不能保证我理解...</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

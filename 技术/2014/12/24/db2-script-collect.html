@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>db2 常用语句整理 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="db2 常用语句整理">
+    <meta name="keywords"  content="db2">
+
+    <meta property="og:title" content="db2 常用语句整理 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/%E6%8A%80%E6%9C%AF/2014/12/24/db2-script-collect.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#db2" class="post-tag">db2</a>
+            
+            
+        </div>
+        <h1>db2 常用语句整理</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="14-12-24"><i class="iconfont icon-date"></i>24 Dec 2014</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <p>这是一篇总结文章，将常用的sql语句做了简单的整理。希望对你有用 ：）</p>
+
+<!--more-->
+<h4 id="执行文件中的sql脚本">执行文件中的sql脚本</h4>
+
+<p>1.执行以;结尾的脚本</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2  -tvf xxx.sql -l xxx.log;
+</code></pre></div></div>
+
+<p>2.执行以@结尾的脚本</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 -td@ -f xxx.sql
+</code></pre></div></div>
+
+<h4 id="导出表中数据到ixf文件">导出表中数据到ixf文件</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "export to xxx.ixf of ixf select * from schema.tablename where ..."
+</code></pre></div></div>
+
+<h4 id="导出表中数据到csv文件">导出表中数据到csv文件</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "export to xxx.csv of del select * from schema.tablename where ..."
+</code></pre></div></div>
+
+<h4 id="从ixf文件导入数据到数据库表">从ixf文件导入数据到数据库表</h4>
+<p>1.创建表并导入</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "import from xxxx.ixf of ixf COMMITCOUNT 2000 create into schema.tablename" (2000 条提交一次）
+</code></pre></div></div>
+
+<p>2.仅插入（增量导入）</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "import from xxx.ixf of ixf commitcount 2000 messages xxx.log insert into schema.tablename"
+</code></pre></div></div>
+
+<p>3.已存在数据修改不存在数据插入（全量导入）</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "import from xxx.ixf of ixf commitcount 2000 messages xxx.log insert_update into schema.tablename";
+</code></pre></div></div>
+
+<p>4.跳过xx条后导入</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "import from xxx.ixf of ixf COMMITCOUNT 2000 SKIPCOUNT 1000 insert into schema.tablename"
+</code></pre></div></div>
+
+<h4 id="查看表空间">查看表空间</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select tabschema,tabname,tbspace from syscat.tables;
+
+db2 list tablespaces
+</code></pre></div></div>
+
+<h4 id="统计所有节点表空间使用率">统计所有节点表空间使用率</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select substr(TABLESPACE_NAME,1,20) as TBSPC_NAME,bigint(TOTAL_PAGES * PAGE_SIZE)/1024/1024 as "TOTAL(MB)",
+used_pages*PAGE_SIZE/1024/1024 as "USED(MB)", free_pages*PAGE_SIZE/1024/1024 as "FREE(MB)" 
+from table(snapshot_tbs_cfg('DB_NAME', -2)) as snapshot_tbs_cfg
+</code></pre></div></div>
+
+<h4 id="查看表空间使用率">查看表空间使用率</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select substr(tbsp_name,1,20) as TABLESPACE_NAME,substr(tbsp_content_type,1,10) as TABLESPACE_TYPE,sum(tbsp_total_size_kb)/1024 as TOTAL_MB,
+sum(tbsp_used_size_kb)/1024 as USED_MB,sum(tbsp_free_size_kb)/1024 as FREE_MB,tbsp_page_size AS PAGE_SIZE 
+from SYSIBMADM.TBSP_UTILIZATION group by tbsp_name,tbsp_content_type,tbsp_page_size
+  	order by 1
+</code></pre></div></div>
+
+<h4 id="修改扩展表空间大小">修改扩展表空间大小</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alter tablespace xxxx RESIZE (ALL 30 M)
+
+ALTER TABLESPACE xxxx EXTEND(ALL 300 M)
+</code></pre></div></div>
+
+<h4 id="表主键的相关操作">表主键的相关操作</h4>
+
+<p>1：查找主键</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describe indexes for table &lt;instancename&gt;.&lt;tablename&gt;
+例子：db2 "DESCRIBE INDEXES FOR TABLE Students"
+</code></pre></div></div>
+
+<p>2：删除表主键</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alter table &lt;instancename&gt;.&lt;tablename&gt; drop primary key
+例子：db2 "ALTER TABLE Students DROP PRIMARY KEY"
+</code></pre></div></div>
+
+<p>3：增加表主键</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alter table &lt;instancename&gt;.&lt;tablename&gt; add CONSTRAINT &lt;primarykeyname&gt; PRIMARY KEY (&lt;columnname&gt;)
+例子： db2 "ALTER TABLE Students ADD CONSTRAINT StudentsKey PRIMARY KEY(sid)"
+</code></pre></div></div>
+
+<h4 id="查看创建索引">查看创建索引</h4>
+
+<p>1.查查看表索引</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>db2 "describe indexes for table POSL.APMS_MCHT show detail"
+
+select *  from SYSCAT.INDEXES  where TABNAME='表名'
+
+db2 "select  tabname  from syscat.indexes"
+</code></pre></div></div>
+
+<p>2.创建索引</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE INDEX &lt;INDEX_NAME&gt; ON &lt;TABLE_NAME&gt; (&lt;COLNAME1,COLNAME2…&gt;) 
+</code></pre></div></div>
+
+<h4 id="创建备份表">创建备份表</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create table XXXXX_BAK as
+(
+select * from   XXXXX
+)definition only;
+insert into XXXXX_BAK  select * from XXXXX;
+
+create table XXXXX_BAK like XXXXX;
+insert into XXXXX_BAK  select * from XXXXX;
+</code></pre></div></div>
+
+<h4 id="修改表名">修改表名</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rename table xxxxx_BAK to xxxxx;
+</code></pre></div></div>
+
+<h4 id="创建序列">创建序列</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE SEQUENCE xxxx_SEQ AS DECIMAL(31,0) START WITH 10000 INCREMENT BY 1 MINVALUE 1 NO MAXVALUE NO CYCLE CACHE 500 ORDER;
+</code></pre></div></div>
+
+<h4 id="关联修改">关联修改</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update xxx.table1 as t1 set (t1.col1)=(select t2.col1 from xxx.table2 t2 where t1.id=t2.id) WHERE t1.id in (select id from xxx.table2 ) 要求id必须是主键
+</code></pre></div></div>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2017/07/04/machine-learning-in-my-opinion.html" class="read-next-link"></a>
+            <section>
+                <span>我所理解的机器学习</span>
+                <p>断断续续看了几个月的机器学习，我觉得是时候总结一下了。正如题目讲的那样，我只说我所理解的机器学习，我不能保证我理解...</p>
+            </section>
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/database/2014/07/03/something-about-db2-procedure.html" class="read-next-link"></a>
+            <section>
+                <span>db2 存储过程总结</span>
+                <p>整个星期都在写存储过程，上一次写这玩意好像还是5，6年前。现在又花了很大力气写这个，感觉很有收获，需要总结一下。</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

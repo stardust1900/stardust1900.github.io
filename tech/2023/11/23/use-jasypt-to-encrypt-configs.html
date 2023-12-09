@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用jasypt对springboot配置信息加密 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="使用jasypt对springboot配置信息加密">
+    <meta name="keywords"  content="jasypt, springboot">
+
+    <meta property="og:title" content="使用jasypt对springboot配置信息加密 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2023/11/23/use-jasypt-to-encrypt-configs.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#jasypt" class="post-tag">jasypt</a>
+            
+            <a href="https://wangxuan.me/tags#springboot" class="post-tag">springboot</a>
+            
+            
+        </div>
+        <h1>使用jasypt对springboot配置信息加密</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="23-11-23"><i class="iconfont icon-date"></i>23 Nov 2023</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <h3 id="1pom文件增加依赖">1.pom文件增加依赖</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;dependency&gt;</span>
+		        <span class="nt">&lt;groupId&gt;</span>com.github.ulisesbocchio<span class="nt">&lt;/groupId&gt;</span>
+		        <span class="nt">&lt;artifactId&gt;</span>jasypt-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+		        <span class="nt">&lt;version&gt;</span>3.0.5<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<h3 id="2修改启动类增加stringencryptor实现">2.修改启动类增加StringEncryptor实现</h3>
+
+<p>jasypt密码可以放到配置文件或者启动命令中，与其这样不如直接写到代码里</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="nd">@Primary</span>
+    <span class="nd">@Bean</span><span class="o">(</span><span class="s">"jasyptStringEncryptor"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">StringEncryptor</span> <span class="nf">stringEncryptor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">PooledPBEStringEncryptor</span> <span class="n">encryptor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PooledPBEStringEncryptor</span><span class="o">();</span>
+        <span class="nc">SimpleStringPBEConfig</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleStringPBEConfig</span><span class="o">();</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">"xxxx"</span><span class="o">);</span><span class="c1">//这里改成你的密码</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setAlgorithm</span><span class="o">(</span><span class="s">"PBEWITHHMACSHA512ANDAES_256"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setKeyObtentionIterations</span><span class="o">(</span><span class="s">"1000"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setPoolSize</span><span class="o">(</span><span class="s">"1"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setProviderName</span><span class="o">(</span><span class="s">"SunJCE"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setSaltGeneratorClassName</span><span class="o">(</span><span class="s">"org.jasypt.salt.RandomSaltGenerator"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setIvGeneratorClassName</span><span class="o">(</span><span class="s">"org.jasypt.iv.RandomIvGenerator"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setStringOutputType</span><span class="o">(</span><span class="s">"base64"</span><span class="o">);</span>
+        <span class="n">encryptor</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">encryptor</span><span class="o">;</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>注意：上面的@Primary 注解必须加上，覆盖默认实现。</p>
+
+<h3 id="3本地写一个加密类对你要加密的敏感信息加密">3.本地写一个加密类，对你要加密的敏感信息加密</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.jasypt.encryption.pbe.PooledPBEStringEncryptor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jasypt.encryption.pbe.config.SimpleStringPBEConfig</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JasyptTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">PooledPBEStringEncryptor</span> <span class="n">encryptor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PooledPBEStringEncryptor</span><span class="o">();</span>
+        <span class="nc">SimpleStringPBEConfig</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleStringPBEConfig</span><span class="o">();</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">"xxxx"</span><span class="o">);</span><span class="c1">//改成你的密码</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setAlgorithm</span><span class="o">(</span><span class="s">"PBEWITHHMACSHA512ANDAES_256"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setKeyObtentionIterations</span><span class="o">(</span><span class="s">"1000"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setPoolSize</span><span class="o">(</span><span class="s">"1"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setProviderName</span><span class="o">(</span><span class="s">"SunJCE"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setSaltGeneratorClassName</span><span class="o">(</span><span class="s">"org.jasypt.salt.RandomSaltGenerator"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setIvGeneratorClassName</span><span class="o">(</span><span class="s">"org.jasypt.iv.RandomIvGenerator"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setStringOutputType</span><span class="o">(</span><span class="s">"base64"</span><span class="o">);</span>
+        <span class="n">encryptor</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+        
+        <span class="nc">String</span> <span class="n">originStr</span> <span class="o">=</span> <span class="s">"xxxx"</span> <span class="o">;</span><span class="c1">//原始字符串</span>
+        <span class="nc">String</span> <span class="n">encStr</span> <span class="o">=</span> <span class="n">encryptor</span><span class="o">.</span><span class="na">encrypt</span><span class="o">(</span><span class="n">originStr</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"originStr encrypt is {}"</span><span class="o">+</span> <span class="n">encStr</span><span class="o">);</span><span class="c1">//加密后的字符串，这个贴到配置文件中</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"originStr is {}"</span><span class="o">+</span> <span class="n">encryptor</span><span class="o">.</span><span class="na">decrypt</span><span class="o">(</span><span class="n">encStr</span><span class="o">));</span><span class="c1">//验证一下解密</span>
+
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="4修改配置文件">4.修改配置文件</h3>
+
+<p>将加密后的信息用前面用 ENC( ) 包起来</p>
+
+<p>例如：</p>
+
+<p>原始配置：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spring</span><span class="o">.</span><span class="na">datascoure</span><span class="o">.</span><span class="na">password</span><span class="o">=</span><span class="n">yourpassword</span>
+</code></pre></div></div>
+<p>改成：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spring</span><span class="o">.</span><span class="na">datascoure</span><span class="o">.</span><span class="na">password</span><span class="o">=</span><span class="no">ENC</span><span class="o">(</span><span class="nc">JL2t1CZpj</span><span class="o">+</span><span class="n">cTQ30IFKu0lkoZCVpYbVIhLm1MRbBpaNI</span><span class="o">])</span>
+</code></pre></div></div>
+
+<p>(完)</p>
+
+<p>参考:</p>
+
+<p>[1] <a href="https://zhuanlan.zhihu.com/p/480828512">https://zhuanlan.zhihu.com/p/480828512</a></p>
+
+<p>[2] <a href="https://github.com/ulisesbocchio/jasypt-spring-boot">https://github.com/ulisesbocchio/jasypt-spring-boot</a></p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        
+        <div class="read-next-item">
+            <a href="/tech/2023/06/16/conversation-with-new-bing-about-mysql-PARTITION.html" class="read-next-link"></a>
+            <section>
+                <span>和必应对话之mysql分区分表</span>
+                <p>  mysql单表数据量太大 导致查询缓慢问题如何解决</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jwt搭建springboot服务步骤 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="jwt搭建springboot服务步骤">
+    <meta name="keywords"  content="jwt, springboot">
+
+    <meta property="og:title" content="jwt搭建springboot服务步骤 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/%E6%8A%80%E6%9C%AF/2020/02/25/jwt-step-by-step.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#jwt" class="post-tag">jwt</a>
+            
+            <a href="https://wangxuan.me/tags#springboot" class="post-tag">springboot</a>
+            
+            
+        </div>
+        <h1>jwt搭建springboot服务步骤</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="20-02-25"><i class="iconfont icon-date"></i>25 Feb 2020</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">一步一步使用jwt搭建springboot服务</h2>
+    
+    <article class="markdown-body">
+        <p>之前通过参考 <a href="https://www.jianshu.com/p/54603b9933ca">SpringBoot集成SpringSecurity和JWT做登陆鉴权</a> 搭建过一次。这两天需要搭建一个全新的，趁这个机会我把整个过程记录下来，供需要的人做参考。</p>
+
+<ol>
+  <li>
+    <p>制作springboot模版工程</p>
+
+    <p>登录 <a href="https://start.spring.io/">https://start.spring.io/</a>
+ 现在(2020-2-25)springboot的最新发行版是2.2.4，但是生成以后，我把这个版本改成了饿2.1.1 因为于swagger2.9.2版本冲突导致无法启动工程。
+ <img src="/pic/snapshot/20200225/1.png" alt="start" /></p>
+
+    <p>输入工程名 描述 包名，jdk版本选8
+ <img src="/pic/snapshot/20200225/2.png" alt="jdk" /></p>
+
+    <p>依赖里暂时选这五个,有问题的话，后面可以在pom.xml文件中修改
+ 然后点击绿色按钮 下载工程
+ <img src="/pic/snapshot/20200225/3.png" alt="jdk" /></p>
+  </li>
+  <li>
+    <p>解压zip文件 导入到eclipse</p>
+
+    <p>我的导入后有一个pom文件的Unknow问题
+ 需要在pom文件中的<properties>节点中加入<maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
+ https://blog.csdn.net/weixin_42247563/article/details/100031885</properties></p>
+
+    <p><img src="/pic/snapshot/20200225/4.png" alt="unknow" /></p>
+  </li>
+  <li>
+    <p>修改pom文件</p>
+
+    <p>增加依赖</p>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>springfox-swagger2<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>springfox-swagger-ui<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-security<span class="nt">&lt;/artifactId&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.security<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-security-jwt<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.1.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>io.jsonwebtoken<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>jjwt<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>0.9.1<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.alibaba<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>fastjson<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.2.62<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.apache.commons<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>commons-lang3<span class="nt">&lt;/artifactId&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.github.pagehelper<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>pagehelper-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.2.13<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>    </div>
+
+    <p>修改build标签  剔除文件，修改最终打包的包名</p>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;build&gt;</span>
+ <span class="nt">&lt;resources&gt;</span>
+ <span class="nt">&lt;resource&gt;</span>
+     <span class="nt">&lt;directory&gt;</span>src/main/java<span class="nt">&lt;/directory&gt;</span>
+     <span class="c">&lt;!-- 包含 --&gt;</span>
+     <span class="nt">&lt;includes&gt;</span>
+         <span class="nt">&lt;include&gt;</span>**/*.xml<span class="nt">&lt;/include&gt;</span>
+     <span class="nt">&lt;/includes&gt;</span>
+     <span class="c">&lt;!-- 排除 --&gt;</span>
+     <span class="nt">&lt;excludes&gt;</span>
+     <span class="nt">&lt;/excludes&gt;</span>
+ <span class="nt">&lt;/resource&gt;</span>
+ <span class="nt">&lt;resource&gt;</span>
+     <span class="nt">&lt;directory&gt;</span>src/main/resources<span class="nt">&lt;/directory&gt;</span>
+     <span class="nt">&lt;filtering&gt;</span>true<span class="nt">&lt;/filtering&gt;</span>
+     <span class="nt">&lt;excludes&gt;</span>
+         <span class="nt">&lt;exclude&gt;</span>template/*.**<span class="nt">&lt;/exclude&gt;</span>
+     <span class="nt">&lt;/excludes&gt;</span>
+ <span class="nt">&lt;/resource&gt;</span>
+ <span class="nt">&lt;resource&gt;</span>
+     <span class="nt">&lt;directory&gt;</span>src/main/resources<span class="nt">&lt;/directory&gt;</span>
+     <span class="nt">&lt;filtering&gt;</span>false<span class="nt">&lt;/filtering&gt;</span>
+     <span class="nt">&lt;includes&gt;</span>
+         <span class="nt">&lt;include&gt;</span>template/*.**<span class="nt">&lt;/include&gt;</span>
+     <span class="nt">&lt;/includes&gt;</span>
+ <span class="nt">&lt;/resource&gt;</span>
+ <span class="nt">&lt;/resources&gt;</span>
+ <span class="nt">&lt;plugins&gt;</span>
+ <span class="nt">&lt;plugin&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;configuration&gt;</span>
+         <span class="nt">&lt;executable&gt;</span>true<span class="nt">&lt;/executable&gt;</span>
+         <span class="nt">&lt;fork&gt;</span>true<span class="nt">&lt;/fork&gt;</span>
+     <span class="nt">&lt;/configuration&gt;</span>
+     <span class="nt">&lt;dependencies&gt;</span>
+         <span class="c">&lt;!--spring热部署 --&gt;</span>
+         <span class="nt">&lt;dependency&gt;</span>
+             <span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+             <span class="nt">&lt;artifactId&gt;</span>springloaded<span class="nt">&lt;/artifactId&gt;</span>
+             <span class="nt">&lt;version&gt;</span>1.2.8.RELEASE<span class="nt">&lt;/version&gt;</span>
+         <span class="nt">&lt;/dependency&gt;</span>
+     <span class="nt">&lt;/dependencies&gt;</span>
+ <span class="nt">&lt;/plugin&gt;</span>
+ <span class="cp">&lt;!—打包时剔除配置文件，将配置文件外置—&gt;</span>			
+ <span class="nt">&lt;plugin&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;configuration&gt;</span>
+         <span class="nt">&lt;excludes&gt;</span>
+             <span class="nt">&lt;exclude&gt;</span>**/application.properties<span class="nt">&lt;/exclude&gt;</span>
+         <span class="nt">&lt;/excludes&gt;</span>
+     <span class="nt">&lt;/configuration&gt;</span>
+ <span class="nt">&lt;/plugin&gt;</span>
+ <span class="nt">&lt;/plugins&gt;</span>
+ <span class="nt">&lt;finalName&gt;</span>board-service<span class="nt">&lt;/finalName&gt;</span>
+ <span class="nt">&lt;/build&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>增加logback.xml配置文件</p>
+  </li>
+  <li>修改application.properties 增加配置
+    <div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="py">logging.level.com.xxxxxx</span><span class="p">=</span><span class="s">debug</span>
+ <span class="py">spring.application.name</span><span class="p">=</span> <span class="s">board-service</span>
+ <span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:mysql:///p?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8</span>
+ <span class="py">spring.datasource.username</span><span class="p">=</span><span class="s">xxxxxxjs</span>
+ <span class="py">spring.datasource.password</span><span class="p">=</span><span class="s">xxxxxxxx</span>
+ <span class="py">spring.datasource.driver-class-name</span><span class="p">=</span><span class="s">com.mysql.cj.jdbc.Driver</span>
+ <span class="py">spring.datasource.max-idle</span><span class="p">=</span><span class="s">10</span>
+ <span class="py">spring.datasource.max-wait</span><span class="p">=</span><span class="s">10000</span>
+ <span class="py">spring.datasource.min-idle</span><span class="p">=</span><span class="s">5</span>
+ <span class="py">spring.datasource.initial-size</span><span class="p">=</span><span class="s">5</span>
+ <span class="py">server.port</span><span class="p">=</span><span class="s">8180</span>
+ <span class="c">#jwt 
+</span> <span class="py">jwt.header</span><span class="p">=</span><span class="s">Authorization</span>
+ <span class="py">jwt.secret</span><span class="p">=</span><span class="s">mySecret</span>
+ <span class="c">#token 有效期一天
+</span> <span class="py">jwt.expiration</span><span class="p">=</span><span class="s">86400</span>
+ <span class="c">#如果想要首尾加上空格，可以使用转义字符。
+</span> <span class="c">#英文空格的unicode码是\u0020，中文空格的unicode码是\u3000
+</span> <span class="py">jwt.tokenHead</span><span class="p">=</span><span class="s">Bearer </span>
+ <span class="py">pagehelper.helperDialect</span><span class="p">=</span><span class="s">mysql</span>
+ <span class="py">pagehelper.reasonable</span><span class="p">=</span><span class="s">true</span>
+ <span class="py">pagehelper.supportMethodsArguments</span><span class="p">=</span><span class="s">true</span>
+ <span class="py">pagehelper.params</span><span class="p">=</span><span class="s">count=countSql</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>创建model类</p>
+
+    <p>在model包下 创建  User,Role , UserDetail 和  ResponseUserToken</p>
+
+    <p>UserDetail 要实现 UserDetails接口
+ <img src="/pic/snapshot/20200225/5.png" alt="model" /></p>
+  </li>
+  <li>
+    <p>引入 JwtUtils 工具类</p>
+
+    <p>token生成与校验的主要逻辑都在此类中，本例中token是保存在ConcurrentHashMap中，生产上可改为redis
+ <img src="/pic/snapshot/20200225/6.png" alt="JwtUtils" /></p>
+  </li>
+  <li>
+    <p>引入token认证filter</p>
+
+    <p>在config包里引入JwtAuthenticationTokenFilter.java</p>
+
+    <p>同时需要引入JwtAuthenticationEntryPoint 和 RestAuthenticationAccessDeniedHandler 修改http返回的status，使接口在认证失败和权限不足的时候仍然返回200，在返回的json报文中给出失败的原因</p>
+  </li>
+  <li>
+    <p>引入安全认证配置 WebSecurityConfig</p>
+
+    <p>在此类中声明可以匿名访问，以及无需安全认证的url
+ <img src="/pic/snapshot/20200225/7.png" alt="WebSecurityConfig" /></p>
+  </li>
+  <li>
+    <p>引入  CorsConfig 使服务允许跨域访问</p>
+
+    <p>(这步是可选的，解决跨域访问问题有很多种方法，这个只是一种)
+需要注意的是：还要同时修改 JwtAuthenticationEntryPoint 和  RestAuthenticationAccessDeniedHandler 解决认证失败和权限不足时的跨域问题。这个是在实际使用中遇到的问题。</p>
+  </li>
+  <li>
+    <p>数据访问</p>
+
+    <p>引入 AuthMapper.java 和  AuthMapper.xml
+<img src="/pic/snapshot/20200225/8.png" alt="AuthMapper" />
+涉及到的表有 sys_user,sys_user_role,sys_role</p>
+  </li>
+  <li>
+    <p>引入认证服务接口和实现类</p>
+
+    <p>AuthService 和  AuthServiceImpl</p>
+
+    <p>还要引入  CustomUserDetailsServiceImpl 作为spring  security 的实现类</p>
+
+    <p>另外还要引入自定义异常  CustomException</p>
+  </li>
+  <li>
+    <p>引入认证controller</p>
+
+    <p>AuthController</p>
+  </li>
+  <li>
+    <p>修改 BoardServiceApplication</p>
+
+    <p>增加注解，指定一个默认的配置文件加载路径(配置文件也可以在启动命令中指定)
+<img src="/pic/snapshot/20200225/9.png" alt="BoardServiceApplication" />
+配置文件的相关信息可参考springboot 官方文档
+<img src="/pic/snapshot/20200225/10.png" alt="springboot" /></p>
+  </li>
+</ol>
+
+<p>以上就是搭建整个工程的全部经过。</p>
+
+<p>启动工程 访问 http://localhost:8180/swagger-ui.html</p>
+
+<p>整个工程的代码传到了github上<a href="https://github.com/stardust1900/board-service">https://github.com/stardust1900/board-service</a>仅供参考。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2020/03/12/spring-security-with-shiro.html" class="read-next-link"></a>
+            <section>
+                <span>在spring security中使用shiro的加密验证方法</span>
+                <p>有个叫若依的后台管理框架挺流行的，我们也在用。经过一段时间发展，若依有了两个版本，前后端分离和未分离版本，前一个版...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2018/06/13/submit-spark-app-in-multiprocess.html" class="read-next-link"></a>
+            <section>
+                <span>多进程提交spark app</span>
+                <p>商户数据分析系统是通过web服务来管理spark app的。我们发现在web服务里同时提交多个spark app的...</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

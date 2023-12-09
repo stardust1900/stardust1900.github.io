@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>db2 存储过程总结 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="db2 存储过程总结">
+    <meta name="keywords"  content="db2">
+
+    <meta property="og:title" content="db2 存储过程总结 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/database/2014/07/03/something-about-db2-procedure.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#db2" class="post-tag">db2</a>
+            
+            
+        </div>
+        <h1>db2 存储过程总结</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="14-07-03"><i class="iconfont icon-date"></i>03 Jul 2014</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <article class="markdown-body">
+        <p>整个星期都在写存储过程，上一次写这玩意好像还是5，6年前。现在又花了很大力气写这个，感觉很有收获，需要总结一下。</p>
+
+<h2 id="db2中一些常用的内置函数">db2中一些常用的内置函数</h2>
+<p>1.substr 截取字符串。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    用法：substr('abce'，2,2) 从第2个字符开始截取两位 结果：'bc'
+</code></pre></div></div>
+
+<p>2.字符串转为数字</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cast(substr('000000296000',1,10) || '.' || substr('000000296000',11,2) as decimal(12,2)) 结果:2960.00
+</code></pre></div></div>
+
+<p>3.hhmiss类型的字符串转为时间</p>
+
+<p>因为time只能转hh:mi:ss格式的字符串 所以需要对字符串进行截取拼接。例子：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>time(substr('231320',1,2) || ':' || substr('231320',3,2) || ':' || substr('231320',5,2)) 结果：23:13:20
+</code></pre></div></div>
+
+<p>4.字符串转为日期</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>to_date('20140703','yyyymmdd') 结果是timestamp类型的 2014-07-03 00:00:00
+to_date('20140703161923','yyyymmddhh24miss') 结果：2014-07-03 16:19:23
+</code></pre></div></div>
+
+<p>用char可以将日期类型转为字符串</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>left((char(integer(current date))),6) 获取yyyymm格式的年月
+substr(char(current date),1,7)        获取yyyy-mm格式的年月
+</code></pre></div></div>
+
+<p>5.字段值相除计算占比保留两位小数</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>decimal(ROUND(col_1/col_2,2),2,2) 这里还需要一个防止除零的处理：
+    case when col_2=0 then 0 
+else decimal(ROUND(col_1/col_2*100,2),2,2) end
+</code></pre></div></div>
+
+<p>6.判断字符串中是否包含某字符</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LOCATE('R2','R1|R2|R3') 结果为：4。locate的用法和java中String.indexOf类似 只是它从1开始标识而不是0。
+</code></pre></div></div>
+
+<p>7.计算字符串长度</p>
+
+<p>这个用length. 举一个通过身份证获取性别的例子。先判断字符串是否为18位，然后看第17位的数字是奇数还是偶数</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>values  case when length('111111111111111111') = 18 then 
+    case when Integer(substr('111111111111111111',17,1))/2.0 = 0 then 'F'
+    else 'M' end
+else '' end
+</code></pre></div></div>
+
+<p>8.替换字符串中的字符</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>用replace。replace('R1|R2|R11','R11','A') 结果为: R1|R2|A
+</code></pre></div></div>
+
+<p>##存储过程##
+1.用游标还是用FOR循环</p>
+
+<p>存储过程中查表获取结果如何遍历。我刚开始的时候用的是游标，但是后来出现一个问题，就是当我在一个存储过程中使用两个游标的时候创建存储过程时总是失败。而且我也找不出是怎么原因，无奈之下之后用FOR来遍历，而且我发现用FOR更方便更简洁。</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql">    <span class="k">create</span> <span class="k">procedure</span> <span class="n">process_month_info</span><span class="p">()</span>
+    <span class="n">P</span><span class="p">:</span> <span class="k">BEGIN</span>
+       <span class="k">DECLARE</span> <span class="n">v_date</span> <span class="nb">Date</span><span class="p">;</span>
+       <span class="k">DECLARE</span> <span class="n">v_ldate</span> <span class="nb">DATE</span><span class="p">;</span>
+       <span class="k">DECLARE</span> <span class="n">v_at_end</span><span class="p">,</span> <span class="n">a_at_end</span> <span class="nb">INTEGER</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
+       <span class="k">DECLARE</span> <span class="n">v_merchant_no</span><span class="p">,</span> <span class="n">a_merchant_no</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+       <span class="k">DECLARE</span> <span class="n">report_day</span> <span class="nb">INTEGER</span> <span class="k">DEFAULT</span> <span class="mi">2</span><span class="p">;</span>
+       <span class="c1">--使用游标</span>
+       <span class="k">DECLARE</span> <span class="n">c_merchants</span> <span class="k">CURSOR</span>
+           <span class="k">FOR</span> <span class="k">select</span> <span class="n">MERCHANT_NO</span> <span class="k">from</span> <span class="n">POSL_BUSI_DATA_STATUS</span> <span class="k">where</span> <span class="n">SPD_STATUS</span><span class="o">=</span><span class="s1">'00'</span><span class="p">;</span>
+        <span class="k">DECLARE</span> <span class="k">CONTINUE</span> <span class="k">HANDLER</span> <span class="k">FOR</span> <span class="k">NOT</span> <span class="k">FOUND</span> <span class="k">SET</span> <span class="n">v_at_end</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="k">OPEN</span> <span class="n">c_merchants</span><span class="p">;</span>
+        <span class="n">MERCHANT_LOOP</span><span class="p">:</span> <span class="n">LOOP</span>
+        <span class="k">set</span> <span class="n">v_date</span> <span class="o">=</span> <span class="k">current</span> <span class="nb">date</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">month</span><span class="p">;</span>
+        <span class="k">set</span> <span class="n">v_ldate</span> <span class="o">=</span> <span class="k">current</span> <span class="nb">date</span> <span class="o">-</span> <span class="mi">13</span> <span class="k">month</span><span class="p">;</span>
+
+        <span class="k">FETCH</span> <span class="n">c_merchants</span> <span class="k">into</span> <span class="n">v_merchant_no</span><span class="p">;</span>
+        <span class="n">IF</span> <span class="n">v_at_end</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="k">THEN</span> 
+            <span class="n">LEAVE</span> <span class="n">MERCHANT_LOOP</span><span class="p">;</span>
+        <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+             <span class="n">MONTH_LOOP</span><span class="p">:</span> <span class="n">LOOP</span>
+             <span class="n">IF</span> <span class="n">v_date</span> <span class="o">&lt;=</span> <span class="n">v_ldate</span> <span class="k">THEN</span>
+                <span class="n">LEAVE</span> <span class="n">MONTH_LOOP</span><span class="p">;</span>
+             <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+                <span class="k">call</span> <span class="n">posl</span><span class="p">.</span><span class="n">month_info_insert</span><span class="p">(</span><span class="n">v_merchant_no</span><span class="p">,</span><span class="n">v_date</span><span class="p">);</span>
+             <span class="k">SET</span> <span class="n">v_date</span> <span class="o">=</span> <span class="n">v_date</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">month</span><span class="p">;</span>
+            <span class="k">END</span> <span class="n">LOOP</span> <span class="n">MONTH_LOOP</span><span class="p">;</span>
+        <span class="k">END</span> <span class="n">LOOP</span> <span class="n">MERCHANT_LOOP</span><span class="p">;</span>
+    <span class="c1">--使用FOR</span>
+
+         <span class="k">FOR</span> <span class="n">param_loop</span> <span class="k">as</span> <span class="k">select</span> <span class="k">case</span> <span class="k">when</span> <span class="n">int_value</span> <span class="k">is</span> <span class="k">null</span> <span class="k">then</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">int_value</span> <span class="k">end</span> <span class="k">from</span> <span class="n">posl</span><span class="p">.</span><span class="n">POSL_SYS_CTRL_PARAM</span> <span class="k">where</span> <span class="n">PARAM_CODE</span> <span class="o">=</span> <span class="s1">'POSL_APPEND_REPORT_DAY'</span>
+           <span class="k">do</span>
+            <span class="k">set</span> <span class="n">report_day</span> <span class="o">=</span> <span class="n">param_loop</span><span class="p">.</span><span class="n">int_value</span><span class="p">;</span>
+         <span class="k">end</span> <span class="k">FOR</span><span class="p">;</span>
+         <span class="n">IF</span> <span class="n">report_day</span> <span class="o">=</span> <span class="k">DAY</span><span class="p">(</span><span class="k">current</span> <span class="nb">date</span><span class="p">)</span> <span class="k">THEN</span> 
+             <span class="k">set</span> <span class="n">v_date</span> <span class="o">=</span> <span class="k">current</span> <span class="nb">date</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">month</span><span class="p">;</span>
+             <span class="k">FOR</span> <span class="n">a_merchant_loop</span> <span class="k">as</span> <span class="k">select</span> <span class="n">MERCHANT_NO</span> <span class="k">from</span> <span class="n">POSL_BUSI_DATA_STATUS</span> <span class="k">where</span> <span class="n">SPD_STATUS</span><span class="o">=</span><span class="s1">'10'</span>
+               <span class="k">do</span>
+                <span class="k">call</span> <span class="n">posl</span><span class="p">.</span><span class="n">month_info_insert</span><span class="p">(</span><span class="n">a_merchant_loop</span><span class="p">.</span><span class="n">MERCHANT_NO</span><span class="p">,</span><span class="n">v_date</span><span class="p">);</span>
+             <span class="k">end</span> <span class="k">FOR</span><span class="p">;</span>
+         <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+    <span class="k">END</span> <span class="n">P</span></code></pre></figure>
+
+<p>2.存储过程的调用</p>
+
+<p>在shell中 可以用 db2 “call schema.procedurename()”的方法调用</p>
+
+<p>还有一种存储过程是有输出参数的，虽然我没用到，但是查资料的时候查到了也记录一下，以备不时之需。</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql">        <span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">get_datetime</span> <span class="p">(</span><span class="k">out</span> <span class="n">cdate</span> <span class="nb">date</span><span class="p">,</span> <span class="k">out</span> <span class="n">ctime</span> <span class="nb">time</span> <span class="p">)</span>
+    	<span class="n">P1</span><span class="p">:</span> <span class="k">BEGIN</span>
+    	     <span class="k">VALUES</span> <span class="k">CURRENT</span> <span class="nb">DATE</span> <span class="k">INTO</span> <span class="n">cdate</span><span class="p">;</span>
+    	     <span class="k">VALUES</span> <span class="k">CURRENT</span> <span class="nb">TIME</span> <span class="k">INTO</span> <span class="n">ctime</span><span class="p">;</span>
+    	<span class="k">END</span> <span class="n">P1</span>
+        <span class="p">[</span><span class="n">db2inst1</span><span class="o">@</span><span class="n">db2serverf1</span> <span class="n">testimport</span><span class="p">]</span><span class="err">$</span> <span class="n">db2</span> <span class="nv">"call posl.get_datetime(?,?)"</span>
+    	  <span class="n">Value</span> <span class="k">of</span> <span class="k">output</span> <span class="k">parameters</span>
+    	  <span class="c1">--------------------------</span>
+    	  <span class="k">Parameter</span> <span class="n">Name</span>  <span class="p">:</span> <span class="n">CDATE</span>
+    	  <span class="k">Parameter</span> <span class="n">Value</span> <span class="p">:</span> <span class="mi">07</span><span class="o">/</span><span class="mi">02</span><span class="o">/</span><span class="mi">2014</span>
+    	  <span class="k">Parameter</span> <span class="n">Name</span>  <span class="p">:</span> <span class="n">CTIME</span>
+    	  <span class="k">Parameter</span> <span class="n">Value</span> <span class="p">:</span> <span class="mi">09</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">32</span>
+    	  <span class="k">Return</span> <span class="n">Status</span> <span class="o">=</span> <span class="mi">0</span></code></pre></figure>
+
+<p>3.查看系统中的存储过程</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select * from syscat.routines; 系统中所有的函数和存储过程都可以通过这个表查到 routinename 对应名称。
+</code></pre></div></div>
+
+<p>4.在shell中 通过db2命令调用sql脚本创建存储过程</p>
+
+<p>需要注意的是在sql脚本中存储过程都需要以@结尾。</p>
+
+<p>warn.sql</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">drop</span> <span class="k">procedure</span> <span class="n">POSL</span><span class="p">.</span><span class="n">process_warn</span><span class="o">@</span>
+
+<span class="k">create</span> <span class="k">procedure</span> <span class="n">POSL</span><span class="p">.</span><span class="n">process_warn</span><span class="p">()</span>
+<span class="n">P</span><span class="p">:</span> <span class="k">BEGIN</span>
+<span class="k">INSERT</span>
+<span class="k">INTO</span>
+    <span class="n">POSL</span><span class="p">.</span><span class="n">SPD_MERCHANT_WARN</span>
+    <span class="p">(</span>
+        <span class="n">ENTITY_OID</span><span class="p">,</span>
+        <span class="n">WORK_DATE</span><span class="p">,</span>
+        <span class="n">MERCHANT_NO</span><span class="p">,</span>
+        <span class="n">CANCEL_FLAG</span><span class="p">,</span>
+        <span class="n">IS_POS_DAILNUM_CHANGE</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_RISK</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R1</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R2</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R3</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R4</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R5</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R6</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R7</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R8</span><span class="p">,</span>
+        <span class="n">IS_TOUCH_R9</span>
+    <span class="p">)</span>
+<span class="k">select</span> 
+<span class="n">NEXTVAL</span> <span class="k">FOR</span> <span class="n">POSL</span><span class="p">.</span><span class="n">SPD_MERCHANT_WARN_SEQ</span> <span class="k">as</span> <span class="n">ENTITY_OID</span><span class="p">,</span>
+<span class="n">VARCHAR_FORMAT</span><span class="p">(</span><span class="k">current</span> <span class="nb">TIMESTAMP</span><span class="p">,</span><span class="s1">'yyyymmdd'</span><span class="p">)</span> <span class="k">as</span> <span class="n">WORK_DATE</span><span class="p">,</span>
+<span class="n">a</span><span class="p">.</span><span class="n">MCHT_CD</span> <span class="k">as</span> <span class="n">MERCHANT_NO</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">DELETE_DATE</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">DELETE_DATE</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="k">current</span> <span class="nb">date</span><span class="p">)</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">CANCEL_FLAG</span><span class="p">,</span>
+<span class="n">a</span><span class="p">.</span><span class="n">IS_POS_DIAL_NO_CHG</span> <span class="k">as</span> <span class="n">IS_POS_DAILNUM_CHANGE</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_RISK</span><span class="p">,</span> 
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R1'</span><span class="p">,</span><span class="k">replace</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">,</span><span class="s1">'R11'</span><span class="p">,</span><span class="s1">'A'</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R1</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R2'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R2</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R3'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R3</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R4'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R4</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R5'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R5</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R6'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R6</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R7'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R7</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R8'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R8</span><span class="p">,</span>
+<span class="k">case</span> <span class="k">when</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">'R9'</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">ruletype</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span> <span class="s1">'Y'</span> <span class="k">else</span> <span class="s1">'N'</span> <span class="k">end</span> <span class="k">as</span> <span class="n">IS_TOUCH_R9</span>
+<span class="k">from</span> <span class="n">POSL</span><span class="p">.</span><span class="n">APMS_MCHT</span> <span class="n">a</span><span class="p">,</span> <span class="n">POSL</span><span class="p">.</span><span class="n">APMS_RXINFO</span> <span class="n">b</span> <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">MCHT_CD</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">MCHT_CD</span> 
+<span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="n">createtime</span> <span class="o">=</span> <span class="nb">char</span><span class="p">(</span><span class="k">current</span> <span class="nb">date</span><span class="p">);</span>
+
+<span class="k">update</span> <span class="n">POSL</span><span class="p">.</span><span class="n">APMS_MCHT</span> <span class="k">set</span> <span class="n">IS_POS_DIAL_NO_CHG</span> <span class="o">=</span> <span class="s1">'N'</span> <span class="k">where</span> <span class="n">IS_POS_DIAL_NO_CHG</span> <span class="o">=</span> <span class="s1">'Y'</span><span class="p">;</span>
+    
+<span class="k">END</span> <span class="n">P</span><span class="o">@</span></code></pre></figure>
+
+<p>调用的shell 脚本</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">db2</span> <span class="k">connect</span> <span class="k">to</span> <span class="err">$</span><span class="n">DB</span> <span class="k">user</span> <span class="err">$</span><span class="k">USER</span> <span class="k">using</span> <span class="err">$</span><span class="n">PWD</span><span class="p">;</span>
+
+<span class="n">db2</span>  <span class="o">-</span><span class="n">td</span><span class="o">@</span> <span class="o">-</span><span class="n">f</span> <span class="n">warn</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span></code></pre></figure>
+
+<p>如果你的sql脚本是在windows下编辑的，执行的时候可能会出现错误。这是由换行符的格式造成的。用dos2unix命令转化一下就ok了</p>
+
+<h2 id="db2-自定义函数">db2 自定义函数##</h2>
+<p>开始时我是想用自定义函数，然后在存储过程中调用函数来实现功能。但是自定义的函数在存储过程中没法调用，我没找到调用的方法，只好放弃，只能用存储过程调存储过程。
+写自定义函数的时候如果你在函数中修改了表的数据，会遇到MODIFIES SQL DATA 的问题，这是因为在自定义函数中默认是不允许修改数据的。需要用下面的声明方式创建函数而且返回类型必须是table，其他类型的都创建不了。这个需要改数据的自定义函数真的很麻烦，能不用最好不要用。</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">function</span> <span class="n">test_insert</span><span class="p">(</span><span class="n">vdate</span> <span class="nb">Date</span><span class="p">)</span>
+	<span class="k">RETURNS</span> <span class="k">TABLE</span> <span class="p">(</span><span class="n">cdate</span> <span class="nb">Date</span><span class="p">,</span>
+	                    <span class="n">num</span> <span class="nb">Integer</span><span class="p">)</span>
+	     <span class="k">LANGUAGE</span> <span class="k">SQL</span>
+	     <span class="k">MODIFIES</span> <span class="k">SQL</span> <span class="k">DATA</span>
+	     <span class="k">NO</span> <span class="k">EXTERNAL</span> <span class="n">ACTION</span>
+	     <span class="k">DETERMINISTIC</span>
+	     <span class="k">BEGIN</span> <span class="k">ATOMIC</span>
+	     <span class="k">insert</span> <span class="k">into</span> <span class="n">test_date</span><span class="p">(</span><span class="n">cdate</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="n">vdate</span><span class="p">);</span>
+	<span class="k">return</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test_date</span> <span class="k">where</span> <span class="n">cdate</span> <span class="o">=</span> <span class="n">vdate</span><span class="p">;</span>
+	<span class="k">END</span></code></pre></figure>
+
+<p>调用这个函数的方式： select * from table(posl.TEST_INSERT(current date))  as t
+但是在存储过程中调用不了。。。</p>
+
+<p>先写这么多吧。结束。</p>
+
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2014/12/24/db2-script-collect.html" class="read-next-link"></a>
+            <section>
+                <span>db2 常用语句整理</span>
+                <p>这是一篇总结文章，将常用的sql语句做了简单的整理。希望对你有用 ：）</p>
+            </section>
+            
+        </div>
+        
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

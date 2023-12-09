@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>python脚本创建jekyll post - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="python脚本创建jekyll post">
+    <meta name="keywords"  content="python, jekyll">
+
+    <meta property="og:title" content="python脚本创建jekyll post - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2021/12/27/user-python-to-create-jekyll-post.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#python" class="post-tag">python</a>
+            
+            <a href="https://wangxuan.me/tags#jekyll" class="post-tag">jekyll</a>
+            
+            
+        </div>
+        <h1>python脚本创建jekyll post</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="21-12-27"><i class="iconfont icon-date"></i>27 Dec 2021</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">rake 的替代方案</h2>
+    
+    <article class="markdown-body">
+        <p>我的博客 http://wangxuan.me 是用jekyll搭建托管在github上的。用了很多年，一直都感觉不错。jekyll中有个创建post的Rakefile，可以用 rake post title=”” 这个命令来创建post模版。我也很喜欢用。但是执行rake命令需要安装ruby，而我平时是不用ruby的，虽然mac上装了，但是新NUC上我不想再仅仅为了用这一个命令就把ruby装上，我想找个python脚本的替代方案，结果，没找到，于是只好自己动手写一个。</p>
+
+<p>主要用argparse模块来实现，比直接用sys.argv优雅一点。
+看一下帮助：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">$ </span>python3 new_post.py <span class="nt">-h</span>
+
+创建post
+
+optional arguments:
+  <span class="nt">-h</span>, <span class="nt">--help</span>            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+  <span class="nt">-et</span> ENGLISH_TITLE, <span class="nt">--english-title</span> ENGLISH_TITLE
+                        英文标题
+  <span class="nt">-ct</span> CHINESE_TITLE, <span class="nt">--chinese-title</span> CHINESE_TITLE
+                        中文标题
+  <span class="nt">-sub</span> SUBTITLE, <span class="nt">--subtitle</span> SUBTITLE
+                        中文子标题
+  <span class="nt">-cat</span> CATEGORY, <span class="nt">--category</span> CATEGORY
+                        分类
+  <span class="nt">-tags</span> TAGS, <span class="nt">--tags</span> TAGS
+                        标签 多个用逗号分隔
+</code></pre></div></div>
+
+<p>看一个例子，就是生成这篇文章的例子：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">$ </span>python3 new_post.py <span class="nt">-et</span> <span class="s2">"user python to create jekyll post"</span> <span class="nt">-ct</span> <span class="s2">"python脚本创建jekyll post"</span> <span class="nt">-cat</span> tech <span class="nt">-tags</span> python,jekyll
+
+_posts/2021-12-27-user-python-to-create-jekyll-post.md 创建成功！
+
+</code></pre></div></div>
+<p>_posts/2021-12-27-user-python-to-create-jekyll-post.md 中生成的内容，如下：</p>
+
+<pre><code class="language-txt">---
+layout: post
+title: python脚本创建jekyll post
+subtitle: 'rake 的替代方案'
+date: 2021-12-27
+category: tech
+tags: [python,jekyll]
+---
+</code></pre>
+
+<p>完整的代码如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">create_post</span><span class="p">(</span><span class="n">post_name</span><span class="p">,</span><span class="n">ct</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">date_</span><span class="p">,</span><span class="n">cat</span><span class="p">,</span><span class="n">tags</span><span class="p">):</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">post_name</span><span class="p">,</span><span class="s">'w'</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"---</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"layout: post</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"title: %s</span><span class="se">\n</span><span class="s">"</span> <span class="o">%</span> <span class="n">ct</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"subtitle: '%s'</span><span class="se">\n</span><span class="s">"</span> <span class="o">%</span> <span class="n">sub</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"date: %s</span><span class="se">\n</span><span class="s">"</span> <span class="o">%</span> <span class="n">date_</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"category: %s</span><span class="se">\n</span><span class="s">"</span> <span class="o">%</span> <span class="n">cat</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"tags: [%s]</span><span class="se">\n</span><span class="s">"</span> <span class="o">%</span> <span class="n">tags</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"---</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">post</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"%s 创建成功！"</span> <span class="o">%</span> <span class="n">post_name</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c1"># print(sys.argv)
+</span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'创建post'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-et'</span><span class="p">,</span> <span class="s">'--english-title'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'英文标题'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-ct'</span><span class="p">,</span> <span class="s">'--chinese-title'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'中文标题'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-sub'</span><span class="p">,</span> <span class="s">'--subtitle'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'中文子标题'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-cat'</span><span class="p">,</span> <span class="s">'--category'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'分类'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-tags'</span><span class="p">,</span> <span class="s">'--tags'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'标签 多个用逗号分隔'</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="c1"># print(type(args),args)
+</span>    <span class="n">et</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">english_title</span> <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="n">english_title</span> <span class="k">else</span> <span class="s">""</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">chinese_title</span> <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="n">chinese_title</span> <span class="k">else</span> <span class="s">""</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">subtitle</span> <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="n">subtitle</span> <span class="k">else</span> <span class="s">""</span>
+    <span class="n">cat</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">category</span> <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="n">category</span> <span class="k">else</span> <span class="s">""</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">tags</span> <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="n">tags</span> <span class="k">else</span> <span class="s">""</span>
+    <span class="c1"># print(et,ct)
+</span>    <span class="n">et</span> <span class="o">=</span> <span class="n">et</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span><span class="s">"-"</span><span class="p">)</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="n">date_</span> <span class="o">=</span> <span class="n">today</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y-%m-%d"</span><span class="p">)</span>
+    <span class="n">post_name</span> <span class="o">=</span> <span class="s">"_posts/%s-%s.md"</span> <span class="o">%</span> <span class="p">(</span><span class="n">date_</span><span class="p">,</span> <span class="n">et</span><span class="p">)</span>
+    <span class="c1"># print(post_name)
+</span>    <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">post_name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">post_name</span><span class="p">))</span>
+        <span class="nb">str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"%s已存在 是否覆盖？Y-是 N-否 :"</span><span class="o">%</span> <span class="n">post_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s">'Y'</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">create_post</span><span class="p">(</span><span class="n">post_name</span><span class="p">,</span><span class="n">ct</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">date_</span><span class="p">,</span><span class="n">cat</span><span class="p">,</span><span class="n">tags</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">create_post</span><span class="p">(</span><span class="n">post_name</span><span class="p">,</span><span class="n">ct</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">date_</span><span class="p">,</span><span class="n">cat</span><span class="p">,</span><span class="n">tags</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>如果你也用jekyll，恰好也不想装ruby，可以试一下这个。:)</p>
+
+<p>Enjoy!</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html" class="read-next-link"></a>
+            <section>
+                <span>当穷人不配有厕所</span>
+                <p>董宇辉在几十万人的直播间，直接问经济学家薛兆丰：薛老师，您提出了很多骇人听闻的观点，震惊世人，廉租房不能配厕所等等...</p>
+            </section>
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/discuss/2021/12/15/do-you-feel-pity-for-wanglihongs-wife.html" class="read-next-link"></a>
+            <section>
+                <span>你同情王力宏的老婆吗？</span>
+                <p>作为一个吃瓜群众，感觉这两天的瓜实在有点多，多得让人有点消化不良。没错，我说的就是王力宏的连环爆炸瓜：王力宏要跟他...</p>
+            </section>
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

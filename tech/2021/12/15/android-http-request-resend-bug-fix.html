@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>android端http请求重发问题定位过程 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="android端http请求重发问题定位过程">
+    <meta name="keywords"  content="okhttp, android">
+
+    <meta property="og:title" content="android端http请求重发问题定位过程 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2021/12/15/android-http-request-resend-bug-fix.html">
+    <meta property="og:description" content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+            <li><a href="/categories.html">categories</a></li>
+            
+            <li><a href="/fastpages/">fastpages</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#okhttp" class="post-tag">okhttp</a>
+            
+            <a href="https://wangxuan.me/tags#android" class="post-tag">android</a>
+            
+            
+        </div>
+        <h1>android端http请求重发问题定位过程</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="21-12-15"><i class="iconfont icon-date"></i>15 Dec 2021</time>
+        </div>
+    </div>
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">okhttp自动重发问题定位</h2>
+    
+    <article class="markdown-body">
+        <p>昨天生产系统上报出一个问题：用户做一次扫码交易，出现了两条交易记录。幸好支付渠道对支付码有限制只成功了一笔，没有出现多扣钱的问题。</p>
+
+<p>现在我们要排查一下，为什么做一次操作会出现两条交易记录。</p>
+
+<p>我们的后台服务是部署了双机，通过阿里云的SLB做负载。在部署服务的两台机器上分别查到了两次交易记录的日志。</p>
+
+<p>一台机器 2021-12-14 13:56:30.100 收到请求，中间调用支付渠道服务耗时2秒，最终2021-12-14 13:56:33.023 返回结果。</p>
+
+<p>另一台机器 2021-12-14 13:56:31.275 收到请求，调用支付渠道服务时报错，2021-12-14 13:56:31.908 返回结果。</p>
+
+<p>后台服务分别收到了请求，现在要确认的是：是SLB转发了两次，还是客户端做了两次请求。</p>
+
+<p>联系阿里云的人协助排查SLB的日志。最终在SLB上也找到了两次请求。两次请求的IP还不一样。一个是移动的一个是电信的。因为商户仅有一台智能POS机，不可能是同时用两台做扫码支付。</p>
+
+<p>猜测是android或java的重发机制。在网络上确实查到有人遇到过类似的问题<a href="https://blog.csdn.net/ljz2009y/article/details/24384909?locationNum=13&amp;fps=1">Android或者Java发送Http自动重发请求的解决方案</a></p>
+
+<blockquote>
+  <p>由于设置了链接与获取数据的超时时间，客户端在发送数据之后，检测到可能并没有发送成功到后端，这个时候http底层会自动重发请求（注意是Http底层，所以应用端不会知道发送了多次请求）。如果应用端自动重发了多次请求，后端也回复了多次请求，但是前段仅仅会只回复1次请求。所以为了解决这个问题，只要在DefaultHttpClient设置如下代码即可解决：</p>
+</blockquote>
+
+<blockquote>
+  <p>defaultHttpClient.setHttpRequestRetryHandler(new DefaultHttpRequestRetryHandler(0,false));</p>
+</blockquote>
+
+<p>于是，我们可以给出一个解释：
+<strong><em>用户做扫码操作时，网络出现问题，智能POS从WiFi连接自动切换到了移动连接，此时客户端做了一次请求重发。</em></strong></p>
+
+<p>因为智能POS是android系统，我们部署在智能POS上的支付app是使用okhttp发起后端请求的，需要修改okhttp相关的代码来规避这个问题.</p>
+
+<p>当然，网上也能找到遇到类似问题的人<a href="https://blog.csdn.net/qq_18244417/article/details/111244263?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.n">实现OkHttp自定义重试次数</a>
+我们不需要自定义重试次数，我们要禁止重试。所以只需要在构建okhttpClient的时候加一句</p>
+
+<blockquote>
+  <p>retryOnConnectionFailure(false)</p>
+</blockquote>
+
+<p>至此，问题定位修改完成，待系统升级后继续观察。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/discuss/2021/12/15/do-you-feel-pity-for-wanglihongs-wife.html" class="read-next-link"></a>
+            <section>
+                <span>你同情王力宏的老婆吗？</span>
+                <p>作为一个吃瓜群众，感觉这两天的瓜实在有点多，多得让人有点消化不良。没错，我说的就是王力宏的连环爆炸瓜：王力宏要跟他...</p>
+            </section>
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/%E6%8A%80%E6%9C%AF/2020/05/13/multi-service-for-ruoyi.html" class="read-next-link"></a>
+            <section>
+                <span>若依后管的多服务实现</span>
+                <p>有时候我们需要多系统多数据库共用一个后管平台，让运维人员通过一个入口登录系统管理后台数据。后管系统用的是开源系统–...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2023</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+</script>
+<script>
+
+(function() { 
+})();
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>
