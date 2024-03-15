@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+	<title></title>
+		<description>南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 微信开发 系统开发</description>
+		<link>https://wangxuan.me</link>
+		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>将github pages托管到4everland</title>
+				<description>
+                
+                    访问速度让人惊喜
+                
+                
+                </description>
+				<pubDate>Sat, 09 Dec 2023 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/tech/2023/12/09/move-github-pages-to-4everland.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2023/12/09/move-github-pages-to-4everland.html</guid>
+			</item>
+		
+			<item>
+				<title>使用jasypt对springboot配置信息加密</title>
+				<description>
+                
+                
+                    1.pom文件增加依赖
+                
+                </description>
+				<pubDate>Thu, 23 Nov 2023 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/tech/2023/11/23/use-jasypt-to-encrypt-configs.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2023/11/23/use-jasypt-to-encrypt-configs.html</guid>
+			</item>
+		
+			<item>
+				<title>和必应对话之mysql分区分表</title>
+				<description>
+                
+                    mysql单表海量数据处理
+                
+                
+                </description>
+				<pubDate>Fri, 16 Jun 2023 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/tech/2023/06/16/conversation-with-new-bing-about-mysql-PARTITION.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2023/06/16/conversation-with-new-bing-about-mysql-PARTITION.html</guid>
+			</item>
+		
+			<item>
+				<title>规则引擎easyRules中组合规则的使用</title>
+				<description>
+                
+                    easyRules4.1.0的用法
+                
+                
+                </description>
+				<pubDate>Fri, 02 Jun 2023 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/tech/2023/06/02/use-compsite-rules-in-easyRules.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2023/06/02/use-compsite-rules-in-easyRules.html</guid>
+			</item>
+		
+			<item>
+				<title>FastJson转Java对像字段不区分大小写</title>
+				<description>
+                
+                
+                    昨天遇到参数key大小写不一致导致校验签名失败的问题，查了很长时间才找到原因。看了一下FastJson源码，发现JSON.toObject中转换成对象的时候会忽略大小写。
+                
+                </description>
+				<pubDate>Fri, 02 Jun 2023 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/tech/2023/06/02/FastJson-convert-json-to-Java-Object-field-ignore-case.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2023/06/02/FastJson-convert-json-to-Java-Object-field-ignore-case.html</guid>
+			</item>
+		
+			<item>
+				<title>当穷人不配有厕所</title>
+				<description>
+                
+                    如何让普通人生活得有尊严
+                
+                
+                </description>
+				<pubDate>Sat, 28 Jan 2023 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html</guid>
+			</item>
+		
+			<item>
+				<title>python脚本创建jekyll post</title>
+				<description>
+                
+                    rake 的替代方案
+                
+                
+                </description>
+				<pubDate>Mon, 27 Dec 2021 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/tech/2021/12/27/user-python-to-create-jekyll-post.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2021/12/27/user-python-to-create-jekyll-post.html</guid>
+			</item>
+		
+			<item>
+				<title>你同情王力宏的老婆吗？</title>
+				<description>
+                
+                    她需要你的同情吗
+                
+                
+                </description>
+				<pubDate>Wed, 15 Dec 2021 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/discuss/2021/12/15/do-you-feel-pity-for-wanglihongs-wife.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/discuss/2021/12/15/do-you-feel-pity-for-wanglihongs-wife.html</guid>
+			</item>
+		
+			<item>
+				<title>android端http请求重发问题定位过程</title>
+				<description>
+                
+                    okhttp自动重发问题定位
+                
+                
+                </description>
+				<pubDate>Wed, 15 Dec 2021 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/tech/2021/12/15/android-http-request-resend-bug-fix.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2021/12/15/android-http-request-resend-bug-fix.html</guid>
+			</item>
+		
+			<item>
+				<title>若依后管的多服务实现</title>
+				<description>
+                
+                
+                    有时候我们需要多系统多数据库共用一个后管平台，让运维人员通过一个入口登录系统管理后台数据。后管系统用的是开源系统–若依，现在我需要对系统做改造，以满足管理多系统多数据库的需求。我们想到了两种方案：配置多数据源和使用代理。
+                
+                </description>
+				<pubDate>Wed, 13 May 2020 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/%E6%8A%80%E6%9C%AF/2020/05/13/multi-service-for-ruoyi.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/%E6%8A%80%E6%9C%AF/2020/05/13/multi-service-for-ruoyi.html</guid>
+			</item>
+		
+	</channel>
+</rss>
