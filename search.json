@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "我的病与痛",
+      "tags"     : "疾病观",
+      "url"      : "/emotion/2024/04/17/my-illness-and-pain.html"
+    } ,
+  
+    {
       "title"    : "将github pages托管到4everland",
       "tags"     : "github 4everland",
       "url"      : "/tech/2023/12/09/move-github-pages-to-4everland.html"
