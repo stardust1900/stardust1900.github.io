@@ -7,6 +7,21 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>1974年之前上映的豆瓣8分电影</title>
+				<description>
+                
+                    
+                
+                
+                    根据我国的著作权法：电影作品和以类似摄制电影的方法创作的作品及摄影作品，保护期为50年，截止于作品首次发表后第50年的12月31日;也就是说，今年（2024年），1974年之前上映的电影不再受保护。然后，你懂的 :)
+                
+                </description>
+				<pubDate>Tue, 07 May 2024 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/tech/2024/05/07/moives-before-1974.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2024/05/07/moives-before-1974.html</guid>
+			</item>
+		
+			<item>
 				<title>了不起的胖猫</title>
 				<description>
                 
@@ -121,19 +136,6 @@
 				<pubDate>Sat, 28 Jan 2023 00:00:00 -0600</pubDate>
 				<link>https://wangxuan.me/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/discuss/2023/01/28/when-the-poor-do-not-deserve-toilets.html</guid>
-			</item>
-		
-			<item>
-				<title>python脚本创建jekyll post</title>
-				<description>
-                
-                    rake 的替代方案
-                
-                
-                </description>
-				<pubDate>Mon, 27 Dec 2021 00:00:00 -0600</pubDate>
-				<link>https://wangxuan.me/tech/2021/12/27/user-python-to-create-jekyll-post.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/tech/2021/12/27/user-python-to-create-jekyll-post.html</guid>
 			</item>
 		
 	</channel>
