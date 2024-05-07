@@ -3,7 +3,7 @@ layout: post
 title: "在spring security中使用shiro的加密验证方法"
 date: 2020-03-12
 cover: ""
-category: 技术
+category: Tech
 tags: [spring security,shiro]
 ---
 有个叫若依的后台管理框架挺流行的，我们也在用。经过一段时间发展，若依有了两个版本，前后端分离和未分离版本，前一个版本用的是spring security验证框架，后一个用的是shiro。

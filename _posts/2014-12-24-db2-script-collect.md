@@ -2,7 +2,7 @@
 layout: post
 title: "db2 常用语句整理"
 description: ""
-category: 技术
+category: Tech
 tags: [db2]
 ---
 这是一篇总结文章，将常用的sql语句做了简单的整理。希望对你有用 ：）

@@ -3,7 +3,7 @@ layout: post
 title: "我所理解的机器学习"
 author: 王一刀
 description: ""
-category: 机器学习
+category: Tech
 tags: 机器学习 ML
 ---
 

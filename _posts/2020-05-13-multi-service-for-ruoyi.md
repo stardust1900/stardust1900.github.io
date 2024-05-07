@@ -3,7 +3,7 @@ layout: post
 title: "若依后管的多服务实现"
 date: 2020-05-13
 cover: ""
-category: 技术
+category: Tech
 tags: [若依,springboot,代理,vue]
 ---
 

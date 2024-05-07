@@ -4,7 +4,7 @@ title: "jwt搭建springboot服务步骤"
 subtitle: '一步一步使用jwt搭建springboot服务'
 date: 2020-02-25
 cover: ""
-category: 技术
+category: Tech
 tags: [jwt,springboot]
 ---
 

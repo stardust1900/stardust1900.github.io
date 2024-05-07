@@ -2,7 +2,7 @@
 layout: post
 title: "多进程提交spark app"
 author: 王一刀
-category: 技术
+category: Tech
 tags: [spark,springboot]
 ---
 

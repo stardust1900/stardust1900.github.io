@@ -3,7 +3,7 @@ layout: post
 title: "你同情王力宏的老婆吗？"
 subtitle: '她需要你的同情吗'
 date: 2021-12-15
-category: discuss
+category: Discuss
 tags: [直男聊八卦]
 ---
 

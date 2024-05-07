@@ -2,7 +2,7 @@
 layout: post
 title: "db2 存储过程总结"
 description: ""
-category: database
+category: Tech
 tags: [db2]
 ---
 整个星期都在写存储过程，上一次写这玩意好像还是5，6年前。现在又花了很大力气写这个，感觉很有收获，需要总结一下。

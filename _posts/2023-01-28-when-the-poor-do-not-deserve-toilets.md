@@ -3,7 +3,7 @@ layout: post
 title: 当穷人不配有厕所
 subtitle: '如何让普通人生活得有尊严'
 date: 2023-01-28
-category: discuss
+category: Discuss
 tags: [尊严]
 ---
 
