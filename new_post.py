@@ -3,7 +3,7 @@ from datetime import date
 import os
 
 def create_post(post_name,ct,sub,date_,cat,tags):
-    post = open(post_name,'w')
+    post = open(post_name,'w',encoding="utf8")
     post.write("---\n")
     post.write("layout: post\n")
     post.write("title: %s\n" % ct)
