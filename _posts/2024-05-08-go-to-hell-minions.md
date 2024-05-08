@@ -37,6 +37,9 @@ tags: [社会热点]
 对于这位百度副总裁，建议还是去看看心理医生吧，大姐，这是病，得治。
 
 参考：
+
 http://www.xinhuanet.com/politics/2016-01/11/c_128615729.htm
+
 https://baijiahao.baidu.com/s?id=1792127424145951597
+
 https://so.html5.qq.com/page/real/search_news?docid=70000021_945663b085641452
