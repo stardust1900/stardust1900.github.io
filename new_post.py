@@ -8,6 +8,7 @@ def create_post(post_name,ct,sub,date_,cat,tags):
     post.write("layout: post\n")
     post.write("title: %s\n" % ct)
     post.write("subtitle: '%s'\n" % sub)
+    post.write("cover: \"\"\n")
     post.write("date: %s\n" % date_)
     post.write("category: %s\n" % cat)
     post.write("tags: [%s]\n" % tags)
