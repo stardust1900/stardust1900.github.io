@@ -1,7 +1,7 @@
 ---
 layout: post
 title: java中SimpleDateFormat解析日期格式的问题
-subtitle: '如何正确的校验格式'
+subtitle: '如何正确地校验日期格式'
 cover: "/assets/images/20240603/cover.jpeg"
 date: 2024-06-03
 category: Tech
