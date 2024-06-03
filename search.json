@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "java中SimpleDateFormat解析日期格式的问题",
+      "tags"     : "java",
+      "url"      : "/tech/2024/06/03/validate-date-format-with-SimpleDateFormat.html"
+    } ,
+  
+    {
       "title"    : "世间的最美丽与人间的最哀愁",
       "tags"     : "中东两千年",
       "url"      : "/notes/2024/05/26/the-middle-east.html"

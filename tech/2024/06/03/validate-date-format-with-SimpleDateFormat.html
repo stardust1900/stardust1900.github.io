@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>java中SimpleDateFormat解析日期格式的问题 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="java中SimpleDateFormat解析日期格式的问题">
+    <meta name="keywords"  content="java">
+
+    <meta property="og:title" content="java中SimpleDateFormat解析日期格式的问题 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2024/06/03/validate-date-format-with-SimpleDateFormat.html">
+    <meta property="og:description" content="去创造点什么而不是依靠别人活着">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">首页</a></li>
+            
+            <li><a href="/tags.html">标签</a></li>
+            
+            <li><a href="/categories.html">分类</a></li>
+            
+            <li><a href="/fastpages/">兜率宫</a></li>
+            
+            <li><a href="/about.html">关于</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#java" class="post-tag">java</a>
+            
+            
+        </div>
+        <h1>java中SimpleDateFormat解析日期格式的问题</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="24-06-03"><i class="iconfont icon-date"></i>03 Jun 2024</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('/assets/images/20240603/cover.jpeg') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">如何正确地校验日期格式</h2>
+    
+    <article class="markdown-body">
+        <p>在日常写代码的过程中，我们经常要处理各种格式的日期，常见的日期格式有：“20240601”，“2024-06-01”，“2024-6-1”。如何正确地处理日期格式，尤其是对外接口中参数的日期格式，就很重要了，一个不小心就可能出现意想不到的问题。</p>
+
+<p>举一个我遇到的真实例子：我们提供的对外接口中有一个参数是日期，定义的格式是“yyyyMMdd”,就是说我们要求用户在调用接口的时候要传“20240601”这样格式的日期，但是，接口提供出去，怎么用就是别人的事了…你会发现经常有用户调用接口的时候，传“2024-06-01”这样格式的日期。如果我们不对格式做校验会出现什么问题呢？</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nc">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyyMMdd"</span><span class="o">);</span>
+    <span class="nc">Date</span> <span class="n">d</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"2024-06-01"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">d</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>你猜上面这段代码的输出是什么？</p>
+
+<p>是：<strong>20231206</strong></p>
+
+<p>出现的问题就是：用户希望查2024年6月1日的数据，接口返回的却是2023年12月6日的数据。</p>
+
+<p>如何避免这个问题？我们需要对日期格式做强校验，当用户传的日期格式不是我们希望的日期格式的时候，我们就通过报错来提示用户。</p>
+
+<p>正好SimpleDateFormat父类DateFormat提供了一个方法： public void setLenient(boolean lenient)，这个方法可以控制是否容忍不正确的日期格式，它默认是true，我们需要改成false。就是不容忍错误格式，对格式做强验证。上面的代码可以改成：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nc">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyyMMdd"</span><span class="o">);</span>
+    <span class="n">sdf</span><span class="o">.</span><span class="na">setLenient</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+    <span class="nc">Date</span> <span class="n">d</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"2024-06-01"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">d</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>再运行上面的代码会抛出异常：Exception in thread “main” java.text.ParseException: Unparseable date: “2024-06-01”</p>
+
+<p>当然，如果你不需要严格的日期，不希望代码抛异常，希望代码运行得更健壮，你就不要加这句：sdf.setLenient(false); 你需要根据实际情况来做决定。</p>
+
+<p>以上就是我遇到过的SimpleDateFormat解析日期格式的问题。如果你有什么疑问，欢迎留言跟我讨论。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        
+        <div class="read-next-item">
+            <a href="/notes/2024/05/26/the-middle-east.html" class="read-next-link"></a>
+            <section>
+                <span>世间的最美丽与人间的最哀愁</span>
+                <p>《中东两千年》这本书，我看了四个月。一个原因是我看书的确很慢，另一个原因是这个本书也确实是难读。这应该算是偏学术的...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="/assets/images/20240526/s33746260.jpg" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>独行深山 © 2024</section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e24e52c9106441c5ed3262fa6fd4f80f";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+    
+</script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>
