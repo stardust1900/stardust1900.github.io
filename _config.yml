@@ -13,6 +13,7 @@ nav:
   首页: '/'
   标签: '/tags.html'
   分类: '/categories.html'
+  RSS: '/rss.xml'
   兜率宫: '/fastpages/'
   关于: '/about.html'
 
