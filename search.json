@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "关于去除图片上的水印",
+      "tags"     : "去水印",
+      "url"      : "/tech/2024/06/04/watermark-removal.html"
+    } ,
+  
+    {
       "title"    : "java中SimpleDateFormat解析日期格式的问题",
       "tags"     : "java",
       "url"      : "/tech/2024/06/03/validate-date-format-with-SimpleDateFormat.html"
