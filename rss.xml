@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 04 Jun 2024 04:46:32 -0500</pubDate>
-    <lastBuildDate>Tue, 04 Jun 2024 04:46:32 -0500</lastBuildDate>
+    <pubDate>Tue, 04 Jun 2024 20:23:04 -0500</pubDate>
+    <lastBuildDate>Tue, 04 Jun 2024 20:23:04 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -87,7 +87,7 @@
 
 &lt;p&gt;这效果，真是一言难尽，你说它没去吧，它的确没有水印了;你说它去了吧，这还不如不去…&lt;/p&gt;
 
-&lt;p&gt;什么原因呢？难道是因为我涂鸦涂得不好？需要更精确？我想过一个鸡贼得办法：往这网站上传一个纯黑的图片，它加了水印我直接下载下来当mask，但这有点冒险…&lt;/p&gt;
+&lt;p&gt;什么原因呢？难道是因为我涂鸦涂得不好？需要更精确？我想过一个鸡贼的办法：往这网站上传一个纯黑的图片，它加了水印我直接下载下来当mask，但这有点冒险…&lt;/p&gt;
 
 &lt;p&gt;于是，让我再展示一下真正的技术:&lt;/p&gt;
 
@@ -109,9 +109,9 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/20240604/reason.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;总得来说: 做水印识别代价太大，而且效果不好。&lt;/p&gt;
+&lt;p&gt;总的来说: 做水印识别代价太大，而且效果不好。&lt;/p&gt;
 
-&lt;p&gt;当我想试试这两个项目得时候，又发现了另外一个项目：iopaint！这个又web界面可以直接在本地跑起来，而且可以下载训练好得模型直接用！于是我装起来试了一下：&lt;/p&gt;
+&lt;p&gt;当我想试试这两个项目得时候，又发现了另外一个项目：iopaint！这个有web界面可以直接在本地跑起来，而且可以下载训练好的模型直接用！于是我装起来试了一下：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/20240604/iopaint1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
