@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "普通人眼中的AI",
+      "tags"     : "人工智能",
+      "url"      : "/discuss/2024/06/07/AI-in-my-opinion.html"
+    } ,
+  
+    {
       "title"    : "关于去除图片上的水印",
       "tags"     : "去水印",
       "url"      : "/tech/2024/06/04/watermark-removal.html"

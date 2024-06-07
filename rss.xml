@@ -5,9 +5,66 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 06 Jun 2024 21:14:30 -0500</pubDate>
-    <lastBuildDate>Thu, 06 Jun 2024 21:14:30 -0500</lastBuildDate>
+    <pubDate>Fri, 07 Jun 2024 04:42:44 -0500</pubDate>
+    <lastBuildDate>Fri, 07 Jun 2024 04:42:44 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
+    
+      <item>
+        <title>普通人眼中的AI</title>
+        <description>&lt;p&gt;回想一下，过去十年我都从科技新闻中学到了哪些新词：云计算，大数据，P2P，O2O，区块链，加密币，AR，原宇宙，机器学习，深度学习，大模型，AI…每个新词出现的时候都有人吹嘘说这是新的一次工业革命。革不革命的我不知道，只知道网上卖课的投机分子们借着这些新词是收割了一波又一波。如今已是2024年了，有些词多少都有点过时了，我们就来聊聊时下最火热的：AI–人工智能。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;过去的AI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果回到两年前，你跟我说AI，我会认为那是个笑话。&lt;/p&gt;
+
+&lt;p&gt;那时能接触到的AI，无非是siri，微软小冰，小爱同学，小度小度之类的语音助手，而这些所谓的人工智能，很多情况下的表现都像个人工智障。虽然一开始各种各样的奇葩响应，让人很欢乐，但新鲜感一过，就被遗忘在角落。偶尔不知道什么原因的突然唤醒，才让人意识到它的存在。&lt;/p&gt;
+
+&lt;p&gt;那时看一家初创公司的宣传，如果它说自己是搞机器学习的，人们会觉得那可能真的是在做点事；如果说自己是搞人工智能的，那别人会觉得它是个骗子…&lt;/p&gt;
+
+&lt;p&gt;除了各种语音助手，还有红极一时的阿尔法狗，这条狗赢了李世石，下哭柯洁，风头无两。我一直有个问题：上世纪，IBM的深蓝下国际象棋就赢世界冠军了，围棋怎么过这么多年才赢？阿尔法狗是不是占了硬件进步的便宜？阿尔法狗在人工智能方面的进步有多大呢？复旦大学计算机科学技术学院教授、博士生导师危辉说：“人机大战对于人工智能的发展意义很有限。解决了围棋问题，并不代表类似技术可以解决其他问题，自然语言理解、图像理解、推理、决策等问题依然存在，人工智能的进步被夸大了。”&lt;/p&gt;
+
+&lt;p&gt;还有，谷歌的无人驾驶，每隔一段时间就会冲上新闻夺取人们的眼球，百度也是生怕错过每一个风口，迅速跟进无人驾驶，李彦宏时不时发布自己体验无人驾驶的消息。当时就有人断言，5到10年内出租车司机将面临失业。谁曾想，比出租车司机先失业的是超过35岁的程序员…现在中年失业开滴滴仍然是送外卖之外的最佳选择:)&lt;/p&gt;
+
+&lt;p&gt;新闻中报道无人驾驶的时候，总是强调训练了几千个小时，行驶了几千万公里。但是，细想一下，普通人学开车要学多久？一个月？多了，要不是法律不允许，学一个星期上路都绰绰有余。为什么人工智能学开车要学这么久？是不是因为你还不够智能？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;现在的AI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;2022年底，ChatGPT横空出世，一下又将AI这个话题引爆。几乎所有的互联网大厂一窝蜂地都开始下场训练大模型，打造自己的ChatGPT。于是各种AIGC应用层出不穷，AI生成文章，AI生成图片，AI生成视频…不断传出一家又一家人工智能公司天价融资的传奇。&lt;/p&gt;
+
+&lt;p&gt;AI就是一座金矿，两年过去，不知道这些公司挖到了多少金。只知道为训练大模型提供GPU的英伟达这两年市值飙升，都超过苹果了。跑去挖金子的挣没挣到钱不知道，卖锄头的倒是赚了个盆满钵满。&lt;/p&gt;
+
+&lt;p&gt;你有经常使用的AIGC工具吗？我经常用的只有new bing（现在叫Copilot），但也只是当作搜索引擎在用，很少让它写篇文章写段代码啥的。&lt;/p&gt;
+
+&lt;p&gt;去年就有新闻称，实际上ChatGPT的使用率远低于人们的想象。无论ChatGPT，文心一言还是通文千问，又或者其他的什么，大家的使用率有多高？为什么不用呢？AIGC有什么问题？&lt;/p&gt;
+
+&lt;p&gt;我觉得最大的问题是不稳定，一会给你惊喜，一会给你惊吓。你敢把AI生成的东西直接交给领导或者客户吗？这玩意搞搞娱乐可以，真的用来工作，你还是得亲自把把关。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;将来的AI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;AIGC现在最新成果是文字生成视频，不知道下一步是什么？有人可能觉得是AI自动编程。现在各种低代码无代码平台也挺多，但是并没有哪个脱颖而出成为现象级产品。但我不觉得AI编程会出现，或者说值得出现。文字生成代码，可能还不如直接写代码。毕竟和自然语言相比，编程语言简单太多了。&lt;/p&gt;
+
+&lt;p&gt;使用AIGC的时候，本质上还是跟电脑打交道，把自己的需求描述给电脑听。把自己的需求描述清楚，这件事本身就很难，如果不比编程难，起码和编程一样难。AI只是工具，它可以代替你干活，但不能代替你思考。&lt;/p&gt;
+
+&lt;p&gt;我不知道再过十年AI会发展成什么样，但我的态度并不乐观。比如造车，无论特斯拉，小米还是比亚迪，他们的车无论屏幕多大马力多足自动驾驶多稳…这都不能成为我心目中的好车。我觉得，真正的好车，应该像佐罗的马，无论在哪只要吹个口哨，它自己就跑过来了。&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;/p&gt;
+
+&lt;p&gt;https://baike.sogou.com/v128716412.htm?ch=frombaikevr&amp;amp;fromTitle=%E9%98%BF%E5%B0%94%E6%B3%95%E7%8B%97&lt;/p&gt;
+
+&lt;p&gt;https://www.yinwang.org/blog-cn/2017/04/23/ai&lt;/p&gt;
+
+&lt;p&gt;https://www.sohu.com/a/684561717_100117963&lt;/p&gt;
+</description>
+        <pubDate>Fri, 07 Jun 2024 00:00:00 -0500</pubDate>
+        <link>https://wangxuan.me/discuss/2024/06/07/AI-in-my-opinion.html</link>
+        <guid isPermaLink="true">https://wangxuan.me/discuss/2024/06/07/AI-in-my-opinion.html</guid>
+        
+        <category>人工智能</category>
+        
+        
+        <category>Discuss</category>
+        
+      </item>
     
       <item>
         <title>关于去除图片上的水印</title>
@@ -3489,161 +3546,6 @@ https://movie.douban.com/subject/26981174/&lt;/p&gt;
         
         
         <category>Emotion</category>
-        
-      </item>
-    
-      <item>
-        <title>将github pages托管到4everland</title>
-        <description>&lt;p&gt;最近发现了个好东西 https://www.4everland.org/，这个号称是web3.0的云计算平台，可以做web主机，云存储，去中心网关等等。如果你用vue或者react做网页应用，部署在这个上面，非常好用。我试了一下，在国内的访问速度也是让人惊喜。&lt;/p&gt;
-
-&lt;p&gt;我的个人博客是用的github pages，虽然凑合用，但是这个在国内的访问速度实在是差强人意。因为4everland是直接导入github仓库的，于是我产生了一个想法：能不能把我的个人博客整到4everland上面去？&lt;/p&gt;
-
-&lt;p&gt;答案是：能，真的是太能了。整完以后的感觉是：哎呀妈呀，真香！&lt;/p&gt;
-
-&lt;p&gt;跟大家介绍一下我是怎么做的，感兴趣的朋友可以试一下。&lt;/p&gt;
-
-&lt;p&gt;因为之前对github action不太熟悉，也浪费了不少时间，曾经一度以为我要自己写action了，不过走运的是从action市场找到了合适的action。&lt;/p&gt;
-
-&lt;p&gt;哪怕你没用过github action，跟着我的步骤做，也一定能成功。&lt;/p&gt;
-
-&lt;h2 id=&quot;0设置github-token&quot;&gt;0.设置github Token&lt;/h2&gt;
-
-&lt;p&gt;因为要通过action创建分支，需要授权&lt;/p&gt;
-
-&lt;p&gt;登陆github后点击又上角头像-&amp;gt;Settings-&amp;gt;Developer setings-&amp;gt;Personal access tokens-&amp;gt;Tokens(classic)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20231209/1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20231209/2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;点击Generate new Token 授权确认后进入创建页面
-&lt;img src=&quot;/assets/images/20231209/3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在note中取个名字，选过期时间，我选的永不过期，下面的授权主要把repo和workflow勾上，我为了保险都给勾上了…&lt;/p&gt;
-
-&lt;p&gt;点击下面的按钮后页面上会生成一个gh开头的字符串，把这个字符串保存好，下一步会用到。&lt;/p&gt;
-
-&lt;h2 id=&quot;1设置secrets&quot;&gt;1.设置secrets&lt;/h2&gt;
-
-&lt;p&gt;这个是要在action使用的变量&lt;/p&gt;
-
-&lt;p&gt;在你的github pages仓库的settings中
-  &lt;img src=&quot;/assets/images/20231209/4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;点击New repository secret&lt;/p&gt;
-
-&lt;p&gt;名字填：DEPLOY_TOKEN secret：填上一步生成的gh开头的字符串 保存。&lt;/p&gt;
-
-&lt;h2 id=&quot;2创建workflow&quot;&gt;2.创建workflow&lt;/h2&gt;
-&lt;p&gt;回到仓库，点击action，点new workflow，然后点set a workflow yourself
-&lt;img src=&quot;/assets/images/20231209/5.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/assets/images/20231209/6.png&quot; alt=&quot;&quot; /&gt;
-把下面的内容拷贝进去，保存 commit changes。github的部分就搞完了&lt;/p&gt;
-
-&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;# Sample workflow for building and deploying a Jekyll site to GitHub Pages&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy Jekyll with GitHub Pages dependencies preinstalled&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# Runs on pushes targeting the default branch&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;main&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;# Allows you to run this workflow manually from the Actions tab&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;workflow_dispatch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pages&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;concurrency&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;pages&quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;cancel-in-progress&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# Build job&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Setup Pages&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/configure-pages@v4&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Build with Jekyll&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# uses: actions/jekyll-build-pages@v1&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jerryjvl/jekyll-build-action@v1&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;destination&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./_site&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;# - name: Upload artifact&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;#   uses: actions/upload-pages-artifact@v2&lt;/span&gt;
-                    
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy to GitHub Pages&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JamesIves/github-pages-deploy-action@v4.5.0&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;folder&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./_site&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;docs&lt;/span&gt;
-
-
-
-  &lt;span class=&quot;c1&quot;&gt;# Deployment job&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# deploy:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#   environment:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#     name: github-pages&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#     url: $&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#   runs-on: ubuntu-latest&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#   needs: build&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#   steps:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#     - name: Deploy to GitHub Pages&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#       id: deployment&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#       uses: actions/deploy-pages@v3&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/20231209/7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;你可能会问 为什么不直接用jekyll的workflow？&lt;/p&gt;
-
-&lt;p&gt;有两个问题：&lt;/p&gt;
-
-&lt;p&gt;1.这个直接部署到pages上了拿不到生成的_site目录。&lt;/p&gt;
-
-&lt;p&gt;上面使用JamesIves/github-pages-deploy-action@v4.5.0 替换 actions/jekyll-build-pages@v1 就是为了将_site目录保存到了docs分支&lt;/p&gt;
-
-&lt;p&gt;2.生成的html中包含*.github.io的域名无法部署到别的域名。&lt;/p&gt;
-
-&lt;p&gt;使用jerryjvl/jekyll-build-action@v1 替换 actions/jekyll-build-pages@v1 就是为了解决这个问题&lt;/p&gt;
-
-&lt;h2 id=&quot;3进入4everland网站&quot;&gt;3.进入4everland网站&lt;/h2&gt;
-
-&lt;p&gt;是用github账号可以直接登陆，登陆后点击projects，点右上角new project，会展示你的所有在github上的仓库，选择你的目标仓库import&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20231209/8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;修改一下工程名，选择docs分支，点击下面的deploy就可以了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20231209/9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;4everland会为你的工程生成一个二级域名你可以直接访问，或者你可以像我一样配置自己的域名，如果你有自己的域名的话。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wangxuan.me&quot;&gt;https://wangxuan.me&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;好了，这样就全部完成了，赶快来试试吧。&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 09 Dec 2023 00:00:00 -0600</pubDate>
-        <link>https://wangxuan.me/tech/2023/12/09/move-github-pages-to-4everland.html</link>
-        <guid isPermaLink="true">https://wangxuan.me/tech/2023/12/09/move-github-pages-to-4everland.html</guid>
-        
-        <category>github</category>
-        
-        <category>4everland</category>
-        
-        
-        <category>Tech</category>
         
       </item>
     
