@@ -165,8 +165,7 @@
 
 <p>来一个完整的例子，通过支持向量机识别图片中的数字：</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="c1"># 准备数据，这个是sklearn内置的一个 图形识别数字的数据
@@ -186,7 +185,6 @@
 <span class="n">plt</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">cm</span><span class="p">.</span><span class="n">gray_r</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">'nearest'</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
-
 </code></pre></div></div>
 
 <p>可以在优矿上直接看运行结果</p>
