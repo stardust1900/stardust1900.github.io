@@ -16,7 +16,9 @@ tags: 机器学习 ML
 
 ## 什么是机器学习 ##
 
-[what is machine learning](https://www.coursera.org/learn/machine-learning/supplement/aAgxl/what-is-machine-learning "what is machine learning") <--这个是斯坦福机器学习课程里对机器学习的定义。
+使计算机能够在不经过明确编程的情况下进行学习的研究领域。这是亚瑟·塞缪尔给机器学习的定义。
+
+[what is machine learning](https://www.coursera.org/learn/machine-learning/lecture/PNeuX/what-is-machine-learning "what is machine learning") <--这个是斯坦福机器学习课程里讲机器学习定义的部分。
 
 要我说，我觉得机器学习也是一个归纳和演绎的过程，先用数据和算法训练出一个模型(归纳),然后用这个模型去做预测(演绎)。你的准备的数据越丰富，选用的算法越合理，训练出的模型就越强大，最后做出的预测**可能**就越准确。
 
