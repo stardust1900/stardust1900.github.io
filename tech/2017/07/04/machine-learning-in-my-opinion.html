@@ -117,7 +117,7 @@
 
 <p>好了，怎么用机器学习，讲完了，哈哈哈</p>
 
-<p>不开玩笑，就是这么简单，不信看这篇文章–&gt;<a href="https://uqer.io/community/share/58f48343271e3b0054da05e8">量化机器学习简易入门</a></p>
+<p>不开玩笑，就是这么简单，不信看这篇文章–&gt;<a href="https://uqer.datayes.com/v3/community/share/58f48343271e3b0054da05e8">量化机器学习简易入门</a></p>
 
 <p>从实践的角度看，使用机器学习的确就这么几步：</p>
 
@@ -131,7 +131,7 @@
 
 <p>这就是机器学习吗？我也不知道，可能是吧。可能这跟你想的有点不同，坦白说，和我起初想的也不太一样…</p>
 
-<p><a href="/pic/snapshot/20170704/machineLearning.png"><img src="/pic/snapshot/20170704/machineLearning.png" /></a></p>
+<p><img src="/assets/images/20170704/machineLearning.png" alt="" /></p>
 
 <p><a href="http://blog.jobbole.com/110684/">为期一周的机器学习</a>&lt;–这是个较完整的介绍，可以让你对机器学习有个大体的概念。</p>
 
@@ -143,13 +143,13 @@
 
 <p>机器学习的分类：</p>
 
-<p><a href="/pic/snapshot/20170704/mlcategory.png"><img src="/pic/snapshot/20170704/mlcategory.png" /></a></p>
+<p><img src="/assets/images/20170704/mlcategory.png" alt="&lt;img src=&quot;/assets/images/20170704/mlcategory.png&quot;  /&gt;" /></p>
 
 <p>我们只看监督学习（分类与回归）与非监督学习(聚类与降维)。</p>
 
 <p>下面是一张scikit-learn官网上的一张图，教你怎么选择算法。</p>
 
-<p><a href="/pic/snapshot/20170704/scikit-learn.png"><img src="/pic/snapshot/20170704/scikit-learn.png" /></a></p>
+<p><img src="/assets/images/20170704/scikit-learn.png" alt="&lt;img src=&quot;/assets/images/20170704/scikit-learn.png&quot;  /&gt;" /></p>
 
 <p>从图上可以看出，你选什么算法，有时候是由你拥有什么样的数据决定的…</p>
 
@@ -165,32 +165,35 @@
 
 <p>来一个完整的例子，通过支持向量机识别图片中的数字：</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">import</span> <span class="n">matplotlib</span><span class="p">.</span><span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="k">from</span> <span class="n">sklearn</span> <span class="n">import</span> <span class="n">datasets</span>
-<span class="k">from</span> <span class="n">sklearn</span> <span class="n">import</span> <span class="n">svm</span>
-<span class="o">#</span> <span class="err">准备数据，这个是</span><span class="n">sklearn</span><span class="err">内置的一个</span> <span class="err">图形识别数字的数据</span>
-<span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">.</span><span class="n">load_digits</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="c1"># 准备数据，这个是sklearn内置的一个 图形识别数字的数据
+</span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">.</span><span class="n">load_digits</span><span class="p">()</span>
 
-<span class="o">#</span> <span class="err">选择一个支持向量机的算法，后面是参数</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="p">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">001</span><span class="p">,</span><span class="k">C</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># 选择一个支持向量机的算法，后面是参数
+</span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="p">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">digits</span><span class="p">.</span><span class="k">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="n">digits</span><span class="p">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">digits</span><span class="p">.</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="n">digits</span><span class="p">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
 
-<span class="o">#</span> <span class="err">训练模型</span>
-<span class="n">clf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="c1"># 训练模型
+</span><span class="n">clf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="o">#</span> <span class="err">预测</span>
-<span class="n">print</span><span class="p">(</span><span class="n">clf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="k">data</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">]))</span>
+<span class="c1"># 预测
+</span><span class="k">print</span><span class="p">(</span><span class="n">clf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">]))</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">cm</span><span class="p">.</span><span class="n">gray_r</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">'nearest'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">cm</span><span class="p">.</span><span class="n">gray_r</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">'nearest'</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="k">show</span><span class="p">()</span></code></pre></figure>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+
+</code></pre></div></div>
 
 <p>可以在优矿上直接看运行结果</p>
 
-<p><a href="/pic/snapshot/20170704/mltest.png"><img src="/pic/snapshot/20170704/mltest.png" /></a></p>
+<p><img src="/assets/images/20170704/mltest.png" alt="&lt;img src=&quot;/assets/images/20170704/mltest.png&quot;  /&gt;" /></p>
 
-<p>这是我通过优矿Uqer.io分享给你的量化策略研究，链接：<a href="https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private">https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private</a>；</p>
+<p>这是我通过优矿Uqer.io分享给你的量化策略研究，链接：<a href="https://uqer.datayes.com/v3/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private">https://uqer.datayes.com/v3/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private</a>；</p>
 
 <p>密码：4760</p>
 
