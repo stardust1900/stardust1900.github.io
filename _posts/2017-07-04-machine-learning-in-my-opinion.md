@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "我所理解的机器学习"
+cover: "/assets/images/20170704/cover.jpeg"
 author: 王一刀
 description: ""
 category: Tech
