@@ -40,7 +40,7 @@ tags: 机器学习 ML
 
 好了，怎么用机器学习，讲完了，哈哈哈
 
-不开玩笑，就是这么简单，不信看这篇文章-->[量化机器学习简易入门](https://uqer.io/community/share/58f48343271e3b0054da05e8)
+不开玩笑，就是这么简单，不信看这篇文章-->[量化机器学习简易入门](https://uqer.datayes.com/v3/community/share/58f48343271e3b0054da05e8)
 
 从实践的角度看，使用机器学习的确就这么几步：
 
@@ -52,8 +52,7 @@ tags: 机器学习 ML
 
 这就是机器学习吗？我也不知道，可能是吧。可能这跟你想的有点不同，坦白说，和我起初想的也不太一样...
 
-
-[<img src="/pic/snapshot/20170704/machineLearning.png" />](/pic/snapshot/20170704/machineLearning.png)
+![](/assets/images/20170704/machineLearning.png)
 
 [为期一周的机器学习](http://blog.jobbole.com/110684/)<--这是个较完整的介绍，可以让你对机器学习有个大体的概念。
 
@@ -65,13 +64,13 @@ tags: 机器学习 ML
 
 机器学习的分类：
 
-[<img src="/pic/snapshot/20170704/mlcategory.png"  />](/pic/snapshot/20170704/mlcategory.png)
+![<img src="/assets/images/20170704/mlcategory.png"  />](/assets/images/20170704/mlcategory.png)
 
 我们只看监督学习（分类与回归）与非监督学习(聚类与降维)。
 
 下面是一张scikit-learn官网上的一张图，教你怎么选择算法。
 
-[<img src="/pic/snapshot/20170704/scikit-learn.png"  />](/pic/snapshot/20170704/scikit-learn.png)
+![<img src="/assets/images/20170704/scikit-learn.png"  />](/assets/images/20170704/scikit-learn.png)
 
 从图上可以看出，你选什么算法，有时候是由你拥有什么样的数据决定的...
 
@@ -88,7 +87,7 @@ tags: 机器学习 ML
 来一个完整的例子，通过支持向量机识别图片中的数字：
 
 
-{% highlight sql %}
+``` python
 
 import matplotlib.pyplot as plt
 from sklearn import datasets
@@ -111,13 +110,13 @@ plt.imshow(digits.images[-7], cmap=plt.cm.gray_r, interpolation='nearest')
 
 plt.show()
 
-{% endhighlight %}
+```
 
 可以在优矿上直接看运行结果
 
-[<img src="/pic/snapshot/20170704/mltest.png"  />](/pic/snapshot/20170704/mltest.png)
+![<img src="/assets/images/20170704/mltest.png"  />](/assets/images/20170704/mltest.png)
 
-这是我通过优矿Uqer.io分享给你的量化策略研究，链接：[https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private](https://uqer.io/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private)；
+这是我通过优矿Uqer.io分享给你的量化策略研究，链接：[https://uqer.datayes.com/v3/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private](https://uqer.datayes.com/v3/community/share/nQ1rPigotzvmewcxFJokuIWe0vE0?private)；
 
 密码：4760
 
