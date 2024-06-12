@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "万物原理读书笔记",
+      "tags"     : "万物原理",
+      "url"      : "/notes/2024/06/12/fundamentals.html"
+    } ,
+  
+    {
       "title"    : "普通人眼中的AI",
       "tags"     : "人工智能",
       "url"      : "/discuss/2024/06/07/AI-in-my-opinion.html"

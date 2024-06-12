@@ -7,6 +7,19 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>万物原理读书笔记</title>
+				<description>
+                
+                    关于客观世界的10个答案
+                
+                
+                </description>
+				<pubDate>Wed, 12 Jun 2024 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/notes/2024/06/12/fundamentals.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2024/06/12/fundamentals.html</guid>
+			</item>
+		
+			<item>
 				<title>普通人眼中的AI</title>
 				<description>
                 
@@ -121,19 +134,6 @@
 				<pubDate>Fri, 26 Apr 2024 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/emotion/2024/04/26/abount-the-midlife-crisis.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/emotion/2024/04/26/abount-the-midlife-crisis.html</guid>
-			</item>
-		
-			<item>
-				<title>我的病与痛</title>
-				<description>
-                
-                    有病方知身是苦
-                
-                
-                </description>
-				<pubDate>Wed, 17 Apr 2024 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/emotion/2024/04/17/my-illness-and-pain.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/emotion/2024/04/17/my-illness-and-pain.html</guid>
 			</item>
 		
 	</channel>
