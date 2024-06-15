@@ -7,6 +7,19 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>格调</title>
+				<description>
+                
+                    社会等级与生活品味
+                
+                
+                </description>
+				<pubDate>Sat, 15 Jun 2024 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/notes/2024/06/15/A-Guide-through-The-American-Status-System.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2024/06/15/A-Guide-through-The-American-Status-System.html</guid>
+			</item>
+		
+			<item>
 				<title>万物原理读书笔记</title>
 				<description>
                 
@@ -121,19 +134,6 @@
 				<pubDate>Mon, 06 May 2024 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/discuss/2024/05/06/the-great-pangmao.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/discuss/2024/05/06/the-great-pangmao.html</guid>
-			</item>
-		
-			<item>
-				<title>聊聊中年危机</title>
-				<description>
-                
-                    谁的青春不迷茫，谁的中年不危机
-                
-                
-                </description>
-				<pubDate>Fri, 26 Apr 2024 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/emotion/2024/04/26/abount-the-midlife-crisis.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/emotion/2024/04/26/abount-the-midlife-crisis.html</guid>
 			</item>
 		
 	</channel>
