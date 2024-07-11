@@ -125,34 +125,24 @@ tags: [量化]
 
 要评估一家公司的杠杆比率，您可以查看其财务报表中的几个关键指标。杠杆比率是衡量公司债务水平和资本结构的指标，它可以帮助投资者了解公司对债务的依赖程度以及其偿债能力。以下是几个常用的杠杆比率指标：
 
-1. 总债务比率 (Total Debt Ratio):
-
-$\text{总债务比率} = \frac{\text{总债务}}{\text{总资产}}$
-
+1. 总债务比率 (Total Debt Ratio):  
+$\text{总债务比率} = \frac{\text{总债务}}{\text{总资产}}$  
 这个比率显示了公司资产中有多少是通过债务融资的。
 
-2. 长期债务比率 (Long-term Debt Ratio):
-
-$\text{长期债务比率} = \frac{\text{长期债务}}{\text{总资产}}$
-
+2. 长期债务比率 (Long-term Debt Ratio):  
+$\text{长期债务比率} = \frac{\text{长期债务}}{\text{总资产}}$  
 这个比率专注于公司的长期债务。
 
-3. 资本化比率 (Capitalization Ratio):
-
-$\text{资本化比率} = \frac{\text{长期债务}}{\text{长期债务} + \text{股东权益}}$
-
+3. 资本化比率 (Capitalization Ratio):  
+$\text{资本化比率} = \frac{\text{长期债务}}{\text{长期债务} + \text{股东权益}}$  
 这个比率比较了长期债务与公司股东权益的相对大小。
 
-4. 负债与净资产比率 (Debt-to-Equity Ratio):
-
-$\text{负债与净资产比率} = \frac{\text{总负债}}{\text{股东权益}}$
-
+4. 负债与净资产比率 (Debt-to-Equity Ratio):  
+$\text{负债与净资产比率} = \frac{\text{总负债}}{\text{股东权益}}$  
 这个比率显示了相对于股东权益，公司有多少负债。
 
-5. 利息保障倍数 (Times Interest Earned):
-
-$\text{利息保障倍数} = \frac{\text{息税前利润 (EBIT)}}{\text{利息费用}}$
-
+5. 利息保障倍数 (Times Interest Earned):  
+$\text{利息保障倍数} = \frac{\text{息税前利润 (EBIT)}}{\text{利息费用}}$  
 这个比率衡量公司支付利息之前的盈利能力。
 
 这些比率可以在公司的资产负债表和利润表中找到所需的数据来计算。通过比较这些比率与行业平均水平或公司过去的数据，可以对公司的财务健康状况和风险水平有一个更好的理解。
