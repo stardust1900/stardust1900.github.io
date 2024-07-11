@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 11 Jul 2024 03:00:35 -0500</pubDate>
-    <lastBuildDate>Thu, 11 Jul 2024 03:00:35 -0500</lastBuildDate>
+    <pubDate>Thu, 11 Jul 2024 03:06:02 -0500</pubDate>
+    <lastBuildDate>Thu, 11 Jul 2024 03:06:02 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -179,14 +179,15 @@
 &lt;p&gt;要评估一家公司的杠杆比率，您可以查看其财务报表中的几个关键指标。杠杆比率是衡量公司债务水平和资本结构的指标，它可以帮助投资者了解公司对债务的依赖程度以及其偿债能力。以下是几个常用的杠杆比率指标：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;总债务比率 (Total Debt Ratio):
-\(\text{总债务比率} = \frac{\text{总债务}}{\text{总资产}}\)
-这个比率显示了公司资产中有多少是通过债务融资的。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;长期债务比率 (Long-term Debt Ratio):&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;总债务比率 (Total Debt Ratio):&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;$\text{总债务比率} = \frac{\text{总债务}}{\text{总资产}}$&lt;/p&gt;
+
+&lt;p&gt;这个比率显示了公司资产中有多少是通过债务融资的。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;长期债务比率 (Long-term Debt Ratio):&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;$\text{长期债务比率} = \frac{\text{长期债务}}{\text{总资产}}$&lt;/p&gt;
