@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 11 Jul 2024 02:41:16 -0500</pubDate>
-    <lastBuildDate>Thu, 11 Jul 2024 02:41:16 -0500</lastBuildDate>
+    <pubDate>Thu, 11 Jul 2024 03:00:35 -0500</pubDate>
+    <lastBuildDate>Thu, 11 Jul 2024 03:00:35 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -185,26 +185,37 @@
 这个比率显示了公司资产中有多少是通过债务融资的。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;长期债务比率 (Long-term Debt Ratio):
-\(\text{长期债务比率} = \frac{\text{长期债务}}{\text{总资产}}\)
-这个比率专注于公司的长期债务。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;资本化比率 (Capitalization Ratio):
-\(\text{资本化比率} = \frac{\text{长期债务}}{\text{长期债务} + \text{股东权益}}\)
-这个比率比较了长期债务与公司股东权益的相对大小。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;负债与净资产比率 (Debt-to-Equity Ratio):
-\(\text{负债与净资产比率} = \frac{\text{总负债}}{\text{股东权益}}\)
-这个比率显示了相对于股东权益，公司有多少负债。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;利息保障倍数 (Times Interest Earned):
-\(\text{利息保障倍数} = \frac{\text{息税前利润 (EBIT)}}{\text{利息费用}}\)
-这个比率衡量公司支付利息之前的盈利能力。&lt;/p&gt;
+    &lt;p&gt;长期债务比率 (Long-term Debt Ratio):&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;$\text{长期债务比率} = \frac{\text{长期债务}}{\text{总资产}}$&lt;/p&gt;
+
+&lt;p&gt;这个比率专注于公司的长期债务。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;资本化比率 (Capitalization Ratio):&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;$\text{资本化比率} = \frac{\text{长期债务}}{\text{长期债务} + \text{股东权益}}$&lt;/p&gt;
+
+&lt;p&gt;这个比率比较了长期债务与公司股东权益的相对大小。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;负债与净资产比率 (Debt-to-Equity Ratio):&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;$\text{负债与净资产比率} = \frac{\text{总负债}}{\text{股东权益}}$&lt;/p&gt;
+
+&lt;p&gt;这个比率显示了相对于股东权益，公司有多少负债。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;利息保障倍数 (Times Interest Earned):&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;$\text{利息保障倍数} = \frac{\text{息税前利润 (EBIT)}}{\text{利息费用}}$&lt;/p&gt;
+
+&lt;p&gt;这个比率衡量公司支付利息之前的盈利能力。&lt;/p&gt;
 
 &lt;p&gt;这些比率可以在公司的资产负债表和利润表中找到所需的数据来计算。通过比较这些比率与行业平均水平或公司过去的数据，可以对公司的财务健康状况和风险水平有一个更好的理解。&lt;/p&gt;
 
