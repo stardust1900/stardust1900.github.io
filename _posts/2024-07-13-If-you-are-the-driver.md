@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如果你是油罐车司机
-subtitle: ''
+subtitle: '放过别人，最终也是放过自己'
 cover: "/assets/images/20240713/cover.jpg"
 date: 2024-07-13
 category: Discuss
