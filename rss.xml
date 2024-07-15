@@ -5,9 +5,59 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 14 Jul 2024 20:39:50 -0500</pubDate>
-    <lastBuildDate>Sun, 14 Jul 2024 20:39:50 -0500</lastBuildDate>
+    <pubDate>Sun, 14 Jul 2024 20:50:52 -0500</pubDate>
+    <lastBuildDate>Sun, 14 Jul 2024 20:50:52 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
+    
+      <item>
+        <title>蹲一个结果</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/images/20991231/wait.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;蹲一个结果&quot;&gt;蹲一个结果&lt;/h1&gt;
+
+&lt;p&gt;[!IMPORTANT]&lt;/p&gt;
+
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;:fire: :date: 2024-07-15 &lt;a href=&quot;https://weibo.com/ttarticle/p/show?id=2309405051606889791919&quot;&gt;罐车运输乱象调查：卸完煤制油直接装运食用大豆油&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://weibo.com/2803301701/OmMCNgiZN&quot;&gt;#国务院食安办回应油罐车用油乱象#&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;[!NOTE]
+Useful information that users should know, even when skimming content.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[!TIP]
+Helpful advice for doing things better or more easily.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[!IMPORTANT]
+Key information users need to know to achieve their goal.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[!WARNING]
+Urgent info that needs immediate user attention to avoid problems.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[!CAUTION]
+Advises about risks or negative outcomes of certain actions.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 31 Dec 2099 00:00:00 -0600</pubDate>
+        <link>https://wangxuan.me/discuss/2099/12/31/wait-for-the-result.html</link>
+        <guid isPermaLink="true">https://wangxuan.me/discuss/2099/12/31/wait-for-the-result.html</guid>
+        
+        <category>社会热点</category>
+        
+        
+        <category>Discuss</category>
+        
+      </item>
     
       <item>
         <title>欧洲之门</title>
@@ -1943,50 +1993,6 @@ $\text{利息保障倍数} = \frac{\text{息税前利润 (EBIT)}}{\text{利息�
         <guid isPermaLink="true">https://wangxuan.me/tech/2024/06/04/watermark-removal.html</guid>
         
         <category>去水印</category>
-        
-        
-        <category>Tech</category>
-        
-      </item>
-    
-      <item>
-        <title>java中SimpleDateFormat解析日期格式的问题</title>
-        <description>&lt;p&gt;在日常写代码的过程中，我们经常要处理各种格式的日期，常见的日期格式有：“20240601”，“2024-06-01”，“2024-6-1”。如何正确地处理日期格式，尤其是对外接口中参数的日期格式，就很重要了，一个不小心就可能出现意想不到的问题。&lt;/p&gt;
-
-&lt;p&gt;举一个我遇到的真实例子：我们提供的对外接口中有一个参数是日期，定义的格式是“yyyyMMdd”,就是说我们要求用户在调用接口的时候要传“20240601”这样格式的日期，但是，接口提供出去，怎么用就是别人的事了…你会发现经常有用户调用接口的时候，传“2024-06-01”这样格式的日期。如果我们不对格式做校验会出现什么问题呢？&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyyMMdd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2024-06-01&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;你猜上面这段代码的输出是什么？&lt;/p&gt;
-
-&lt;p&gt;是：&lt;strong&gt;20231206&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;出现的问题就是：用户希望查2024年6月1日的数据，接口返回的却是2023年12月6日的数据。&lt;/p&gt;
-
-&lt;p&gt;如何避免这个问题？我们需要对日期格式做强校验，当用户传的日期格式不是我们希望的日期格式的时候，我们就通过报错来提示用户。&lt;/p&gt;
-
-&lt;p&gt;正好SimpleDateFormat父类DateFormat提供了一个方法： public void setLenient(boolean lenient)，这个方法可以控制是否容忍不正确的日期格式，它默认是true，我们需要改成false。就是不容忍错误格式，对格式做强验证。上面的代码可以改成：&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyyMMdd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setLenient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2024-06-01&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;再运行上面的代码会抛出异常：Exception in thread “main” java.text.ParseException: Unparseable date: “2024-06-01”&lt;/p&gt;
-
-&lt;p&gt;当然，如果你不需要严格的日期，不希望代码抛异常，希望代码运行得更健壮，你就不要加这句：sdf.setLenient(false); 你需要根据实际情况来做决定。&lt;/p&gt;
-
-&lt;p&gt;以上就是我遇到过的SimpleDateFormat解析日期格式的问题。如果你有什么疑问，欢迎留言跟我讨论。&lt;/p&gt;
-</description>
-        <pubDate>Mon, 03 Jun 2024 00:00:00 -0500</pubDate>
-        <link>https://wangxuan.me/tech/2024/06/03/validate-date-format-with-SimpleDateFormat.html</link>
-        <guid isPermaLink="true">https://wangxuan.me/tech/2024/06/03/validate-date-format-with-SimpleDateFormat.html</guid>
-        
-        <category>java</category>
         
         
         <category>Tech</category>
