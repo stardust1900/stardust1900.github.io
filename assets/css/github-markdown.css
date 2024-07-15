@@ -458,7 +458,10 @@ li p:nth-child(2) {
 .markdown-body blockquote>:last-child {
   margin-bottom: 0;
 }
-
+.markdown-body blockquote strong {
+  text-decoration: underline;
+  background-color: yellow;
+}
 .markdown-body kbd {
   display: inline-block;
   padding: 3px 5px;
