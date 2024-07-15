@@ -68,3 +68,5 @@ RSS: true
 
 # Plugins
 plugins: [jekyll-paginate,jekyll-sitemap]
+# 显示未来日期
+future: true
