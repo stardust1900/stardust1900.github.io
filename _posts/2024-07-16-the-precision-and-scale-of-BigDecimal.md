@@ -2,7 +2,7 @@
 layout: post
 title: BigDecimal的精度与刻度
 subtitle: '为什么你应该用字符串构造BigDecimal对象'
-cover: ""
+cover: "/assets/images/20240716/cover.jpeg"
 date: 2024-07-16
 category: Tech
 tags: [java]
@@ -38,6 +38,7 @@ BigDecimal类中也有获取精度和刻度的方法
 JDK api中用一个表格比较了这几种模式的区别
 
 **Result of rounding input to one digit with the given rounding mode**
+
 |Input Number	|UP	|DOWN	|CEILING	|FLOOR	|HALF_UP	|HALF_DOWN	|HALF_EVEN	|UNNECESSARY|
 |:---           |:---|:---|:---|:---|:---|:---|:---|:---|
 |5.5	        |6	 |5   |6   |5	|6	 |5	  |6   |throw ArithmeticException|
