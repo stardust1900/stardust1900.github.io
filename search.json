@@ -7,6 +7,12 @@
     } ,
   
     {
+      "title"    : "BigDecimal的精度与刻度",
+      "tags"     : "java",
+      "url"      : "/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html"
+    } ,
+  
+    {
       "title"    : "欧洲之门",
       "tags"     : "乌克兰",
       "url"      : "/notes/2024/07/14/The-Gates-of-Europe.html"

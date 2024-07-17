@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 15 Jul 2024 04:02:16 -0500</pubDate>
-    <lastBuildDate>Mon, 15 Jul 2024 04:02:16 -0500</lastBuildDate>
+    <pubDate>Tue, 16 Jul 2024 22:45:50 -0500</pubDate>
+    <lastBuildDate>Tue, 16 Jul 2024 22:45:50 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -37,6 +37,223 @@
         
         
         <category>Discuss</category>
+        
+      </item>
+    
+      <item>
+        <title>BigDecimal的精度与刻度</title>
+        <description>&lt;p&gt;BigDecimal是Java中用于高精度算术运算的类。当您需要精确地处理非常大或非常小的数字时，例如在金融计算中，它特别有用。由于众所周知得原因，Double这种类型在某些情况下会出现丢失精度的问题，所以在需要对较为敏感的数据(比如与金额有关的)进行运算时，我们都会用BigDecimal。但是，用BigDecimal不代表就一定没问题，我们今天就讨论一下关于BigDecimal的问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;精度与刻度&quot;&gt;精度与刻度&lt;/h2&gt;
+
+&lt;p&gt;要正确使用BigDecimal，首先要清楚精度(precision)和刻度(scale)的概念。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Precision（精度）：表示数值的总位数，包括小数点前后的位数。例如，数值 123.45 的精度是 5，因为它有 5 位数字。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Scale（刻度）：表示小数点后的位数。例如，数值 123.45 的刻度是 2，因为小数点后有 2 位数字。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;举个例子，如果一个数值类型定义为 DECIMAL(7, 2)，那么它的精度是 7，刻度是 2。这意味着这个数值最多可以有 7 位数字，其中 2 位在小数点后，5 位在小数点前。
+(p.s. DECIMAL这个数值类型通常是用在数据库中的，JAVA中并没有这个类型。用这个例子是因为它可以最清晰地说明精度与刻度)&lt;/p&gt;
+
+&lt;p&gt;BigDecimal类中也有获取精度和刻度的方法&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;12.1234&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;precision:%s scale:%s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;precision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//输出：precision:6 scale:4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;除法中的刻度&quot;&gt;除法中的刻度&lt;/h2&gt;
+
+&lt;p&gt;在用BigDecimal做除法运算，使用divide方法的时候，可以指定刻度，也可以不指定。&lt;/p&gt;
+
+&lt;p&gt;当指定刻度，即保留几位小数的时候，需要指定进位模式(RoundingMode)。
+可选的模式有UP、DOWN、CEILING、FLOOR、HALF_UP、HALF_DOWN、HALF_EVEN、UNNECESSARY。
+JDK api中用一个表格比较了这几种模式的区别&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Result of rounding input to one digit with the given rounding mode&lt;/strong&gt;
+|Input Number	|UP	|DOWN	|CEILING	|FLOOR	|HALF_UP	|HALF_DOWN	|HALF_EVEN	|UNNECESSARY|
+|:—           |:—|:—|:—|:—|:—|:—|:—|:—|
+|5.5	        |6	 |5   |6   |5	|6	 |5	  |6   |throw ArithmeticException|
+|2.5	        |3	 |2   |3   |2	|3	 |2	  |2   |throw ArithmeticException|
+|1.6	        |2	 |1   |2   |1	|2	 |2	  |2   |throw ArithmeticException|
+|1.1	        |2	 |1   |2   |1	|1	 |1	  |1   |throw ArithmeticException|
+|1.0	        |1	 |1   |1   |1	|1	 |1	  |1   |1|
+|-1.0	        |-1	 |-1  |-1  |-1	|-1  |-1  |-1  |-1|
+|-1.1	        |-2	 |-1  |-1  |-2	|-1  |-1  |-1  |throw ArithmeticException|
+|-1.6	        |-2	 |-1  |-1  |-2	|-2  |-2  |-2  |throw ArithmeticException|
+|-2.5	        |-3	 |-2  |-2  |-3	|-3  |-2  |-2  |throw ArithmeticException|
+|-5.5	        |-6	 |-5  |-5  |-6	|-6  |-5  |-6  |throw ArithmeticException|&lt;/p&gt;
+
+&lt;p&gt;按指定的规则进位，保留几位小数，这没有问题。&lt;/p&gt;
+
+&lt;p&gt;如果不指定刻度呢？&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;divide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//输出 0.125&lt;/span&gt;
+	&lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;three&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;divide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;three&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;当结果能除尽的时候正常处理，当除不尽即结果是无限循环小数的时候，程序抛出异常。
+看一下源码：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;divide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;divisor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;cm&quot;&gt;/*
+         * Handle zero cases first.
+         */&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;divisor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// x/0&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 0/0&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArithmeticException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Division undefined&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// NaN&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArithmeticException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Division by zero&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// Calculate preferred scale&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;preferredScale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;saturateLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;divisor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0/y&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;zeroValueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredScale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;cm&quot;&gt;/*
+             * If the quotient this/divisor has a terminating decimal
+             * expansion, the expansion can have no more than
+             * (a.precision() + ceil(10*b.precision)/3) digits.
+             * Therefore, create a MathContext object with this
+             * precision and do a divide with the UNNECESSARY rounding
+             * mode.
+             */&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;MathContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MathContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;precision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                                                            &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;divisor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;precision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+                                                            &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+                                              &lt;span class=&quot;nc&quot;&gt;RoundingMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UNNECESSARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quotient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;quotient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;divide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;divisor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ArithmeticException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArithmeticException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Non-terminating decimal expansion; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                                              &lt;span class=&quot;s&quot;&gt;&quot;no exact representable decimal result.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quotientScale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quotient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+            &lt;span class=&quot;c1&quot;&gt;// divide(BigDecimal, mc) tries to adjust the quotient to&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// the desired one by removing trailing zeros; since the&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// exact divide method does not have an explicit digit&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// limit, we can add zeros too.&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredScale&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quotientScale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quotient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setScale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preferredScale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ROUND_UNNECESSARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quotient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;MathContext mc = new MathContext( (int)Math.min(this.precision() +(long)Math.ceil(10.0*divisor.precision()/3.0),Integer.MAX_VALUE),RoundingMode.UNNECESSARY);&lt;/p&gt;
+
+&lt;p&gt;这一句算了一个刻度，然后进位方式选了UNNECESSARY。所以当除不尽的时候就抛异常了。&lt;/p&gt;
+
+&lt;p&gt;也就是说它断定，如果一个除法能除尽，它的小数位小于this.precision() +(long)Math.ceil(10.0*divisor.precision()/3.0)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这句话的意思是，如果 this 除以 divisor 的商是一个有限小数，那么这个小数的位数不会超过以下公式计算的结果：&lt;br /&gt;
+$a.precision() + \lceil \frac{10 \cdot b.precision}{3} \rceil$&lt;br /&gt;
+其中：&lt;br /&gt;
+•  a.precision() 是 this 的精度，即 this 的总位数。&lt;br /&gt;
+•  b.precision() 是 divisor 的精度，即 divisor 的总位数。&lt;br /&gt;
+•  ceil 是向上取整函数。&lt;br /&gt;
+这个公式的作用是估算有限小数的最大位数。具体来说，它考虑了 this 和 divisor 的精度，并通过一个比例关系来确定商的小数位数上限。&lt;br /&gt;
+举个例子，如果 this 的精度是 5，divisor 的精度是 3，那么公式计算如下：&lt;br /&gt;
+$5 + \lceil \frac{10 \cdot 3}{3} \rceil = 5 + \lceil 10 \rceil = 5 + 10 = 15$&lt;br /&gt;
+因此，商的有限小数位数不会超过 15 位。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;插一句啊，这是为什么？&lt;/p&gt;
+
+&lt;p&gt;AI是这样回答的：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这个公式的提出者并没有明确的记录，但它基于数论中的一些基本原理。证明这个公式需要用到基本算术定理（Fundamental Theorem of Arithmetic），即每个整数都可以唯一地分解为素数的乘积。&lt;br /&gt;
+证明思路&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;有限小数的条件：&lt;br /&gt;
+一个分数 $\frac{a}{b}$只有在其分母 (b) 仅包含 2 和 5 作为素因子时，才会有一个有限小数。这是因为 10 的唯一素因子是 2 和 5。&lt;/li&gt;
+    &lt;li&gt;小数位数的估算：&lt;br /&gt;
+假设我们有一个分数 $\frac{a}{b}$，其中 (a) 和 (b) 是整数，并且 (b) 仅包含 2 和 5 作为素因子。我们可以将 (b) 表示为 $(2^m \times 5^n)$，其中 (m) 和 (n) 是非负整数。&lt;/li&gt;
+    &lt;li&gt;小数位数的上限：&lt;br /&gt;
+为了使分数 $\frac{a}{b}$ 变成一个整数，我们需要将其乘以 $(10^{\max(m, n)})$。因此，有限小数的最大位数可以通过以下公式估算：&lt;br /&gt;
+$a.precision + \lceil \frac{10 \cdot b.precision}{3} \rceil$&lt;br /&gt;
+其中 (a.precision) 是分子 (a) 的位数，(b.precision) 是分母 (b) 的位数。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;具体例子&lt;br /&gt;
+假设我们有两个数：&lt;br /&gt;
+•  this = 12345（精度为 5，因为有 5 位数字）&lt;br /&gt;
+•  divisor = 678（精度为 3，因为有 3 位数字）&lt;br /&gt;
+我们想知道 12345 除以 678 的商，如果是有限小数，它的小数部分最多有多少位。根据公式：&lt;br /&gt;
+$5 + \lceil \frac{10 \cdot 3}{3} \rceil = 5 + \lceil 10 \rceil = 5 + 10 = 15$
+因此，12345 除以 678 的商，如果是有限小数，小数部分最多有 15 位。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;额…是数论啊？那我走，打扰了，打扰了…
+&lt;img src=&quot;/assets/images/meme/daraole.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;为什么你应该用字符串来构造bigdecimal&quot;&gt;为什么你应该用字符串来构造BigDecimal&lt;/h2&gt;
+
+&lt;p&gt;聪明的你应该早就发现了，BigDecimal的构造方法有很多个。应该用哪个呢？很多人都知道应该用字符串，可是为什么呢？&lt;br /&gt;
+因为，当你不用字符串的时候，会用很多意想不到的惊喜。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strnum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;12.1234&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;precision:%s scale:%s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strnum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;precision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strnum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//输出 precision:6 scale:4&lt;/span&gt;
+
+    &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;12.1234&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;precision:%s scale:%s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;precision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//输出precision:50 scale:48&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;下面一个刻度是48，这是什么鬼？&lt;/p&gt;
+
+&lt;p&gt;再试试除法&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;divide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//输出 0.0125&lt;/span&gt;
+
+    &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;divide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//输出 0.0125000000000000006938893903907228377647697925567626953125&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;为什么会出现这种结果？这个原因众所周知：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二进制（也称为基数2）不能精确表示某些十进制数，尤其是那些在十进制中有有限小数位但在二进制中需要无限小数位的数。例如，0.1 和 0.2 在二进制中无法精确表示。&lt;br /&gt;
+这是因为二进制系统只能使用 0 和 1 来表示数值，而某些十进制数在转换为二进制时会变成无限循环小数。例如：&lt;br /&gt;
+•  0.1 在二进制中表示为 0.00011001100110011…（无限循环）&lt;br /&gt;
+•  0.2 在二进制中表示为 0.0011001100110011…（无限循环）&lt;br /&gt;
+由于计算机的存储空间有限，这些无限循环小数只能被截断，从而导致精度损失。这就是为什么在使用浮点数进行计算时，可能会出现精度问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果你看源码你会发现 public BigDecimal(double val) 和  public BigDecimal(String val)的实现完全不同。或许你也会想为什么呢？为什么要实现两套不同的呢？你就直接这样：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;BigDecimal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;不就完了？&lt;/p&gt;
+
+&lt;p&gt;至于JDK团队实现两套的原因是什么？你知道吗？欢迎留言告诉我:)&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 16 Jul 2024 00:00:00 -0500</pubDate>
+        <link>https://wangxuan.me/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html</link>
+        <guid isPermaLink="true">https://wangxuan.me/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html</guid>
+        
+        <category>java</category>
+        
+        
+        <category>Tech</category>
         
       </item>
     
@@ -1823,160 +2040,6 @@ $\text{利息保障倍数} = \frac{\text{息税前利润 (EBIT)}}{\text{利息�
         
         
         <category>Discuss</category>
-        
-      </item>
-    
-      <item>
-        <title>关于去除图片上的水印</title>
-        <description>&lt;p&gt;现在有很多去除水印的工具，但基本上都需要你花钱。作为资深白嫖党，想让我花钱，那是不可能的。&lt;/p&gt;
-
-&lt;p&gt;于是我做了下research(search, search, research…)，我发现现在的“去水印”基本上都是一个思路：利用图像修复算法。把有水印的地方看作是图像损坏的地方，用相邻像素替换那些损坏的地方。&lt;/p&gt;
-
-&lt;p&gt;现在看看有什么开源工具可以用来去除图片上的水印。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1. openCV 图像修复&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;openCV中就有&lt;a href=&quot;https://apachecn.github.io/opencv-doc-zh/#/docs/4.0.0/9.2-tutorial_py_inpainting&quot;&gt;图像修复&lt;/a&gt;的方法,提供了两种算法分别基于&lt;em&gt;2004 年由 Alexandru Telea 撰写的“基于快速行进方法的图像修复技术”&lt;/em&gt; 和 &lt;em&gt;Bertalmio，Marcelo，Andrea L. Bertozzi 和 Guillermo Sapiro 在 2001 年的论文“Navier-Stokes，流体动力学和图像和视频修补”&lt;/em&gt; 实现。调用cv.inpaint方法时，前者用cv.INPAINT_TELEA标记后者用cv.INPAINT_NS，openCV修复图像的方法使用起来很简单，只需要几行代码：&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;messi_2.jpg&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;mask&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;mask2.png&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inpaint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INPAINT_TELEA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# dst = cv.inpaint(img,mask,3,cv.INPAINT_NS)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;dst&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroyAllWindows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;上面messi_2.jpg是需要修复的图片，而mask2.png是掩模图片，这张图片的作用是指定图片损坏的位置，该图片只有黑白两色，白色就是损坏的地方。掩模图片和原图的大小(即宽高)必须完全一致，否则会报错。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/messi.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;第一张图像是原图。第二个图像是mask(掩模)。第三个图像是第一个算法的结果，最后一个图像是第二个算法的结果。&lt;/p&gt;
-
-&lt;p&gt;对于轻微损坏，或者说只有很少一两个水印的图片，这种方法还是可以的。可是，对于满屏水印的图片怎么办呢？&lt;/p&gt;
-
-&lt;p&gt;像这样的：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/original_image.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2. mask图像怎么创建&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;用openCV去除上面这样图片的水印，首先要面临的问题是mask图片怎么办？&lt;/p&gt;
-
-&lt;p&gt;new Bing是这样回答的：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;创建掩模图像是图像修复过程中的一个重要步骤。掩模图像用于指示原始图像中需要修复的区域。以下是创建掩模图像的基本步骤：&lt;/p&gt;
-  &lt;ol&gt;
-    &lt;li&gt;打开图像编辑软件：你可以使用任何图像编辑软件，如Photoshop、GIMP或者Paint.NET。&lt;/li&gt;
-    &lt;li&gt;导入原始图像：将需要修复的原始图像导入到图像编辑软件中。&lt;/li&gt;
-    &lt;li&gt;创建新图层：在原始图像上创建一个新的图层，用于绘制掩模。&lt;/li&gt;
-    &lt;li&gt;选择画笔工具：使用画笔工具，在新图层上绘制需要修复的区域。通常，我们使用白色来标记这些区域。&lt;/li&gt;
-    &lt;li&gt;填充损坏区域：确保所有需要修复的区域都被白色完全覆盖。如果区域很小，可以使用放大工具来帮助精确&amp;gt;绘制。&lt;/li&gt;
-    &lt;li&gt;保存掩模图像：完成绘制后，只保存包含掩模的图层（通常为白色损坏区域和黑色背景）为一个新的图像文&amp;gt;件，格式可以是PNG或BMP，以保留二值信息。
-在OpenCV中使用掩模图像时，掩模应该是一个二值图像，其中白色代表需要修复的区域，黑色代表不需要修复的区域。如果你有任何疑问或需要进一步的帮助，请告诉我！&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;学会了吧？然后，让我展示一下真正的技术：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/mask.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;呐，这就是我根据上面的图片创建的掩模图像。&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove_watermark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;watermark_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 读取原始图像和水印图像
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;original_image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;watermark&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;watermark_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_GRAYSCALE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 去除水印
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;watermark_removed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inpaint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;watermark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INPAINT_NS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 保存去除水印后的图像
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imwrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;watermark_removed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# 使用示例
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove_watermark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;original_image.jpg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;mask.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;output_image.jpg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;看一下效果吧：
-&lt;img src=&quot;/assets/images/20240604/output_image.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这效果，真是一言难尽，你说它没去吧，它的确没有水印了;你说它去了吧，这还不如不去…&lt;/p&gt;
-
-&lt;p&gt;什么原因呢？难道是因为我涂鸦涂得不好？需要更精确？我想过一个鸡贼的办法：往这网站上传一个纯黑的图片，它加了水印我直接下载下来当mask，但这有点冒险…&lt;/p&gt;
-
-&lt;p&gt;于是，让我再展示一下真正的技术:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/mask2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我把水印提取出来做mask这下够精确了吧。&lt;/p&gt;
-
-&lt;p&gt;再看效果：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/output_image2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这玩意，不能说跟原图一模一样，那也的确是没啥差别。我觉得这不是mask文件的问题，mask文件太精确不是好事，应该还是修复算法的问题。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.机器学习修复算法&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;既然是算法不行，那，有没有更好的修复算法呢？有，就是使用卷积神经网络（CNN）来提取图像的特征，如边缘、纹理、颜色等信息然后修复。现成的也有：https://github.com/braindotai/Watermark-Removal-Pytorch  这个是使用Pytorch来训练；https://github.com/zuruoke/watermark-removal 这个用的是tensorflow。&lt;/p&gt;
-
-&lt;p&gt;遗憾的是：这两个，无论用哪一个，你都逃不掉创建mask。为什么不能通过机器学习自己识别水印创建mask呢？Watermark-Removal-Pytorch项目的README中也给出了解释：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/reason.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;总的来说: 做水印识别代价太大，而且效果不好。&lt;/p&gt;
-
-&lt;p&gt;当我想试试这两个项目得时候，又发现了另外一个项目：iopaint！这个有web界面可以直接在本地跑起来，而且可以下载训练好的模型直接用！于是我装起来试了一下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/iopaint1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;直接涂在水印上就可以去除水印，可以涂一个去一个，也可以全部涂好一起去，一起去除要花得时间长一些。&lt;/p&gt;
-
-&lt;p&gt;去除的结果是这样的：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/beike_cleanup.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这个效果在我看来已经是非常不错了。还有一个让人惊喜的地方是，它还可以下载mask文件！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/20240604/iopaint.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;有了mask文件你就可以批量去除水印了，当然了，你所有图片水印的位置要都一样。我试了一下，某房产网站的图片水印的位置也都是一样的。如果它不升级更新，你可以用一个mask文件去除水印&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iopaint run &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lama &lt;span class=&quot;nt&quot;&gt;--device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;cpu &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;--image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/image_folder &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;--mask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/mask_folder &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;output_dir
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这个命令的解释：&lt;/p&gt;
-
-&lt;p&gt;–image is the folder containing input images,&lt;/p&gt;
-
-&lt;p&gt;–mask is the folder containing corresponding mask images. When –mask is a path to a mask file, all images will be processed using this mask.&lt;/p&gt;
-
-&lt;p&gt;iopaint真的是个不错的项目，可是要用起来，你多少要有点编程知识。不过，iopaint有个机智的地方是：它有windows的一键安装包，但是，你得花钱买。哈哈哈。&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;/p&gt;
-
-&lt;p&gt;https://apachecn.github.io/opencv-doc-zh/#/docs/4.0.0/9.2-tutorial_py_inpainting&lt;/p&gt;
-
-&lt;p&gt;https://github.com/zuruoke/watermark-removal&lt;/p&gt;
-
-&lt;p&gt;https://github.com/braindotai/Watermark-Removal-Pytorch&lt;/p&gt;
-
-&lt;p&gt;https://github.com/Sanster/IOPaint&lt;/p&gt;
-
-&lt;p&gt;https://www.iopaint.com/&lt;/p&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 -0500</pubDate>
-        <link>https://wangxuan.me/tech/2024/06/04/watermark-removal.html</link>
-        <guid isPermaLink="true">https://wangxuan.me/tech/2024/06/04/watermark-removal.html</guid>
-        
-        <category>去水印</category>
-        
-        
-        <category>Tech</category>
         
       </item>
     
