@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蹲一个结果 - 独行深山</title>
+    <title>拼拼古诗 - 独行深山</title>
     <meta name="author"  content="王君敕">
-    <meta name="description" content="蹲一个结果">
-    <meta name="keywords"  content="社会热点">
+    <meta name="description" content="拼拼古诗">
+    <meta name="keywords"  content="flutter">
 
-    <meta property="og:title" content="蹲一个结果 - 独行深山">
+    <meta property="og:title" content="拼拼古诗 - 独行深山">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wangxuan.me/discuss/2099/12/31/wait-for-the-result.html">
+    <meta property="og:url" content="https://wangxuan.me/tech/2024/07/19/chinese-poem.html">
     <meta property="og:description" content="去创造点什么而不是依靠别人活着">
     <meta property="og:site_name" content="独行深山">
     <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
@@ -63,44 +63,69 @@
         <div class="post-tags">
             
             
-            <a href="https://wangxuan.me/tags#%E7%A4%BE%E4%BC%9A%E7%83%AD%E7%82%B9" class="post-tag">社会热点</a>
+            <a href="https://wangxuan.me/tags#flutter" class="post-tag">flutter</a>
             
             
         </div>
-        <h1>蹲一个结果</h1>
+        <h1>拼拼古诗</h1>
         <div class="post-meta">
             <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
-            <time class="post-meta-item" datetime="99-12-31"><i class="iconfont icon-date"></i>31 Dec 2099</time>
+            <time class="post-meta-item" datetime="24-07-19"><i class="iconfont icon-date"></i>19 Jul 2024</time>
         </div>
     </div>
     
     <div class="filter"></div>
-    <div class="post-cover" style="background: url('/assets/images/20991231/wait.jpeg') center no-repeat; background-size: cover;">
+    <div class="post-cover" style="background: url('/assets/images/20240719/p5.jpg') center no-repeat; background-size: cover;">
     
 </header>
 
 <div class="post-content">
     
-    <h2 class="post-subtitle">记录一些需要等待后续的新闻事件</h2>
+    <h2 class="post-subtitle">一个flutter实现的古诗拼图游戏</h2>
     
     <article class="markdown-body">
-        <p><img src="/assets/images/20991231/wait.jpeg" alt="" /></p>
+        <p>去年(2023年)年底我初学flutter，看了一些文档和教程，想找个东西来练练手。</p>
 
-<h1 id="蹲一个结果">蹲一个结果</h1>
+<p>小时候看过一个关于历史名人儿时事迹的短片，有一集是讲周总理的，有一个细节我记得很清楚：幼年周恩来经常要做一个游戏–有一堆纸片，每片纸上一个字，他要一个一个字拼起来拼成一首诗。</p>
 
-<ul class="task-list">
-  <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />2024-07-15 <a href="https://weibo.com/ttarticle/p/show?id=2309405051606889791919">罐车运输乱象调查：卸完煤制油直接装运食用大豆油</a><br />
-<a href="https://weibo.com/2803301701/OmMCNgiZN">#国务院食安办回应油罐车用油乱象#</a></p>
-  </li>
-  <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />2024-07-15 <a href="https://baike.baidu.com/item/5%C2%B722%E5%85%A8%E6%A4%92%E5%8E%BF%E6%BB%81%E6%B2%B3%E6%B0%B4%E6%B1%A1%E6%9F%93%E4%BA%8B%E4%BB%B6/64487765">5·22全椒县滁河水污染事件</a></p>
-  </li>
-  <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />2024-07-15 <a href="https://weibo.com/1642634100/OjZSUFkra">#姜萍明日参加阿里全球数学竞赛决赛#</a><br />
-据阿里巴巴达摩院DAMO官方微信公众号发布消息，2024年阿里巴巴全球数学竞赛决赛将于6月22日举行。决赛形式为线上个人闭卷赛。决赛分为五个赛道，选手可任选一个赛道。独立阅卷组分赛道阅卷，再交叉复审、核验。每个赛道将评出金奖1名、银奖2名、铜奖4名以及优秀奖10名。<strong>获奖名单将于8月公布</strong>。</p>
-  </li>
-</ul>
+<p>很多年前我就想，或许可以把这个游戏做成手机应用。可惜，一直没有动手。恰好可以用flutter来实现这个想法。</p>
+
+<p>于是找了github上的唐诗三百首做数据源，做了个原始版本。</p>
+
+<p>一开始它是这样的：</p>
+
+<p>https://www.bilibili.com/video/BV1C7421K7MH</p>
+
+<p>初始版本的代码在这：
+https://gitee.com/wangyidao/peom_puzzle</p>
+
+<p>后来，我想，或许我可以把它美化一下，增加小学到高中教科书中的诗句，可以选择年级以便调整难度。于是在github上搜一下，在这个repo<br />
+https://github.com/chinese-poetry/huajianji<br />
+找到了我想要的数据。</p>
+
+<p>然后，又觉得可以再增加一些英文翻译。恰巧，我又搜到了维吉尼亚大学图书馆网站上的唐诗300首<br />
+https://cti.lib.virginia.edu/frame.htm<br />
+于是经过几番调整，现在它变成了这样。</p>
+
+<p><img src="/assets/images/20240719/p1.jpg" alt="" /></p>
+
+<p><img src="/assets/images/20240719/p2.jpg" alt="" /></p>
+
+<p><img src="/assets/images/20240719/p3.jpg" alt="" /></p>
+
+<p><img src="/assets/images/20240719/p4.jpg" alt="" /></p>
+
+<p><img src="/assets/images/20240719/p5.jpg" alt="" /></p>
+
+<p>https://www.bilibili.com/video/BV1D7421K7Xg</p>
+
+<p>曾几何时，我幻想着能把这个应用上架到应用商店。还申请了软著。
+<img src="/assets/images/20240719/p6.jpg" alt="" />
+后来发现，我天真了… 在这个时代，个人想发个应用太难了。</p>
+
+<p>唉，算了，算了，开源吧！</p>
+
+<p><a href="https://github.com/stardust1900/chinese_poem">https://github.com/stardust1900/chinese_poem</a></p>
 
     </article>
     
@@ -151,16 +176,28 @@
     </section>
     <section class="post-footer-item read-next">
         
-        
         <div class="read-next-item">
-            <a href="/tech/2024/07/19/chinese-poem.html" class="read-next-link"></a>
+            <a href="/discuss/2099/12/31/wait-for-the-result.html" class="read-next-link"></a>
             <section>
-                <span>拼拼古诗</span>
-                <p>去年(2023年)年底我初学flutter，看了一些文档和教程，想找个东西来练练手。</p>
+                <span>蹲一个结果</span>
+                <p></p>
             </section>
             
             <div class="filter"></div>
-            <img src="/assets/images/20240719/p5.jpg" alt="">
+            <img src="/assets/images/20991231/wait.jpeg" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html" class="read-next-link"></a>
+            <section>
+                <span>BigDecimal的精度与刻度</span>
+                <p>BigDecimal是Java中用于高精度算术运算的类。当您需要精确地处理非常大或非常小的数字时，例如在金融计算中...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="/assets/images/20240716/cover.jpeg" alt="">
             
         </div>
         

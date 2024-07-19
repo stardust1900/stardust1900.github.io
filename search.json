@@ -7,6 +7,12 @@
     } ,
   
     {
+      "title"    : "拼拼古诗",
+      "tags"     : "flutter",
+      "url"      : "/tech/2024/07/19/chinese-poem.html"
+    } ,
+  
+    {
       "title"    : "BigDecimal的精度与刻度",
       "tags"     : "java",
       "url"      : "/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html"
