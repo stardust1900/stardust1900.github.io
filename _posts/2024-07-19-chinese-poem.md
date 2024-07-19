@@ -20,7 +20,7 @@ tags: [flutter]
 [https://www.bilibili.com/video/BV1C7421K7MH](https://www.bilibili.com/video/BV1C7421K7MH)
 
 初始版本的代码在这：
-[https://gitee.com/wangyidao/peom_puzzle](https://gitee.com/wangyidao/peom_puzzle)
+[https://github.com/stardust1900/poem_puzzle](https://github.com/stardust1900/poem_puzzle)
 
 后来，我想，或许我可以把它美化一下，增加小学到高中教科书中的诗句，可以选择年级以便调整难度。于是在github上搜一下，在这个repo  
 [https://github.com/chinese-poetry/huajianji](https://github.com/chinese-poetry/huajianji)  
