@@ -17,13 +17,13 @@ tags: [flutter]
 
 一开始它是这样的：
 
-https://www.bilibili.com/video/BV1C7421K7MH
+[https://www.bilibili.com/video/BV1C7421K7MH](https://www.bilibili.com/video/BV1C7421K7MH)
 
 初始版本的代码在这：
-https://gitee.com/wangyidao/peom_puzzle
+[https://gitee.com/wangyidao/peom_puzzle](https://gitee.com/wangyidao/peom_puzzle)
 
 后来，我想，或许我可以把它美化一下，增加小学到高中教科书中的诗句，可以选择年级以便调整难度。于是在github上搜一下，在这个repo  
-https://github.com/chinese-poetry/huajianji  
+[https://github.com/chinese-poetry/huajianji](https://github.com/chinese-poetry/huajianji)  
 找到了我想要的数据。
 
 然后，又觉得可以再增加一些英文翻译。恰巧，我又搜到了维吉尼亚大学图书馆网站上的唐诗300首  
@@ -40,11 +40,12 @@ https://cti.lib.virginia.edu/frame.htm
 
 ![](/assets/images/20240719/p5.jpg)
 
-https://www.bilibili.com/video/BV1D7421K7Xg
+[https://www.bilibili.com/video/BV1D7421K7Xg](https://www.bilibili.com/video/BV1D7421K7Xg)
 
 曾几何时，我幻想着能把这个应用上架到应用商店。还申请了软著。
 ![](/assets/images/20240719/p6.jpg)
-后来发现，我天真了... 在这个时代，个人想发个应用太难了。
+
+后来发现，是我天真了... 在这个时代，个人想上架个应用太特么难了。
 
 唉，算了，算了，开源吧！
 
