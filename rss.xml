@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 18 Jul 2024 22:32:36 -0500</pubDate>
-    <lastBuildDate>Thu, 18 Jul 2024 22:32:36 -0500</lastBuildDate>
+    <pubDate>Fri, 19 Jul 2024 02:25:28 -0500</pubDate>
+    <lastBuildDate>Fri, 19 Jul 2024 02:25:28 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -55,7 +55,7 @@
 &lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1C7421K7MH&quot;&gt;https://www.bilibili.com/video/BV1C7421K7MH&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;初始版本的代码在这：
-&lt;a href=&quot;https://gitee.com/wangyidao/peom_puzzle&quot;&gt;https://gitee.com/wangyidao/peom_puzzle&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://github.com/stardust1900/poem_puzzle&quot;&gt;https://github.com/stardust1900/poem_puzzle&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;后来，我想，或许我可以把它美化一下，增加小学到高中教科书中的诗句，可以选择年级以便调整难度。于是在github上搜一下，在这个repo&lt;br /&gt;
 &lt;a href=&quot;https://github.com/chinese-poetry/huajianji&quot;&gt;https://github.com/chinese-poetry/huajianji&lt;/a&gt;&lt;br /&gt;
