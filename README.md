@@ -20,3 +20,18 @@
 **来都来了，领个红包再走**
 
 ![](/assets/img/redpacket.jpg)
+
+---
+python3 new_post.py -et "How to prove that you are not mentally ill" -ct "如何证明自己没有精神病？" -cat Discuss -tags 疯人院
+
+python3 new_post.py -et "Centuries of Change" -ct "欧罗巴一千年" -cat Notes -tags 欧罗巴一千年
+
+python3 new_post.py -et "If you are the driver" -ct "如果你是油罐车司机" -cat Discuss -tags 社会热点
+
+python3 new_post.py -et "The Gates of Europe" -ct "欧洲之门" -cat Notes -tags 乌克兰
+
+python3 new_post.py -et "wait for the result" -ct "蹲一个结果" -cat Discuss -tags 社会热点
+
+python3 new_post.py -et "chinese poem" -ct "拼拼古诗" -cat Tech -tags flutter
+
+python3 new_post.py -et "Is Successor a good film" -ct "抓娃娃是部好电影吗" -cat Notes -tags 抓娃娃
