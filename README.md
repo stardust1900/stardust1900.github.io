@@ -35,3 +35,5 @@ python3 new_post.py -et "wait for the result" -ct "蹲一个结果" -cat Discuss
 python3 new_post.py -et "chinese poem" -ct "拼拼古诗" -cat Tech -tags flutter
 
 python3 new_post.py -et "Is Successor a good film" -ct "抓娃娃是部好电影吗" -cat Notes -tags 抓娃娃
+
+python3 new_post.py -et "chinese historical torture devices cangue" -ct "中国古代刑罚中的夹棍" -cat Discuss -tags 夹棍
