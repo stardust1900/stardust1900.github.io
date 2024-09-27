@@ -129,7 +129,7 @@
 
 <blockquote>
   <p>CAPM基于两个构想：第一个构想是市场组合M，第二个是将任何个股或组合与市场联系起来的贝塔系数（beta coefficient）的概念。理论上讲，市场组合应该包括所有资产：英国的股票、日本的债券、马来西亚的种植园等。在投资实践中，市场组合通常取作某个具有广泛覆盖面的、价值加权的国内股票指数，例如美国的纽交所综合指数（NYSE Composite）、英国的金融时报指数（FTA）或是日本的东证股价指数（TOPIX）。<br />
-让我们考虑任意一个组合P，记组合P的超额收益率（excess return）为$r_P$，市场组合M的超额收益率为$r_M$。超额收益率是收益率减去同期无风险资产的收益率。我们定义组合P的贝塔为：\(\beta_P = \frac{Cov(r_P,r_M)}{Var(r_M)}\)
+让我们考虑任意一个组合P，记组合P的超额收益率（excess return）为$r_P$，市场组合M的超额收益率为$r_M$。超额收益率是收益率减去同期无风险资产的收益率。我们定义组合P的贝塔为：  $\beta_P = \frac{Cov(r_P,r_M)}{Var(r_M)}$
 贝塔正比于组合收益率与市场收益率之间的协方差。它是对未来的一个预测。值得注意的是，市场组合的贝塔值等于1，无风险资产的贝塔值等于0。<br />
 贝塔使我们能够将任意组合的超额收益率分解为两个不相关的部分，一个是市场部分，另一个是残差部分。<br />
 –<br />
@@ -145,7 +145,7 @@ CAPM同样认为投资者不能战胜市场，但从一个略微不同的角度�
   <p>在1992年12月，股票西尔斯（Sears）关于标普500指数的贝塔预测值为1.05。如果标普500指数最终实现的收益率比国库券低5%，那么西尔斯的预期超额收益率是多少？</p>
 </blockquote>
 
-<blockquote style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
+<div style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
 在资本资产定价模型（CAPM）中，一个资产的预期收益率可以通过以下公式计算：
 
 $$ \text{预期收益率} = \text{无风险收益率} + \beta \times (\text{市场收益率} - \text{无风险收益率}) $$
@@ -172,13 +172,13 @@ $ \text{预期超额收益率} = (-0.0525) $
 $ \text{预期超额收益率} = -0.0525 $
 
 西尔斯的预期超额收益率是 -0.0525 或 -5.25%。
-</blockquote>
+</div>
 
 <blockquote>
   <p>如果标普500指数的长期预期年化超额收益率为7%，那么西尔斯的预期超额收益率是多少？</p>
 </blockquote>
 
-<blockquote style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
+<div style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
 根据资本资产定价模型（CAPM），一个资产的预期超额收益率可以表示为：
 
 $ \text{预期超额收益率} = \beta \times \text{市场超额收益率} $
@@ -193,13 +193,13 @@ $ \text{西尔斯的预期超额收益率} = 1.05 \times 0.07 $
 $ \text{西尔斯的预期超额收益率} = 0.0735 $
 
 西尔斯的预期超额收益率是 $0.0735$ 或 $7.35\%$。
-</blockquote>
+</div>
 
 <blockquote>
   <p>假设不同股票的残差收益率之间不相关。股票A的贝塔值为1.15，波动率为35%；股票B的贝塔值为0.95，波动率为33%。如果市场波动率为20%，那么股票A与股票B之间的相关性是多少？哪只股票具有更高的残差波动率？</p>
 </blockquote>
 
-<blockquote style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
+<div style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
 在资本资产定价模型（CAPM）中，股票的总风险由系统性风险（市场风险）和非系统性风险（残差风险或特定风险）组成。贝塔值（$\beta$）衡量的是系统性风险，而残差波动率（$\sigma_e$）衡量的是非系统性风险。
 
 股票A和股票B的残差波动率可以通过以下公式计算：
@@ -226,13 +226,13 @@ $ \sigma_{Ae} = 0.2638 $
 $ \sigma_{Be} = 0.2698 $
 
 股票A与股票B之间的残差收益率相关性是 $0$。具有更高残差波动率的股票是股票B，其残差波动率为 $0.2698$ 或 $26.98\%$。
-</blockquote>
+</div>
 
 <blockquote>
   <p>怎样的一列预期收益率将使我们100%投资于GE这只股票？</p>
 </blockquote>
 
-<blockquote style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
+<div style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
 要确定使投资者100%投资于通用电气（GE）股票的预期收益率，我们需要考虑投资者的风险偏好和市场条件。以下是一些关键因素和步骤：
 
 ### 1. 确定GE的预期收益率
@@ -267,13 +267,13 @@ $$ E(R_i) = R_f + \beta_i \times (E(R_m) - R_f) $$
 要使投资者100%投资于GE，GE的预期收益率需要足够高，以吸引投资者从其他投资机会转向GE。这通常意味着GE的预期收益率应该至少等于或高于市场提供的收益率，同时考虑到投资者的风险偏好和市场条件。
 
 如果需要具体的数字计算，我们需要GE的贝塔系数、当前的无风险收益率、市场的预期收益率等数据。这些数据可以通过财务分析软件、市场研究报告或咨询财务顾问获得。
-</blockquote>
+</div>
 
 <blockquote>
   <p>根据CAPM，主动投资经理的预期残差收益率是多少？</p>
 </blockquote>
 
-<blockquote style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
+<div style="background-color: lightgrey; color: darkblue; padding: 10px;"> 
 在资本资产定价模型（CAPM）中，主动投资管理者的预期残差收益率（也称为阿尔法，$\alpha$）是指投资组合的实际收益率与根据CAPM模型预期的收益率之间的差额。CAPM模型的公式是：
 
 $ E(R_i) = R_f + \beta_i \times (E(R_m) - R_f) $
@@ -308,7 +308,7 @@ $ \alpha = E(R_p) - (R_f + \beta \times (E(R_m) - R_f)) $
 - 市场的预期收益率 $ E(R_m) $。
 
 这些数据通常可以通过市场研究、历史数据和财务模型获得。如果一个主动投资管理者声称能够实现正的阿尔法，他们需要展示他们的投资策略如何能够系统地产生超过CAPM模型预测的收益。
-</blockquote>
+</div>
 
 <blockquote>
   <p>最特殊的特征组合包括组合C（最小方差组合）和组合Q（最高夏普率组合，夏普率即为Sharpe ratio，SR）。有效前沿描述了一组特征组合，它们是每个可达到的预期收益率水平下的最小方差组合。利用特征组合的概念，我们可以把CAPM的结论简单表述为“组合Q就是市场组合”。</p>
