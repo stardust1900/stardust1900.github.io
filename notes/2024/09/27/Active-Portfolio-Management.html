@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主动投资组合管理 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="主动投资组合管理">
+    <meta name="keywords"  content="量化">
+
+    <meta property="og:title" content="主动投资组合管理 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/notes/2024/09/27/Active-Portfolio-Management.html">
+    <meta property="og:description" content="去创造点什么而不是依靠别人活着">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">首页</a></li>
+            
+            <li><a href="/tags.html">标签</a></li>
+            
+            <li><a href="/categories.html">分类</a></li>
+            
+            <li><a href="/doushuai/">兜率宫</a></li>
+            
+            <li><a href="/about.html">关于</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#%E9%87%8F%E5%8C%96" class="post-tag">量化</a>
+            
+            
+        </div>
+        <h1>主动投资组合管理</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="24-09-27"><i class="iconfont icon-date"></i>27 Sep 2024</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('/assets/images/20240927/s27465221.jpg') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">创造高收益并控制风险的量化投资方法</h2>
+    
+    <article class="markdown-body">
+        <blockquote>
+  <p>马科维茨的伟大，在于他提出选择投资组合的目标是达到“有效组合”，也就是构建在给定的风险下获取最大预期收益的组合。不同风险下的有效投资组合形成所谓的“有效前沿”。最终的选择，可以通过求解不同风险厌恶水平下的“效用函数”最大化问题来得到。</p>
+  <blockquote>
+    <p>译者序</p>
+  </blockquote>
+</blockquote>
+
+<p>这句话，简直了，不太像人话…</p>
+
+<blockquote>
+  <p>在主动管理中，更高的残差收益率、更低的残差风险是必然的偏好。我们采用均值/方差的方式来体现这一点，即用残差收益率减去一个残差风险的二次惩罚项（残差方差的线性惩罚项）。我们称之为“风险调整预期收益率”（risk-adjusted expected return）或“附加值”（value-added）。我们可以用无差异曲线来描述偏好。不同的均值/方差组合，只要它们的附加值相同，我们对它们的偏好就没有差异。每一条无差异曲线都包含一个具有零残差风险的特殊组合，其残差收益率被称为“确定性等价”残差收益率。</p>
+  <blockquote>
+    <p>第1章 绪论</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>由于采用了相对的视角，我们会集中于收益率的一个组成部分——残差收益率（residual return），也就是资产收益率中与业绩基准收益率不相关的部分。
+信息率（informationratio，IR）是残差收益率的年化预期值与其年化波动率之比。信息率定义了主动投资经理可选的投资机会的集合。信息率越高，主动管理的空间越大。<br />
+<strong>信息率衡量了主动管理的机会集，它的平方决定了我们产生附加值的能力，信息率越高越好</strong>。那么，从哪里寻找更高的信息率呢？投资机会集有哪些来源？根据主动管理基本定律，有两个来源。第一个就是我们预测每只资产残差收益率的能力。我们用信息系数（information coefficient，IC）来衡量这种能力，它是收益率的预测值和实现值之间的相关系数。信息系数是衡量我们预测能力的一个度量。<br />
+第二个产生高信息率的来源是广度（breadth，BR），即每年我们能够应用上述预测能力的次数。如果能力水平相同，那么能够预测1000只股票的收益理应好于预测100只。基本定律告诉我们，信息率正比于我们的预测能力和预测广度的平方根：$IR=IC·\sqrt{BR}$。这种观念不仅帮助我们理解理论本身，还能指导我们合理地设计研究策略。</p>
+  <blockquote>
+    <p>第1章 绪论</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>传统的资产估值和收益率预测方法更加实用。最经典的就是分红折现模型（dividend discount model），它把净现值的想法应用于估值问题之上。<br />
+还有其他结构化的估值和收益率预测方法。一种方法是找出过去表现出色的资产的共同特征，进而找出那些将要表现出色的资产。另一种方法试图运用比较估值法来找出具有相同因子暴露但市场定价却不同的资产。一旦找到，意味着套利机会的出现。还有一种方法是去预测那些由市场定价的因子的收益率。<br />
+主动管理即预测。没有预测，基金经理将采用被动投资——持有业绩基准组合。在本书的论述中，预测是指将资产收益率的原始预测信号转化为精炼预测的过程。这种信息处理在主动管理中至关重要。它的基本想法就是预测基本定律：$阿尔法（alpha）=波动率·IC·标准分值$，它是我们将一个标准化的（均值为0，标准差为1）分值转化为一个对残差收益率的预测值（阿尔法）的基本方程。方程中，波动率（volatility）是残差波动率，IC是信息系数——标准分值和收益率实现值的相关系数。信息处理过程以原始信号为输入，首先将它转化为标准分值，然后依次乘以信息系数和波动率，产生最终的阿尔法。</p>
+  <blockquote>
+    <p>第1章 绪论</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p><strong>CAPM不是预测预期收益的唯一方法，但应该说它是最好的方法</strong>。就像本章稍后一节将论证的那样，CAPM自从被提出以来，经受住了学术界和实践界无数严格测试的考验。<strong>一种预测预期收益率的替代方法是用历史平均收益率，即股票在之前某段历史上的平均收益率</strong>。这不是一个好主意，它有两个主要问题。第一，历史收益率包含了大量的样本误差（如果用已知年化标准差为σ的平稳随机过程生成一列收益率，那么以这列收益率为样本估计出的年化收益率的标准误将是这里Y是指数据（那一列收益率）长度是Y年。不论我们观察的是每日、月度、季度或年度的收益率，结论都是一样的。由于股票年化波动率的典型数值大约是35%，所以即使我们有5年的观测数据，估计误差依然有大约16%！）。第二，股票样本空间随时间变化：新股票不断出现，老股票逐渐消失或合并。股票本身随时间变化：盈利会变，资本结构会变，股票波动率也会变。历史平均是CAPM一致预测的一种糟糕的替代方案。<br />
+<strong>第二种提供预期收益率的替代方法是套利定价理论（arbitrage pricing theory，APT）</strong>。我们将在第7章讨论APT。我们发现APT是主动投资经理的一个有效工具，但它不能作为一致预期收益率的来源。</p>
+  <blockquote>
+    <p>第2章 一致预期收益率：资本资产定价模型</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>CAPM基于两个构想：第一个构想是市场组合M，第二个是将任何个股或组合与市场联系起来的贝塔系数（beta coefficient）的概念。理论上讲，市场组合应该包括所有资产：英国的股票、日本的债券、马来西亚的种植园等。在投资实践中，市场组合通常取作某个具有广泛覆盖面的、价值加权的国内股票指数，例如美国的纽交所综合指数（NYSE Composite）、英国的金融时报指数（FTA）或是日本的东证股价指数（TOPIX）。<br />
+让我们考虑任意一个组合P，记组合P的超额收益率（excess return）为$r_P$，市场组合M的超额收益率为$r_M$。超额收益率是收益率减去同期无风险资产的收益率。我们定义组合P的贝塔为：\(\beta_P = \frac{Cov(r_P,r_M)}{Var(r_M)}\)
+贝塔正比于组合收益率与市场收益率之间的协方差。它是对未来的一个预测。值得注意的是，市场组合的贝塔值等于1，无风险资产的贝塔值等于0。<br />
+贝塔使我们能够将任意组合的超额收益率分解为两个不相关的部分，一个是市场部分，另一个是残差部分。<br />
+–<br />
+CAPM与有效市场理论虽不相同，但却是一致的。有效市场理论有三种强度：弱有效、半强有效和强有效。弱有效形式认为：只使用历史价格和成交量数据不能战胜市场。半强有效形式认为：只使用公开信息（历史价格、基本面信息、分析师的公开评级等）不能战胜市场。强有效形式认为：投资者无论如何都不能战胜市场（即市场价格包含了一切相关信息）。<br />
+CAPM同样认为投资者不能战胜市场，但从一个略微不同的角度。对任何一位持有非市场组合的投资者A，必然存在（至少在等效意义下）与A对称的另一位投资者B，B持有的组合相对于市场的偏离恰好与A的相反。因此，只要不存在“更傻的傻瓜”，我们就不应该预期A与B中的任何一人能够战胜市场。有效市场理论认为不存在“更傻的傻瓜”是由于它认为市场价格反映了一切有用的信息。<br />
+将收益率和风险分解为市场部分和残差部分的能力依赖于我们预测贝塔的能力。CAPM进一步认为任何股票（从而任何投资组合）的预期残差收益率为零。</p>
+  <blockquote>
+    <p>第2章 一致预期收益率：资本资产定价模型</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>在1992年12月，股票西尔斯（Sears）关于标普500指数的贝塔预测值为1.05。如果标普500指数最终实现的收益率比国库券低5%，那么西尔斯的预期超额收益率是多少？
+在资本资产定价模型（CAPM）中，一个资产的预期收益率可以通过以下公式计算：</p>
+</blockquote>
+
+\[\text{预期收益率} = \text{无风险收益率} + \beta \times (\text{市场收益率} - \text{无风险收益率})\]
+
+<p>其中：</p>
+<ul>
+  <li>$\beta$ 是资产相对于市场的波动性或风险系数。</li>
+  <li>$\text{市场收益率}$ 是市场投资组合的预期收益率。</li>
+  <li>$\text{无风险收益率}$ 是无风险资产（如国库券）的收益率。</li>
+</ul>
+
+<p>根据题目，如果标普500指数的收益率比国库券低5%，我们可以将市场收益率表示为：</p>
+
+<p>$ \text{市场收益率} = \text{无风险收益率} - 0.05 $</p>
+
+<p>将 $\beta = 1.05$ 和市场收益率的关系代入CAPM公式，我们可以计算出西尔斯的预期收益率：</p>
+
+<p>$ \text{预期收益率} = \text{无风险收益率} + 1.05 \times (\text{无风险收益率} - 0.05 - \text{无风险收益率}) $
+$ \text{预期收益率} = \text{无风险收益率} + 1.05 \times (-0.05) $
+$ \text{预期收益率} = \text{无风险收益率} - 0.0525 $</p>
+
+<p>西尔斯的预期超额收益率是：</p>
+
+<p>$ \text{预期超额收益率} = \text{预期收益率} - \text{无风险收益率} $
+$ \text{预期超额收益率} = (-0.0525) $
+$ \text{预期超额收益率} = -0.0525 $</p>
+
+<p>西尔斯的预期超额收益率是 -0.0525 或 -5.25%。</p>
+
+<blockquote>
+  <p>如果标普500指数的长期预期年化超额收益率为7%，那么西尔斯的预期超额收益率是多少？</p>
+</blockquote>
+
+<p>根据资本资产定价模型（CAPM），一个资产的预期超额收益率可以表示为：</p>
+
+<p>$ \text{预期超额收益率} = \beta \times \text{市场超额收益率} $</p>
+
+<p>其中：</p>
+<ul>
+  <li>$\beta$ 是资产相对于市场的波动性或风险系数。</li>
+  <li>$\text{市场超额收益率}$ 是市场投资组合的预期超额收益率。</li>
+</ul>
+
+<p>题目中提到标普500指数的长期预期年化超额收益率为7%，西尔斯的贝塔值（$\beta$）为1.05。因此，我们可以计算出西尔斯的预期超额收益率：</p>
+
+<p>$ \text{西尔斯的预期超额收益率} = 1.05 \times 0.07 $
+$ \text{西尔斯的预期超额收益率} = 0.0735 $</p>
+
+<p>西尔斯的预期超额收益率是 $0.0735$ 或 $7.35\%$。</p>
+
+<blockquote>
+  <p>假设不同股票的残差收益率之间不相关。股票A的贝塔值为1.15，波动率为35%；股票B的贝塔值为0.95，波动率为33%。如果市场波动率为20%，那么股票A与股票B之间的相关性是多少？哪只股票具有更高的残差波动率？</p>
+</blockquote>
+
+<p>在资本资产定价模型（CAPM）中，股票的总风险由系统性风险（市场风险）和非系统性风险（残差风险或特定风险）组成。贝塔值（$\beta$）衡量的是系统性风险，而残差波动率（$\sigma_e$）衡量的是非系统性风险。</p>
+
+<p>股票A和股票B的残差波动率可以通过以下公式计算：</p>
+
+<p>$ \sigma_A^2 = \text{总波动率}^2 - \beta_A^2 \times \text{市场波动率}^2 $
+$ \sigma_B^2 = \text{总波动率}^2 - \beta_B^2 \times \text{市场波动率}^2 $</p>
+
+<p>其中，$\sigma_A^2$ 和 $\sigma_B^2$ 分别是股票A和股票B的残差波动率，总波动率是股票自身的波动率。</p>
+
+<p>首先，我们计算股票A和股票B的残差波动率：</p>
+
+<p>$ \sigma_{Ae}^2 = 0.35^2 - 1.15^2 \times 0.20^2 $
+$ \sigma_{Be}^2 = 0.33^2 - 0.95^2 \times 0.20^2 $
+$ \sigma_{Ae}^2 = 0.0696 $
+$ \sigma_{Be}^2 = 0.0728 $</p>
+
+<p>接着，我们计算残差收益率的相关性。由于不同股票的残差收益率之间不相关，所以股票A与股票B之间的残差收益率相关性为0。</p>
+
+<p>最后，我们比较残差波动率：</p>
+
+<ul>
+  <li>股票A的残差波动率为 $\sqrt{0.0696}$</li>
+  <li>股票B的残差波动率为 $\sqrt{0.0728}$
+$ \sigma_{Ae} = 0.2638 $
+$ \sigma_{Be} = 0.2698 $</li>
+</ul>
+
+<p>股票A与股票B之间的残差收益率相关性是 $0$。具有更高残差波动率的股票是股票B，其残差波动率为 $0.2698$ 或 $26.98\%$。</p>
+
+<blockquote>
+  <p>怎样的一列预期收益率将使我们100%投资于GE这只股票？
+要确定使投资者100%投资于通用电气（GE）股票的预期收益率，我们需要考虑投资者的风险偏好和市场条件。以下是一些关键因素和步骤：</p>
+</blockquote>
+
+<h3 id="1-确定ge的预期收益率">1. 确定GE的预期收益率</h3>
+<p>首先，我们需要知道GE股票的预期收益率。这通常基于历史数据、财务分析、市场情绪和其他经济指标来预测。</p>
+
+<h3 id="2-考虑无风险收益率">2. 考虑无风险收益率</h3>
+<p>无风险收益率通常是指政府债券的收益率，这是一个基准，投资者可以无风险地获得这个收益率。</p>
+
+<h3 id="3-使用资本资产定价模型capm">3. 使用资本资产定价模型（CAPM）</h3>
+<p>CAPM模型可以帮助我们理解预期收益率与风险之间的关系。CAPM模型的公式是：
+$ E(R_i) = R_f + \beta_i \times (E(R_m) - R_f) $
+其中：</p>
+<ul>
+  <li>$ E(R_i) $ 是资产 $ i $ 的预期收益率。</li>
+  <li>$ R_f $ 是无风险收益率。</li>
+  <li>$ \beta_i $ 是资产 $ i $ 的贝塔系数，表示其相对于市场的风险。</li>
+  <li>$ E(R_m) $ 是市场的预期收益率。</li>
+  <li>$ (E(R_m) - R_f) $ 是市场风险溢价。</li>
+</ul>
+
+<h3 id="4-计算ge的预期收益率">4. 计算GE的预期收益率</h3>
+<p>如果我们要使投资者100%投资于GE，我们需要确保GE的预期收益率至少与市场提供的收益率相当，或者更高。这意味着GE的预期收益率应该至少等于市场预期收益率加上GE的风险溢价。</p>
+
+<h3 id="5-考虑投资者的风险偏好">5. 考虑投资者的风险偏好</h3>
+<p>如果投资者是风险厌恶的，他们可能需要更高的预期收益率来补偿持有单一股票的风险。如果投资者是风险中性或风险偏好的，他们可能愿意接受较低的预期收益率。</p>
+
+<h3 id="6-调整预期收益率">6. 调整预期收益率</h3>
+<p>如果GE的当前预期收益率低于市场收益率，公司可能需要采取措施提高其股票的吸引力，如提高盈利能力、增加分红或改善公司治理。</p>
+
+<h3 id="7-考虑其他投资机会">7. 考虑其他投资机会</h3>
+<p>投资者可能会比较GE的预期收益率与其他投资机会，如其他股票、债券或房地产。如果GE的预期收益率不能竞争，投资者可能会选择其他投资。</p>
+
+<h3 id="结论">结论</h3>
+<p>要使投资者100%投资于GE，GE的预期收益率需要足够高，以吸引投资者从其他投资机会转向GE。这通常意味着GE的预期收益率应该至少等于或高于市场提供的收益率，同时考虑到投资者的风险偏好和市场条件。</p>
+
+<p>如果需要具体的数字计算，我们需要GE的贝塔系数、当前的无风险收益率、市场的预期收益率等数据。这些数据可以通过财务分析软件、市场研究报告或咨询财务顾问获得。</p>
+
+<blockquote>
+  <p>根据CAPM，主动投资经理的预期残差收益率是多少？
+在资本资产定价模型（CAPM）中，主动投资管理者的预期残差收益率（也称为阿尔法，$\alpha$）是指投资组合的实际收益率与根据CAPM模型预期的收益率之间的差额。CAPM模型的公式是：</p>
+</blockquote>
+
+<p>$ E(R_i) = R_f + \beta_i \times (E(R_m) - R_f) $</p>
+
+<p>其中：</p>
+<ul>
+  <li>$ E(R_i) $ 是资产 $ i $ 的预期收益率。</li>
+  <li>$ R_f $ 是无风险收益率。</li>
+  <li>$ \beta_i $ 是资产 $ i $ 的贝塔系数，表示其相对于市场的风险。</li>
+  <li>$ E(R_m) $ 是市场的预期收益率。</li>
+  <li>$ (E(R_m) - R_f) $ 是市场风险溢价。</li>
+</ul>
+
+<p>在CAPM框架下，一个主动投资管理者的预期残差收益率（$\alpha$）可以通过以下公式表示：</p>
+
+<p>$ E(R_p) = E(R_i) - [R_f + \beta_i \times (E(R_m) - R_f)] $</p>
+
+<p>或者简化为：</p>
+
+<p>$ \alpha = E(R_p) - (R_f + \beta \times (E(R_m) - R_f)) $</p>
+
+<p>这里的 $ E(R_p) $ 是投资组合的实际预期收益率。</p>
+
+<h3 id="预期残差收益率阿尔法的解释">预期残差收益率（阿尔法）的解释：</h3>
+<ul>
+  <li>如果 $\alpha$ 大于0，表示投资组合的预期收益率超过了CAPM模型预测的收益率，这意味着主动投资管理者通过选股或市场时机选择等方式实现了超额收益。</li>
+  <li>如果 $\alpha$ 等于0，表示投资组合的预期收益率正好符合CAPM模型的预测，即市场收益。</li>
+  <li>如果 $\alpha$ 小于0，表示投资组合的预期收益率低于CAPM模型的预测，这可能意味着投资策略不够有效或市场条件不利。</li>
+</ul>
+
+<h3 id="实际计算">实际计算：</h3>
+<p>要计算具体的 $\alpha$，我们需要知道以下数据：</p>
+<ul>
+  <li>投资组合的实际预期收益率 $ E(R_p) $。</li>
+  <li>无风险收益率 $ R_f $。</li>
+  <li>投资组合的贝塔系数 $ \beta $。</li>
+  <li>市场的预期收益率 $ E(R_m) $。</li>
+</ul>
+
+<p>这些数据通常可以通过市场研究、历史数据和财务模型获得。如果一个主动投资管理者声称能够实现正的阿尔法，他们需要展示他们的投资策略如何能够系统地产生超过CAPM模型预测的收益。</p>
+
+<blockquote>
+  <p>最特殊的特征组合包括组合C（最小方差组合）和组合Q（最高夏普率组合，夏普率即为Sharpe ratio，SR）。有效前沿描述了一组特征组合，它们是每个可达到的预期收益率水平下的最小方差组合。利用特征组合的概念，我们可以把CAPM的结论简单表述为“组合Q就是市场组合”。</p>
+  <blockquote>
+    <p>第2章 一致预期收益率：资本资产定价模型</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="数学记号">数学记号</h2>
+<p>为使表达更清晰，我们约定用普通字体代表标量，用粗体小写代表向量，用粗体大写代表矩阵。<br />
+h——风险资产头寸的权重（列向量），即组合在每只风险资产上的投资权重（百分比）；<br />
+f——预期超额收益率（列向量）；<br />
+μ——CAPM下的预期超额收益率（列向量），当CAPM成立时有f=μ；<br />
+V——风险资产超额收益率之间的协方差矩阵（假设非奇异）；<br />
+β——资产的贝塔值（列向量）；<br />
+e——全1向量（每个元素均为1）；</p>
+
+<p>我们将“风险”定义为超额收益率的年化标准差。</p>
+<h2 id="假设">假设</h2>
+<p>我们考虑单一投资期，投资期内不进行组合再平衡操作。基础假设是：<br />
+A1存在一个无风险资产；<br />
+A2所有一阶和二阶矩均存在；<br />
+A3不存在零风险的全额投资组合；<br />
+A4组合C（最小方差的全额投资组合）的预期超额收益率是严格正值。</p>
+
+<p>我们主要在典型的投资期长度内讨论问题，因此在短期内应该存在一只具有确定收益率的投资工具（例如美国国库券）。在稍后的章节中，我们可能会放松假设A4，即最小方差的全额投资组合具有严格正的预期超额收益率。虽然A4在典型的经济实体中肯定是成立的，但它对很多章节技术附录中的结果而言不是完全必要的。</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/discuss/2099/12/31/wait-for-the-result.html" class="read-next-link"></a>
+            <section>
+                <span>蹲一个结果</span>
+                <p></p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="/assets/images/20991231/wait.jpeg" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/discuss/2024/08/22/chinese-historical-torture-devices-cangue.html" class="read-next-link"></a>
+            <section>
+                <span>中国古代刑罚中的夹棍</span>
+                <p>这两天在看《叫魂》这本书。</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="/assets/images/20240822/cover.jpg" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>
+        <a href="/rss.xml" target="_blank">
+        <!-- SVG图标代码 -->
+        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
+            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
+            </path>
+        </svg>
+        </a>
+        独行深山 © 2024
+    </section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+    
+</script>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>
