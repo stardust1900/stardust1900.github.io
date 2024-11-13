@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 13 Nov 2024 01:55:21 -0600</pubDate>
-    <lastBuildDate>Wed, 13 Nov 2024 01:55:21 -0600</lastBuildDate>
+    <pubDate>Wed, 13 Nov 2024 02:57:29 -0600</pubDate>
+    <lastBuildDate>Wed, 13 Nov 2024 02:57:29 -0600</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -134,12 +134,12 @@ AI好是好，但是很多情况下不能直接解决问题，虽然有了它得
 &lt;/span&gt;                    &lt;span class=&quot;n&quot;&gt;md&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;%s &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;note_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;kindle笔记由几个问题：&lt;/p&gt;
+&lt;p&gt;kindle笔记有几个问题：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;复制出的文字很多空格&lt;/li&gt;
-  &lt;li&gt;翻页地方划线的部分会有几个字重复&lt;/li&gt;
+  &lt;li&gt;跨页划线的部分会有几个字重复&lt;/li&gt;
   &lt;li&gt;PC 导出的html格式有问题&lt;/li&gt;
-  &lt;li&gt;PC 和 手机端导出的html标签一致&lt;/li&gt;
+  &lt;li&gt;PC 和 手机端导出的html标签不一致&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;前两个问题在程序里很容易解决，上面的脚本已经解决了。hmtl格式不一致需要做下调整，不能通过&amp;lt;h2&amp;gt;&amp;lt;h3&amp;gt;标签来取元素，要通过class来取，于是调整了一下，让PC和手机端导出的都可以直接用：&lt;/p&gt;

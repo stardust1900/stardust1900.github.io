@@ -149,12 +149,12 @@ AI好是好，但是很多情况下不能直接解决问题，虽然有了它得
 </span>                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">%s </span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="n">note_text</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>kindle笔记由几个问题：</p>
+<p>kindle笔记有几个问题：</p>
 <ul>
   <li>复制出的文字很多空格</li>
-  <li>翻页地方划线的部分会有几个字重复</li>
+  <li>跨页划线的部分会有几个字重复</li>
   <li>PC 导出的html格式有问题</li>
-  <li>PC 和 手机端导出的html标签一致</li>
+  <li>PC 和 手机端导出的html标签不一致</li>
 </ul>
 
 <p>前两个问题在程序里很容易解决，上面的脚本已经解决了。hmtl格式不一致需要做下调整，不能通过&lt;h2&gt;&lt;h3&gt;标签来取元素，要通过class来取，于是调整了一下，让PC和手机端导出的都可以直接用：</p>
