@@ -7,6 +7,12 @@
     } ,
   
     {
+      "title"    : "kindle笔记转成markdown",
+      "tags"     : "python",
+      "url"      : "/tech/2024/11/13/kindle-notes-to-markdown.html"
+    } ,
+  
+    {
       "title"    : "思考快与慢读书笔记",
       "tags"     : "思考，快与慢",
       "url"      : "/notes/2024/11/12/Think-Fast-and-Slow.html"

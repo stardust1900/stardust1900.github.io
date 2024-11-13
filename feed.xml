@@ -20,6 +20,19 @@
 			</item>
 		
 			<item>
+				<title>kindle笔记转成markdown</title>
+				<description>
+                
+                    一个简单的python脚本
+                
+                
+                </description>
+				<pubDate>Wed, 13 Nov 2024 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/tech/2024/11/13/kindle-notes-to-markdown.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2024/11/13/kindle-notes-to-markdown.html</guid>
+			</item>
+		
+			<item>
 				<title>思考快与慢读书笔记</title>
 				<description>
                 
@@ -123,19 +136,6 @@
 				<pubDate>Sat, 13 Jul 2024 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/discuss/2024/07/13/If-you-are-the-driver.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/discuss/2024/07/13/If-you-are-the-driver.html</guid>
-			</item>
-		
-			<item>
-				<title>打开量化投资的黑箱</title>
-				<description>
-                
-                    简明量化交易指南
-                
-                
-                </description>
-				<pubDate>Mon, 08 Jul 2024 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/notes/2024/07/08/Inside-the-Black-Box.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2024/07/08/Inside-the-Black-Box.html</guid>
 			</item>
 		
 	</channel>

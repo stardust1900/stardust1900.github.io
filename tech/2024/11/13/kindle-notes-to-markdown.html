@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kindle笔记转成markdown - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="kindle笔记转成markdown">
+    <meta name="keywords"  content="python">
+
+    <meta property="og:title" content="kindle笔记转成markdown - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2024/11/13/kindle-notes-to-markdown.html">
+    <meta property="og:description" content="去创造点什么而不是依靠别人活着">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">首页</a></li>
+            
+            <li><a href="/tags.html">标签</a></li>
+            
+            <li><a href="/categories.html">分类</a></li>
+            
+            <li><a href="/doushuai/">兜率宫</a></li>
+            
+            <li><a href="/about.html">关于</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#python" class="post-tag">python</a>
+            
+            
+        </div>
+        <h1>kindle笔记转成markdown</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="24-11-13"><i class="iconfont icon-date"></i>13 Nov 2024</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">一个简单的python脚本</h2>
+    
+    <article class="markdown-body">
+        <p>你喜欢看书吗？你平常看书，看纸质书，还是电子书？你看书的时候做笔记吗？</p>
+
+<p>从少年时代起，我就一直挺喜欢看书，直到现在也喜欢在睡觉之前看会书。很长时间以来，我都是看纸质书，很少看电子书，我没有专门看电子书的设备，只偶尔在手机上看。直到去年用老婆的kindle看了罗杰•克劳利的《地中海史诗三部曲》，那是我第一次看电子版的长篇。感觉还挺不错。前几天老婆给我买了个掌阅ocean4turbo，现在我也有了自己的电子阅读器了，可以预见，我以后看的电子书将会超过纸质书。</p>
+
+<p>我从小就没有做笔记的习惯，不光看书，哪怕是上课也从来不记笔记。中小学课堂上的内容其实很少，不需要记笔记，脑子也能记住，哪怕记不住，很多东西老师也会反复讲。但是大学以后，课堂上讲的内容指数级增长，不记笔记很难记住，但是那时的我没有意识到问题，盲目自信，继续头铁不记笔记，导致每次期末感觉啥都没学啥都没记住，都要靠突击才能通过考试…毕业多年后，我恍惚意识到自己的问题，但为时已晚。关于读书笔记，我也坚持一种观点：书只管看就行了，不用刻意记笔记，让大脑自然去过滤，看的时候让你有感触有共鸣的句子，你自然会回头多看几遍，看完一本书，你记住的部分就是这本书最精华的部分。但后来，可能是记忆力衰退了，我发现这方法不太管用了，看过的书也很快忘了，过段时间再翻，感觉自己在看一本新书，看过了就和没看过一样…我终于承认：读书还是得记笔记。</p>
+
+<p>像钱钟书李敖那样，抄书剪书做卡片做分类的读书笔记方法，我不知道具体是如何做的，也不知道适不适合咱们普通人，毕竟人家是学者这些是人家的工作，他们不会嫌费时费力。现在是信息时代，我们应该有自己的方法，可能效率更高，而且更便于检索。<br />
+我曾经用豆瓣读书做笔记，看纸质书的时候，看到好的地方就拿手机拍照，编辑一下划下红线，传到笔记里。像这样：
+<img src="/assets/images/20241113/1.png" alt="" />
+但图片是不便于检索的。
+后来豆瓣也升级了，拍的照片可以文字识别，不用保存图片可以直接保存文字了。
+<img src="/assets/images/20241113/2.png" alt="" /></p>
+
+<p>这些都是保存在豆瓣上的，想看的时候要到豆瓣上找，而且搜起来很困难，豆瓣的搜索功能是出了名的差。我曾经一度把读书笔记当微博发，加个标签，搜索起来也方便。</p>
+
+<p>但这些都是权益之计，既然我以后可能都主要看电子书了，一定有更好的办法。</p>
+
+<p>你别说，还真是。用过kindle和微信读书的一定都会觉得这玩意做笔记太方便了。最厉害的是，笔记还可以导出来，kindle导出的是html，微信读书是能直接复制出txt。我其实更喜欢kindle一点。虽然kindle退出中国，但国际版还能正常使用，它导出的笔记是这样的：
+<img src="/assets/images/20241113/3.png" alt="" /></p>
+
+<p>我想或许可以把html转成markdown，放到github上，我的博客里，归档起来，检索也方便。于是我问了下AI：
+<img src="/assets/images/20241113/4.png" alt="" />
+AI好是好，但是很多情况下不能直接解决问题，虽然有了它得帮助会方便很多，但最终还是得自己动手。
+于是我用python写了一版：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="k">def</span> <span class="nf">pc_note</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"笔记本.html"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+    <span class="c1"># print(soup.prettify())
+</span>    <span class="n">heads</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">find_all</span><span class="p">([</span><span class="s">'h2'</span><span class="p">,</span> <span class="s">'h3'</span><span class="p">])</span>
+    <span class="n">pre_pos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pre_text</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'notes.md'</span><span class="p">,</span><span class="s">'w'</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">md</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">heads</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s">'h2'</span> <span class="o">==</span> <span class="n">head</span><span class="p">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+                <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'%s%s</span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="p">(</span><span class="s">'## '</span><span class="p">,</span> <span class="n">head</span><span class="p">.</span><span class="n">get_text</span><span class="p">()))</span>
+            <span class="k">elif</span> <span class="s">'h3'</span> <span class="o">==</span> <span class="n">head</span><span class="p">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="c1"># children = head.find_all(recursive=False)
+</span>                <span class="n">note_text</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'div'</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">'noteText'</span><span class="p">).</span><span class="n">get_text</span><span class="p">()</span>
+                <span class="n">head_text</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="n">get_text</span><span class="p">()</span>
+                <span class="n">head_text</span> <span class="o">=</span> <span class="n">head_text</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">note_text</span><span class="p">)]</span>
+                <span class="n">position_start</span> <span class="o">=</span> <span class="n">head_text</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'位置'</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="s">'位置 '</span><span class="p">)</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">head_text</span><span class="p">[</span><span class="n">position_start</span><span class="p">:])</span>
+                <span class="c1"># 删除空格
+</span>                <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span><span class="s">''</span><span class="p">)</span>
+                <span class="c1"># 删除重复
+</span>                <span class="k">if</span> <span class="n">pre_text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="n">note_text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]:</span>
+                    <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
+                <span class="c1"># 位置贴近的部分不换行
+</span>                <span class="k">if</span> <span class="n">pos</span> <span class="o">-</span> <span class="n">pre_pos</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+                <span class="n">pre_pos</span> <span class="o">=</span> <span class="n">pos</span>
+                <span class="n">pre_text</span> <span class="o">=</span> <span class="n">note_text</span>
+                <span class="k">if</span> <span class="n">head_text</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'标注'</span><span class="p">):</span>
+                    <span class="c1"># 原文划线内容
+</span>                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'&gt; %s  </span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="n">note_text</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">head_text</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'备注'</span><span class="p">):</span>
+                    <span class="c1">#  笔记内容
+</span>                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">%s </span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="n">note_text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>kindle笔记由几个问题：</p>
+<ul>
+  <li>复制出的文字很多空格</li>
+  <li>翻页地方划线的部分会有几个字重复</li>
+  <li>PC 导出的html格式有问题</li>
+  <li>PC 和 手机端导出的html标签一致</li>
+</ul>
+
+<p>前两个问题在程序里很容易解决，上面的脚本已经解决了。hmtl格式不一致需要做下调整，不能通过&lt;h2&gt;&lt;h3&gt;标签来取元素，要通过class来取，于是调整了一下，让PC和手机端导出的都可以直接用：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mobile_note</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"笔记本.html"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+    <span class="n">target_elements</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'.sectionHeading, .noteHeading, .noteText'</span><span class="p">)</span>
+
+    <span class="n">text_type</span> <span class="o">=</span> <span class="s">'原文'</span>
+    <span class="n">pre_pos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cur_pos</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">pre_text</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'notes1.md'</span><span class="p">,</span><span class="s">'w'</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s">'UTF-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">md</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">target_elements</span><span class="p">:</span>
+            <span class="n">cls</span> <span class="o">=</span> <span class="n">element</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'class'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s">'sectionHeading'</span> <span class="o">==</span> <span class="n">cls</span><span class="p">:</span>
+                <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+                <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'%s%s</span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="p">(</span><span class="s">'## '</span><span class="p">,</span> <span class="n">element</span><span class="p">.</span><span class="n">get_text</span><span class="p">().</span><span class="n">strip</span><span class="p">()))</span>
+            <span class="k">elif</span> <span class="s">'noteHeading'</span> <span class="o">==</span> <span class="n">cls</span><span class="p">:</span>
+                <span class="c1"># print(element.get_text())
+</span>                <span class="n">inner_text</span> <span class="o">=</span> <span class="s">''</span>
+                <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">element</span><span class="p">.</span><span class="n">contents</span><span class="p">:</span>
+                    <span class="c1"># 如果子节点是字符串类型（即文本），则将其添加到h3_text字符串中
+</span>                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">inner_text</span> <span class="o">+=</span> <span class="n">child</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s">' '</span>
+                <span class="k">if</span> <span class="n">inner_text</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'标注'</span><span class="p">):</span>
+                    <span class="n">text_type</span> <span class="o">=</span> <span class="s">'原文'</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">text_type</span> <span class="o">=</span> <span class="s">'笔记'</span>
+                <span class="n">position_start</span> <span class="o">=</span> <span class="n">inner_text</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'位置'</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="s">'位置 '</span><span class="p">)</span>
+                <span class="n">cur_pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">inner_text</span><span class="p">[</span><span class="n">position_start</span><span class="p">:])</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">cur_pos</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'pre_pos:%s cur_pos:%s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pre_pos</span><span class="p">,</span><span class="n">cur_pos</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">cur_pos</span> <span class="o">-</span> <span class="n">pre_pos</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+                 <span class="c1"># 删除空格
+</span>                <span class="n">note_text</span> <span class="o">=</span> <span class="n">element</span><span class="p">.</span><span class="n">get_text</span><span class="p">().</span><span class="n">strip</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span><span class="s">''</span><span class="p">)</span>
+                <span class="c1"># 删除重复
+</span>                <span class="k">if</span> <span class="n">pre_text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="n">note_text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]:</span>
+                    <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+
+                <span class="k">if</span> <span class="n">text_type</span> <span class="o">==</span> <span class="s">'原文'</span><span class="p">:</span>
+                    <span class="c1"># 原文划线内容
+</span>                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'&gt; %s  </span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="n">note_text</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1">#  笔记内容
+</span>                    <span class="n">md</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">%s </span><span class="se">\n</span><span class="s">'</span> <span class="o">%</span> <span class="n">note_text</span><span class="p">)</span>
+                <span class="n">pre_pos</span> <span class="o">=</span> <span class="n">cur_pos</span>
+                <span class="n">pre_text</span> <span class="o">=</span> <span class="n">note_text</span>
+</code></pre></div></div>
+
+<p>我用上面这个脚本把笔记转成markdown放到了我的博客里<a href="https://wangxuan.me/notes/2024/11/12/Think-Fast-and-Slow.html">https://wangxuan.me/notes/2024/11/12/Think-Fast-and-Slow.html</a></p>
+
+<p>效果还行，我挺满意。如果用兴趣你也可以试试，有什么问题欢迎留言跟我讨论。</p>
+
+<p>最后，分享一下国际版的kindle apk安装包，关注“魔域桃源”公众号</p>
+
+<p><img src="/assets/img/wechat.png" alt="" /></p>
+
+<p>在聊天框里发送:kindle</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/discuss/2099/12/31/wait-for-the-result.html" class="read-next-link"></a>
+            <section>
+                <span>蹲一个结果</span>
+                <p></p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="/assets/images/20991231/wait.jpeg" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/notes/2024/11/12/Think-Fast-and-Slow.html" class="read-next-link"></a>
+            <section>
+                <span>思考快与慢读书笔记</span>
+                <p>第3章 惰性思维与延迟满足的矛盾</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>
+        <a href="/rss.xml" target="_blank">
+        <!-- SVG图标代码 -->
+        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
+            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
+            </path>
+        </svg>
+        </a>
+        独行深山 © 2024
+    </section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+    
+</script>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>
