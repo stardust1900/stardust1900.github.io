@@ -7,6 +7,12 @@
     } ,
   
     {
+      "title"    : "陶渊明诗两首",
+      "tags"     : "陶渊明",
+      "url"      : "/discuss/2024/12/27/Tow-poems-of-Tao-Yuanming.html"
+    } ,
+  
+    {
       "title"    : "kindle笔记转成markdown",
       "tags"     : "python",
       "url"      : "/tech/2024/11/13/kindle-notes-to-markdown.html"
