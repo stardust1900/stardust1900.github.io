@@ -20,6 +20,21 @@
 			</item>
 		
 			<item>
+				<title>苏东坡新传笔记</title>
+				<description>
+                
+                    
+                
+                
+                    《苏东坡新传》
+                
+                </description>
+				<pubDate>Wed, 15 Jan 2025 00:00:00 -0600</pubDate>
+				<link>https://wangxuan.me/notes/2025/01/15/notes-of-A-New-Biography-of-Su-Dongpo.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2025/01/15/notes-of-A-New-Biography-of-Su-Dongpo.html</guid>
+			</item>
+		
+			<item>
 				<title>置身事内笔记</title>
 				<description>
                 
@@ -125,19 +140,6 @@
 				<pubDate>Fri, 19 Jul 2024 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/tech/2024/07/19/chinese-poem.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/tech/2024/07/19/chinese-poem.html</guid>
-			</item>
-		
-			<item>
-				<title>BigDecimal的精度与刻度</title>
-				<description>
-                
-                    为什么你应该用字符串构造BigDecimal对象
-                
-                
-                </description>
-				<pubDate>Tue, 16 Jul 2024 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/tech/2024/07/16/the-precision-and-scale-of-BigDecimal.html</guid>
 			</item>
 		
 	</channel>
