@@ -4,7 +4,7 @@ title: 抓娃娃是部好电影吗
 subtitle: '一言难尽'
 cover: "/assets/images/20240722/cover.jpeg"
 date: 2024-07-22
-category: Notes
+category: Discuss
 tags: [抓娃娃]
 ---
 好久没去影院看电影了，前天去影院看了这部《抓娃娃》。至于看完后的感觉，真是有点一言难尽...
