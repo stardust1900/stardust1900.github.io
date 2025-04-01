@@ -1,4 +1,4 @@
-:。---
+---
 layout: post
 title: 未来是湿的笔记
 subtitle: '无组织的组织力量'
