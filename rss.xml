@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 25 Mar 2025 01:23:34 -0500</pubDate>
-    <lastBuildDate>Tue, 25 Mar 2025 01:23:34 -0500</lastBuildDate>
+    <pubDate>Tue, 01 Apr 2025 02:29:04 -0500</pubDate>
+    <lastBuildDate>Tue, 01 Apr 2025 02:29:04 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -96,8 +96,18 @@
       </item>
     
       <item>
-        <title>未来是湿的笔记</title>
-        <description>&lt;p&gt;2025-03-05&lt;/p&gt;
+        <title>Notes Of Here Comes Everybody</title>
+        <description>&lt;p&gt;:。—
+layout: post
+title: 未来是湿的笔记
+subtitle: ‘无组织的组织力量’
+cover: “”
+date: 2025-03-25
+category: Notes
+tags: [无组织]
+—&lt;/p&gt;
+
+&lt;p&gt;2025-03-05&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;原文：而当顾客选中某一本的时候，书店可以当场印制出来交到顾客手中，那会是什么样的情形？如果唱片店当场刻制顾客需要的唱片又会如何？在这样的情形下，消费者得到了他们想要的，而书店或唱片店不再有库存和上下游的浪费。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -532,15 +542,13 @@
   &lt;p&gt;原文：自由的捍卫者们很久以来已注意到自由社会有着自身的特殊问题。然而这种观点假定自由的价值超出了那些问题，不是基于净价值的计算而是因为自由是社会应该追求的东西。&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;p&gt;–测试github手机端修改–&lt;/p&gt;
+
 </description>
         <pubDate>Tue, 25 Mar 2025 00:00:00 -0500</pubDate>
-        <link>https://wangxuan.me/notes/2025/03/25/notes-of-Here-Comes-Everybody.html</link>
-        <guid isPermaLink="true">https://wangxuan.me/notes/2025/03/25/notes-of-Here-Comes-Everybody.html</guid>
+        <link>https://wangxuan.me/2025/03/25/notes-of-Here-Comes-Everybody.html</link>
+        <guid isPermaLink="true">https://wangxuan.me/2025/03/25/notes-of-Here-Comes-Everybody.html</guid>
         
-        <category>无组织</category>
-        
-        
-        <category>Notes</category>
         
       </item>
     
