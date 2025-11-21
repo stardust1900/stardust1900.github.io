@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制论与科学方法论 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="控制论与科学方法论">
+    <meta name="keywords"  content="控制论">
+
+    <meta property="og:title" content="控制论与科学方法论 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/notes/2025/11/21/Cybernatics.html">
+    <meta property="og:description" content="去创造点什么而不是依靠别人活着">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">首页</a></li>
+            
+            <li><a href="/tags.html">标签</a></li>
+            
+            <li><a href="/categories.html">分类</a></li>
+            
+            <li><a href="/doushuai/">兜率宫</a></li>
+            
+            <li><a href="/about.html">关于</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#%E6%8E%A7%E5%88%B6%E8%AE%BA" class="post-tag">控制论</a>
+            
+            
+        </div>
+        <h1>控制论与科学方法论</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="25-11-21"><i class="iconfont icon-date"></i>21 Nov 2025</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle"></h2>
+    
+    <article class="markdown-body">
+        <p>《控制论与科学方法论 (金观涛、华国凡) (Z-Library)》</p>
+
+<p>金观涛、华国凡
+72个笔记</p>
+
+<p>台湾版序</p>
+
+<p>◆ 控制论、系统论、信息论</p>
+
+<p>◆ 2025/11/07发表想法</p>
+
+<p>什么叫共轭</p>
+
+<p>原文：共轭</p>
+
+<p>序 言</p>
+
+<p>◆ 有一次，我们向一位化学界的老教授谈起控制论，认为这门和电子计算机一起成长起来的边缘科学提供了许多有益的方法论启示</p>
+
+<p>◆ 如果我们去追溯控制论思想的源流，就能发现它至少是三条悠长的支流汇合的结果。</p>
+
+<p>◆ 一条是数学和物理的发展</p>
+
+<p>◆ 有不少科学家认为：与其说我们这个世界是建立在必然性之上的，倒不如说是建立在偶然性之上的，许多物理定律仅仅是大量事件统计平均的结果。</p>
+
+<p>◆ 另一条支流是生物学和生命科学的进展</p>
+
+<p>◆ 20世纪三四十年代，生物学家提出了“内稳定”概念，意味着人类对这一问题的认识已推进到新的阶段，它直接为控制论的诞生奠定了基础。</p>
+
+<p>◆ 第三条支流是人类对思维规律的探讨</p>
+
+<p>◆ 在20世纪40年代，标志着这三条支流汇合的科学著作终于出现了。1947年，维纳的《控制论》就是作为统一它们的最初尝试。尽管维纳的这本书中有许多错误，有很多大胆的但后来被证明是不妥切的设想，但这本书震动了科学界</p>
+
+<p>◆ 现代科学的某些思想往往在今天我们能够以精确的方式表述之前，就被我们的祖先注意过，有的甚至还被认真地研究过。</p>
+
+<p>第一章 控制和反馈</p>
+
+<p>◆ 2025/11/07发表想法</p>
+
+<p>这句话如何理解</p>
+
+<p>原文：有始也者，有未始有始也者，有未始有夫未始有始也者</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1.1</td>
+      <td>可能性空间</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 几何学的大厦是建立在公理基础上的，控制论和系统论的研究则开始于可能性空间。</p>
+
+<p>◆ 同一型氨基酸组成的生物才能形成一个生命系统。这样，在生命起源的最初阶段，大自然就面临着一个重要的选择：是选择D型呢还是选择L型</p>
+
+<p>◆ 世界上许多事物并不是从一开始就注定要发展成现在这个样子的，在事物发展的初期，它们往往有多种发展的可能性，由于条件或者纯粹机遇的关系，最终才沿着某一个特定的方向发展下去。</p>
+
+<p>◆ （1）被控制的对象必须存在着多种发展的可能性。</p>
+
+<p>◆ （2）被控制的对象不仅必须存在多种发展的可能性，而且，人可以在这些可能性中通过一定的手段进行选择，才谈得到控制</p>
+
+<p>◆ 由此可见，控制的概念与事物发展的可能性密切相关。我们将事物发展变化中面临的各种可能性集合称为这个事物的可能性空间。它是控制论中最基本的概念。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1.2</td>
+      <td>人通过选择改造世界</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 控制，归根结底是一个在事物可能性空间中进行有方向的选择的过程</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1.6</td>
+      <td>共轭控制</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 共扼控制揭示了人类使用工具过程的本质。也许有人会问，把使用工具这么一件直观的事情表述成那样复杂的一种结构，有什么意义呢？其意义在于运用控制论方法后，就可以用数学语言来确切地描述这一过程了，并且可以把很多数学上关于共扼控制的成果运用到制造和使用工具的研究中去，得出许多凭直观想像不到的结论来。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1.7</td>
+      <td>负反馈调节</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 作为一般的负反馈调节机制必定要有两个环节：（1）系统一旦出现目标差，便自动出现某种减少目标差的反应。（2）减少目标差的调节要一次一次地发挥作用，使得对目标的逼近能积累起来</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1.9</td>
+      <td>正反馈与恶性循环</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 负反馈描述目标差减少的调节，而正反馈描述目标差越来越大的过程，从对控制目标的偏离来说，它们正好相反</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2.1</td>
+      <td>什么是知道</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 2025/11/08发表想法</p>
+
+<p>和byte有没有关系？</p>
+
+<p>原文：实际应用中，我们使用以2为底的负对数来计算信息量，单位称为比特。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2.2</td>
+      <td>信息的传递</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 那么，信息传递过程中的传递是什么意思呢？是传递物质还是传递能量呢？都不是。信息的传递是指可能性空间缩小过程的传递。信息源发生的确定性事件使它的可能性空间缩小了，经过传递，这种缩小最终导致了信息接受者可能性空间的缩小。因此，所谓信息的传递也就是可能性空间变化的传递。从这点来说，传递信息跟控制有密切的关系，我们在第一章曾经说过，所谓控制也是一种使可能性空间缩小的过程。实际上，信息的传递离不开控制，控制也离不开信息的传递。</p>
+
+<p>◆ 解剖学表明，人体大脑皮质的躯体感觉区中相应于手指和口唇部的区域最大，说明大脑对这些部位的信息最敏感，因此人对手指和口唇的控制也最自如，这显然跟人类的劳动和语言有关。</p>
+
+<p>◆ 信息和控制的这种依存关系反映了认识论中知和行的统一，知表示获得信息，行表示实行控制。人们只有对外部世界有所认识，才可以能动地去改造它。反之，人们只有参与对外部世界的改造，才能够获得对它们的真知。传递信息和实行控制的过程都贯穿着事物可能性空间的变化，并且它们之间存在着一定的质和量的约束关系，这就深刻地揭示了知和行在本质上是统一的。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2.3</td>
+      <td>信息是一种客体吗</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 随着不同的接受者，同样的事件，可以有着完全不同的意义，对于不同的人，同样的话，有不同的内容。这种现象，称为信息的主观性</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2.4</td>
+      <td>通道容量</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 根据信息传递过程的三个基本环节可以把干扰分为三类：（1）干扰发生在人控制通道的可辨状态过程中，这称为控制干扰。（2）干扰发生在信号自然传递中，或某些外来因素彰响了通道的可辨状态，这称为自然干扰或噪音。（3）干扰发生在人接受信号过程中，这通常称为主观干扰。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2.5</td>
+      <td>滤波：去伪存真的研究</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 无线电中电容器通不过低频信号但能通过高频信号，电感则相反。这就是阻抗滤波的最简单的例子。广义一点讲，所谓阻抗滤波，就是找到干扰和携带信息信号的本质差别，用一种装置或手段让干扰信号通不过去，而携带信息的信号能顺利通过。不同的无线电台利用不同频率的无线电波把信号发送出来，我们的收音机天线实际上把所有不同电台的无线电节目都接收下来了</p>
+
+<p>◆ 收音机中的滤波器和相应装置</p>
+
+<p>◆ 利用不同节目的无线电波频率不同，选出某一个节目相应的无线电频率通过，而拒绝其他频率节目通过。</p>
+
+<p>◆ 一些著名的军事理论家指出，军事上的重大行动不能完全取决于情报。克劳塞维茨讲过：“对于没有经验的指挥官来说，更糟的是……一个情报得到支持，证实、补充另一个情报，图画上在不断增加新的色彩，最后，他不得不匆忙作出决定，但是不久又发现这个决定是愚蠢的，所有这些情报都是虚假的……通常，人们容易相信坏的……而且容易把坏</p>
+
+<p>◆ 的作某些夸大……以这种方式传来危险消息尽管像海浪一样会消失下去，但也会像海浪一样没有任何明显原因就常常出现。指挥官必须坚持自己的信念，像屹立在海中的岩石一样，经得住海浪的冲击。”</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>3.1</td>
+      <td>系统研究方法中的因果联系</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 人们发现，许多学科的疑点如果按原因的原因或结果的结果追索下去，都会不约而同地涉及天体起源、生命起源、人类起源这样一些根本问题。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>3.3</td>
+      <td>系统的稳态结构</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 也就是说，只要系统处于稳态平衡中，岛上的物种数不是随意的。如果太多，会绝灭；太少，大陆上新来的将进行补充</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>3.4</td>
+      <td>稳态结构和预言</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 由于月球跟地球之间存在着潮汐摩擦，不管月球原来的自转速度比它的公转速度快还是慢，最后总会趋向一致，也就是说，月球永远把同定的一面朝向地球是一种稳态结构，不大会发生改变。根据同样的道理，人们预言地球的自转速度也将逐渐缓慢下来，最终将跟月球的公转速度一致</p>
+
+<p>◆ 用稳态结构来预测事物发展方向时，必须注意，要把可能结构中一切稳定态都找出来，进行分析比较，看哪一个更稳定些</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>3.5</td>
+      <td>均匀和稳定</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 人们常常利用均匀性来控制和选择某些系统的稳态结构。我们知道，金属的晶体组成并不到处一样，有些地方晶体缺少电子，会发生变形，这种情况称为空穴。空穴是金属结构中比较脆弱的地方，金属在受力情况下，一般在空穴多的地方容易断裂。那么怎样增加金属的强度呢</p>
+
+<p>◆ 因为在外力（干扰）引起晶体位置变化时，空穴如不均匀，那么将引起空穴的重新分布，应力可能在空穴周围积累起来，金属容易断裂。如果空穴分布均匀，那金属在受到外力作用时，空穴和空穴之间互相牵制，重新使应力分布变得均句，金属就不易断裂。因此，用X射线轰击金属，使空穴均匀，是增加金属强度的有效途径。</p>
+
+<p>◆ 热力学第二定律对这种均匀导致稳定的现象进行了理论上的概括。这个定律认为，一个孤立系统不管内部如何变化，它的熵总要趋向极大。倘趋向极大就是变成一种内部均匀的、无序的、混乱的情况。这种状态是系统自然趋向的最稳定结构。</p>
+
+<p>◆ 一部生物进化史，就是生物从原始的比较均的无序结构发展为高级的比较不均匀的有序结构的历史</p>
+
+<p>◆ 薛定谔认为，生命体之所以能免于趋近最大值熵的死亡状态，就是因力生命体能通过吃、喝、呼吸等新陈代谢的过程从环境里不断汲取负熵。他认为，有机体就是赖负熵为生的。</p>
+
+<p>◆ 获得诺贝尔奖金的化学家普里高京创立了耗散结构的热力学。他认为一个与外界有能量和物质交换的开放体系不能维持均匀稳定结构，它们在与外界交换过程中会自动趋向有序的不均匀结构，以保证自身的稳定</p>
+
+<p>◆ 一个封闭体系跟外界隔绝，它们的无序状态是“死”的，其实在现实世界中很难找到。现实世界中大量存在的是跟外界有密切交往的开放体系。它们是”活”的，能够通过新陈代谢存在下去。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>3.7</td>
+      <td>超稳定系统</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 有没有一种特殊的系统可以抗拒这种变化趋势，而保持高度的稳定性呢？有的，这就是超稳定系统。超稳定系统有一个重要特点，就是靠不稳定来维持稳定。</p>
+
+<p>◆ 为什么只有靠不稳定才能维持超稳定呢？因为系统本身的变化往往是一种不可抗拒的趋势。实际上要维持系统长期不变是做不到的，惟一的办法是当系统本身变化了，不稳定出现时，重新修复系统</p>
+
+<p>◆ 超稳定系统有一种特殊的现象，那就是周期性地出现稳定——不稳定——稳定现象。不稳定时，新的机制发生作用，使系统回到原有的稳定结构，而不是新的稳定结构。这种超稳定系统应用在社会科学中，非常有趣地说明中国封建社会长期停滞的原因。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>3.8</td>
+      <td>系统的演化</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 研究大时间尺度上生态系统的变化，一般把生态系统分成三个互相作用的子系统：生物群落、土壤和气候（图3.13）。这个系统有两种稳定态。一种是不毛状态，即没有生物群，但当气候适宜和附近有生物群落时，这种不毛状态会慢慢变化</p>
+
+<p>◆ 假定某地一开始是沙漠和岩石，慢慢由于地衣的生长，会有薄薄的土层出现。随着土壤中生物有机质的增加，生态系统进入苔期，土壤加厚二三公分，保水力加强。保水力加强的后果有利生态、系统进一步改变，生态系统进入杂草期，有早熟禾、车前草、狗牙根、蒲公英出现。随着杂草丛生，土壤中</p>
+
+<p>◆ 有机质进一步增加，生态系统进入了灌木期，土层越来越厚，保水力也越来越强。最后树木茂盛到一定程度，地面蒸发减少，使微生物在其间繁衍，地面上地衣、苔藓及草丛逐渐减少。最后，生态系统达到盛林期，各种树木竞争，达到稳定，土壤有机质达到动态平衡。生态系统把这一整个系统的平衡态称为顶极状态。到这一状态，生态消长不再变化。</p>
+
+<p>◆ 并且森林对气候也有一定调节能力。整个系统达到新的稳定</p>
+
+<p>◆ 生物系统适应环境的稳定结构可用适应空间的适应峰（也可用洼）来表示</p>
+
+<p>◆ 或者说同一个问题有两个答案。这时，系统到底演化到两种稳定结构的哪一种去，就或多或少带有一点偶然性</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>4.3</td>
+      <td>事物为什么具有确定的性质</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 从稳态结构角度分析，质的稳定性大致包括了这样几类含义。</p>
+
+<p>◆ 第一类质的稳定性的含义是，当事物受到一个比较大的干扰时，事物质的规定性也即状态发生的变化很小。</p>
+
+<p>◆ 化学中常用的缓冲溶液也具有这种性质。比如我们配成缓冲溶液，它的pH值为4.74。当溶液受到较大的干扰，如加入定量的酸和碱时，pH值的变化不大。这种性质非常宝贵，我们知道，许多化学反应需要在较稳定的酸碱度条件下进行，用这种方法配制的缓冲溶液，提供了一个稳定的酸碱环境。这里pH4.74被称为这个缓冲溶液的稳定态。</p>
+
+<p>◆ 第二类稳定性的含义是指事物处于这样一种性质或这样一个状态，如果我们给事物一个干扰，使事物偏离这一状态，事物能以某种方式自动地回到那个原来状态去。</p>
+
+<p>◆ 第三类稳定性似乎具有更广义的含义，它指事物自动发生或容易发生的总趋势。如果一个事物能自动发生趋向某一状态的变化，那么我们就说这一状态比原来的状态更稳定</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>4.6</td>
+      <td>怎样判别飞跃</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 2025/11/16发表想法</p>
+
+<p>忒修斯之船</p>
+
+<p>原文：黑格尔在《逻辑学》中曾经举过从头上拔走一根头发是否会成为秃子和从谷堆里取走一粒谷是否还会有谷堆的例子，借以说明量变如何导致了质变。对于我们来说，要确定一个质变是由飞跃方式进行还是渐变方式进行，就不但要研究质变，而且要研究质变发生时事物的稳定性如何</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>4.8</td>
+      <td>关节点：蝴蝶、燕尾及其他</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 燕尾型和折叠型突变在几何光学上很有用处，它们成功地解释了彩虹的形状和一系列奇妙的光学现象。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>4.10</td>
+      <td>极端共存</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 对于水来说，还有一个三态共存区，即水的固、液、气三态可以同时共存，著名的水的三相点就是三态共存区。</p>
+
+<p>◆ 例如铸铁中碳和硅的含量都很高时，形成石墨比较好的灰口铁。碳和硅含量都很低时，出现大量Fe3C，形成白口铁。如果灰口铁和白口铁同时存在，则形成两种组织混合的麻口铁。根据突变理论，这两种质混合出现的共存区在控制平面中的分布应当呈尖角形</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>5.1</td>
+      <td>认识对象和黑箱</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 在不给狗食物的情况下，给它看不同颜色的东西时，它的唾液分泌紊乱，不能按照原先建立的条件反射来分泌一定量的唾液。这说明，狗不能区别不同的颜色。而给它看同一颜色不同亮度的东西时，唾液分泌量是有规则的，可以按原先建立的条件反射来分泌唾液，而且这种区分能力比人敏感得多，达到0.001烛光的精确度。可见狗是色盲的，它是通过区別外界事物的发光亮度来“看见”的。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>5.4</td>
+      <td>理论的清晰性</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>◆ 科学上最犯忌的是那些不具备清晰性的理论，那些浑浑噩噩、似是而非、模棱两可的理论，那些看起来包罗万象、面</p>
+
+<p>◆ 面俱到，而实际上不着边际，什么问题也说明不了的理论。</p>
+
+<p>◆ 总用一套让人摸不着头脑的规范性语言去套用。什么“既是好事又是坏事既变又不变既存在又不存在”，“既同一又不同一”……弄得人晕头转向。这类理论不提供任何信息量。如果用实践去检验，不管实践的结果是什么，它们都不会错，也不会不错。无法判定真伪，也就是不具备可检验性。因而也就不能通过“实践——理论——实践”的模式得到修正</p>
+
+<p>◆ 模棱两可，不明确，是中国古代科学理论的一个大弱点。浑天说虽然有大地是球形的思想，许多学者深信浑天说，一行等天文学家还测量过子午线的长度，但他们从来没有想明确说明大地是一个球体。虽然不少人有地动的思想。但这些思想从来没有表述成哥白尼日心说那样清晰的理论。这种风格甚至表现在数学领域中。数学是一切科学中要求最严格最清晰的一种。中国古代数学虽然发达，但从来没有发明过记录</p>
+
+<p>◆ 公式和符号的方法，数学主要是用文字陈述的，而中国的文言文字不易也不能表达明确的数学概念。解方程是中国古代数学在世界上遥遥领先的学科，但中国数学家在方程中连等号都没有引用，并且计算只写最后结果，没有中间步骤。</p>
+
+<p>◆ 那么什么是可证伪性呢？波普尔认为，如果一个假说存在着一个或一组在逻辑上可能的与该假说相抵触的观察陈述，那么这个假说是可证伪的。比如“所有的物质遇热膨胀”这一假说就满足可证伪性。</p>
+
+<p>◆ 理论的清晰性和波普尔提出理论的可证伪性是一致的。理论只有具备了清晰性才能够被证伪。从本质上来说，清晰性和可证伪性都要求理论给出信息量。</p>
+
+<p>– 来自微信读书</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        <div class="read-next-item">
+            <a href="/discuss/2099/12/31/wait-for-the-result.html" class="read-next-link"></a>
+            <section>
+                <span>蹲一个结果</span>
+                <p></p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="/assets/images/20991231/wait.jpeg" alt="">
+            
+        </div>
+        
+        
+        <div class="read-next-item">
+            <a href="/notes/2025/11/07/How-to-Read-a-Book.html" class="read-next-link"></a>
+            <section>
+                <span>如何阅读一本书</span>
+                <p>扉页</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>
+        <a href="/rss.xml" target="_blank">
+        <!-- SVG图标代码 -->
+        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
+            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
+            </path>
+        </svg>
+        </a>
+        独行深山 © 2025
+    </section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+    
+</script>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>
