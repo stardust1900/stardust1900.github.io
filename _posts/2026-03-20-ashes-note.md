@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 草灰笔记
-subtitle: '为自己开发的应该用'
+subtitle: '为自己开发的应用'
 cover: ""
 date: 2026-03-20
 category: Tech
