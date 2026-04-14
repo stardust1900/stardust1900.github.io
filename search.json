@@ -7,6 +7,12 @@
     } ,
   
     {
+      "title"    : "中国通史从上古到1949",
+      "tags"     : "笔记 历史",
+      "url"      : "/notes/2026/04/14/history-of-China.html"
+    } ,
+  
+    {
       "title"    : "草灰笔记",
       "tags"     : "草灰笔记 AI编程",
       "url"      : "/tech/2026/03/20/ashes-note.html"
