@@ -11,7 +11,7 @@ def create_post(post_name,ct,sub,date_,cat,tags):
     post.write("cover: \"\"\n")
     post.write("date: %s\n" % date_)
     post.write("category: %s\n" % cat)
-    post.write("tags: [%s]\n" % tags)
+    post.write("tags: %s\n" % tags)
     post.write("---\n")
     post.close()
 
