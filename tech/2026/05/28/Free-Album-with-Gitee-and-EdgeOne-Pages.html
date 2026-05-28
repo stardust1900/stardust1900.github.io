@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用Gitee和EdgeOne Pages搭建支持外链的免费相册 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="用Gitee和EdgeOne Pages搭建支持外链的免费相册">
+    <meta name="keywords"  content="AI编程, 免费相册">
+
+    <meta property="og:title" content="用Gitee和EdgeOne Pages搭建支持外链的免费相册 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/tech/2026/05/28/Free-Album-with-Gitee-and-EdgeOne-Pages.html">
+    <meta property="og:description" content="去创造点什么而不是依靠别人活着">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wwhkmu5o9p");
+</script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">首页</a></li>
+            
+            <li><a href="/tags.html">标签</a></li>
+            
+            <li><a href="/categories.html">分类</a></li>
+            
+            <li><a href="/doushuai/">兜率宫</a></li>
+            
+            <li><a href="/about.html">关于</a></li>
+            
+            <li><a href="https://photo.wangxuan.me/">相册</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#AI%E7%BC%96%E7%A8%8B" class="post-tag">AI编程</a>
+            
+            <a href="https://wangxuan.me/tags#%E5%85%8D%E8%B4%B9%E7%9B%B8%E5%86%8C" class="post-tag">免费相册</a>
+            
+            
+        </div>
+        <h1>用Gitee和EdgeOne Pages搭建支持外链的免费相册</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="26-05-28"><i class="iconfont icon-date"></i>28 May 2026</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528103916_99_26.png') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">AI生成代码</h2>
+    
+    <article class="markdown-body">
+        <p>我一直想给我的博客找个免费的图床，但是一直没找到合适的。因为是用的github pages，国内访问速度堪忧，所有我一直尽量不在博客里贴图片，甚至连题图都省了。</p>
+
+<p>现在有AI了，我可以让AI按照我的要求来生成个支持外链的相册。我提供想法，AI提供代码~</p>
+
+<p>众所周知，我是个抠门的人，我只想让AI来生成代码，但是我不想花钱。甚至AI Agent赠送的积分我也能省则省，看看我怎么做的。</p>
+
+<h2 id="1-写需求让ai优化需求使用千问完成">1. 写需求，让AI优化需求。使用千问完成。</h2>
+
+<p>在千问对话框下面的更多里，选择代码。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528100210_89_26.png" alt="1.png" /></p>
+
+<p>我只写了依据话：使用 Vite 创建一个纯前端相册，读取albums目录下以YYYY-MM-dd-开头的文件夹里的图片，生成缩略图，图片详情也展示Exif信息…</p>
+
+<p>原来怎么写的不记得了，大概是这么个意思。点击优化指令。它就会把需求细化，然后发送它就会生成代码。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528095403_88_26.png" alt="" /></p>
+
+<h2 id="2-生成工程代码元宝和deepseek完成">2. 生成工程代码。元宝，和deepseek完成。</h2>
+
+<p>在千问里试了几次，千问只会生成一个单独的html文件，这个不是我想要的。你千问不听话，我用其他的，反正AI有的是。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 使用 Vite 创建一个纯前端相册展示工程，不依赖后端服务。工程需满足以下要求：  
+- 启动时自动扫描本地 `albumns/` 目录（模拟为静态资源路径，使用 Vite 的 `import.meta.glob` 功能动态导入该目录下所有子文件夹）；
+- 仅识别以 `YYYY-MM-dd-` 格式开头的子文件夹（如 `2024-05-20-vacation`），每个文件夹视为一个相册， `YYYY-MM-dd-` 后面文字为相册名称；
+- 对每个相册内的图片文件（支持 `.jpg`, `.jpeg`, `.png`, `.webp`），生成缩略图并展示在相册列表页；缩略图使用 Canvas 或 CSS `object-fit: cover` 实现等比裁剪，尺寸统一为 200×150 像素；
+- 点击缩略图进入图片详情页，显示：
+  - 原图（居中、最大宽度 90vw，支持缩放/拖拽查看）；
+  - EXIF 信息（包括拍摄时间、相机型号、GPS 坐标（若存在）、曝光参数等），使用开源轻量库如 `exif-js` 或 `piexifjs` 解析（需通过 CDN 引入）；
+  - 当前图片的可复制外链地址（基于 Vite 开发服务器的静态资源路径，如 `/albumns/2024-05-20-vacation/photo.jpg`），提供一键复制按钮；
+- 页面具备基础导航：相册列表页（默认首页）与图片详情页（通过 URL hash 或 URLSearchParams 切换，如 `#album=2024-05-20-vacation&amp;photo=photo.jpg`），支持浏览器前进/后退；
+- UI 要求简洁响应式：使用原生 CSS Flex/Grid 布局，无外部 UI 框架；相册列表采用网格布局（每行 3～4 个缩略图），详情页含返回按钮；
+- 所有资源路径均相对于 `albumns/` 目录，开发时将 `albumns` 放置于 Vite 项目 `public/` 目录下，确保可被直接访问；
+- 构建后仍能通过静态服务器运行（即不依赖 Node.js 运行时读取文件系统）。
+
+
+项目结构为：
+photo-album/
+├── albums/                # 你的相册目录（自行创建并按格式放入图片）
+├── index.html             # 前端页面（已内嵌完整交互逻辑）
+├── package.json
+├── vite.config.js         # Vite 配置 + 后端 API（读取文件、生成缩略图、解析 EXIF）
+└── .thumbnails/           # 自动生成的缩略图缓存（无需手动管理，建议 .gitignore 忽略）
+
+请生成完整、可直接运行的代码，包含 Vite 兼容的模块化脚本结构，并附带简要注释说明关键逻辑。
+</code></pre></div></div>
+<p>把这段话，复制到了元宝和deepseek里，让他们都帮我生成代码。生成后，我比较了一下，貌似元宝生成的好一点。</p>
+
+<h2 id="3-优化代码qcoder完成">3. 优化代码。Qcoder完成。</h2>
+<p>将生成的代码按照目录结构整理好。导入到vscode。把Qcoder插件装上，当然codebuddy，copilot等等其他编程助手也可以。反正大多数每月都送免费积分，我是把能装的都装了。
+Qcoder本月的积分还没用完，就先用它，不行就换其他的，再不行我就用非遗手艺古法编程，自己动手改。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528101952_90_26.png" alt="" />
+来来回回，几轮交互，代码算是完成了。</p>
+
+<h2 id="4-部署代码通过edgeone-pages部署">4. 部署代码。通过EdgeOne Pages部署。</h2>
+
+<p>首先你得有gitee账号，github也行的。把AI生成的代码提交到git上。还有，就是你要有个域名。</p>
+
+<p>让后在EdgeOne Pages里设置。找不到的，直接用这个链接<a href="https://console.tencentcloud.com/edgeone/pages">https://console.tencentcloud.com/edgeone/pages</a></p>
+
+<p>选择Pages选项卡
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102505_91_26.png" alt="" /></p>
+
+<p>创建项目，选择从git导入。这里会让你授权，我的是已经授权过的。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102527_92_26.png" alt="" />
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102551_93_26.png" alt="" /></p>
+
+<p>然后就可以看到你在git上创建的项目了。</p>
+
+<p>选择刚刚上传的想入导入，配置项目，其他的不用动，就框架预设选vite。点击开始部署。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102702_94_26.png" alt="" />
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102902_95_26.png" alt="" />
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528104211_100_26.png" alt="" />
+部署完成需要配置域名。因为我的域名没有备案，加速区域智能选全球可用区（不含中国大陆）。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102922_97_26.png" alt="" />
+配置完成，再装个免费的证书，支持ssl访问，就大功告成了。
+<img src="https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528103002_98_26.png" alt="" />
+这是我的：<a href="https://photo.wangxuan.me">https://photo.wangxuan.me</a></p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        
+        <div class="read-next-item">
+            <a href="/discuss/2026/05/12/dear-you.html" class="read-next-link"></a>
+            <section>
+                <span>汇款单里的情书</span>
+                <p>昨天去影院看了这部《给阿嬷的情书》。电影结尾时介绍了侨批，就是华侨汇钱回家并附带家书的那种票据。所谓的情书，其实是...</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>
+        <a href="/rss.xml" target="_blank">
+        <!-- SVG图标代码 -->
+        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
+            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
+            </path>
+        </svg>
+        </a>
+        独行深山 © 2026
+    </section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+    
+</script>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

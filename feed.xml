@@ -7,6 +7,19 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>用Gitee和EdgeOne Pages搭建支持外链的免费相册</title>
+				<description>
+                
+                    AI生成代码
+                
+                
+                </description>
+				<pubDate>Thu, 28 May 2026 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/tech/2026/05/28/Free-Album-with-Gitee-and-EdgeOne-Pages.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2026/05/28/Free-Album-with-Gitee-and-EdgeOne-Pages.html</guid>
+			</item>
+		
+			<item>
 				<title>汇款单里的情书</title>
 				<description>
                 
@@ -127,19 +140,6 @@
 				<pubDate>Thu, 14 Aug 2025 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/notes/2025/08/14/wangyangming.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/notes/2025/08/14/wangyangming.html</guid>
-			</item>
-		
-			<item>
-				<title>股市稳赚笔记</title>
-				<description>
-                
-                    仍然能打败市场的神奇公式
-                
-                
-                </description>
-				<pubDate>Mon, 14 Jul 2025 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/notes/2025/07/14/The-Little-Book-That-Still-Beats-the-Market.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2025/07/14/The-Little-Book-That-Still-Beats-the-Market.html</guid>
 			</item>
 		
 	</channel>
