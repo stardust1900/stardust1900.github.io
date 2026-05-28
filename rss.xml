@@ -5,13 +5,13 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 27 May 2026 22:09:16 -0500</pubDate>
-    <lastBuildDate>Wed, 27 May 2026 22:09:16 -0500</lastBuildDate>
+    <pubDate>Wed, 27 May 2026 22:54:14 -0500</pubDate>
+    <lastBuildDate>Wed, 27 May 2026 22:54:14 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
         <title>用Gitee和EdgeOne Pages搭建支持外链的免费相册</title>
-        <description>&lt;p&gt;我一直想给我的博客找个免费的图床，但是一直没找到合适的。因为是用的github pages，国内访问速度堪忧，所有我一直尽量不在博客里贴图片，甚至连题图都省了。&lt;/p&gt;
+        <description>&lt;p&gt;我一直想给我的博客找个免费的图床，但是一直没找到合适的。因为是用的github pages，国内访问速度堪忧，所以我一直尽量不在博客里贴图片，甚至连题图都省了。&lt;/p&gt;
 
 &lt;p&gt;现在有AI了，我可以让AI按照我的要求来生成个支持外链的相册。我提供想法，AI提供代码~&lt;/p&gt;
 
