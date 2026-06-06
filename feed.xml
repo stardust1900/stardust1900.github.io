@@ -7,6 +7,21 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>谁把我苹果电脑的名字改成了小米15</title>
+				<description>
+                
+                    
+                
+                
+                    今天下午，我打开了我那尘封已久的MacBook Pro，无意中发现它的名字在命令行里居然变成了“Xiaomi-15”。
+                
+                </description>
+				<pubDate>Sat, 06 Jun 2026 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/tech/2026/06/06/Who-change-my-Mac's-hostname.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/tech/2026/06/06/Who-change-my-Mac's-hostname.html</guid>
+			</item>
+		
+			<item>
 				<title>用Gitee和EdgeOne Pages搭建支持外链的免费相册</title>
 				<description>
                 
@@ -127,19 +142,6 @@
 				<pubDate>Wed, 17 Sep 2025 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/notes/2025/09/17/The-ABCs-of-How-We-Learn.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/notes/2025/09/17/The-ABCs-of-How-We-Learn.html</guid>
-			</item>
-		
-			<item>
-				<title>王阳明大传</title>
-				<description>
-                
-                    知行合一的心学智慧
-                
-                
-                </description>
-				<pubDate>Thu, 14 Aug 2025 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/notes/2025/08/14/wangyangming.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2025/08/14/wangyangming.html</guid>
 			</item>
 		
 	</channel>
