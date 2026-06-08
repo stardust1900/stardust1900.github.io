@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "讲解的艺术",
+      "tags"     : "读书 讲解的艺术",
+      "url"      : "/notes/2026/06/08/The-Art-of-Explanation.html"
+    } ,
+  
+    {
       "title"    : "谁把我苹果电脑的名字改成了小米15",
       "tags"     : "Mac 苹果电脑",
       "url"      : "/tech/2026/06/06/Who-change-my-Macs-hostname.html"
