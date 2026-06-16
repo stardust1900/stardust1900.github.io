@@ -7,6 +7,19 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>纳瓦尔宝典</title>
+				<description>
+                
+                    财富与幸福指南
+                
+                
+                </description>
+				<pubDate>Tue, 16 Jun 2026 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/notes/2026/06/16/The-Almanack-of-Naval-Ravikant.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2026/06/16/The-Almanack-of-Naval-Ravikant.html</guid>
+			</item>
+		
+			<item>
 				<title>讲解的艺术</title>
 				<description>
                 
@@ -129,19 +142,6 @@
 				<pubDate>Fri, 07 Nov 2025 00:00:00 -0600</pubDate>
 				<link>https://wangxuan.me/notes/2025/11/07/How-to-Read-a-Book.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/notes/2025/11/07/How-to-Read-a-Book.html</guid>
-			</item>
-		
-			<item>
-				<title>为什么学生不喜欢上学?</title>
-				<description>
-                
-                    认知心理学家解开大脑学习的运作结构，如何更有效地学习与思考
-                
-                
-                </description>
-				<pubDate>Fri, 17 Oct 2025 00:00:00 -0500</pubDate>
-				<link>https://wangxuan.me/notes/2025/10/17/Why-Dont-Students-Like-School.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2025/10/17/Why-Dont-Students-Like-School.html</guid>
 			</item>
 		
 	</channel>
