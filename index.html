@@ -76,13 +76,22 @@ description: 只身打马过草原，独自仗剑走天涯
                 {% endif %}
             </section>
 
-            {% if site.recommend-tags and site.tags.size>0 %}
+           {% if site.recommend-tags and site.tags.size>0 %}
             <section class="tags-card">
+                {% assign temp_tags = "" | split: "" %}
                 {% for tag in site.tags %}
-                    {% if forloop.index > site.recommend-condition-size %}
-                        {% break %}
-                    {% endif %}
-                    <a href="{{ "tags.html#" | append: tag[0] | prepend: site.baseurl }}" class="tag">{{ tag[0]}}</a>
+                    {% assign tag_name = tag[0] %}
+                    {% assign count = tag[1].size %}
+                    {% assign count_str = count | append: "" %}
+                    {% assign padded = "00000" | append: count_str | slice: -5, 5 %}
+                    {% assign entry = padded | append: "|" | append: tag_name %}
+                    {% assign temp_tags = temp_tags | push: entry %}
+                {% endfor %}
+                {% assign sorted_temp = temp_tags | sort | reverse %}
+                {% for entry in sorted_temp limit: site.recommend-condition-size %}
+                    {% assign parts = entry | split: "|" %}
+                    {% assign tag_name = parts[1] %}
+                    <a href="{{ "tags.html#" | append: tag_name | prepend: site.baseurl }}" class="tag">{{ tag_name }}</a>
                 {% endfor %}
             </section>
             {% endif %}
