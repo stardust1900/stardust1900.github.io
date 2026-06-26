@@ -7,6 +7,32 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>基因传</title>
+				<description>
+                
+                    众生之源
+                
+                
+                </description>
+				<pubDate>Fri, 26 Jun 2026 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/notes/2026/06/26/The-Gene-An-Intimate-History.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2026/06/26/The-Gene-An-Intimate-History.html</guid>
+			</item>
+		
+			<item>
+				<title>癌症传</title>
+				<description>
+                
+                    众病之王
+                
+                
+                </description>
+				<pubDate>Fri, 26 Jun 2026 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/notes/2026/06/26/A-Biography-of-Cancer.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2026/06/26/A-Biography-of-Cancer.html</guid>
+			</item>
+		
+			<item>
 				<title>纳瓦尔宝典</title>
 				<description>
                 
@@ -114,34 +140,6 @@
 				<pubDate>Tue, 09 Dec 2025 00:00:00 -0600</pubDate>
 				<link>https://wangxuan.me/notes/2025/12/09/Swamplands-of-the-Soul.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/notes/2025/12/09/Swamplands-of-the-Soul.html</guid>
-			</item>
-		
-			<item>
-				<title>控制论与科学方法论</title>
-				<description>
-                
-                    
-                
-                
-                    《控制论与科学方法论 (金观涛、华国凡)》
-                
-                </description>
-				<pubDate>Fri, 21 Nov 2025 00:00:00 -0600</pubDate>
-				<link>https://wangxuan.me/notes/2025/11/21/Cybernatics.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2025/11/21/Cybernatics.html</guid>
-			</item>
-		
-			<item>
-				<title>如何阅读一本书</title>
-				<description>
-                
-                    如何聪明地阅读
-                
-                
-                </description>
-				<pubDate>Fri, 07 Nov 2025 00:00:00 -0600</pubDate>
-				<link>https://wangxuan.me/notes/2025/11/07/How-to-Read-a-Book.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2025/11/07/How-to-Read-a-Book.html</guid>
 			</item>
 		
 	</channel>
