@@ -7,6 +7,19 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>思考的框架</title>
+				<description>
+                
+                    一些理论的汇总简介
+                
+                
+                </description>
+				<pubDate>Wed, 01 Jul 2026 00:00:00 -0500</pubDate>
+				<link>https://wangxuan.me/notes/2026/07/01/The-Great-Mental-Models.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/notes/2026/07/01/The-Great-Mental-Models.html</guid>
+			</item>
+		
+			<item>
 				<title>基因传</title>
 				<description>
                 
@@ -127,19 +140,6 @@
 				<pubDate>Fri, 20 Mar 2026 00:00:00 -0500</pubDate>
 				<link>https://wangxuan.me/tech/2026/03/20/ashes-note.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/tech/2026/03/20/ashes-note.html</guid>
-			</item>
-		
-			<item>
-				<title>中年之路2</title>
-				<description>
-                
-                    灵魂的沼泽地
-                
-                
-                </description>
-				<pubDate>Tue, 09 Dec 2025 00:00:00 -0600</pubDate>
-				<link>https://wangxuan.me/notes/2025/12/09/Swamplands-of-the-Soul.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/notes/2025/12/09/Swamplands-of-the-Soul.html</guid>
 			</item>
 		
 	</channel>
