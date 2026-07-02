@@ -103,16 +103,16 @@
 
 <p>openCV中就有<a href="https://apachecn.github.io/opencv-doc-zh/#/docs/4.0.0/9.2-tutorial_py_inpainting">图像修复</a>的方法,提供了两种算法分别基于<em>2004 年由 Alexandru Telea 撰写的“基于快速行进方法的图像修复技术”</em> 和 <em>Bertalmio，Marcelo，Andrea L. Bertozzi 和 Guillermo Sapiro 在 2001 年的论文“Navier-Stokes，流体动力学和图像和视频修补”</em> 实现。调用cv.inpaint方法时，前者用cv.INPAINT_TELEA标记后者用cv.INPAINT_NS，openCV修复图像的方法使用起来很简单，只需要几行代码：</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">cv2</span> <span class="k">as</span> <span class="n">cv</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">cv2</span> <span class="k">as</span> <span class="n">cv</span>
 
-<span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'messi_2.jpg'</span><span class="p">)</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'mask2.png'</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">dst</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="n">inpaint</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">mask</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">cv</span><span class="p">.</span><span class="n">INPAINT_TELEA</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="sh">'</span><span class="s">messi_2.jpg</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="sh">'</span><span class="s">mask2.png</span><span class="sh">'</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dst</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="nf">inpaint</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">mask</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">cv</span><span class="p">.</span><span class="n">INPAINT_TELEA</span><span class="p">)</span>
 <span class="c1"># dst = cv.inpaint(img,mask,3,cv.INPAINT_NS)
-</span><span class="n">cv</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">'dst'</span><span class="p">,</span><span class="n">dst</span><span class="p">)</span>
-<span class="n">cv</span><span class="p">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">cv</span><span class="p">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</span><span class="n">cv</span><span class="p">.</span><span class="nf">imshow</span><span class="p">(</span><span class="sh">'</span><span class="s">dst</span><span class="sh">'</span><span class="p">,</span><span class="n">dst</span><span class="p">)</span>
+<span class="n">cv</span><span class="p">.</span><span class="nf">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cv</span><span class="p">.</span><span class="nf">destroyAllWindows</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>上面messi_2.jpg是需要修复的图片，而mask2.png是掩模图片，这张图片的作用是指定图片损坏的位置，该图片只有黑白两色，白色就是损坏的地方。掩模图片和原图的大小(即宽高)必须完全一致，否则会报错。</p>
@@ -152,17 +152,17 @@
 
 <p>呐，这就是我根据上面的图片创建的掩模图像。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cv2</span>
 <span class="k">def</span> <span class="nf">remove_watermark</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">watermark_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
     <span class="c1"># 读取原始图像和水印图像
-</span>    <span class="n">original_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
-    <span class="n">watermark</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">watermark_path</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+</span>    <span class="n">original_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">watermark</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="n">watermark_path</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
     <span class="c1"># 去除水印
-</span>    <span class="n">watermark_removed</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">inpaint</span><span class="p">(</span><span class="n">original_image</span><span class="p">,</span> <span class="n">watermark</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">INPAINT_NS</span><span class="p">)</span>
+</span>    <span class="n">watermark_removed</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inpaint</span><span class="p">(</span><span class="n">original_image</span><span class="p">,</span> <span class="n">watermark</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">INPAINT_NS</span><span class="p">)</span>
     <span class="c1"># 保存去除水印后的图像
-</span>    <span class="n">cv2</span><span class="p">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">watermark_removed</span><span class="p">)</span>
+</span>    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">watermark_removed</span><span class="p">)</span>
 <span class="c1"># 使用示例
-</span><span class="n">remove_watermark</span><span class="p">(</span><span class="s">"original_image.jpg"</span><span class="p">,</span> <span class="s">"mask.png"</span><span class="p">,</span> <span class="s">"output_image.jpg"</span><span class="p">)</span>
+</span><span class="nf">remove_watermark</span><span class="p">(</span><span class="sh">"</span><span class="s">original_image.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">mask.png</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output_image.jpg</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>看一下效果吧：
 <img src="/assets/images/20240604/output_image.jpg" alt="" /></p>

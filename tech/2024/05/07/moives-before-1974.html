@@ -95,11 +95,11 @@
 
 <p>于是，我找到了一个豆瓣电影的数据集，用python脚本把1974年之前上映豆瓣评分8分以上的电影过滤了出来。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 
 
 <span class="c1"># 显示所有列
-</span><span class="n">pd</span><span class="p">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</span><span class="n">pd</span><span class="p">.</span><span class="nf">set_option</span><span class="p">(</span><span class="sh">'</span><span class="s">display.max_columns</span><span class="sh">'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 <span class="c1"># 显示所有行
 # pd.set_option('display.max_rows', None)
@@ -113,26 +113,26 @@
 <span class="c1"># # 设置浮点数的显示格式
 # pd.set_option('display.float_format', '{:.2f}'.format)
 </span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'D:</span><span class="se">\\</span><span class="s">xxxxxxx</span><span class="se">\\</span><span class="s">movies.csv'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">D:</span><span class="se">\\</span><span class="s">xxxxxxx</span><span class="se">\\</span><span class="s">movies.csv</span><span class="sh">'</span><span class="p">)</span>
 <span class="c1"># 获取所有列名
-</span><span class="n">column_names</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+</span><span class="n">column_names</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="nf">tolist</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
 <span class="c1"># 显示指定列
 # print(df[['NAME','YEAR']])
 # 根据条件过滤
 # print(df[df['YEAR']&lt;=1974])
-</span><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s">'YEAR'</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">1974</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'YEAR'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'DOUBAN_SCORE'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">8</span><span class="p">)][[</span><span class="s">'NAME'</span><span class="p">,</span><span class="s">'YEAR'</span><span class="p">,</span><span class="s">'DOUBAN_SCORE'</span><span class="p">,</span><span class="s">'MOVIE_ID'</span><span class="p">]]</span>
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">YEAR</span><span class="sh">'</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">1974</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">YEAR</span><span class="sh">'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">DOUBAN_SCORE</span><span class="sh">'</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">8</span><span class="p">)][[</span><span class="sh">'</span><span class="s">NAME</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">YEAR</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">DOUBAN_SCORE</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">MOVIE_ID</span><span class="sh">'</span><span class="p">]]</span>
 <span class="c1"># 将movie_id修改为网址
-</span><span class="n">result</span><span class="p">[</span><span class="s">'MOVIE_ID'</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">'MOVIE_ID'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s">'https://movie.douban.com/subject/</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s">/'</span><span class="p">)</span>
+</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">MOVIE_ID</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">MOVIE_ID</span><span class="sh">'</span><span class="p">].</span><span class="nf">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="sh">'</span><span class="s">https://movie.douban.com/subject/</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span>
 <span class="c1"># 去掉小数点
-</span><span class="n">result</span><span class="p">[</span><span class="s">'YEAR'</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">'YEAR'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">YEAR</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">YEAR</span><span class="sh">'</span><span class="p">].</span><span class="nf">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="c1"># 修改列名
-</span><span class="n">result</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'名称'</span><span class="p">,</span><span class="s">'上映年份'</span><span class="p">,</span><span class="s">'豆瓣评分'</span><span class="p">,</span><span class="s">'豆瓣网址'</span><span class="p">]</span>
+</span><span class="n">result</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">名称</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">上映年份</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">豆瓣评分</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">豆瓣网址</span><span class="sh">'</span><span class="p">]</span>
 <span class="c1"># 将DataFrame转换为字符串，不显示索引
-</span><span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="nf">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
 
 <span class="c1"># 将DataFrame保存到CSV文件，不显示索引
-</span><span class="n">result</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">'movies_b4_1974.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</span><span class="n">result</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">movies_b4_1974.csv</span><span class="sh">'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><strong>结果如下：</strong></p>

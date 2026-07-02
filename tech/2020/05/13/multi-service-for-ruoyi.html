@@ -220,26 +220,26 @@
 
     <p>前端下载的时候需要通过接收流的方式来生成文件</p>
 
-    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="k">if</span> <span class="p">(</span><span class="nx">getToken</span><span class="p">())</span> <span class="p">{</span>
-         <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Bearer </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">getToken</span><span class="p">()</span> <span class="c1">// 让每个请求携带自定义token 请根据实际情况自行修改</span>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="k">if </span><span class="p">(</span><span class="nf">getToken</span><span class="p">())</span> <span class="p">{</span>
+         <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Bearer </span><span class="dl">'</span> <span class="o">+</span> <span class="nf">getToken</span><span class="p">()</span> <span class="c1">// 让每个请求携带自定义token 请根据实际情况自行修改</span>
      <span class="p">}</span>
      <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/dev-api/canislupus/platform/convergepre/export</span><span class="dl">'</span><span class="p">;</span>
-     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
-     <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,{</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+     <span class="nx">axios</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,{</span>
      <span class="na">responseType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">blob</span><span class="dl">'</span><span class="p">,</span>  <span class="c1">//指定reponseType 为blog</span>
      <span class="na">headers</span><span class="p">:{</span><span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="nx">token</span><span class="p">}</span>
-     <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+     <span class="p">}).</span><span class="nf">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
      <span class="kd">let</span> <span class="nx">blob</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
-     <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">()</span>
-     <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">)</span>
+     <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="p">()</span>
+     <span class="nx">reader</span><span class="p">.</span><span class="nf">readAsDataURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">)</span>
      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-     <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">)</span>
-     <span class="kd">let</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nb">decodeURI</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">content-disposition</span><span class="dl">'</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">fileName=</span><span class="dl">'</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+     <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">)</span>
+     <span class="kd">let</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nf">decodeURI</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">content-disposition</span><span class="dl">'</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">fileName=</span><span class="dl">'</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
      <span class="nx">a</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">fileName</span>
      <span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span>
-     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
-     <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">()</span>
-     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+     <span class="nx">a</span><span class="p">.</span><span class="nf">click</span><span class="p">()</span>
+     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nf">removeChild</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
      <span class="p">}</span>
      <span class="p">})</span>
 </code></pre></div>    </div>
@@ -250,18 +250,18 @@
     <p>需要把request.js中的拦截器修改一下</p>
 
     <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 响应拦截器</span>
- <span class="nx">service</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+ <span class="nx">service</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
      <span class="c1">//下面是增加的</span>
      <span class="k">if</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span> <span class="p">{</span>
-     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span>
      <span class="k">if</span><span class="p">(</span><span class="dl">"</span><span class="s2">blob</span><span class="dl">"</span> <span class="o">===</span> <span class="nx">res</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">responseType</span><span class="p">)</span> <span class="p">{</span>
          <span class="k">return</span> <span class="nx">res</span>
      <span class="p">}</span>
      <span class="p">}</span>
      <span class="c1">//上面是增加的</span>
      <span class="kd">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span>
-     <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">MessageBox</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span>
+     <span class="k">if </span><span class="p">(</span><span class="nx">code</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">MessageBox</span><span class="p">.</span><span class="nf">confirm</span><span class="p">(</span>
          <span class="dl">'</span><span class="s1">登录状态已过期，您可以继续留在该页面，或者重新登录</span><span class="dl">'</span><span class="p">,</span>
          <span class="dl">'</span><span class="s1">系统提示</span><span class="dl">'</span><span class="p">,</span>
          <span class="p">{</span>
@@ -269,28 +269,28 @@
              <span class="na">cancelButtonText</span><span class="p">:</span> <span class="dl">'</span><span class="s1">取消</span><span class="dl">'</span><span class="p">,</span>
              <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">warning</span><span class="dl">'</span>
          <span class="p">}</span>
-         <span class="p">).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-         <span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">LogOut</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-             <span class="nx">location</span><span class="p">.</span><span class="nx">reload</span><span class="p">()</span> <span class="c1">// 为了重新实例化vue-router对象 避免bug</span>
+         <span class="p">).</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+         <span class="nx">store</span><span class="p">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="dl">'</span><span class="s1">LogOut</span><span class="dl">'</span><span class="p">).</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+             <span class="nx">location</span><span class="p">.</span><span class="nf">reload</span><span class="p">()</span> <span class="c1">// 为了重新实例化vue-router对象 避免bug</span>
          <span class="p">})</span>
          <span class="p">})</span>
-     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">Notification</span><span class="p">.</span><span class="nx">error</span><span class="p">({</span>
+     <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">Notification</span><span class="p">.</span><span class="nf">error</span><span class="p">({</span>
          <span class="na">title</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span>
          <span class="p">})</span>
-         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">)</span>
+         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">)</span>
      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span>
      <span class="p">}</span>
  <span class="p">},</span>
  <span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
-     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">err</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">error</span><span class="p">)</span>
-     <span class="nx">Message</span><span class="p">({</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">err</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">error</span><span class="p">)</span>
+     <span class="nc">Message</span><span class="p">({</span>
      <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">duration</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1000</span>
      <span class="p">})</span>
-     <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+     <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
  <span class="p">}</span>
  <span class="p">)</span>
 </code></pre></div>    </div>
@@ -298,14 +298,14 @@
     <p>生成的js中也需要把responseType加上</p>
 
     <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 导出平台列表</span>
- <span class="k">export</span> <span class="kd">function</span> <span class="nx">exportConvergepre</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
- <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">request</span><span class="p">({</span>
+ <span class="k">export</span> <span class="kd">function</span> <span class="nf">exportConvergepre</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+ <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nf">request</span><span class="p">({</span>
      <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/canislupus/platform/convergepre/export</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">responseType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">blob</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">params</span><span class="p">:</span> <span class="nx">query</span>
  <span class="p">});</span>
- <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
  <span class="k">return</span> <span class="nx">req</span><span class="p">;</span>
  <span class="p">}</span>
 </code></pre></div>    </div>
