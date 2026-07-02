@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用AI生成了一个把微信读书笔记转Markdown格式的网站 - 独行深山</title>
+    <meta name="author"  content="王君敕">
+    <meta name="description" content="用AI生成了一个把微信读书笔记转Markdown格式的网站">
+    <meta name="keywords"  content="读书, 微信读书">
+
+    <meta property="og:title" content="用AI生成了一个把微信读书笔记转Markdown格式的网站 - 独行深山">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wangxuan.me/notes/2026/07/02/Weread-notes-to-Markdown.html">
+    <meta property="og:description" content="去创造点什么而不是依靠别人活着">
+    <meta property="og:site_name" content="独行深山">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wwhkmu5o9p");
+</script>
+</head>
+<body>
+    <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<input id="nm-switch" type="hidden" value="true">
+
+<header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">首页</a></li>
+            
+            <li><a href="/tags.html">标签</a></li>
+            
+            <li><a href="/categories.html">分类</a></li>
+            
+            <li><a href="/doushuai/">兜率宫</a></li>
+            
+            <li><a href="/about.html">关于</a></li>
+            
+            <li><a href="https://photo.wangxuan.me/">相册</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+<header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            
+            
+            <a href="https://wangxuan.me/tags#%E8%AF%BB%E4%B9%A6" class="post-tag">读书</a>
+            
+            <a href="https://wangxuan.me/tags#%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6" class="post-tag">微信读书</a>
+            
+            
+        </div>
+        <h1>用AI生成了一个把微信读书笔记转Markdown格式的网站</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
+            <time class="post-meta-item" datetime="26-07-02"><i class="iconfont icon-date"></i>02 Jul 2026</time>
+        </div>
+    </div>
+    
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('https://photo.wangxuan.me/albums/2026-06-26-cover/weread.jpg') center no-repeat; background-size: cover;">
+    
+</header>
+
+<div class="post-content">
+    
+    <h2 class="post-subtitle">AI生成工具</h2>
+    
+    <article class="markdown-body">
+        <p>两年前我有了个掌阅阅读器，于是我开始在阅读器上看书，从此一发不可收，导致我两年没看一本纸质书。不过，你别说，电子书还真是省钱。zlib上下载，导入到kindle或者微信读书里去看，这两年看的书愣是一分钱没花…
+如果问我看电子书有什么好处，我觉得是方便做笔记。其实，以前我是一个看书从不做笔记的人，那是因为年轻时记忆力好盲目自信，现在衰退得厉害，看完啥都记不住，不做笔记跟没看一样，后来开始记笔记，但是一直没有好方法。虽然看纸质书的时候，看到好玩的也会拿手机拍发到豆瓣读书笔记里看完了再整理成博客，但是实在是不方便，一张张照片，也很难整理。看电子书就方便多了，看的时候随便拿手指划划，看完直接能导出。
+kindle的读书笔记导出的是html格式，通过脚本可以很方便地转成markdown。我之前还发过转换的脚本关于读书笔记。
+微信读书没有导出笔记的功能，只能在网页版上全部复制出来，而且格式比较奇葩，太多特殊字符，发表的想法与原文也别扭。直接贴到博客里格式就有点难于接受。所以很长时间以来，我都是在kindle里看书。
+但是与微信读书的查询功能相比，kindle的字典和搜索功能实在是垃圾，而且因为不可知的原因我的阅读器上的kindle下载不了字典。尤其现在微信读书有了AI的加持。kindle的下场就是被我弃如敝帚。
+微信读书啥都好，就是导出笔记不行，那么我们就来解决笔记的问题。以前得费劲写脚本，现在不用了，现在有AI了，让AI来转格式，直接把复制出的笔记让他给转成markdown。但是这种方法不稳定，来回调整格式也让人火大，还是让它生成脚本。我试了一下，几轮对话调整之后，基本可用，最终脚本如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span><span class="sh">"""</span><span class="s">
+微信读书笔记 → Markdown 转换脚本
+用法：python convert_notes.py &lt;输入文件&gt; &lt;输出文件&gt;
+</span><span class="sh">"""</span>
+
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">def</span> <span class="nf">convert_weixin_notes</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+    <span class="c1"># 用于暂存想法内容（想法标题 + 想法正文）
+</span>    <span class="n">idea_buffer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">collecting_idea</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">rstrip</span><span class="p">()</span>
+
+        <span class="c1"># ---- 第1行：书籍标题 ----
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">《</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">》</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s"># </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ---- 第2行：作者（可选） ----
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">line</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">◆</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">个笔记</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ---- 第3行：笔记数 ----
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">个笔记</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ---- 空行 ----
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">collecting_idea</span><span class="p">:</span>
+                <span class="n">idea_buffer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">''</span><span class="p">)</span>          <span class="c1"># 想法中的空行保留
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">''</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ---- 章节标题（如"推荐序"、"第1章"等） ----
+</span>        <span class="c1"># 不在收集想法时才判断章节标题
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">collecting_idea</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">◆</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">原文：</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="nf">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="c1"># 判断是否为章节标题：不包含特殊符号，且不是笔记数统计
+</span>            <span class="k">if</span> <span class="sh">'</span><span class="s">个笔记</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">来自微信读书</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="sh">'</span><span class="s">发表想法</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">## </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+
+        <span class="c1"># ---- 处理 ◆ 开头的行 ----
+</span>        <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">◆</span><span class="sh">'</span><span class="p">):</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:].</span><span class="nf">strip</span><span class="p">()</span>
+
+            <span class="c1"># 判断是否为"发表想法"标记
+</span>            <span class="k">if</span> <span class="sh">'</span><span class="s">发表想法</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+                <span class="c1"># 开始收集想法，但不保存"发表想法"行
+</span>                <span class="n">collecting_idea</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="n">idea_buffer</span> <span class="o">=</span> <span class="p">[]</span>      <span class="c1"># 不保存"发表想法"标记行
+</span>                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 这是普通原文
+</span>                <span class="k">if</span> <span class="n">collecting_idea</span> <span class="ow">or</span> <span class="n">idea_buffer</span><span class="p">:</span>
+                    <span class="c1"># 先检查想法缓冲区中是否有"原文："开头的行
+</span>                    <span class="n">original_text</span> <span class="o">=</span> <span class="bp">None</span>
+                    <span class="n">idea_lines</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">idea_line</span> <span class="ow">in</span> <span class="n">idea_buffer</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">idea_line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">原文：</span><span class="sh">'</span><span class="p">):</span>
+                            <span class="n">original_text</span> <span class="o">=</span> <span class="n">idea_line</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>  <span class="c1"># 去掉"原文："前缀
+</span>                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">idea_lines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">idea_line</span><span class="p">)</span>
+                    
+                    <span class="c1"># 输出原文引用（优先使用想法缓冲区中的"原文："内容）
+</span>                    <span class="k">if</span> <span class="n">original_text</span><span class="p">:</span>
+                        <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">&gt; </span><span class="si">{</span><span class="n">original_text</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># 去掉可能存在的"原文："前缀
+</span>                        <span class="k">if</span> <span class="n">content</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">原文：</span><span class="sh">'</span><span class="p">):</span>
+                            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">&gt; </span><span class="si">{</span><span class="n">content</span><span class="p">[</span><span class="mi">3</span><span class="si">:</span><span class="p">]</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">&gt; </span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                    
+                    <span class="c1"># 再输出收集到的想法内容（普通文本）
+</span>                    <span class="k">for</span> <span class="n">idea_line</span> <span class="ow">in</span> <span class="n">idea_lines</span><span class="p">:</span>
+                        <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">idea_line</span><span class="p">)</span>
+                    
+                    <span class="c1"># 清空想法缓冲区
+</span>                    <span class="n">idea_buffer</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">collecting_idea</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># 无待输出的想法，直接输出原文引用（去掉"原文："前缀）
+</span>                    <span class="k">if</span> <span class="n">content</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">原文：</span><span class="sh">'</span><span class="p">):</span>
+                        <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">&gt; </span><span class="si">{</span><span class="n">content</span><span class="p">[</span><span class="mi">3</span><span class="si">:</span><span class="p">]</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">&gt; </span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+
+        <span class="c1"># ---- 其他行（想法正文等） ----
+</span>        <span class="k">if</span> <span class="n">collecting_idea</span><span class="p">:</span>
+            <span class="n">idea_buffer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ---- 默认：直接输出（如"-- 来自微信读书"） ----
+</span>        <span class="n">result</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># 文件末尾可能残留未输出的想法（极少见），这里忽略
+</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">转换完成！输出文件：</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">用法：python convert_notes.py &lt;输入文件.txt&gt; &lt;输出文件.md&gt;</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">input_file</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="nf">convert_weixin_notes</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>后来我又想，现在腾讯有免费的egdeone，把它转成网页放到公网岂不美哉。
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260702151701_122_26.png" alt="" />
+腾讯好啊，edgeone 得用。
+于是让AI把python转成web vite工程，整了个二级域名一发布，这小工具不就成了。
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260702170612_123_26.png" alt="" />
+https://weread.wangxuan.me/
+这是地址，有兴趣的可以试试。
+源码也有：
+https://gitee.com/wangyidao/weread</p>
+
+    </article>
+    
+    <div class="social-share-wrapper">
+        <div class="social-share"></div>
+    </div>
+    
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="https://wangxuan.me/assets/img/profile.png" alt="">
+        </div>
+        <div class="author-name" rel="author">王君敕</div>
+        <div class="bio">
+            <p>交流，讨论，分享； 思考，总结，沉淀</p>
+        </div>
+        
+        <ul class="sns-links">
+            
+            <li>
+                <a href="//weibo.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//douban.com/people/stardust1900" target="_blank">
+                    <i class="iconfont icon-douban"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//twitter.com/halfg0d" target="_blank">
+                    <i class="iconfont icon-twitter"></i>
+                </a>
+            </li>
+            
+            <li>
+                <a href="//github.com/stardust1900" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </section>
+    <section class="post-footer-item read-next">
+        
+        
+        <div class="read-next-item">
+            <a href="/notes/2026/07/01/The-Great-Mental-Models.html" class="read-next-link"></a>
+            <section>
+                <span>思考的框架</span>
+                <p>推荐序</p>
+            </section>
+            
+            <div class="filter"></div>
+            <img src="https://photo.wangxuan.me/albums/2026-06-26-cover/思考的框架.jpeg" alt="">
+            
+        </div>
+        
+    </section>
+        <section class="post-footer-item comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="title"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</section>
+
+<footer class="g-footer">
+    <section>
+        <a href="/rss.xml" target="_blank">
+        <!-- SVG图标代码 -->
+        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
+            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
+            </path>
+        </svg>
+        </a>
+        独行深山 © 2026
+    </section>
+    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+    
+    socialShare('.social-share', {
+        sites: ['wechat','weibo','douban','twitter'],
+        wechatQrcodeTitle: "分享到微信朋友圈",
+        wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+    
+</script>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/index.min.js"></script>
+
+</body>
+</html>

@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "用AI生成了一个把微信读书笔记转Markdown格式的网站",
+      "tags"     : "读书 微信读书",
+      "url"      : "/notes/2026/07/02/Weread-notes-to-Markdown.html"
+    } ,
+  
+    {
       "title"    : "思考的框架",
       "tags"     : "读书 思考的框架",
       "url"      : "/notes/2026/07/01/The-Great-Mental-Models.html"
