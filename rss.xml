@@ -5,8 +5,8 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 29 Jul 2026 07:02:18 +0000</pubDate>
-    <lastBuildDate>Wed, 29 Jul 2026 07:02:18 +0000</lastBuildDate>
+    <pubDate>Wed, 29 Jul 2026 07:06:35 +0000</pubDate>
+    <lastBuildDate>Wed, 29 Jul 2026 07:06:35 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
     
       <item>
@@ -18,7 +18,7 @@
 
 &lt;p&gt;不记得什么时候产生的这个想法了，总觉得在一个聊天室里，每个人扮演一个角色，读一些电影对白或者话剧台词，可能会很好玩。目前来看，能有足够多声音角色来实现这个想法的库只有edge-tts。现在python是有免费可用的edge-tts包的。那就让AI直接用tkinter写一版看看吧。很快就完成了，看起来是这样：
 &lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729135308_6_26.png&quot; alt=&quot;&quot; /&gt;
-虽然还行，界面页差强人意，只能勉强玩玩，这个只能说是验证了我的想法可实现。不得不承认，我觉得这个应用理想中的运行平台应该是手机端。现在问题就清晰了：python实现，手机端应用。如何实现呢？能选的框架可能就只有kivy了。这是个有点历史的跨平台框架了，几年前玩过，我记得windows平台输入中文的问题一直没解决，现在问一下AI，回答是：仍然没解决。但是它说在安卓端没有问题，可以正常输入。于是我决定让AI用kivy来改写了。谁曾想这居然是个大坑，即使有AI它依然是大坑。因为我之前就又切换GUI框架的打算，特意让AI生成代码的时候把表现和逻辑分层，所以代码很快就迁移完成。代码在windows下也能跑，它的界面是这样的。&lt;/p&gt;
+虽然还行，界面也差强人意，只能勉强玩玩，这个只能说是验证了我的想法可实现。不得不承认，我觉得这个应用理想中的运行平台应该是手机端。现在问题就清晰了：python实现，手机端应用。能选的框架可能就只有kivy了。这是个有点历史的跨平台框架了，几年前玩过，我记得windows平台输入中文的问题一直没解决，现在问一下AI，回答是：仍然没解决。但是它说在安卓端没有问题，可以正常输入。于是我决定让AI用kivy来改写了。谁曾想这居然是个大坑，即使有AI它依然是大坑。因为我之前就有切换GUI框架的打算，特意让AI生成代码的时候把表现和逻辑分层，所以代码很快就迁移完成。代码在windows下也能跑，它的界面是这样的。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729140507_7_26.png&quot; alt=&quot;&quot; /&gt;
 &lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729140530_8_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -37,7 +37,7 @@
 &lt;h1 id=&quot;拼拼古诗&quot;&gt;拼拼古诗&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-07-29-logo/poem.png&quot; width=&quot;100&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;既然dart版的edge-tts都有了，我可以把拼拼古诗改去，也用这个包。&lt;br /&gt;
+&lt;p&gt;既然dart版的edge-tts都有了，我可以把拼拼古诗改回去，也用这个包。&lt;br /&gt;
 另外增加了搜索，和语速控制。&lt;br /&gt;
 现在是这样：&lt;/p&gt;
 
