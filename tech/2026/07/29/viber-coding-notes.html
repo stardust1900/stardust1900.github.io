@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>被讨厌的勇气 - 独行深山</title>
+    <title>ViberCoding手记(20260729) - 独行深山</title>
     <meta name="author"  content="王君敕">
-    <meta name="description" content="被讨厌的勇气">
-    <meta name="keywords"  content="心理学, 被讨厌的勇气">
+    <meta name="description" content="ViberCoding手记(20260729)">
+    <meta name="keywords"  content="AI编程, ViberCoding">
 
-    <meta property="og:title" content="被讨厌的勇气 - 独行深山">
+    <meta property="og:title" content="ViberCoding手记(20260729) - 独行深山">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wangxuan.me/notes/2026/07/13/The-Courage-to-Be-Disliked.html">
+    <meta property="og:url" content="https://wangxuan.me/tech/2026/07/29/viber-coding-notes.html">
     <meta property="og:description" content="去创造点什么而不是依靠别人活着">
     <meta property="og:site_name" content="独行深山">
     <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
@@ -72,86 +72,70 @@
         <div class="post-tags">
             
             
-            <a href="https://wangxuan.me/tags#%E5%BF%83%E7%90%86%E5%AD%A6" class="post-tag">心理学</a>
+            <a href="https://wangxuan.me/tags#AI%E7%BC%96%E7%A8%8B" class="post-tag">AI编程</a>
             
-            <a href="https://wangxuan.me/tags#%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94" class="post-tag">被讨厌的勇气</a>
+            <a href="https://wangxuan.me/tags#ViberCoding" class="post-tag">ViberCoding</a>
             
             
         </div>
-        <h1>被讨厌的勇气</h1>
+        <h1>ViberCoding手记(20260729)</h1>
         <div class="post-meta">
             <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="https://wangxuan.me" target="_blank" rel="author">王君敕</a></></span>
-            <time class="post-meta-item" datetime="26-07-13"><i class="iconfont icon-date"></i>13 Jul 2026</time>
+            <time class="post-meta-item" datetime="26-07-29"><i class="iconfont icon-date"></i>29 Jul 2026</time>
         </div>
     </div>
     
     <div class="filter"></div>
-    <div class="post-cover" style="background: url('https://photo.wangxuan.me/albums/2026-06-26-cover/被讨厌的勇气.jpeg') center no-repeat; background-size: cover;">
+    <div class="post-cover" style="background: url('https://photo.wangxuan.me/albums/2026-07-29-logo/icon.png') center no-repeat; background-size: cover;">
     
 </header>
 
 <div class="post-content">
     
-    <h2 class="post-subtitle">“自我启发之父”阿德勒的哲学课</h2>
+    <h2 class="post-subtitle">玩偶聊天室的诞生</h2>
     
     <article class="markdown-body">
-        <blockquote>
-  <p>如果一味地关注过去的原因，企图仅仅靠原因去解释事物，那就会陷入“决定论”。也就是说，最终会得出这样的结论：我们的现在甚至末来全部都由过去的事情所决定，而且根本无法改变。</p>
-</blockquote>
+        <p>最近腾讯的混元模型限时免费，所以codebuddy和workbuddy玩得有点肆无忌惮。</p>
 
-<blockquote>
-  <p>阿德勒在否定心理创伤学说的时候说了下面这段话：“任何经历本身并不是成功或者失败的原因。我们并非因为自身经历中的刺激——所谓的心理创伤——而痛苦，事实上我们会从经历中发现符合自己目的的因素。决定我们自身的不是过去的经历，而是我们自己赋予经历的意义。我们给过去的经历“赋予了什么样的意义”，这直接决定了我们的生活。人生不是由别人赋予的，而是由自己选择的，是自己选择自己如何生活。</p>
-</blockquote>
+<h1 id="玩偶聊天室">玩偶聊天室</h1>
+<p><img src="https://photo.wangxuan.me/albums/2026-07-29-logo/icon.png" width="100" /></p>
 
-<blockquote>
-  <p>所谓愤怒其实只是可放可收的一种“手段”而已。</p>
-</blockquote>
+<p>不记得什么时候产生的这个想法了，总觉得在一个聊天室里，每个人扮演一个角色，读一些电影对白或者话剧台词，可能会很好玩。目前来看，能有足够多声音角色来实现这个想法的库只有edge-tts。现在python是有免费可用的edge-tts包的。那就让AI直接用tkinter写一版看看吧。很快就完成了，看起来是这样：
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729135308_6_26.png" alt="" />
+虽然还行，界面页差强人意，只能勉强玩玩，这个只能说是验证了我的想法可实现。不得不承认，我觉得这个应用理想中的运行平台应该是手机端。现在问题就清晰了：python实现，手机端应用。如何实现呢？能选的框架可能就只有kivy了。这是个有点历史的跨平台框架了，几年前玩过，我记得windows平台输入中文的问题一直没解决，现在问一下AI，回答是：仍然没解决。但是它说在安卓端没有问题，可以正常输入。于是我决定让AI用kivy来改写了。谁曾想这居然是个大坑，即使有AI它依然是大坑。因为我之前就又切换GUI框架的打算，特意让AI生成代码的时候把表现和逻辑分层，所以代码很快就迁移完成。代码在windows下也能跑，它的界面是这样的。</p>
 
-<blockquote>
-  <p>以精神创伤说为代表的弗洛伊德式的原因论就是变相的决定论，是虚无主义的入口。<br />
-人并不受过去的原因所左右，而是朝着自己定下的目标前进，这就是哲人的主张。</p>
-</blockquote>
+<p><img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729140507_7_26.png" alt="" />
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729140530_8_26.png" alt="" /></p>
 
-<blockquote>
-  <p>人的烦恼皆源于人际关系。”这是阿德勒心理学的一个基本概念。如果这个世界没有人际关系，如果这个宇宙中没有他人只有自己，那么一切烦恼也都将消失。</p>
-</blockquote>
+<p>看着还行，把这个打成apk包试试吧。谁曾想打包才是噩梦的开始，windows下不能直接打，我不想用WSL，于是在虚拟机里打，我有装了ubuntu26.04的虚拟机。打包过程无比漫长，动不动一两个小时，下载依赖包那叫一个慢，我打了两天才打出第一个apk包，这个包装在手机上，直接就是闪退。连到android studio里看logcat，把错误信息给AI去改，要命的是：需要clean 重新打包，依赖包会重新下。反反复复，折腾了足足有两天，终于能在手机上跑起来了。结果，那个体验这是一言难尽，丑就算了，还奇慢，最不能忍的是输入的时候输入法界面直接把下半屏遮住，输入框被挡了个严严实实，基本是半盲输入。算了，算了，放弃了…</p>
 
-<blockquote>
-  <p>那么，假设你压制住了争论，而且彻底认输的对方爽快地退出。但是，权力之争并没有就此结束。败下阵来的对方会很快转入下一个阶段。<br />
-是的，“复仇”阶段。尽管暂时败下阵来，但对方会在别的地方以别的形式策划着复仇、等待着进行报复。</p>
-</blockquote>
+<p>不知怎么得我突然灵机一动：让AI把edge-tts用dart改写一下，用flutter实现，有没有搞头呢？其实之前ViberCoding不盛行的时候，我曾手动让AI对话改写过，一开始能用，微软变动的时候就不能用了，太不稳定就放弃了，现在有各种AI工具，让它根据python的库实时改不就行了？
+说干就干，直接在workbuddy里，把edge-tts得github地址贴进去，让它用dart改写。没想到出奇得顺利！
+代码在这：https://gitee.com/wangyidao/dart-edge-tts</p>
 
-<blockquote>
-  <p><strong>自由就是不再寻求认可</strong>？<br />
-“货币是被铸造的自由。”它是陀思妥耶夫斯基的小说中出现的一句话。“被铸造的自由”这种说法是何等的痛快啊！我认为这是一句非常精辟的话，它一语道破了货币的本质。</p>
-</blockquote>
+<p>于是用flutter把界面重写了一下，改了一些bug，今天算是完成了1.0版。它现在是这样的：
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729142708_9_26.png" alt="" />
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729142822_10_26.png" alt="" />
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729143036_11_26.png" alt="" /></p>
 
-<blockquote>
-  <p>想要取得别人认可的时候，几乎所有人都会采取“满足别人的期待”这一手段，这其实都是受“如果做了恰当的事情就能够得到表扬”这种赏罚教育的影响。<br />
-如果工作的主要目标成了“满足别人的期待”，那工作就会变得相当痛苦吧。因为那样就会一味在意别人的视线、害怕别人的评价，根本无法做真正的自己。</p>
-</blockquote>
+<h1 id="拼拼古诗">拼拼古诗</h1>
+<p><img src="https://photo.wangxuan.me/albums/2026-07-29-logo/poem.png" width="100" /></p>
 
-<blockquote>
-  <p>经济地位跟人的价值毫无关系。</p>
-</blockquote>
+<p>既然dart版的edge-tts都有了，我可以把拼拼古诗改去，也用这个包。<br />
+另外增加了搜索，和语速控制。<br />
+现在是这样：</p>
 
-<blockquote>
-  <p>上帝，请赐予我平静，去接受我无法改变的：给予我勇气，去改变我能改变的；赐我智慧，分辨这两者的区别。”<br />
-这是广为流传的“尼布尔的祈祷文”，<br />
-看清事物的真理，这就是“达观”。这并不是什么悲观主义。</p>
-</blockquote>
+<p><img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729143247_12_26.jpg" alt="" />
+<img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729143507_13_26.jpg" alt="" /></p>
 
-<blockquote>
-  <p>事实上，此时如果非常焦躁地洗餐具，不仅自己不会觉得有趣，就连家人也不愿靠近。另一方面，如果是一边愉快地哼着歌一边洗餐具，孩子们也许会过来帮忙，或至少营造出一种容易帮忙的氛围。</p>
-</blockquote>
+<h1 id="草灰笔记">草灰笔记</h1>
+<p><img src="https://photo.wangxuan.me/albums/2026-07-29-logo/ashes_note_logo.png" width="100" /></p>
 
-<blockquote>
-  <p>甚至也有人说要想真正理解阿德勒心理学直至改变生活方式，需要“相当于自身岁数一半的时间”。也就是说，如果40岁开始学的话，需要20年也就是到60岁才能学会。20岁开始学的话，加上10年，得到30岁才能学会。</p>
-</blockquote>
+<p>这个应用我每天都在用，遇到问题就会修改，想到功能也会增加。<br />
+最近是加了一个优化：全角的引号和双引号高亮显示，避免复制代码执行的时候报错。<br />
+还加了一个功能，就是RSS阅读器（没错，我就是这么老派）。以前都是在foxmail里看RSS订阅，现在都是在草灰笔记里了。</p>
 
-<blockquote>
-  <p>对人而言的幸福不过就是“良好的人际关系”吗？也就是说，我们的生命就为了这么渺小的港湾或喜悦而存在吗？</p>
-</blockquote>
+<p><img src="https://photo.wangxuan.me/albums/2026-05-28-blog/20260729144229_14_26.png" alt="" /></p>
 
     </article>
     
@@ -202,28 +186,16 @@
     </section>
     <section class="post-footer-item read-next">
         
+        
         <div class="read-next-item">
-            <a href="/tech/2026/07/29/viber-coding-notes.html" class="read-next-link"></a>
+            <a href="/notes/2026/07/13/The-Courage-to-Be-Disliked.html" class="read-next-link"></a>
             <section>
-                <span>ViberCoding手记(20260729)</span>
-                <p>最近腾讯的混元模型限时免费，所以codebuddy和workbuddy玩得有点肆无忌惮。</p>
+                <span>被讨厌的勇气</span>
+                <p>  如果一味地关注过去的原因，企图仅仅靠原因去解释事物，那就会陷入“决定论”。也就是说，最终会得出这样的结论：我们...</p>
             </section>
             
             <div class="filter"></div>
-            <img src="https://photo.wangxuan.me/albums/2026-07-29-logo/icon.png" alt="">
-            
-        </div>
-        
-        
-        <div class="read-next-item">
-            <a href="/discuss/2026/07/06/Is-vitamin-D-supplementation-a-scheme-orchestrated-by-capital.html" class="read-next-link"></a>
-            <section>
-                <span>补充维生素D,是不是资本做的局？</span>
-                <p>赵二哈这段时间魔怔了一样，非要逼着我吃维生素D，我的应对是：要么直接拒绝，要么消极抵抗。因为我坚持的是“奥卡姆剃刀...</p>
-            </section>
-            
-            <div class="filter"></div>
-            <img src="https://photo.wangxuan.me/albums/2026-06-26-cover/vitaminD.jpg" alt="">
+            <img src="https://photo.wangxuan.me/albums/2026-06-26-cover/被讨厌的勇气.jpeg" alt="">
             
         </div>
         

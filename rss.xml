@@ -5,9 +5,66 @@
     <description>去创造点什么而不是依靠别人活着</description>
     <link>https://wangxuan.me//</link>
     <atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 13 Jul 2026 07:52:34 +0000</pubDate>
-    <lastBuildDate>Mon, 13 Jul 2026 07:52:34 +0000</lastBuildDate>
+    <pubDate>Wed, 29 Jul 2026 07:02:18 +0000</pubDate>
+    <lastBuildDate>Wed, 29 Jul 2026 07:02:18 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>ViberCoding手记(20260729)</title>
+        <description>&lt;p&gt;最近腾讯的混元模型限时免费，所以codebuddy和workbuddy玩得有点肆无忌惮。&lt;/p&gt;
+
+&lt;h1 id=&quot;玩偶聊天室&quot;&gt;玩偶聊天室&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-07-29-logo/icon.png&quot; width=&quot;100&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;不记得什么时候产生的这个想法了，总觉得在一个聊天室里，每个人扮演一个角色，读一些电影对白或者话剧台词，可能会很好玩。目前来看，能有足够多声音角色来实现这个想法的库只有edge-tts。现在python是有免费可用的edge-tts包的。那就让AI直接用tkinter写一版看看吧。很快就完成了，看起来是这样：
+&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729135308_6_26.png&quot; alt=&quot;&quot; /&gt;
+虽然还行，界面页差强人意，只能勉强玩玩，这个只能说是验证了我的想法可实现。不得不承认，我觉得这个应用理想中的运行平台应该是手机端。现在问题就清晰了：python实现，手机端应用。如何实现呢？能选的框架可能就只有kivy了。这是个有点历史的跨平台框架了，几年前玩过，我记得windows平台输入中文的问题一直没解决，现在问一下AI，回答是：仍然没解决。但是它说在安卓端没有问题，可以正常输入。于是我决定让AI用kivy来改写了。谁曾想这居然是个大坑，即使有AI它依然是大坑。因为我之前就又切换GUI框架的打算，特意让AI生成代码的时候把表现和逻辑分层，所以代码很快就迁移完成。代码在windows下也能跑，它的界面是这样的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729140507_7_26.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729140530_8_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;看着还行，把这个打成apk包试试吧。谁曾想打包才是噩梦的开始，windows下不能直接打，我不想用WSL，于是在虚拟机里打，我有装了ubuntu26.04的虚拟机。打包过程无比漫长，动不动一两个小时，下载依赖包那叫一个慢，我打了两天才打出第一个apk包，这个包装在手机上，直接就是闪退。连到android studio里看logcat，把错误信息给AI去改，要命的是：需要clean 重新打包，依赖包会重新下。反反复复，折腾了足足有两天，终于能在手机上跑起来了。结果，那个体验这是一言难尽，丑就算了，还奇慢，最不能忍的是输入的时候输入法界面直接把下半屏遮住，输入框被挡了个严严实实，基本是半盲输入。算了，算了，放弃了…&lt;/p&gt;
+
+&lt;p&gt;不知怎么得我突然灵机一动：让AI把edge-tts用dart改写一下，用flutter实现，有没有搞头呢？其实之前ViberCoding不盛行的时候，我曾手动让AI对话改写过，一开始能用，微软变动的时候就不能用了，太不稳定就放弃了，现在有各种AI工具，让它根据python的库实时改不就行了？
+说干就干，直接在workbuddy里，把edge-tts得github地址贴进去，让它用dart改写。没想到出奇得顺利！
+代码在这：https://gitee.com/wangyidao/dart-edge-tts&lt;/p&gt;
+
+&lt;p&gt;于是用flutter把界面重写了一下，改了一些bug，今天算是完成了1.0版。它现在是这样的：
+&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729142708_9_26.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729142822_10_26.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729143036_11_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;拼拼古诗&quot;&gt;拼拼古诗&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-07-29-logo/poem.png&quot; width=&quot;100&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;既然dart版的edge-tts都有了，我可以把拼拼古诗改去，也用这个包。&lt;br /&gt;
+另外增加了搜索，和语速控制。&lt;br /&gt;
+现在是这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729143247_12_26.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729143507_13_26.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;草灰笔记&quot;&gt;草灰笔记&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-07-29-logo/ashes_note_logo.png&quot; width=&quot;100&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个应用我每天都在用，遇到问题就会修改，想到功能也会增加。&lt;br /&gt;
+最近是加了一个优化：全角的引号和双引号高亮显示，避免复制代码执行的时候报错。&lt;br /&gt;
+还加了一个功能，就是RSS阅读器（没错，我就是这么老派）。以前都是在foxmail里看RSS订阅，现在都是在草灰笔记里了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://photo.wangxuan.me/albums/2026-05-28-blog/20260729144229_14_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+        <link>https://wangxuan.me/tech/2026/07/29/viber-coding-notes.html</link>
+        <guid isPermaLink="true">https://wangxuan.me/tech/2026/07/29/viber-coding-notes.html</guid>
+        
+        <category>AI编程</category>
+        
+        <category>ViberCoding</category>
+        
+        
+        <category>Tech</category>
+        
+      </item>
     
       <item>
         <title>被讨厌的勇气</title>
@@ -1964,98 +2021,6 @@ https://gitee.com/wangyidao/weread&lt;/p&gt;
         <category>Mac</category>
         
         <category>苹果电脑</category>
-        
-        
-        <category>Tech</category>
-        
-      </item>
-    
-      <item>
-        <title>用Gitee和EdgeOne Pages搭建支持外链的免费相册</title>
-        <description>&lt;p&gt;我一直想给我的博客找个免费的图床，但是一直没找到合适的。因为是用的github pages，国内访问速度堪忧，所以我一直尽量不在博客里贴图片，甚至连题图都省了。&lt;/p&gt;
-
-&lt;p&gt;现在有AI了，我可以让AI按照我的要求来生成个支持外链的相册。我提供想法，AI提供代码~&lt;/p&gt;
-
-&lt;p&gt;众所周知，我是个抠门的人，我只想让AI来生成代码，但是我不想花钱。甚至AI Agent赠送的积分我也能省则省，看看我怎么做的。&lt;/p&gt;
-
-&lt;h2 id=&quot;1-写需求让ai优化需求使用千问完成&quot;&gt;1. 写需求，让AI优化需求。使用千问完成。&lt;/h2&gt;
-
-&lt;p&gt;在千问对话框下面的更多里，选择代码。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528100210_89_26.png&quot; alt=&quot;1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我只写了一句话：使用 Vite 创建一个纯前端相册，读取albums目录下以YYYY-MM-dd-开头的文件夹里的图片，生成缩略图，图片详情展示Exif信息…&lt;/p&gt;
-
-&lt;p&gt;原来怎么写的不记得了，大概是这么个意思。点击优化指令。它就会把需求细化，然后发送它就会生成代码。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528095403_88_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;2-生成工程代码元宝和deepseek完成&quot;&gt;2. 生成工程代码。元宝，和deepseek完成。&lt;/h2&gt;
-
-&lt;p&gt;在千问里试了几次，千问只会生成一个单独的html文件，这个不是我想要的。你千问不听话，我用其他的，反正AI有的是。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 使用 Vite 创建一个纯前端相册展示工程，不依赖后端服务。工程需满足以下要求：  
-- 启动时自动扫描本地 `albumns/` 目录（模拟为静态资源路径，使用 Vite 的 `import.meta.glob` 功能动态导入该目录下所有子文件夹）；
-- 仅识别以 `YYYY-MM-dd-` 格式开头的子文件夹（如 `2024-05-20-vacation`），每个文件夹视为一个相册， `YYYY-MM-dd-` 后面文字为相册名称；
-- 对每个相册内的图片文件（支持 `.jpg`, `.jpeg`, `.png`, `.webp`），生成缩略图并展示在相册列表页；缩略图使用 Canvas 或 CSS `object-fit: cover` 实现等比裁剪，尺寸统一为 200×150 像素；
-- 点击缩略图进入图片详情页，显示：
-  - 原图（居中、最大宽度 90vw，支持缩放/拖拽查看）；
-  - EXIF 信息（包括拍摄时间、相机型号、GPS 坐标（若存在）、曝光参数等），使用开源轻量库如 `exif-js` 或 `piexifjs` 解析（需通过 CDN 引入）；
-  - 当前图片的可复制外链地址（基于 Vite 开发服务器的静态资源路径，如 `/albumns/2024-05-20-vacation/photo.jpg`），提供一键复制按钮；
-- 页面具备基础导航：相册列表页（默认首页）与图片详情页（通过 URL hash 或 URLSearchParams 切换，如 `#album=2024-05-20-vacation&amp;amp;photo=photo.jpg`），支持浏览器前进/后退；
-- UI 要求简洁响应式：使用原生 CSS Flex/Grid 布局，无外部 UI 框架；相册列表采用网格布局（每行 3～4 个缩略图），详情页含返回按钮；
-- 所有资源路径均相对于 `albumns/` 目录，开发时将 `albumns` 放置于 Vite 项目 `public/` 目录下，确保可被直接访问；
-- 构建后仍能通过静态服务器运行（即不依赖 Node.js 运行时读取文件系统）。
-
-
-项目结构为：
-photo-album/
-├── albums/                # 你的相册目录（自行创建并按格式放入图片）
-├── index.html             # 前端页面（已内嵌完整交互逻辑）
-├── package.json
-├── vite.config.js         # Vite 配置 + 后端 API（读取文件、生成缩略图、解析 EXIF）
-└── .thumbnails/           # 自动生成的缩略图缓存（无需手动管理，建议 .gitignore 忽略）
-
-请生成完整、可直接运行的代码，包含 Vite 兼容的模块化脚本结构，并附带简要注释说明关键逻辑。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;把这段话，复制到了元宝和deepseek里，让他们都帮我生成代码。生成后，我比较了一下，貌似元宝生成的好一点。&lt;/p&gt;
-
-&lt;h2 id=&quot;3-优化代码qcoder完成&quot;&gt;3. 优化代码。Qcoder完成。&lt;/h2&gt;
-&lt;p&gt;将生成的代码按照目录结构整理好。导入到vscode。把Qcoder插件装上，当然codebuddy，copilot等等其他编程助手也可以。反正大多数每月都送免费积分，我是把能装的都装了。
-Qcoder本月的积分还没用完，就先用它，不行就换其他的，再不行我就用非遗手艺古法编程，自己动手改。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528101952_90_26.png&quot; alt=&quot;&quot; /&gt;
-来来回回，几轮交互，代码算是完成了。&lt;/p&gt;
-
-&lt;h2 id=&quot;4-部署代码通过edgeone-pages部署&quot;&gt;4. 部署代码。通过EdgeOne Pages部署。&lt;/h2&gt;
-
-&lt;p&gt;首先你得有gitee账号，github也行的。把AI生成的代码提交到git上。还有，就是你要有个域名。&lt;/p&gt;
-
-&lt;p&gt;然后在EdgeOne Pages里设置。找不到的，直接用这个链接：  &lt;a href=&quot;https://console.tencentcloud.com/edgeone/pages&quot;&gt;https://console.tencentcloud.com/edgeone/pages&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;选择Pages选项卡
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102505_91_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;创建项目，选择从git导入。这里会让你授权，我的是已经授权过的。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102527_92_26.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102551_93_26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后就可以看到你在git上创建的项目了。&lt;/p&gt;
-
-&lt;p&gt;选择刚刚上传的想入导入，配置项目，其他的不用动，就框架预设选vite。点击开始部署。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102702_94_26.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102902_95_26.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528104211_100_26.png&quot; alt=&quot;&quot; /&gt;
-部署完成需要配置域名。因为我的域名没有备案，加速区域只能选“全球可用区（不含中国大陆）”。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528102922_97_26.png&quot; alt=&quot;&quot; /&gt;
-配置完成，再装个免费的证书，支持ssl访问，就大功告成了。
-&lt;img src=&quot;https://photo.wangxuan.me/.compressed/2026-05-28-blog/20260528103002_98_26.png&quot; alt=&quot;&quot; /&gt;
-这是我的：&lt;a href=&quot;https://photo.wangxuan.me&quot;&gt;https://photo.wangxuan.me&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
-        <link>https://wangxuan.me/tech/2026/05/28/Free-Album-with-Gitee-and-EdgeOne-Pages.html</link>
-        <guid isPermaLink="true">https://wangxuan.me/tech/2026/05/28/Free-Album-with-Gitee-and-EdgeOne-Pages.html</guid>
-        
-        <category>AI编程</category>
-        
-        <category>免费相册</category>
         
         
         <category>Tech</category>
