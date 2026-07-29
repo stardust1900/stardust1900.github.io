@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ViberCoding手记(20260729)
+title: ViberCoding手记
 subtitle: '玩偶聊天室的诞生'
 cover: "https://photo.wangxuan.me/albums/2026-07-29-logo/icon.png"
 date: 2026-07-29
