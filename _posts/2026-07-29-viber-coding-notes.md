@@ -35,7 +35,7 @@ tags: AI编程 ViberCoding
 # 拼拼古诗
 <img src="https://photo.wangxuan.me/albums/2026-07-29-logo/poem.png"  width="100" />
 
-既然dart版的edge-tts都有了，我可以把拼拼古诗改去，也用这个包。  
+既然dart版的edge-tts都有了，我可以把拼拼古诗改回去，也用这个包。  
 另外增加了搜索，和语速控制。  
 现在是这样：
 
