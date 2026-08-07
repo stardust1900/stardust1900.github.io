@@ -19,10 +19,23 @@ description: 只身打马过草原，独自仗剑走天涯
         {% for post in paginator.posts %}
             <article class="article-item">
                 {% if post.cover %}
+                    {% assign cover_is_url = false %}
+                    {% if post.cover contains 'http' or post.cover contains '/' %}
+                        {% assign cover_is_url = true %}
+                    {% elsif post.cover contains '.jpg' or post.cover contains '.png' or post.cover contains '.gif' or post.cover contains '.webp' or post.cover contains '.svg' or post.cover contains '.bmp' or post.cover contains '.avif' %}
+                        {% assign cover_is_url = true %}
+                    {% endif %}
+                    {% if cover_is_url %}
                 <div class="post-cover">
                     <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
                     <img src="{{ post.cover }}" alt="">
                 </div>
+                    {% else %}
+                <div class="post-cover emoji-cover">
+                    <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
+                    <span class="emoji">{{ post.cover }}</span>
+                </div>
+                    {% endif %}
                 {% endif %}
                 <section class="post-preview">
                     <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
