@@ -1,0 +1,36 @@
+/* ---------- emoji 封面支持 ----------
+   当文章 front matter 的 cover 为 emoji 字符（非图片 URL）时，
+   首页卡片与文章页头部以居中大 emoji 作为视觉封面。 */
+
+/* 首页文章卡片：emoji 封面 */
+.post-cover.emoji-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  max-height: 300px;
+  background: linear-gradient(135deg, #eef2ff, #f6f7fb);
+}
+.post-cover.emoji-cover .emoji {
+  font-size: 88px;
+  line-height: 1;
+  user-select: none;
+  transition: transform .25s ease;
+}
+.post-cover.emoji-cover:hover .emoji {
+  transform: scale(1.08);
+}
+
+/* 文章页头部 banner：emoji 封面 */
+.post-emoji {
+  text-align: center;
+  font-size: 64px;
+  line-height: 1.2;
+  margin: 118px 0 14px;
+  opacity: .92;
+  user-select: none;
+  transition: transform .25s ease;
+}
+.post-header:hover .post-emoji {
+  transform: scale(1.06);
+}

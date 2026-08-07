@@ -1,6 +1,12 @@
 [
   
     {
+      "title"    : "emoji测试",
+      "tags"     : "emoji",
+      "url"      : "/discuss/2026/08/07/emoji-test.html"
+    } ,
+  
+    {
       "title"    : "ViberCoding手记",
       "tags"     : "AI编程 ViberCoding",
       "url"      : "/tech/2026/07/29/viber-coding-notes.html"

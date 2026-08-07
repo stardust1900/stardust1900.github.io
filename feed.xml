@@ -7,6 +7,21 @@
 		<atom:link href="https://wangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>emoji测试</title>
+				<description>
+                
+                    
+                
+                
+                    emoji测试,emoji测试emoji测试emoji测试emoji测试emoji测试emoji测试
+                
+                </description>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<link>https://wangxuan.me/discuss/2026/08/07/emoji-test.html</link>
+				<guid isPermaLink="true">https://wangxuan.me/discuss/2026/08/07/emoji-test.html</guid>
+			</item>
+		
+			<item>
 				<title>ViberCoding手记</title>
 				<description>
                 
@@ -123,21 +138,6 @@
 				<pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
 				<link>https://wangxuan.me/notes/2026/06/08/The-Art-of-Explanation.html</link>
 				<guid isPermaLink="true">https://wangxuan.me/notes/2026/06/08/The-Art-of-Explanation.html</guid>
-			</item>
-		
-			<item>
-				<title>谁把我苹果电脑的名字改成了小米15</title>
-				<description>
-                
-                    
-                
-                
-                    今天下午，我打开了我那尘封已久的MacBook Pro，无意中发现它的名字在命令行里居然变成了“Xiaomi-15”。
-                
-                </description>
-				<pubDate>Sat, 06 Jun 2026 00:00:00 +0000</pubDate>
-				<link>https://wangxuan.me/tech/2026/06/06/Who-change-my-Macs-hostname.html</link>
-				<guid isPermaLink="true">https://wangxuan.me/tech/2026/06/06/Who-change-my-Macs-hostname.html</guid>
 			</item>
 		
 	</channel>
