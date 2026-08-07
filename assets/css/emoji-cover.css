@@ -2,17 +2,22 @@
    当文章 front matter 的 cover 为 emoji 字符（非图片 URL）时，
    首页卡片与文章页头部以居中大 emoji 作为视觉封面。 */
 
-/* 首页文章卡片：emoji 封面 */
+/* 首页文章卡片：emoji 封面
+   高度与图片封面保持一致（桌面 max-height:300px / 移动 max-height:200px），
+   emoji 作为整块 banner 居中铺满，视觉占比与图片封面一致。 */
 .post-cover.emoji-cover {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 160px;
+  width: 100%;
+  height: 300px;
   max-height: 300px;
+  margin-bottom: 14px;
+  overflow: hidden;
   background: linear-gradient(135deg, #eef2ff, #f6f7fb);
 }
 .post-cover.emoji-cover .emoji {
-  font-size: 88px;
+  font-size: 128px;
   line-height: 1;
   user-select: none;
   transition: transform .25s ease;
@@ -21,16 +26,46 @@
   transform: scale(1.08);
 }
 
-/* 文章页头部 banner：emoji 封面 */
+/* 文章页头部 banner：emoji 封面
+   与首页 emoji 封面保持一致，作为整块 banner 居中铺满，
+   emoji 放大居中，视觉占比与图片封面一致。 */
 .post-emoji {
-  text-align: center;
-  font-size: 64px;
-  line-height: 1.2;
-  margin: 118px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  margin: 0 0 24px;
+  font-size: 160px;
+  line-height: 1;
   opacity: .92;
   user-select: none;
+  background: linear-gradient(135deg, #eef2ff, #f6f7fb);
   transition: transform .25s ease;
 }
 .post-header:hover .post-emoji {
-  transform: scale(1.06);
+  transform: scale(1.04);
+}
+
+/* emoji 封面时，去掉下方 .post-tags 多余的顶部留白（原 150px 是给背景封面预留） */
+.post-emoji + .post-tags {
+  margin-top: 0;
+}
+
+/* 移动端：emoji 封面高度与图片封面对齐（max-height:200px） */
+@media screen and (max-width: 500px) {
+  .post-emoji {
+    height: 200px;
+    font-size: 112px;
+  }
+}
+
+/* 移动端：emoji 封面高度与图片封面对齐（max-height:200px） */
+@media screen and (max-width: 500px) {
+  .post-cover.emoji-cover {
+    height: 200px;
+    max-height: 200px;
+  }
+  .post-cover.emoji-cover .emoji {
+    font-size: 96px;
+  }
 }
