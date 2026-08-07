@@ -5,7 +5,8 @@
 /* 首页文章卡片：emoji 封面
    高度与图片封面保持一致（桌面 max-height:300px / 移动 max-height:200px），
    emoji 作为整块 banner 居中铺满，视觉占比与图片封面一致。 */
-.post-cover.emoji-cover {
+/* 提高特异性（0,4,0）以覆盖 app.min.css 的 .article-list .article-item .post-cover（0,3,0） */
+.article-list .article-item .post-cover.emoji-cover {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,13 +17,13 @@
   overflow: hidden;
   background: linear-gradient(135deg, #eef2ff, #f6f7fb);
 }
-.post-cover.emoji-cover .emoji {
+.article-list .article-item .post-cover.emoji-cover .emoji {
   font-size: 128px;
   line-height: 1;
   user-select: none;
   transition: transform .25s ease;
 }
-.post-cover.emoji-cover:hover .emoji {
+.article-list .article-item .post-cover.emoji-cover:hover .emoji {
   transform: scale(1.08);
 }
 
@@ -51,21 +52,21 @@
   margin-top: 0;
 }
 
-/* 移动端：emoji 封面高度与图片封面对齐（max-height:200px） */
-@media screen and (max-width: 500px) {
+/* 移动端：emoji 封面高度与图片封面对齐（app.min.css 在 ≤695px 时 max-height:200px） */
+@media screen and (max-width: 695px) {
   .post-emoji {
     height: 200px;
     font-size: 112px;
   }
 }
 
-/* 移动端：emoji 封面高度与图片封面对齐（max-height:200px） */
-@media screen and (max-width: 500px) {
-  .post-cover.emoji-cover {
+/* 移动端：emoji 封面高度与图片封面对齐（≤695px） */
+@media screen and (max-width: 695px) {
+  .article-list .article-item .post-cover.emoji-cover {
     height: 200px;
     max-height: 200px;
   }
-  .post-cover.emoji-cover .emoji {
+  .article-list .article-item .post-cover.emoji-cover .emoji {
     font-size: 96px;
   }
 }
