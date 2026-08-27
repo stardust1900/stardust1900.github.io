@@ -80,19 +80,6 @@
 .night-mode .friend-desc { color: #868a94; }
 .night-mode .friends-comment { background-color: #2d313a; border-color: rgba(255, 255, 255, .1); }
 
-/* 评论区加载提示 */
-.utterances-loading {
-  display: block !important;
-  visibility: visible !important;
-  padding: 24px 0;
-  margin-bottom: 12px;
-  text-align: center;
-  font-size: 15px;
-  line-height: 24px;
-  color: #a6abb2;
-}
-.night-mode .utterances-loading { color: #868a94; }
-
 /* 移动端适配 */
 @media screen and (max-width: 695px) {
   .friends-list li { width: 48%; }
