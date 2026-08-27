@@ -1,0 +1,44 @@
+---
+title: 友链
+layout: default
+---
+
+{% include header.html %}
+
+<div class="g-banner tags-banner {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }}" data-theme="{{ site.theme-color }}">
+    <h2>友链</h2>
+</div>
+
+<main class="tags-content">
+    <ul class="tags-list friends-list">
+        <li class="friends-tips">
+            <span class="tag-name">申请友链</span>
+            <span class="tag-post">在下方评论区留言申请，格式：站点名称 / 网址 / Logo 地址 / 一句话简介。审核通过后会尽快添加。</span>
+        </li>
+
+        {% for friend in site.data.friends %}
+        <li class="friend-card">
+            <a class="friend-link" href="{{ friend.url }}" target="_blank" rel="noopener" title="{{ friend.name }}"></a>
+            <img class="friend-logo" src="{{ friend.logo }}" alt="{{ friend.name }}"
+                 onerror="this.src='/assets/img/profile.png'">
+            <h3 class="friend-name">{{ friend.name }}</h3>
+            <p class="friend-desc">{{ friend.desc }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <section class="post-footer-item comment friends-comment">
+        <div id="disqus_thread">
+            <script src="https://utteranc.es/client.js"
+                    repo="stardust1900/stardust1900.github.io"
+                    issue-term="友链申请"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+</main>
+
+{% include footer.html %}

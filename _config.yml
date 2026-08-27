@@ -13,6 +13,7 @@ nav:
   首页: '/'
   标签: '/tags.html'
   分类: '/categories.html'
+  友链: '/friends.html'
   关于: '/about.html'
   墨阅: 'https://moyue.wangxuan.me/'
   量化: 'https://quant.wangxuan.me/'
