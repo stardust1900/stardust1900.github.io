@@ -1,0 +1,90 @@
+/* ---------- 友链墙 ---------- */
+.friends-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.friends-list li {
+  position: relative;
+  width: 31.5%;
+  margin-bottom: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .3s ease, box-shadow .3s ease;
+  overflow: hidden;
+}
+.friends-list li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(52, 61, 70, .18);
+}
+/* 申请说明卡片占满整行 */
+.friends-tips {
+  width: 100% !important;
+  cursor: default;
+}
+.friends-tips .tag-post {
+  margin: 16px auto;
+}
+
+/* 友链卡片 */
+.friend-card .friend-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+.friend-logo {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 1px 4px rgba(100, 110, 120, .35);
+}
+.friend-name {
+  font-size: 18px;
+  color: #4e4e4e;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.friend-desc {
+  font-size: 14px;
+  color: #a6abb2;
+  line-height: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 评论区 */
+.friends-comment {
+  width: 100%;
+  margin: 24px 0 0;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #e7eaf1;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 37, 55, .06);
+}
+
+/* 夜间模式适配（卡片底色主题已覆盖，补充文字颜色） */
+.night-mode .friend-name { color: #868a94; }
+.night-mode .friend-desc { color: #868a94; }
+.night-mode .friends-comment { background-color: #2d313a; border-color: rgba(255, 255, 255, .1); }
+
+/* 移动端适配 */
+@media screen and (max-width: 695px) {
+  .friends-list li { width: 48%; }
+  .friends-tips { width: 100% !important; }
+}
+@media screen and (max-width: 420px) {
+  .friends-list li { width: 100%; }
+}
