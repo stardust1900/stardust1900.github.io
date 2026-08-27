@@ -46,27 +46,30 @@ layout: default
                 var loading = document.getElementById('utterances-loading');
                 var thread = document.getElementById('disqus_thread');
                 if (!loading || !thread) return;
-                var hide = function () { loading.style.display = 'none'; };
-                // 监听 utterances 插入的 iframe，一旦出现即隐藏提示
-                var observer = new MutationObserver(function (mutations) {
-                    for (var i = 0; i < mutations.length; i++) {
-                        if (mutations[i].addedNodes && mutations[i].addedNodes.length) {
-                            for (var j = 0; j < mutations[i].addedNodes.length; j++) {
-                                var n = mutations[i].addedNodes[j];
-                                if (n && (n.tagName === 'IFRAME' || (n.querySelector && n.querySelector('iframe')))) {
-                                    hide();
-                                    observer.disconnect();
-                                    return;
+                var hide = function () {
+                    loading.style.display = 'none';
+                };
+                // 方式 1：MutationObserver 监听 iframe 插入
+                try {
+                        var observer = new MutationObserver(function () {
+                                if (thread.querySelector('iframe')) {
+                                        hide();
+                                        observer.disconnect();
+                                        if (intervalId) clearInterval(intervalId);
                                 }
-                            }
+                        });
+                        observer.observe(thread, { childList: true, subtree: true });
+                } catch (e) {}
+                // 方式 2：轮询兜底，每 500ms 检查一次
+                var intervalId = setInterval(function () {
+                        if (thread.querySelector('iframe')) {
+                                hide();
+                                clearInterval(intervalId);
                         }
-                    }
-                });
-                observer.observe(thread, { childList: true, subtree: true });
-                // 兜底：60s 后无论是否成功都隐藏，避免永久残留
+                }, 500);
+                // 方式 3：60s 后兜底结束
                 setTimeout(function () {
-                    if (thread.querySelector('iframe')) hide();
-                    observer.disconnect();
+                        clearInterval(intervalId);
                 }, 60000);
             })();
         </script>
