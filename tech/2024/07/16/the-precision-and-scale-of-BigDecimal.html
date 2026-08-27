@@ -508,13 +508,17 @@ $5 + \lceil \frac{10 \cdot 3}{3} \rceil = 5 + \lceil 10 \rceil = 5 + 10 = 15$
     </section>
         <section class="post-footer-item comment">
         <div id="disqus_thread">
+            <div id="utterances-loading" class="utterances-loading">
+                正在加载留言区请稍后。用的是 utteranc，可能比较慢，请耐心一点。
+            </div>
             <script src="https://utteranc.es/client.js"
                     repo="stardust1900/stardust1900.github.io"
                     issue-term="title"
                     label="comment"
                     theme="github-light"
                     crossorigin="anonymous"
-                    async>
+                    async
+                    onload="document.getElementById('utterances-loading').style.display='none';">
             </script>
         </div>
     </section>

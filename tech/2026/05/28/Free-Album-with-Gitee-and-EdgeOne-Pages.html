@@ -267,13 +267,17 @@ Qcoder本月的积分还没用完，就先用它，不行就换其他的，再�
     </section>
         <section class="post-footer-item comment">
         <div id="disqus_thread">
+            <div id="utterances-loading" class="utterances-loading">
+                正在加载留言区请稍后。用的是 utteranc，可能比较慢，请耐心一点。
+            </div>
             <script src="https://utteranc.es/client.js"
                     repo="stardust1900/stardust1900.github.io"
                     issue-term="title"
                     label="comment"
                     theme="github-light"
                     crossorigin="anonymous"
-                    async>
+                    async
+                    onload="document.getElementById('utterances-loading').style.display='none';">
             </script>
         </div>
     </section>
