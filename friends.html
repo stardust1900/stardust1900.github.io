@@ -91,9 +91,6 @@
     </ul>
 
     <section class="post-footer-item comment friends-comment">
-        <div id="utterances-loading" class="utterances-loading">
-            正在加载留言区请稍后。用的是 utteranc，可能比较慢，请耐心一点。
-        </div>
         <div id="disqus_thread">
             <script src="https://utteranc.es/client.js"
                     repo="stardust1900/stardust1900.github.io"
@@ -104,53 +101,6 @@
                     async>
             </script>
         </div>
-        <script>
-            (function () {
-                var loading = document.getElementById('utterances-loading');
-                var thread = document.getElementById('disqus_thread');
-                if (!loading || !thread) return;
-                var hidden = false;
-                var hide = function () {
-                        if (hidden) return;
-                        hidden = true;
-                        loading.style.display = 'none';
-                };
-                // 检测函数：任意位置找到 utterances 相关 iframe 即认为已加载
-                var isUtterancesLoaded = function () {
-                        if (document.querySelector('iframe.utterances-frame')) return true;
-                        if (document.querySelector('iframe[src*="utteranc.es"]')) return true;
-                        if (document.querySelector('.utterances')) return true;
-                        if (thread.querySelector('iframe')) return true;
-                        return false;
-                };
-                // 方式 1：监听整个 section 和 body
-                var section = loading.parentNode;
-                try {
-                        var observer = new MutationObserver(function () {
-                                if (isUtterancesLoaded()) {
-                                        hide();
-                                        observer.disconnect();
-                                        clearInterval(intervalId);
-                                }
-                        });
-                        observer.observe(section, { childList: true, subtree: true });
-                        observer.observe(document.body, { childList: true, subtree: true });
-                } catch (e) {}
-                // 方式 2：每 500ms 轮询兜底
-                var intervalId = setInterval(function () {
-                        if (isUtterancesLoaded()) {
-                                hide();
-                                clearInterval(intervalId);
-                        }
-                }, 500);
-                // 方式 3：5 秒后强制隐藏（utterances 通常 3 秒内加载完）
-                setTimeout(hide, 5000);
-                // 方式 4：60 秒兜底停止轮询
-                setTimeout(function () {
-                        clearInterval(intervalId);
-                }, 60000);
-            })();
-        </script>
     </section>
 </main>
 
