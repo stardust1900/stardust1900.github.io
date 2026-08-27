@@ -82,7 +82,10 @@
 
 /* 评论区加载提示 */
 .utterances-loading {
+  display: block !important;
+  visibility: visible !important;
   padding: 24px 0;
+  margin-bottom: 12px;
   text-align: center;
   font-size: 15px;
   line-height: 24px;

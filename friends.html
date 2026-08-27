@@ -28,20 +28,48 @@ layout: default
     </ul>
 
     <section class="post-footer-item comment friends-comment">
+        <div id="utterances-loading" class="utterances-loading">
+            正在加载留言区请稍后。用的是 utteranc，可能比较慢，请耐心一点。
+        </div>
         <div id="disqus_thread">
-            <div id="utterances-loading" class="utterances-loading">
-                正在加载留言区请稍后。用的是 utteranc，可能比较慢，请耐心一点。
-            </div>
             <script src="https://utteranc.es/client.js"
                     repo="stardust1900/stardust1900.github.io"
                     issue-term="友链申请"
                     label="comment"
                     theme="github-light"
                     crossorigin="anonymous"
-                    async
-                    onload="document.getElementById('utterances-loading').style.display='none';">
+                    async>
             </script>
         </div>
+        <script>
+            (function () {
+                var loading = document.getElementById('utterances-loading');
+                var thread = document.getElementById('disqus_thread');
+                if (!loading || !thread) return;
+                var hide = function () { loading.style.display = 'none'; };
+                // 监听 utterances 插入的 iframe，一旦出现即隐藏提示
+                var observer = new MutationObserver(function (mutations) {
+                    for (var i = 0; i < mutations.length; i++) {
+                        if (mutations[i].addedNodes && mutations[i].addedNodes.length) {
+                            for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+                                var n = mutations[i].addedNodes[j];
+                                if (n && (n.tagName === 'IFRAME' || (n.querySelector && n.querySelector('iframe')))) {
+                                    hide();
+                                    observer.disconnect();
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                });
+                observer.observe(thread, { childList: true, subtree: true });
+                // 兜底：60s 后无论是否成功都隐藏，避免永久残留
+                setTimeout(function () {
+                    if (thread.querySelector('iframe')) hide();
+                    observer.disconnect();
+                }, 60000);
+            })();
+        </script>
     </section>
 </main>
 
