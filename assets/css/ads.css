@@ -8,10 +8,8 @@
   box-sizing: border-box;
   overflow: hidden;
 }
-/* 首页右侧：固定 300×250 */
+/* 首页右侧：固定 240×250 */
 .sidebar-ad-card {
-  width: 300px;
-  height: 250px;
   margin-top: 12px;
   padding: 0;
 }
