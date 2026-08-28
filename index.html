@@ -118,6 +118,18 @@ description: 只身打马过草原，独自仗剑走天涯
         </div>
         {% endif %}
 
+        {% if site.adsense.enabled %}
+        <div class="sidebar-ad-card">
+            <ins class="adsbygoogle"
+                 style="display:block;width:300px;height:250px"
+                 data-ad-client="{{ site.adsense.client }}"
+                 data-ad-slot="{{ site.adsense.home_ad_slot }}"
+                 data-ad-format="auto"
+                 data-full-width-responsive="false"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        {% endif %}
+
     </aside>
 
 </main>

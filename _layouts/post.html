@@ -63,7 +63,21 @@
     {% endif %}
 </div>
 
-<section class="author-detail">
+<section class="author-det    </div>
+
+    {% if site.adsense.enabled %}
+    <div class="post-ad-card">
+        <ins class="adsbygoogle"
+             style="display:block;width:728px;height:90px"
+             data-ad-client="{{ site.adsense.client }}"
+             data-ad-slot="{{ site.adsense.post_ad_slot }}"
+             data-ad-format="horizontal"
+             data-full-width-responsive="false"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    {% endif %}
+
+    <section class="author-detail">
     <section class="post-footer-item author-card">
         <div class="avatar">
             <img src="{{ site.avatar | absolute_url }}" alt="">

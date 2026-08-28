@@ -74,3 +74,10 @@ RSS: true
 plugins: [jekyll-paginate,jekyll-sitemap]
 # 显示未来日期
 future: true
+
+# Google AdSense 广告配置
+adsense:
+  enabled: true
+  client: 'ca-pub-3202703159392077'   # 发布商 ID（与 head.html 中一致）
+  home_ad_slot: '2210648758'          # 首页右侧广告位 ID（替换为真实 slot）
+  post_ad_slot: '9669290191'          # 文章页广告位 ID（替换为真实 slot）
