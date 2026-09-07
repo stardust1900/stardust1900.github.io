@@ -70,3 +70,18 @@
     font-size: 96px;
   }
 }
+/* 确保 emoji 封面整块(含 emoji 字符)可点击跳转 */
+.article-list .article-item .post-cover.emoji-cover .post-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  /* 把链接抬到 emoji 之上 */
+}
+
+.article-list .article-item .post-cover.emoji-cover .emoji {
+  pointer-events: none;
+  /* emoji 不拦截点击,让事件穿透给链接 */
+}
