@@ -29,6 +29,7 @@
 }
 /* 移动端适配 */
 @media screen and (max-width: 695px) {
-  .sidebar-ad-card { width: 100%; }
+  /* 移动端不展示首页侧栏广告 */
+  .sidebar-ad-card { display: none !important; }
   .post-ad-card { width: 100%; height: auto; }
 }
