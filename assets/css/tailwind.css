@@ -11,7 +11,7 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-slate-50 text-slate-700 antialiased font-sans;
+    @apply bg-slate-50 text-slate-800 antialiased font-sans;
   }
   html.dark {
     color-scheme: dark;
@@ -31,14 +31,25 @@
            dark:border-slate-700/50 dark:bg-slate-900/70;
   }
 
-  /* 文章阅读容器排版 */
+  /* 文章阅读容器排版（侧重长文阅读舒适度） */
   .prose-reader {
-    @apply prose prose-slate max-w-none dark:prose-invert
-           prose-headings:font-semibold prose-a:text-brand
-           prose-code:rounded prose-code:bg-slate-100 prose-code:px-1
+    @apply prose prose-slate prose-lg max-w-none dark:prose-invert
+           prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
+           prose-p:leading-8 prose-li:leading-8
+           prose-p:text-slate-700 dark:prose-p:text-slate-300
+           prose-a:text-brand prose-a:no-underline prose-a:font-medium hover:prose-a:underline
+           prose-strong:text-slate-900 dark:prose-strong:text-white
+           prose-li:marker:text-brand
+           prose-blockquote:border-l-4 prose-blockquote:border-brand
+           prose-blockquote:bg-slate-100/70 prose-blockquote:not-italic
+           prose-blockquote:font-normal prose-blockquote:text-slate-600
+           prose-blockquote:rounded-r-xl prose-blockquote:py-1 prose-blockquote:px-4
+           prose-blockquote:dark:bg-slate-800/50 prose-blockquote:dark:text-slate-300
+           prose-hr:border-slate-200 dark:prose-hr:border-slate-700
+           prose-img:rounded-xl prose-img:shadow-soft
+           prose-code:rounded prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5
            prose-code:before:content-[''] prose-code:after:content-['']
-           prose-pre:bg-slate-900 dark:prose-pre:bg-black/60
-           prose-img:rounded-lg;
+           prose-pre:bg-slate-900 dark:prose-pre:bg-black/60;
   }
 
   /* 代码块：统一深色底，行内代码白底样式不得泄漏进来 */
