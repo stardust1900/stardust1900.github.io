@@ -2,7 +2,8 @@
 .friends-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 2.75%;
 }
 .friends-list li {
   position: relative;
