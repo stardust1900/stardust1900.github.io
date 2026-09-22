@@ -3,34 +3,31 @@ title: Tags
 layout: default
 ---
 
-{% include header.html %}
+<section class="relative overflow-hidden bg-gradient-to-br from-brand to-indigo-600 px-5 py-16 text-center text-white">
+  <h1 class="text-3xl font-bold sm:text-4xl">TAGS</h1>
+</section>
 
-<div class="g-banner tags-banner {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }}" data-theme="{{ site.theme-color }}">
-    <h2>TAGS</h2>
-</div>
+<main class="mx-auto max-w-reader px-5 py-10">
+  <div class="ui-card mb-8 flex flex-wrap gap-2">
+    {% if site.recommend-tags and site.tags.size > 0 %}
+      {% for tag in site.tags %}
+      <a href="#{{ tag[0] }}" class="ui-tag">{{ tag[0] }}</a>
+      {% endfor %}
+    {% endif %}
+  </div>
 
-<main class="tags-content">
-
-    <ul class="tags-list">
+  <div class="space-y-6">
+    {% for tag in site.tags %}
+    <section class="ui-card scroll-mt-20" id="{{ tag[0] }}">
+      <h2 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">「{{ tag[0] }}」</h2>
+      <ul class="space-y-1.5 text-sm">
+        {% for post in tag[1] %}
         <li>
-        {% if site.recommend-tags and site.tags.size>0 %}
-            {% for tag in site.tags %}
-            <a href="#{{ tag[0] }}" class="tag">{{ tag[0]}}</a>
-            {% endfor %}
-        {% endif %}
+          <a href="{{ post.url }}" class="text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">{{ post.title }}</a>
         </li>
-        {% for tag in site.tags %}
-        <div>
-        <li>
-            <span class="tag-name" id="{{ tag[0] }}">「{{ tag[0] }}」</span>
-            {% for post in tag[1] %}
-            <a class="tag-post" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-            {% endfor %}
-        </li>
-        
-        </div>
-        {% endfor%}
-    </ul>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
+  </div>
 </main>
-    
-{% include footer.html %}

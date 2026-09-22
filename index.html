@@ -4,134 +4,127 @@ home-title: 独行深山
 description: 只身打马过草原，独自仗剑走天涯
 ---
 
-{% include header.html %}
+<section class="relative overflow-hidden border-b border-slate-200/70 bg-gradient-to-b from-brand/5 via-white to-white px-5 py-24 text-center dark:border-slate-800 dark:from-brand/10 dark:via-slate-900 dark:to-slate-900">
+  <div class="pointer-events-none absolute left-1/2 top-0 h-48 w-[40rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl dark:bg-brand/20"></div>
+  <div class="relative mx-auto max-w-2xl animate-fade-up">
+    <h1 class="bg-gradient-to-r from-brand to-indigo-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">{{ page.home-title }}</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">{{ page.description }}</p>
+    <div class="mx-auto mt-7 h-1 w-16 rounded-full bg-gradient-to-r from-brand to-indigo-400"></div>
+  </div>
+</section>
 
-<div class="g-banner home-banner {{ site.theme-color | prepend: 'banner-theme-' }}" data-theme="{{ site.theme-color }}">
-    <h2>{{ page.home-title }}</h2>
-    <h3>{{ page.description }}</h3>
-    {% if page.header-img %}
-    <img class="header-img" src="{{ page.header-img | prepend: site.baseurl }}" alt="">
-    {% endif %}
-</div>
-
-<main class="g-container home-content">
-    <div class="article-list">
-        {% for post in paginator.posts %}
-            <article class="article-item">
-                {% if post.cover %}
-                    {% assign cover_is_url = false %}
-                    {% if post.cover contains 'http' or post.cover contains '/' %}
-                        {% assign cover_is_url = true %}
-                    {% elsif post.cover contains '.jpg' or post.cover contains '.png' or post.cover contains '.gif' or post.cover contains '.webp' or post.cover contains '.svg' or post.cover contains '.bmp' or post.cover contains '.avif' %}
-                        {% assign cover_is_url = true %}
-                    {% endif %}
-                    {% if cover_is_url %}
-                <div class="post-cover">
-                    <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
-                    <img src="{{ post.cover }}" alt="">
-                </div>
-                    {% else %}
-                <div class="post-cover emoji-cover">
-                    <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
-                    <span class="emoji">{{ post.cover }}</span>
-                </div>
-                    {% endif %}
-                {% endif %}
-                <section class="post-preview">
-                    <a class="post-link" href="{{ post.url }}" title="{{ post.title }}"></a>
-                    <h2 class="post-title">{{ post.title }}</h2>
-                    {% if post.subtitle %}
-                    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-                    {% endif %}
-                    {% if post.subtitle.size==0 or post.subtitle==nil %}
-                    <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 126}}</p>
-                    {% endif %}
-                </section>
-                <footer class="post-meta">
-                    <div class="post-tags">
-                        {% if post.tags.size > 0 %}
-                            {% for tag in post.tags  %}
-                            <a href={{ "tags.html#" | append: tag | pretend: site.baseurl}} class="post-tag">{{ tag }}</a>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <time class="post-date" datetime="{{ post.date | date:"%y-%m-%d" }}">{{ post.date | date_to_string }}</time>
-                </footer>
-            </article>
-        {% endfor %}
-
-        {% if paginator.total_pages > 1 %}
-            {% include pageNav.html %}
+<main class="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-5 py-10 lg:grid-cols-[1fr_280px]">
+  <div>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {% for post in paginator.posts %}
+      <article class="ui-card group flex flex-col overflow-hidden">
+        {% if post.cover %}
+          {% assign cover_is_url = false %}
+          {% if post.cover contains 'http' or post.cover contains '/' %}
+            {% assign cover_is_url = true %}
+          {% elsif post.cover contains '.jpg' or post.cover contains '.png' or post.cover contains '.gif' or post.cover contains '.webp' or post.cover contains '.svg' or post.cover contains '.bmp' or post.cover contains '.avif' %}
+            {% assign cover_is_url = true %}
+          {% endif %}
+          {% if cover_is_url %}
+          <div class="relative -m-5 mb-0 h-40 overflow-hidden">
+            <a href="{{ post.url }}" class="absolute inset-0"></a>
+            <img src="{{ post.cover }}" alt="{{ post.title }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+          </div>
+          {% else %}
+          <div class="-m-5 mb-0 flex h-40 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl dark:from-slate-800 dark:to-slate-700">
+            <span>{{ post.cover }}</span>
+          </div>
+          {% endif %}
         {% endif %}
-
+        <h2 class="mt-4 text-lg font-semibold leading-snug text-slate-900 dark:text-white">
+          <a href="{{ post.url }}" class="transition hover:text-brand">{{ post.title }}</a>
+        </h2>
+        {% if post.subtitle %}
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ post.subtitle }}</p>
+        {% endif %}
+        <p class="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+          {{ post.excerpt | strip_html | strip_newlines | truncate: 126 }}
+        </p>
+        <div class="mt-4 flex items-center justify-between text-xs text-slate-400 dark:text-slate-500">
+          <div class="flex flex-wrap gap-1">
+            {% for tag in post.tags limit:3 %}
+            <a href="{{ 'tags.html#' | append: tag | relative_url }}" class="hover:text-brand">#{{ tag }}</a>
+            {% endfor %}
+          </div>
+          <time datetime="{{ post.date | date:'%Y-%m-%d' }}">{{ post.date | date_to_string }}</time>
+        </div>
+      </article>
+      {% endfor %}
     </div>
 
-    <aside class="g-sidebar-wrapper">
-        <div class="g-sidebar">
-            <section class="author-card">
-                <div class="avatar">
-                    <img src="{{ site.avatar | prepend: site.baseurl }}" alt="">
-                </div>
-                <div class="author-name" rel="author">{{ site.author }}</div>
-                <div class="bio">
-                    <p>{{ site.bio }}</p>
-                </div>
-                {% if site.sns.size > 0 %}
-                <ul id="sns-links" class="sns-links">
-                    {% for s in site.sns %}
-                    <li>
-                        <a href="{{ s[1] }}" target="_blank">
-                            <i class="iconfont icon-{{ s[0] }}"></i>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </section>
+    {% if paginator.total_pages > 1 %}
+      {% include pageNav.html %}
+    {% endif %}
+  </div>
 
-           {% if site.recommend-tags and site.tags.size>0 %}
-            <section class="tags-card">
-                {% assign temp_tags = "" | split: "" %}
-                {% for tag in site.tags %}
-                    {% assign tag_name = tag[0] %}
-                    {% assign count = tag[1].size %}
-                    {% assign count_str = count | append: "" %}
-                    {% assign padded = "00000" | append: count_str | slice: -5, 5 %}
-                    {% assign entry = padded | append: "|" | append: tag_name %}
-                    {% assign temp_tags = temp_tags | push: entry %}
-                {% endfor %}
-                {% assign sorted_temp = temp_tags | sort | reverse %}
-                {% for entry in sorted_temp limit: site.recommend-condition-size %}
-                    {% assign parts = entry | split: "|" %}
-                    {% assign tag_name = parts[1] %}
-                    <a href="{{ "tags.html#" | append: tag_name | prepend: site.baseurl }}" class="tag">{{ tag_name }}</a>
-                {% endfor %}
-            </section>
-            {% endif %}
-        </div>
+  <aside class="space-y-6">
+    <section class="ui-card text-center">
+      <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}" class="mx-auto h-16 w-16 rounded-full object-cover shadow-soft">
+      <div class="mt-3 font-semibold text-slate-900 dark:text-white">{{ site.author }}</div>
+      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ site.bio }}</p>
+      {% if site.sns.size > 0 %}
+      <ul class="mt-4 flex justify-center gap-4">
+        {% for s in site.sns %}
+        {% assign sname = s[0] %}
+        <li>
+          <a href="{{ s[1] }}" target="_blank" rel="noopener" class="text-slate-400 transition hover:text-brand" aria-label="{{ sname }}">
+            {% include icon.html name=sname %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </section>
 
-        {% if site.search %}
-        <div class="search-card">
-            <input id="search_input" type="text" placeholder="Search...">
-            <i class="iconfont icon-search"></i>
-            <div class="search_result"></div>
-        </div>
-        {% endif %}
+    {% if site.recommend-tags and site.tags.size > 0 %}
+    <section class="ui-card">
+      <h3 class="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">热门标签</h3>
+      <div class="flex flex-wrap gap-2">
+        {% assign temp_tags = "" | split: "" %}
+        {% for tag in site.tags %}
+          {% assign count = tag[1].size %}
+          {% assign count_str = count | append: "" %}
+          {% assign padded = "00000" | append: count_str | slice: -5, 5 %}
+          {% assign entry = padded | append: "|" | append: tag[0] %}
+          {% assign temp_tags = temp_tags | push: entry %}
+        {% endfor %}
+        {% assign sorted_temp = temp_tags | sort | reverse %}
+        {% for entry in sorted_temp limit: site.recommend-condition-size %}
+          {% assign parts = entry | split: "|" %}
+          {% assign tag_name = parts[1] %}
+          <a href="{{ 'tags.html#' | append: tag_name | relative_url }}" class="ui-tag">{{ tag_name }}</a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
 
-        {% if site.adsense.enabled %}
-        <div class="sidebar-ad-card">
-            <ins class="adsbygoogle"
-                 style="display:block;width:240px;height:100px"
-                 data-ad-client="{{ site.adsense.client }}"
-                 data-ad-slot="{{ site.adsense.home_ad_slot }}"
-                 data-ad-format="auto"
-                 data-full-width-responsive="false"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-        {% endif %}
+    {% if site.search %}
+    <section class="ui-card">
+      <h3 class="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">站内搜索</h3>
+      <div class="relative">
+        <span class="pointer-events-none absolute left-3 top-2.5 text-slate-400">{% include icon.html name='search' %}</span>
+        <input id="search_input" type="text" placeholder="输入关键词…"
+               class="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-9 pr-3 text-sm text-slate-700 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200">
+      </div>
+      <div id="search_result" class="mt-2 hidden max-h-72 space-y-1 overflow-auto text-sm"></div>
+    </section>
+    {% endif %}
 
-    </aside>
-
+    {% if site.adsense.enabled %}
+    <section class="overflow-hidden rounded-2xl">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="{{ site.adsense.client }}"
+           data-ad-slot="{{ site.adsense.home_ad_slot }}"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+    {% endif %}
+  </aside>
 </main>
-
-{% include footer.html %}

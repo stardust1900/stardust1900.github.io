@@ -2,32 +2,30 @@
 title: Categories
 layout: default
 ---
-{% include header.html %}
-<div class="g-banner tags-banner {{ site.postPatterns | prepend: 'post-pattern-' }} {{ site.theme-color | prepend: 'bgcolor-' }}" data-theme="{{ site.theme-color }}">
-    <h2>CATEGORIES</h2>
-</div>
-<main class="tags-content">
-    <ul class="tags-list">
-{% assign sortedcategories = site.categories | sort %}
-{% for category in sortedcategories %}
-<li>
-    <h2>{{ category[0] | capitalize }}</h2>
-    
+
+<section class="relative overflow-hidden bg-gradient-to-br from-brand to-indigo-600 px-5 py-16 text-center text-white">
+  <h1 class="text-3xl font-bold sm:text-4xl">CATEGORIES</h1>
+</section>
+
+<main class="mx-auto max-w-reader px-5 py-10">
+  <div class="ui-card space-y-6">
+    {% assign sortedcategories = site.categories | sort %}
+    {% for category in sortedcategories %}
+    <section>
+      <h2 class="mb-2 text-lg font-semibold capitalize text-slate-900 dark:text-white">{{ category[0] }}</h2>
+      <ul class="space-y-1.5 text-sm">
         {% assign pages_list = category[1] %}
         {% for node in pages_list %}
-            {% if node.title != null %}
-            {% if group == null or group == node.group %}
-                <span class="tag-post">
-                    {% assign date_format = site.date_format.categories %}
-                    {{ node.date | date: '%Y-%m-%d' }} <a href="{{ site.baseurl}}{{ node.url }}">{{ node.title }}</a>
-                </span>
-            {% endif %}
-            {% endif %}
+          {% if node.title != null %}
+          <li class="flex gap-3 text-slate-600 dark:text-slate-300">
+            <span class="shrink-0 text-slate-400">{{ node.date | date: '%Y-%m-%d' }}</span>
+            <a href="{{ site.baseurl }}{{ node.url }}" class="transition hover:text-brand">{{ node.title }}</a>
+          </li>
+          {% endif %}
         {% endfor %}
         {% assign pages_list = nil %}
-</li>
-{% endfor %}
-</ul>
+      </ul>
+    </section>
+    {% endfor %}
+  </div>
 </main>
-
-{% include footer.html %}

@@ -1,13 +1,9 @@
-<footer class="g-footer">
-    <section>
-        <a href="/rss.xml" target="_blank">
-        <!-- SVG图标代码 -->
-        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
-            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
-            </path>
-        </svg>
-        </a>
-        {{ site.title }} © {{ site.time | date: '%Y' }}
-    </section>
-    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+<footer class="mt-16 border-t border-slate-200 bg-white/60 py-8 dark:border-slate-700/60 dark:bg-slate-900/40">
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-5 text-center text-sm text-slate-500 dark:text-slate-400">
+    <a href="{{ '/rss.xml' | relative_url }}" target="_blank" class="inline-flex items-center gap-1.5 text-slate-500 transition hover:text-brand dark:text-slate-400">
+      {% include icon.html name='rss' %}<span>RSS</span>
+    </a>
+    <div>{{ site.title }} © {{ site.time | date: '%Y' }}</div>
+    <div>Powered by <a href="//jekyllrb.com" class="hover:text-brand">Jekyll</a> · Built with <a href="https://tailwindcss.com" class="hover:text-brand">Tailwind CSS</a></div>
+  </div>
 </footer>

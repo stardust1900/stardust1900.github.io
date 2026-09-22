@@ -60,7 +60,7 @@ recommend-condition-size: 10 # a tag will be recommended if the size of it is mo
 # Build settings
 paginate: 6
 paginate_path: 'page:num'
-exclude: ['node_modules', '.gitignore', 'README.md']
+exclude: ['node_modules', '.gitignore', 'README.md', 'package.json', 'package-lock.json', 'tailwind.config.js', 'postcss.config.js', 'assets/css/tailwind.css', '_config.test.yml']
 
 # Markdown
 markdown: kramdown
@@ -71,7 +71,7 @@ kramdown:
 RSS: true
 
 # Plugins
-plugins: [jekyll-paginate,jekyll-sitemap,jekyll-seo-tag]
+plugins: [jekyll-paginate,jekyll-sitemap]
 # 显示未来日期
 future: true
 

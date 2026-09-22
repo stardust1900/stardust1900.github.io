@@ -3,23 +3,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="author"  content="{{ site.author }}">
-    <meta name="description" content="{{ site.description }}">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta name="keywords"  content="{{ site.keyword }}">
+    <meta name="msvalidate.01" content="B2B7279843FD6B9A9746C37327324ACF" />
+    <link rel="canonical" href="{{ page.url | prepend: site.url }}">
+
     <!-- Open Graph -->
     <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ page.url | prepend: site.url }}">
-    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta property="og:site_name" content="{{ site.title }}">
-    <meta name="msvalidate.01" content="B2B7279843FD6B9A9746C37327324ACF" />
-    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
-    <link rel="stylesheet" href="/assets/css/github-markdown.css">
-    <link rel="stylesheet" href="/assets/css/prism.css">
-    <link rel="stylesheet" href="/assets/css/share.min.css">
-    <link rel="stylesheet" href="/assets/css/app.min.css">
-    <link rel="stylesheet" href="/assets/css/emoji-cover.css">
-    <link rel="stylesheet" href="/assets/css/friends.css">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/rss.xml' | relative_url }}">
+
+    <!-- 主题脚本：首屏渲染前确定暗色，避免闪烁 -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          var prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (t === 'dark' || (!t && prefers)) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+    {% if site.adsense.enabled %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense.client }}"
+         crossorigin="anonymous"></script>
+    {% endif %}
+
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -27,8 +42,9 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wwhkmu5o9p");
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3202703159392077"
-     crossorigin="anonymous"></script>
-<!-- AdSense 广告样式 -->
-<link rel="stylesheet" href="/assets/css/ads.css">
+
+    {% if page.layout == 'post' %}
+    <script>window.MathJax={tex2jax:{inlineMath:[['$','$']],skipTags:['script','noscript','style','textarea','pre']}};</script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    {% endif %}
 </head>
