@@ -5,6 +5,7 @@ gem "jekyll", "~> 4.4"
 group :jekyll_plugins do
   gem "jekyll-paginate"
   gem "jekyll-sitemap"
+  gem "jekyll-seo-tag"
 end
 
 gem "webrick"
@@ -16,3 +17,4 @@ gem "bigdecimal"
 gem "csv"
 gem "json"
 gem "logger"
+gem 'wdm', '>= 0.1.0'
