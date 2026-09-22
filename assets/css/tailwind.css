@@ -41,6 +41,35 @@
            prose-img:rounded-lg;
   }
 
+  /* 代码块：统一深色底，行内代码白底样式不得泄漏进来 */
+  .prose-reader pre {
+    @apply overflow-x-auto rounded-xl bg-slate-900 py-4 text-[13px] leading-relaxed text-slate-200 shadow-soft ring-1 ring-white/10
+           dark:bg-black/60 dark:ring-white/5;
+  }
+  .prose-reader pre code {
+    @apply block bg-transparent p-0 text-inherit;
+  }
+
+  /* Rouge token 配色（One Dark 风，代码块恒为深底） */
+  .prose-reader .highlight .c, .prose-reader .highlight .c1, .prose-reader .highlight .cm,
+  .prose-reader .highlight .cs, .prose-reader .highlight .ge { @apply italic text-slate-500; }
+  .prose-reader .highlight .k, .prose-reader .highlight .kc, .prose-reader .highlight .kd,
+  .prose-reader .highlight .kn, .prose-reader .highlight .kr, .prose-reader .highlight .kw { @apply text-purple-400; }
+  .prose-reader .highlight .s, .prose-reader .highlight .s1, .prose-reader .highlight .s2,
+  .prose-reader .highlight .sb, .prose-reader .highlight .sc, .prose-reader .highlight .se,
+  .prose-reader .highlight .si, .prose-reader .highlight .sx { @apply text-emerald-400; }
+  .prose-reader .highlight .m, .prose-reader .highlight .mf, .prose-reader .highlight .mi,
+  .prose-reader .highlight .il { @apply text-orange-400; }
+  .prose-reader .highlight .nf, .prose-reader .highlight .fm { @apply text-sky-400; }
+  .prose-reader .highlight .nc, .prose-reader .highlight .ne, .prose-reader .highlight .nn { @apply text-yellow-300; }
+  .prose-reader .highlight .nt, .prose-reader .highlight .na, .prose-reader .highlight .nx { @apply text-rose-400; }
+  .prose-reader .highlight .no, .prose-reader .highlight .nb, .prose-reader .highlight .bp { @apply text-orange-300; }
+  .prose-reader .highlight .o, .prose-reader .highlight .ow { @apply text-cyan-300; }
+  .prose-reader .highlight .p { @apply text-slate-400; }
+  .prose-reader .highlight .gi { @apply text-emerald-400; }
+  .prose-reader .highlight .gd { @apply text-rose-400; }
+  .prose-reader .highlight .err { @apply text-rose-400 underline; }
+
   /* 通用卡片 */
   .ui-card {
     @apply rounded-2xl border border-slate-200/70 bg-white p-5 shadow-soft
