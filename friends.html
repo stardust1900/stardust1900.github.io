@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +7,36 @@
     <meta name="author"  content="王一舠">
     <meta name="description" content="去创造点什么而不是依靠别人活着">
     <meta name="keywords"  content="南京 个人开发者 软件开发 公众号开发 小程序开发 App开发 商城开发 系统开发">
+    <meta name="msvalidate.01" content="B2B7279843FD6B9A9746C37327324ACF" />
+    <link rel="canonical" href="https://wangxuan.me/friends.html">
+
     <!-- Open Graph -->
     <meta property="og:title" content="友链 - 独行深山">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wangxuan.me/friends.html">
     <meta property="og:description" content="去创造点什么而不是依靠别人活着">
     <meta property="og:site_name" content="独行深山">
-    <meta name="msvalidate.01" content="B2B7279843FD6B9A9746C37327324ACF" />
-    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
-    <link rel="stylesheet" href="/assets/css/github-markdown.css">
-    <link rel="stylesheet" href="/assets/css/prism.css">
-    <link rel="stylesheet" href="/assets/css/share.min.css">
-    <link rel="stylesheet" href="/assets/css/app.min.css">
-    <link rel="stylesheet" href="/assets/css/emoji-cover.css">
-    <link rel="stylesheet" href="/assets/css/friends.css">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" type="application/rss+xml" title="独行深山" href="/rss.xml">
+
+    <!-- 主题脚本：首屏渲染前确定暗色，避免闪烁 -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          var prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (t === 'dark' || (!t && prefers)) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3202703159392077"
+         crossorigin="anonymous"></script>
+    
+
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -29,171 +44,252 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wwhkmu5o9p");
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3202703159392077"
-     crossorigin="anonymous"></script>
-<!-- AdSense 广告样式 -->
-<link rel="stylesheet" href="/assets/css/ads.css">
+
+    
 </head>
-<body>
-    <!--[if lt IE 10]>
-<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
-<![endif]-->
-    <input id="nm-switch" type="hidden" value="true">
-    <header class="g-header">
-    <div class="g-logo">
-      <a href="/"></a>
-    </div>
-    <i id="menu-toggle" class="iconfont icon-menu"></i>
-    <nav class="g-nav">
-        <ul>
-            
-            <li><a href="/">首页</a></li>
-            
-            <li><a href="/tags.html">标签</a></li>
-            
-            <li><a href="/categories.html">分类</a></li>
-            
-            <li><a href="/friends.html">友链</a></li>
-            
-            <li><a href="/about.html">关于</a></li>
-            
-            <li><a href="https://moyue.wangxuan.me/">墨阅</a></li>
-            
-            <li><a href="https://quant.wangxuan.me/">量化</a></li>
-            
-            <li><a href="https://photo.wangxuan.me/">相册</a></li>
-            
-            <li><a href="https://works.wangxuan.me/">作品</a></li>
-            
-        </ul>
+
+<body class="min-h-screen flex flex-col">
+    <header class="site-header">
+  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-5">
+    <a href="/" class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">独行深山</a>
+
+    <nav class="hidden items-center gap-6 md:flex">
+      
+        <a href="/" 
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">首页</a>
+      
+        <a href="/tags.html" 
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">标签</a>
+      
+        <a href="/categories.html" 
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">分类</a>
+      
+        <a href="/friends.html" 
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">友链</a>
+      
+        <a href="/about.html" 
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">关于</a>
+      
+        <a href="https://moyue.wangxuan.me/" target="_blank" rel="noopener"
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">墨阅</a>
+      
+        <a href="https://quant.wangxuan.me/" target="_blank" rel="noopener"
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">量化</a>
+      
+        <a href="https://photo.wangxuan.me/" target="_blank" rel="noopener"
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">相册</a>
+      
+        <a href="https://works.wangxuan.me/" target="_blank" rel="noopener"
+           class="text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">作品</a>
+      
     </nav>
+
+    <div class="flex items-center gap-1">
+      <button id="theme-toggle" type="button"
+              class="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-brand dark:text-slate-400 dark:hover:bg-slate-800"
+              aria-label="切换明暗主题">
+        <span class="hidden dark:block">
+
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+  
+</span>
+        <span class="block dark:hidden">
+
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+  
+</span>
+      </button>
+      <button id="menu-toggle" type="button"
+              class="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-brand dark:text-slate-400 dark:hover:bg-slate-800 md:hidden"
+              aria-label="打开菜单" aria-expanded="false">
+        
+
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  
+
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="hidden border-t border-slate-200/70 px-5 py-3 dark:border-slate-700/60 md:hidden">
+    
+      <a href="/" 
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">首页</a>
+    
+      <a href="/tags.html" 
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">标签</a>
+    
+      <a href="/categories.html" 
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">分类</a>
+    
+      <a href="/friends.html" 
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">友链</a>
+    
+      <a href="/about.html" 
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">关于</a>
+    
+      <a href="https://moyue.wangxuan.me/" target="_blank" rel="noopener"
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">墨阅</a>
+    
+      <a href="https://quant.wangxuan.me/" target="_blank" rel="noopener"
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">量化</a>
+    
+      <a href="https://photo.wangxuan.me/" target="_blank" rel="noopener"
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">相册</a>
+    
+      <a href="https://works.wangxuan.me/" target="_blank" rel="noopener"
+         class="block py-2 text-sm text-slate-600 transition hover:text-brand dark:text-slate-300 dark:hover:text-brand">作品</a>
+    
+  </nav>
 </header>
 
+    <div class="flex-1">
+        <section class="relative overflow-hidden bg-gradient-to-br from-brand to-indigo-600 px-5 py-16 text-center text-white">
+  <h1 class="text-3xl font-bold sm:text-4xl">友链</h1>
+  <p class="mt-3 text-white/80">与有趣的灵魂互相链接</p>
+</section>
 
-<div class="g-banner tags-banner post-pattern-circuitBoard bgcolor-default" data-theme="default">
-    <h2>友链</h2>
-</div>
+<main class="mx-auto max-w-5xl px-5 py-10">
+  <div class="ui-card mb-8">
+    <span class="ui-tag mb-3">申请友链</span>
+    <p class="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+      在下方评论区留言申请，格式：站点名称 / 网址 / Logo 地址 / 一句话简介。审核通过后会尽快添加。
+    </p>
+  </div>
 
-<main class="tags-content">
-    <ul class="tags-list friends-list">
-        <li class="friends-tips">
-            <span class="tag-name">申请友链</span>
-            <span class="tag-post">在下方评论区留言申请，格式：站点名称 / 网址 / Logo 地址 / 一句话简介。审核通过后会尽快添加。</span>
-        </li>
+  <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://blog.wangxuan.me/" target="_blank" rel="noopener" title="独行深山"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://blog.wangxuan.me/assets/img/profile.png" alt="独行深山"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">独行深山</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">去创造点什么而不是依靠别人活着</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://works.wangxuan.me/" target="_blank" rel="noopener" title="魔域桃源"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://works.wangxuan.me/logo.svg" alt="魔域桃源"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">魔域桃源</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">王一舠的作品集</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://quant.wangxuan.me/" target="_blank" rel="noopener" title="量化投资观察"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://photo.wangxuan.me/albums/2026-07-29-logo/quant.png" alt="量化投资观察"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">量化投资观察</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">量化投资观察 · 机会发现与因子研究</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://moyue.wangxuan.me/" target="_blank" rel="noopener" title="墨阅"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://moyue.wangxuan.me/favicon.svg" alt="墨阅"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">墨阅</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">这里记录我读过的书、写过的代码、以及那些值得分享的思考。每一篇文章，都是一次与自己的对话。</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://toolkit.wangxuan.me/" target="_blank" rel="noopener" title="工具箱"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://photo.wangxuan.me/albums/2026-07-29-logo/toolkit.png" alt="工具箱"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">工具箱</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">把常用小事，做成顺手的小工具。</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://games.wangxuan.me/" target="_blank" rel="noopener" title="脑力小站"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://photo.wangxuan.me/albums/2026-07-29-logo/games.png" alt="脑力小站"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">脑力小站</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">点开即玩，无需登录。每天来一局，和朋友比谁先通关。</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://js.wangxuan.me/" target="_blank" rel="noopener" title="苏超"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://js.wangxuan.me/favicon.png" alt="苏超"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">苏超</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">江苏省城市足球联赛</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://shop.wangxuan.me/" target="_blank" rel="noopener" title="云边小卖部"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://shop.wangxuan.me/favicon.svg" alt="云边小卖部"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">云边小卖部</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">一个网上购物小店demo</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://wish.wangxuan.me/" target="_blank" rel="noopener" title="星愿"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://wish.wangxuan.me/favicon.png" alt="星愿"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">星愿</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">让每一个愿望都被温柔以待</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://indiecn.wangxuan.me/" target="_blank" rel="noopener" title="独立开发者"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://indiecn.wangxuan.me/favicon.svg" alt="独立开发者"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">独立开发者</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">中国独立开发者项目列表</p>
+    </li>
+    
+    <li class="ui-card group relative flex flex-col items-center text-center">
+      <a class="friend-link absolute inset-0" href="https://tts.wangxuan.me/" target="_blank" rel="noopener" title="文字转语音"></a>
+      <img class="friend-logo h-16 w-16 rounded-full object-cover shadow-soft"
+           src="https://tts.wangxuan.me/favicon.svg" alt="文字转语音"
+           onerror="this.src='/assets/img/profile.png'">
+      <h3 class="friend-name mt-3 w-full truncate text-base font-semibold text-slate-900 dark:text-white">文字转语音</h3>
+      <p class="friend-desc mt-1 line-clamp-2 text-xs text-slate-400 dark:text-slate-500">免费文字转语音 · 多语言发音人 · 在线试听与 MP3 下载</p>
+    </li>
+    
+  </ul>
 
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://blog.wangxuan.me/" target="_blank" rel="noopener" title="独行深山"></a>
-            <img class="friend-logo" src="https://blog.wangxuan.me/assets/img/profile.png" alt="独行深山"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">独行深山</h3>
-            <p class="friend-desc">去创造点什么而不是依靠别人活着</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://works.wangxuan.me/" target="_blank" rel="noopener" title="魔域桃源"></a>
-            <img class="friend-logo" src="https://works.wangxuan.me/logo.svg" alt="魔域桃源"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">魔域桃源</h3>
-            <p class="friend-desc">王一舠的作品集</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://quant.wangxuan.me/" target="_blank" rel="noopener" title="量化投资观察"></a>
-            <img class="friend-logo" src="https://photo.wangxuan.me/albums/2026-07-29-logo/quant.png" alt="量化投资观察"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">量化投资观察</h3>
-            <p class="friend-desc">量化投资观察 · 机会发现与因子研究</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://moyue.wangxuan.me/" target="_blank" rel="noopener" title="墨阅"></a>
-            <img class="friend-logo" src="https://moyue.wangxuan.me/favicon.svg" alt="墨阅"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">墨阅</h3>
-            <p class="friend-desc">这里记录我读过的书、写过的代码、以及那些值得分享的思考。每一篇文章，都是一次与自己的对话。</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://toolkit.wangxuan.me/" target="_blank" rel="noopener" title="工具箱"></a>
-            <img class="friend-logo" src="https://photo.wangxuan.me/albums/2026-07-29-logo/toolkit.png" alt="工具箱"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">工具箱</h3>
-            <p class="friend-desc">把常用小事，做成顺手的小工具。</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://games.wangxuan.me/" target="_blank" rel="noopener" title="脑力小站"></a>
-            <img class="friend-logo" src="https://photo.wangxuan.me/albums/2026-07-29-logo/games.png" alt="脑力小站"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">脑力小站</h3>
-            <p class="friend-desc">点开即玩，无需登录。每天来一局，和朋友比谁先通关。</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://js.wangxuan.me/" target="_blank" rel="noopener" title="苏超"></a>
-            <img class="friend-logo" src="https://js.wangxuan.me/favicon.png" alt="苏超"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">苏超</h3>
-            <p class="friend-desc">江苏省城市足球联赛</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://shop.wangxuan.me/" target="_blank" rel="noopener" title="云边小卖部"></a>
-            <img class="friend-logo" src="https://shop.wangxuan.me/favicon.svg" alt="云边小卖部"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">云边小卖部</h3>
-            <p class="friend-desc">一个网上购物小店demo</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://wish.wangxuan.me/" target="_blank" rel="noopener" title="星愿"></a>
-            <img class="friend-logo" src="https://wish.wangxuan.me/favicon.png" alt="星愿"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">星愿</h3>
-            <p class="friend-desc">让每一个愿望都被温柔以待</p>
-        </li>
-        
-        <li class="friend-card">
-            <a class="friend-link" href="https://indiecn.wangxuan.me/" target="_blank" rel="noopener" title="独立开发者"></a>
-            <img class="friend-logo" src="https://indiecn.wangxuan.me/favicon.svg" alt="独立开发者"
-                 onerror="this.src='/assets/img/profile.png'">
-            <h3 class="friend-name">独立开发者</h3>
-            <p class="friend-desc">中国独立开发者项目列表</p>
-        </li>
-        
-    </ul>
-
-    <section class="post-footer-item comment friends-comment">
-        <div id="disqus_thread">
-            <script src="https://utteranc.es/client.js"
-                    repo="stardust1900/stardust1900.github.io"
-                    issue-term="友链申请"
-                    label="comment"
-                    theme="github-light"
-                    crossorigin="anonymous"
-                    async>
-            </script>
-        </div>
-    </section>
+  <section class="ui-card mt-10">
+    <div id="friends-comments">
+      <script src="https://utteranc.es/client.js"
+              repo="stardust1900/stardust1900.github.io"
+              issue-term="友链申请"
+              label="comment"
+              theme="github-light"
+              crossorigin="anonymous"
+              async>
+      </script>
+    </div>
+  </section>
 </main>
 
-<footer class="g-footer">
-    <section>
-        <a href="/rss.xml" target="_blank">
-        <!-- SVG图标代码 -->
-        <svg t="1718768161045" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4251" width="15" height="15">
-            <path d="M42.666667 853.333333a128 128 0 1 1 256 0 128 128 0 0 1-256 0z m938.666666 128h-178.773333c0-418.986667-340.906667-759.893333-759.893333-759.893333V42.666667c517.546667 0 938.666667 421.12 938.666666 938.666666z m-298.666666 0h-182.826667c0-252.074667-205.098667-457.130667-457.173333-457.130666V341.333333c352.896 0 640 287.104 640 640z" fill="#EE802F" p-id="4252">
-            </path>
-        </svg>
-        </a>
-        独行深山 © 2026
-    </section>
-    <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+    </div>
+    <footer class="mt-16 border-t border-slate-200 bg-white/60 py-8 dark:border-slate-700/60 dark:bg-slate-900/40">
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-5 text-center text-sm text-slate-500 dark:text-slate-400">
+    <a href="/rss.xml" target="_blank" class="inline-flex items-center gap-1.5 text-slate-500 transition hover:text-brand dark:text-slate-400">
+      
+
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9h2.5A11.5 11.5 0 0 0 4 8.5V11Zm0 4a5 5 0 0 1 5 5h2.5A7.5 7.5 0 0 0 4 12.5V15Zm2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>
+  
+<span>RSS</span>
+    </a>
+    <div>独行深山 © 2026</div>
+    <div>Powered by <a href="//jekyllrb.com" class="hover:text-brand">Jekyll</a> · Built with <a href="https://tailwindcss.com" class="hover:text-brand">Tailwind CSS</a></div>
+  </div>
 </footer>
 
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/assets/js/prism.js"></script>
-    <script src="/assets/js/index.min.js"></script>
+
+    <script type="module" src="/assets/js/main.js"></script>
 </body>
 </html>
