@@ -26,14 +26,14 @@ description: 只身打马过草原，独自仗剑走天涯
             {% assign cover_is_url = true %}
           {% endif %}
           {% if cover_is_url %}
-          <div class="relative -m-5 mb-0 h-40 overflow-hidden">
-            <a href="{{ post.url }}" class="absolute inset-0"></a>
-            <img src="{{ post.cover }}" alt="{{ post.title }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
-          </div>
+          <a href="{{ post.url }}" aria-label="{{ post.title }}" class="-m-5 mb-0 block h-40 overflow-hidden">
+            <img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+          </a>
           {% else %}
-          <div class="-m-5 mb-0 flex h-40 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl dark:from-slate-800 dark:to-slate-700">
-            <span>{{ post.cover }}</span>
-          </div>
+          <a href="{{ post.url }}" aria-label="{{ post.title }}"
+             class="-m-5 mb-0 flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 text-5xl transition duration-300 hover:from-brand/10 hover:to-indigo-100 dark:from-slate-800 dark:to-slate-700 dark:hover:from-brand/20 dark:hover:to-slate-700">
+            <span class="transition duration-500 group-hover:scale-110">{{ post.cover }}</span>
+          </a>
           {% endif %}
         {% endif %}
         <h2 class="mt-4 text-lg font-semibold leading-snug text-slate-900 dark:text-white">
