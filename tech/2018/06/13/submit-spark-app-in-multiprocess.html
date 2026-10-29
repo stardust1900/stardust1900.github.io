@@ -147,7 +147,11 @@
 </header>
 
 
+    
+    
+
     <article class="mx-auto w-full max-w-reader px-5 py-10 sm:py-14">
+        
         <header class="mb-8">
             <div class="mb-4 flex flex-wrap gap-2">
                 
@@ -165,6 +169,7 @@
                 <time datetime="2018-06-13">13 Jun 2018</time>
             </div>
         </header>
+        
 
         <div class="prose-reader">
             <p>商户数据分析系统是通过web服务来管理spark app的。我们发现在web服务里同时提交多个spark app的时候，无法提交成功。在stackoverflow上查到：单个jvm里spark不允许有多个sparksession，因为spark不支持并且以后也不会支持(It is not supported and won’t be)。原文：<a href="https://stackoverflow.com/questions/40153728/multiple-sparksessions-in-single-jvm">Multiple SparkSessions in single JVM</a> 。web服务启动的时候只有一个进程，那么，问题来了，怎么才能在web服务里同时提交多个spark app呢？</p>

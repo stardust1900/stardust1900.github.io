@@ -147,22 +147,50 @@
 </header>
 
 
-    <article class="mx-auto w-full max-w-reader px-5 py-10 sm:py-14">
-        <header class="mb-8">
+    
+    
+    
+    
+
+    <section class="relative isolate w-full overflow-hidden bg-slate-900">
+        
+        <img src="/assets/images/20240716/cover.jpeg" alt="BigDecimal的精度与刻度" loading="eager" fetchpriority="high"
+             class="absolute inset-0 -z-10 h-full w-full object-cover">
+        
+
+        
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-slate-900/95 via-slate-900/55 to-slate-900/20"></div>
+        
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-b from-transparent to-slate-50 dark:to-slate-900"></div>
+
+        <div class="relative mx-auto flex min-h-[clamp(18rem,44vh,26rem)] w-full max-w-reader animate-fade-up flex-col justify-end px-5 pb-10 pt-24">
+            
             <div class="mb-4 flex flex-wrap gap-2">
                 
-                
-                <a href="/tags.html#java" class="ui-tag">java</a>
-                
+                <a href="/tags.html#java"
+                   class="rounded-full border border-white/25 bg-white/15 px-3 py-1 text-sm text-white/90 backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:bg-white/30 hover:text-white">java</a>
                 
             </div>
-            <h1 class="text-3xl font-bold leading-tight text-slate-900 dark:text-white sm:text-4xl">BigDecimal的精度与刻度</h1>
-            <div class="mt-4 flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+            
+
+            <h1 class="text-3xl font-bold leading-tight text-white drop-shadow-[0_2px_16px_rgba(15,23,42,.55)] sm:text-4xl">BigDecimal的精度与刻度</h1>
+
+            
+            <p class="mt-3 text-lg font-medium text-white/80 drop-shadow-[0_1px_10px_rgba(15,23,42,.5)]">为什么你应该用字符串构造BigDecimal对象</p>
+            
+
+            <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-white/70">
                 <span>王一舠</span>
-                <span>·</span>
+                <span class="h-1 w-1 rounded-full bg-white/50"></span>
                 <time datetime="2024-07-16">16 Jul 2024</time>
             </div>
-        </header>
+            <div class="mt-6 h-1 w-16 rounded-full bg-gradient-to-r from-brand to-indigo-300"></div>
+        </div>
+    </section>
+    
+
+    <article class="mx-auto w-full max-w-reader px-5 py-10 sm:py-14">
+        
 
         <div class="prose-reader">
             <p>BigDecimal是Java中用于高精度算术运算的类。当您需要精确地处理非常大或非常小的数字时，例如在金融计算中，它特别有用。由于众所周知得原因，Double这种类型在某些情况下会出现丢失精度的问题，所以在需要对较为敏感的数据(比如与金额有关的)进行运算时，我们都会用BigDecimal。但是，用BigDecimal不代表就一定没问题，我们今天就讨论一下关于BigDecimal的问题。</p>
